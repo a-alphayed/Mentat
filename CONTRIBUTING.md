@@ -195,6 +195,18 @@ Description & purpose
 - Use discussions for questions
 - Tag maintainers for urgent issues
 
+## Developer Certificate of Origin (DCO)
+
+By contributing to this project, you agree to the Developer Certificate of Origin (DCO). This document was created by the Linux Kernel community and is a simple statement that you, as a contributor, have the legal right to make the contribution.
+
+The DCO is legally binding statement that assures contributors have the right to submit their work under the project's license. All commits must be signed off with:
+
+```
+git commit -s -m "Your commit message"
+```
+
+This adds a `Signed-off-by` line to your commit message.
+
 ## Recognition
 
 Contributors are recognized through:
@@ -202,6 +214,9 @@ Contributors are recognized through:
 - CHANGELOG.md mentions
 - Issue/PR acknowledgments
 - Community discussions
+
+### Notable Contributors
+- @amgiiine - Commands Cheat Sheet and documentation improvements
 
 ---
 

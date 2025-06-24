@@ -4,7 +4,7 @@
 
 ### `/user:analyze` - Multi-dimensional code analysis
 - `--code` - Code quality review
-- `--arch` - Architecture analysis  
+- `--arch` - Architecture analysis
 - `--profile` - Performance profiling
 - `--security` - Security assessment
 - `--perf` - Performance bottlenecks
@@ -158,5 +158,3 @@
 - Documentation: `/docs/[category]/`
 
 Version: SuperClaude v4.0.0
-
-Credit @amgiiine

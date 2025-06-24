@@ -1,7 +1,7 @@
 # Meet SuperClaude – The Missing Power-Up for Claude Code
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-4.0.0-blue.svg)](https://github.com/NomenAK/SuperClaude/releases)
+[![Version](https://img.shields.io/badge/version-4.0.0-blue.svg)](https://github.com/NomenAK/SuperClaude)
 [![GitHub issues](https://img.shields.io/github/issues/NomenAK/SuperClaude)](https://github.com/NomenAK/SuperClaude/issues)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/NomenAK/SuperClaude/blob/master/CONTRIBUTING.md)
 
@@ -49,7 +49,7 @@ Switch Claude's entire mindset with one command:
 
 ```bash
 /persona:architect    # Big-picture system design mode
-/persona:frontend     # Pixel-perfect UI obsession mode  
+/persona:frontend     # Pixel-perfect UI obsession mode
 /persona:security     # Paranoid threat-modeling mode
 /persona:analyzer     # Sherlock Holmes debugging mode
 ```
@@ -91,7 +91,7 @@ Our UltraCompressed mode strips unnecessary tokens without losing clarity. More 
 /persona:analyzer
 /user:troubleshoot --investigate --prod
 /user:analyze --profile      # Find the real bottleneck
-/persona:performance  
+/persona:performance
 /user:improve --performance --threshold 90%
 ```
 
@@ -114,7 +114,7 @@ SuperClaude is pure configuration – no code, no external dependencies. It work
 
 The framework includes:
 - **CLAUDE.md** – Core configuration and behaviors
-- **RULES.md** – Engineering standards and practices  
+- **RULES.md** – Engineering standards and practices
 - **PERSONAS.md** – 9 specialized thinking modes
 - **MCP.md** – Smart tool orchestration
 - **18 Commands** – Ready-made workflows
@@ -164,7 +164,7 @@ No more "this is better" without proof. SuperClaude enforces:
 
 SuperClaude is MIT-licensed and built by developers, for developers. We welcome:
 - New personas for specialized workflows
-- Commands that solve your daily pain points  
+- Commands that solve your daily pain points
 - Patterns that make Claude Code smarter
 - Ideas that push the boundaries
 

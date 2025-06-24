@@ -197,7 +197,7 @@ Risk: HIGH→More Qs | LOW→Safe defaults | Flow: Detect→CRIT block|HIGH opti
 Design: KISS[H:7]: Simple>clever | YAGNI[M:6]: Immediate only | SOLID[H:8]: Single resp|Open/closed
 DRY[M:6]: Extract common|cfg>duplicate | Clean Code[C:9]: <20lines|<5cyclo|<3nest
 Code Gen[C:10]: NO comments unless asked | Short>long names | Minimal boilerplate
-Docs[C:9]: Bullets>paragraphs | Essential only | No "Overview"|"Introduction" 
+Docs[C:9]: Bullets>paragraphs | Essential only | No "Overview"|"Introduction"
 UltraCompressed[C:10]: --uc flag | Context>70% | ~70% reduction | Legend REQUIRED
 Architecture[H:8]: DDD: Bounded contexts|Aggregates|Events | Event→Pub/Sub | Microservices→APIs
 Testing[H:8]: TDD cycle|AAA pattern|Unit>Integration>E2E | Test all|Mock deps|Edge cases

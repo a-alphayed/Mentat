@@ -1,14 +1,14 @@
 # CLAUDE.md - SuperClaude Cfg
 
-## Legend  
+## Legend
 | Symbol | Meaning | | Abbrev | Meaning |
 |--------|---------|---|--------|---------|
 | → | leads to | | cfg | configuration |
 | & | and/with | | docs | documentation |
 | > | greater than | | ops | operations |
 
-@RULES.md 
-@MCP.md 
+@RULES.md
+@MCP.md
 @PERSONAS.md
 
 ## Core Cfg
@@ -26,7 +26,7 @@ Commands: /user:<command> [flags] | /task:<action> | Ex: /user:build --init
 ```yaml
 Activation: Natural language OR command flags
 Flags: --think | --think-hard | --ultrathink
-none: Single file|Basic | think: Multi-file|Standard  
+none: Single file|Basic | think: Multi-file|Standard
 think hard: Architecture|Complex | ultrathink: Redesign|Critical
 Examples: /user:analyze --code --think | /user:design --api --ultrathink
 ```

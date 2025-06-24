@@ -13,6 +13,9 @@ NC='\033[0m' # No Color
 
 # Default installation directory
 INSTALL_DIR="$HOME/.claude"
+FORCE_INSTALL=false
+UPDATE_MODE=false
+UNINSTALL_MODE=false
 
 # Function to show usage
 show_usage() {
@@ -20,12 +23,18 @@ show_usage() {
     echo ""
     echo "Options:"
     echo "  --dir <directory>    Install to custom directory (default: $HOME/.claude)"
+    echo "  --force              Skip confirmation prompts (for automation)"
+    echo "  --update             Update existing installation (preserves customizations)"
+    echo "  --uninstall          Remove SuperClaude from specified directory"
     echo "  -h, --help          Show this help message"
     echo ""
     echo "Examples:"
     echo "  $0                          # Install to default location"
     echo "  $0 --dir /opt/claude        # Install to /opt/claude"
     echo "  $0 --dir ./local-claude     # Install to ./local-claude"
+    echo "  $0 --force                  # Install without prompts"
+    echo "  $0 --update                 # Update existing installation"
+    echo "  $0 --uninstall              # Remove SuperClaude"
 }
 
 # Parse command line arguments
@@ -34,6 +43,18 @@ while [[ $# -gt 0 ]]; do
         --dir)
             INSTALL_DIR="$2"
             shift 2
+            ;;
+        --force)
+            FORCE_INSTALL=true
+            shift
+            ;;
+        --update)
+            UPDATE_MODE=true
+            shift
+            ;;
+        --uninstall)
+            UNINSTALL_MODE=true
+            shift
             ;;
         -h|--help)
             show_usage
@@ -49,7 +70,41 @@ done
 
 # Convert to absolute path if relative
 if [[ ! "$INSTALL_DIR" = /* ]]; then
-    INSTALL_DIR="$(cd "$(dirname "$INSTALL_DIR")" && pwd)/$(basename "$INSTALL_DIR")"
+    # Check if parent directory exists
+    parent_dir=$(dirname "$INSTALL_DIR")
+    if [[ ! -d "$parent_dir" ]]; then
+        echo -e "${RED}Error: Parent directory '$parent_dir' does not exist${NC}"
+        exit 1
+    fi
+    INSTALL_DIR="$(cd "$parent_dir" && pwd)/$(basename "$INSTALL_DIR")"
+fi
+
+# Handle uninstall mode
+if [[ "$UNINSTALL_MODE" = true ]]; then
+    echo -e "${GREEN}SuperClaude Uninstaller${NC}"
+    echo "========================"
+    echo -e "Target directory: ${YELLOW}$INSTALL_DIR${NC}"
+    echo ""
+    
+    if [[ ! -d "$INSTALL_DIR" ]]; then
+        echo -e "${RED}Error: SuperClaude not found at $INSTALL_DIR${NC}"
+        exit 1
+    fi
+    
+    if [[ "$FORCE_INSTALL" != true ]]; then
+        echo -e "${YELLOW}This will remove SuperClaude from $INSTALL_DIR${NC}"
+        echo -n "Are you sure you want to continue? (y/n): "
+        read -r confirm_uninstall
+        if [ "$confirm_uninstall" != "y" ]; then
+            echo "Uninstall cancelled."
+            exit 0
+        fi
+    fi
+    
+    echo "Removing SuperClaude..."
+    rm -rf "$INSTALL_DIR"
+    echo -e "${GREEN}✓ SuperClaude uninstalled successfully!${NC}"
+    exit 0
 fi
 
 echo -e "${GREEN}SuperClaude Installer${NC}"
@@ -57,31 +112,62 @@ echo "======================"
 echo -e "Installation directory: ${YELLOW}$INSTALL_DIR${NC}"
 echo ""
 
-# Confirmation prompt
-echo -e "${YELLOW}This will install SuperClaude in $INSTALL_DIR${NC}"
-echo -n "Are you sure you want to continue? (y/n): "
-read -r confirm_install
-if [ "$confirm_install" != "y" ]; then
-    echo "Installation cancelled."
-    exit 0
+# Check write permissions
+parent_for_write=$(dirname "$INSTALL_DIR")
+if [[ -d "$INSTALL_DIR" ]]; then
+    # Directory exists, check if we can write to it
+    if [[ ! -w "$INSTALL_DIR" ]]; then
+        echo -e "${RED}Error: No write permission for $INSTALL_DIR${NC}"
+        exit 1
+    fi
+elif [[ ! -w "$parent_for_write" ]]; then
+    # Directory doesn't exist, check if we can create it
+    echo -e "${RED}Error: No write permission to create $INSTALL_DIR${NC}"
+    exit 1
+fi
+
+# Confirmation prompt (skip if --force)
+if [[ "$FORCE_INSTALL" != true ]]; then
+    if [[ "$UPDATE_MODE" = true ]]; then
+        echo -e "${YELLOW}This will update SuperClaude in $INSTALL_DIR${NC}"
+    else
+        echo -e "${YELLOW}This will install SuperClaude in $INSTALL_DIR${NC}"
+    fi
+    echo -n "Are you sure you want to continue? (y/n): "
+    read -r confirm_install
+    if [ "$confirm_install" != "y" ]; then
+        echo "Installation cancelled."
+        exit 0
+    fi
 fi
 echo ""
 
 # Check if we're in SuperClaude directory
 if [ ! -f "CLAUDE.md" ] || [ ! -d ".claude/commands" ]; then
     echo -e "${RED}Error: This script must be run from the SuperClaude directory${NC}"
-    echo "Please cd into the SuperClaude directory and try again."
+    echo ""
+    echo "Expected files not found. Please ensure you are in the root SuperClaude directory."
+    echo "Missing: $([ ! -f "CLAUDE.md" ] && echo "CLAUDE.md ")$([ ! -d ".claude/commands" ] && echo ".claude/commands/")"
+    echo ""
+    echo "Solution: cd to the SuperClaude directory and run: ./install.sh"
     exit 1
 fi
 
 # Check if existing directory exists and has files
 if [ -d "$INSTALL_DIR" ] && [ "$(ls -A "$INSTALL_DIR" 2>/dev/null)" ]; then
     echo -e "${YELLOW}Existing configuration found at $INSTALL_DIR${NC}"
-    echo -n "Backup existing configuration? (y/n): "
-    read -r backup_choice
+    
+    # In update mode, always backup
+    if [[ "$UPDATE_MODE" = true ]] || [[ "$FORCE_INSTALL" = true ]]; then
+        backup_choice="y"
+    else
+        echo -n "Backup existing configuration? (y/n): "
+        read -r backup_choice
+    fi
+    
     if [ "$backup_choice" = "y" ]; then
-        # Create backup directory inside installation directory
-        backup_dir="$INSTALL_DIR/backup.$(date +%Y%m%d_%H%M%S)"
+        # Create backup directory in parent directory to avoid conflicts
+        backup_dir="$(dirname "$INSTALL_DIR")/superclaude-backup.$(date +%Y%m%d_%H%M%S)"
         mkdir -p "$backup_dir"
         
         # Backup ALL existing files
@@ -105,7 +191,11 @@ elif [ -d "$INSTALL_DIR" ]; then
 fi
 
 echo ""
-echo "Installing SuperClaude..."
+if [[ "$UPDATE_MODE" = true ]]; then
+    echo "Updating SuperClaude..."
+else
+    echo "Installing SuperClaude..."
+fi
 
 # Create directory structure
 echo "Creating directories..."
@@ -113,7 +203,24 @@ mkdir -p "$INSTALL_DIR/commands/shared"
 
 # Copy main configuration files
 echo "Copying configuration files..."
-cp CLAUDE.md RULES.md PERSONAS.md MCP.md "$INSTALL_DIR/"
+if [[ "$UPDATE_MODE" = true ]]; then
+    # In update mode, preserve user modifications
+    for file in CLAUDE.md RULES.md PERSONAS.md MCP.md; do
+        if [[ -f "$INSTALL_DIR/$file" ]]; then
+            # Check if file differs from source
+            if ! cmp -s "$file" "$INSTALL_DIR/$file"; then
+                echo "  Preserving customized $file (new version: $file.new)"
+                cp "$file" "$INSTALL_DIR/$file.new"
+            else
+                cp "$file" "$INSTALL_DIR/"
+            fi
+        else
+            cp "$file" "$INSTALL_DIR/"
+        fi
+    done
+else
+    cp CLAUDE.md RULES.md PERSONAS.md MCP.md "$INSTALL_DIR/"
+fi
 
 # Copy command files
 echo "Copying slash commands..."
@@ -139,13 +246,30 @@ echo -e "Shared resources: ${GREEN}$shared_files${NC} (expected: 31)"
 # Check if installation was successful
 if [ "$main_files" -ge 4 ] && [ "$command_files" -ge 19 ] && [ "$shared_files" -ge 31 ]; then
     echo ""
-    echo -e "${GREEN}✓ SuperClaude installed successfully!${NC}"
-    echo ""
-    echo "Next steps:"
-    echo "1. Open any project with Claude Code"
-    echo "2. Try a command: /user:analyze --code"
-    echo "3. Activate a persona: /persona:architect"
-    echo ""
+    if [[ "$UPDATE_MODE" = true ]]; then
+        echo -e "${GREEN}✓ SuperClaude updated successfully!${NC}"
+        echo ""
+        # Check for .new files
+        new_files=$(find "$INSTALL_DIR" -name "*.new" 2>/dev/null)
+        if [[ -n "$new_files" ]]; then
+            echo -e "${YELLOW}Note: The following files have updates available:${NC}"
+            echo "$new_files" | while read -r file; do
+                echo "  - $file"
+            done
+            echo ""
+            echo "To review changes: diff <file> <file>.new"
+            echo "To apply update: mv <file>.new <file>"
+            echo ""
+        fi
+    else
+        echo -e "${GREEN}✓ SuperClaude installed successfully!${NC}"
+        echo ""
+        echo "Next steps:"
+        echo "1. Open any project with Claude Code"
+        echo "2. Try a command: /user:analyze --code"
+        echo "3. Activate a persona: /persona:architect"
+        echo ""
+    fi
     if [ -n "$backup_dir" ] && [ -d "$backup_dir" ]; then
         echo -e "${YELLOW}Note: Your previous configuration was backed up to:${NC}"
         echo "$backup_dir"
@@ -155,7 +279,18 @@ if [ "$main_files" -ge 4 ] && [ "$command_files" -ge 19 ] && [ "$shared_files" -
 else
     echo ""
     echo -e "${RED}✗ Installation may be incomplete${NC}"
-    echo "Please check the error messages above or install manually."
-    echo "See README.md for manual installation instructions."
+    echo ""
+    echo "Expected vs Actual file counts:"
+    echo "  Main config files: $main_files/4$([ "$main_files" -lt 4 ] && echo " ❌" || echo " ✓")"
+    echo "  Command files: $command_files/19$([ "$command_files" -lt 19 ] && echo " ❌" || echo " ✓")"
+    echo "  Shared resources: $shared_files/31$([ "$shared_files" -lt 31 ] && echo " ❌" || echo " ✓")"
+    echo ""
+    echo "Troubleshooting steps:"
+    echo "1. Check for error messages above"
+    echo "2. Ensure you have write permissions to $INSTALL_DIR"
+    echo "3. Verify all source files exist in the current directory"
+    echo "4. Try running with sudo if permission errors occur"
+    echo ""
+    echo "For manual installation, see README.md"
     exit 1
 fi
