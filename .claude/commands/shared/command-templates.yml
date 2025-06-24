@@ -19,10 +19,11 @@ Command_Header:
   Purpose: "[Action] [Subject] specified in $ARGUMENTS"
 
 Universal_Flags:
-  Planning: "--plan (show execution plan)"
-  Thinking: "--think | --think-hard | --ultrathink"
-  Docs: "--uc (ultracompressed mode)"
-  MCP: "--c7 --seq --magic --pup | --no-mcp"
+  Planning: "@include shared/constants.yml#Standard_Flags.Planning"
+  Thinking: "@include shared/constants.yml#Standard_Flags.Thinking"
+  Compression: "@include shared/constants.yml#Standard_Flags.Compression"
+  MCP_Control: "@include shared/constants.yml#Standard_Flags.MCP_Control"
+  Execution: "@include shared/constants.yml#Standard_Flags.Execution"
   
 Flag_Templates:
   MCP_Control: "@see shared/mcp-flags.yml"
@@ -30,15 +31,20 @@ Flag_Templates:
   Planning_Mode: "@see shared/planning-mode.yml"
   
 Research_Requirements:
-  Standard: "shared/research-first.yml enforced"
-  External_Libs: "C7/WebSearch docs required"
-  Patterns: "Official verification mandatory"
-  Citations: "// Source: [doc ref] required"
+  Standard: "@include shared/research-first.yml#Research_Policy"
+  External_Libs: "@include shared/research-first.yml#Library_Requirements"
+  Patterns: "@include shared/research-first.yml#Pattern_Verification"
+  Citations: "@include shared/constants.yml#Standard_Messages.Report_References"
   
 Report_Output:
-  Location: ".claudedocs/[type]/[command]-[type]-<timestamp>.md"
-  Directory: "mkdir -p .claudedocs/[type]/"
-  Reference: "📄 Report saved to: [path]"
+  Location: "@include shared/constants.yml#Documentation_Paths"
+  Directory: "@include shared/execution-lifecycle.yml#Preparation_Actions"
+  Reference: "@include shared/constants.yml#Standard_Messages.Report_References"
+  
+Error_Handling:
+  Classification: "@include shared/severity-levels.yml#Severity_Levels"
+  Recovery: "@include shared/error-handling.yml#Recovery_Strategies"
+  Escalation: "@include shared/severity-levels.yml#Escalation_Pathways"
 ```
 
 ## Command Type Templates
@@ -98,7 +104,7 @@ Instead_Of_Repeating:
   Thinking_Modes: "@see shared/thinking-modes.yml"
   Research_Standards: "@see shared/research-first.yml"
   Validation_Rules: "@see shared/validation.yml"
-  Performance_Patterns: "@see shared/performance-monitoring.yml"
+  Performance_Patterns: "@see shared/performance.yml"
   
 Template_Usage:
   Command_File: |

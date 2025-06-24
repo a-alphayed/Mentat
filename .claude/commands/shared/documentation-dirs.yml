@@ -98,7 +98,7 @@ Commands:
   
 Shared_Resources:
   audit.yml: → .claudedocs/audit/
-  performance-monitoring.yml: → .claudedocs/metrics/
+  performance.yml: → .claudedocs/metrics/
   checkpoint.yml: → .claudedocs/summaries/checkpoint-*.md
 ```
 

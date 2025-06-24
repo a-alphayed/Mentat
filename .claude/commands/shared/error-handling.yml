@@ -1,36 +1,66 @@
-# Enhanced Error Recovery System
+# Error Handling & Recovery System
 
 ## Legend
 | Symbol | Meaning | | Abbrev | Meaning |
 |--------|---------|---|--------|---------|
 | 🔄 | retry/recovery | | err | error |
 | ⚠ | warning/caution | | rec | recovery |
-| ✅ | success/fixed | | fail | failure |
-| 🔧 | repair/fix | | ctx | context |
+| ✅ | success/fixed | | ctx | context |
+| 🔧 | repair/fix | | fail | failure |
+
+## Error Classification & Response
+
+```yaml
+Severity_Levels:
+  CRITICAL [10]: Data loss, security breach, prod down
+    Response: Immediate stop, alert, rollback, incident response
+    Recovery: Manual intervention required, full investigation
+    
+  HIGH [7-9]: Build failure, test failure, deployment issues
+    Response: Stop workflow, notify user, suggest fixes
+    Recovery: Automated retry w/ backoff, alternative paths
+    
+  MEDIUM [4-6]: Warning conditions, perf degradation
+    Response: Continue w/ warning, log for later review
+    Recovery: Attempt optimization, monitor for escalation
+    
+  LOW [1-3]: Info messages, style violations, minor optimizations
+    Response: Note in output, continue execution
+    Recovery: Background fixes, cleanup on completion
+
+Error_Categories:
+  Transient:
+    Network_Timeouts: "MCP server unreachable, API timeouts"
+    Resource_Busy: "File locked, system overloaded"
+    Rate_Limits: "API quota exceeded, temporary blocks"
+    Strategy: Exponential backoff retry, circuit breaker pattern
+    
+  Permanent:
+    Syntax_Errors: "Invalid code, malformed input"
+    Permission_Denied: "Access restrictions, auth failures"
+    Not_Found: "Missing files, invalid paths"
+    Strategy: No retry, immediate fallback or user guidance
+    
+  Context:
+    Configuration: "Missing env vars, incorrect settings"
+    State_Conflicts: "Dirty working tree, merge conflicts"
+    Version_Mismatch: "Incompatible versions, deprecated APIs"
+    Strategy: Validation, helpful error msgs, setup guidance
+    
+  Resource:
+    Memory: "Out of memory, insufficient resources"
+    Disk_Space: "Storage full, temp space unavailable"
+    API_Limits: "Rate limits, quota exceeded"
+    Strategy: Resource monitoring, cleanup, queue management
+```
 
 ## Intelligent Retry Strategies
 
 ```yaml
-Error_Classification:
-  Transient_Errors:
-    Network_Timeouts: "MCP server unreachable, API timeouts"
-    Resource_Busy: "File locked, system overloaded"
-    Rate_Limits: "API quota exceeded, temporary blocks"
-    
-  Permanent_Errors:
-    Syntax_Errors: "Invalid code, malformed input"
-    Permission_Denied: "Access restrictions, auth failures"
-    Not_Found: "Missing files, invalid paths"
-    
-  Context_Errors:
-    Configuration: "Invalid settings, missing dependencies"
-    State_Conflicts: "Dirty working tree, merge conflicts"
-    Version_Mismatch: "Incompatible versions, deprecated APIs"
-
 Retry_Logic:
   Exponential_Backoff:
     Base_Delay: "1 second"
-    Max_Delay: "60 seconds"  
+    Max_Delay: "60 seconds"
     Max_Attempts: "3 for transient, 1 for permanent"
     Jitter: "±25% randomization to avoid thundering herd"
     
@@ -39,6 +69,11 @@ Retry_Logic:
     Rate_Limits: "Wait for reset period + retry"
     Resource_Busy: "Short delay + retry w/ alternative"
     Permanent: "No retry, immediate fallback"
+
+Circuit_Breaker:
+  Failure_Threshold: "3 consecutive failures"
+  Recovery_Time: "5 minutes before re-enabling"
+  Health_Check: "Lightweight test before full retry"
 ```
 
 ## MCP Server Failover
@@ -80,6 +115,42 @@ Server_Health_Monitoring:
     Slow_Response: ">30s response time"
     Action: "Switch to faster alternative if available"
     Notification: "Inform user of performance impact"
+```
+
+## Recovery Strategies
+
+```yaml
+Automatic_Recovery:
+  Retry_Mechanisms:
+    Simple: "Up to 3 attempts with 1s delay"
+    Exponential: "1s, 2s, 4s, 8s delays with jitter"
+    Circuit_Breaker: "Stop retries after threshold failures"
+    
+  Fallback_Patterns:
+    Alternative_Commands: "Use native tools if MCP fails"
+    Degraded_Functionality: "Skip non-essential features"
+    Cached_Results: "Use previous successful outputs"
+    
+  State_Management:
+    Checkpoints: "Save state before risky operations"
+    Rollback: "Automatic revert to last known good state"
+    Cleanup: "Remove partial results on failure"
+
+Manual_Recovery:
+  User_Guidance:
+    Clear_Error_Messages: "What failed, why, how to fix"
+    Action_Items: "Specific steps user can take"
+    Documentation_Links: "Relevant help resources"
+    
+  Intervention_Points:
+    Confirmation: "Ask before destructive operations"
+    Override: "Allow user to skip validation warnings"
+    Custom: "Accept user-provided alternative approaches"
+    
+  Recovery_Tools:
+    Diagnostic: "Commands to investigate failures"
+    Repair: "Automated fixes for common issues"
+    Reset: "Return to clean state for fresh start"
 ```
 
 ## Context Preservation
@@ -145,6 +216,30 @@ Risk_Assessment:
     Low_Risk: "Proceed w/ monitoring"
 ```
 
+## Command-Specific Recovery
+
+```yaml
+Build_Failures:
+  Clean_Retry: "Remove artifacts, clear cache, rebuild"
+  Dependency_Issues: "Update lockfiles, reinstall packages"
+  Compilation_Errors: "Suggest fixes, alternative approaches"
+  
+Test_Failures:
+  Flaky_Tests: "Retry failed tests, identify unstable tests"
+  Environment_Issues: "Reset test state, check prerequisites"
+  Coverage_Gaps: "Generate missing tests, update thresholds"
+  
+Deploy_Failures:
+  Health_Check_Failures: "Rollback, investigate logs"
+  Resource_Constraints: "Scale up, optimize deployment"
+  Configuration_Issues: "Validate settings, check secrets"
+  
+Analysis_Failures:
+  Tool_Unavailable: "Fallback to alternative analysis tools"
+  Large_Codebase: "Reduce scope, batch processing"
+  Permission_Issues: "Guide user through access setup"
+```
+
 ## Enhanced Error Reporting
 
 ```yaml
@@ -176,29 +271,51 @@ Error_Learning:
     Automated_Fixes: "Apply known solutions automatically"
 ```
 
-## Implementation Integration
+## Integration with Commands
 
 ```yaml
-Command_Wrapper_Enhancement:
-  Error_Boundary:
-    Catch_All_Errors: "Wrap every operation in try/catch"
-    Classify_Error: "Determine error type & appropriate response"
-    Apply_Strategy: "Retry, failover, or graceful degradation"
-    
-  Context_Management:
-    Save_State: "Before each significant operation"
-    Track_Progress: "Monitor completion of multi-step processes"
-    Restore_State: "On failure, return to last good state"
-    
-Recovery_Commands:
-  Manual_Recovery: "/user:recover --from-checkpoint"
-  Status_Check: "/user:recovery-status"
-  Clear_State: "/user:recovery-clear"
+Pre_Execution_Validation:
+  Prerequisites: "Check required tools, permissions, resources"
+  Environment: "Validate configuration, network connectivity"
+  State: "Ensure clean starting state, no conflicts"
   
-Integration_Points:
-  All_Commands: "Enhanced error handling built into every command"
-  MCP_Servers: "Automatic failover & circuit breaker patterns"
-  User_Experience: "Seamless recovery w/ minimal interruption"
+During_Execution:
+  Monitoring: "Track progress, resource usage, early warnings"
+  Checkpointing: "Save state at critical milestones"
+  Health_Checks: "Validate system state during long operations"
+  
+Post_Execution:
+  Verification: "Confirm expected outcomes achieved"
+  Cleanup: "Remove temporary files, release resources"
+  Reporting: "Document successes, failures, lessons learned"
+  
+Error_Reporting_Format:
+  Structured: "Consistent error message format across commands"
+  Actionable: "Include specific steps for resolution"
+  Contextual: "Provide relevant system and environment information"
+  Traceable: "Include operation ID for troubleshooting"
+```
+
+## Configuration & Customization
+
+```yaml
+User_Preferences:
+  Recovery_Style: "Conservative (safe) vs Aggressive (fast)"
+  Retry_Limits: "Maximum attempts for different error types"
+  Notification: "How and when to alert user of issues"
+  Automation_Level: "How much recovery to attempt automatically"
+  
+Project_Settings:
+  Critical_Operations: "Commands that require extra safety"
+  Acceptable_Risk: "Tolerance for failures in development vs production"
+  Resource_Limits: "Maximum time, memory, network usage"
+  Dependencies: "Critical external services that must be available"
+  
+Environment_Adaptation:
+  Development: "More aggressive retries, helpful error messages"
+  Staging: "Balanced approach, thorough logging"
+  Production: "Conservative recovery, immediate alerting"
+  CI_CD: "Fast failure, detailed diagnostic information"
 ```
 
 ## Usage Examples
@@ -221,4 +338,4 @@ Command_Chain_Failure:
 ```
 
 ---
-*Enhanced Error Recovery v1.0 - Intelligent resilience for SuperClaude operations*
+*Error Handling v1.0 - Comprehensive error recovery and resilience for SuperClaude*
