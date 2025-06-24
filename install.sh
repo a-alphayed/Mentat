@@ -133,11 +133,11 @@ command_files=$(ls -1 "$INSTALL_DIR/commands/"*.md 2>/dev/null | wc -l)
 shared_files=$(ls -1 "$INSTALL_DIR/commands/shared/"*.yml 2>/dev/null | wc -l)
 
 echo -e "Main config files: ${GREEN}$main_files${NC} (expected: 4)"
-echo -e "Command files: ${GREEN}$command_files${NC} (expected: 18)"
-echo -e "Shared resources: ${GREEN}$shared_files${NC} (expected: 26)"
+echo -e "Command files: ${GREEN}$command_files${NC} (expected: 19)"
+echo -e "Shared resources: ${GREEN}$shared_files${NC} (expected: 31)"
 
 # Check if installation was successful
-if [ "$main_files" -ge 4 ] && [ "$command_files" -ge 18 ] && [ "$shared_files" -ge 26 ]; then
+if [ "$main_files" -ge 4 ] && [ "$command_files" -ge 19 ] && [ "$shared_files" -ge 31 ]; then
     echo ""
     echo -e "${GREEN}✓ SuperClaude installed successfully!${NC}"
     echo ""
