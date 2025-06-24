@@ -1,11 +1,6 @@
-## Legend
-| Symbol | Meaning | | Abbrev | Meaning |
-|--------|---------|---|--------|---------|
-| → | leads to | | perf | performance |
-| & | and/with | | ops | operations |
-| w/ | with | | impl | implementation |
+@include shared/constants.yml#Process_Symbols
 
-Execute immediately. Add --plan flag if user wants to see plan first.
+@include shared/command-templates.yml#Universal_Flags
 
 Improve code, perf, or quality of system specified in $ARGUMENTS.
 
@@ -160,24 +155,8 @@ Balance considerations:
 - Speed vs correctness
 - Present vs future needs
 
-## Research Requirements
+@include shared/command-templates.yml#Research_Requirements
 
-All optimization patterns must be verified:
-- Performance optimizations → Research benchmarks and best practices via WebSearch
-- Framework-specific improvements → C7 documentation lookup required
-- Algorithm changes → Verify complexity analysis with authoritative sources
-- Caching strategies → Check official recommendations for the platform
-- Never apply "common" optimizations without documentation backing
-- All improvements must cite sources: // Source: [optimization guide reference]
+@include shared/command-templates.yml#Report_Output
 
-Report Output:
-- Quality metrics: `.claudedocs/metrics/quality-<timestamp>.md`
-- Performance benchmarks: `.claudedocs/metrics/performance-<timestamp>.md`
-- Iteration logs: `.claudedocs/summaries/iteration-log-<timestamp>.md`
-- Ensure directory exists: `mkdir -p .claudedocs/metrics/ .claudedocs/summaries/`
-- Include report location in output: "📄 Report saved to: [path]"
-
-Deliverables:
-- For quality: Refactored code, quality metrics report, improvement documentation
-- For performance: Optimized system, performance benchmarks, bottleneck analysis
-- For iterate: Final metrics, iteration log, recommendations for future improvements
+@include shared/constants.yml#Success_Messages

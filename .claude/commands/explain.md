@@ -1,11 +1,6 @@
-## Legend
-| Symbol | Meaning | | Abbrev | Meaning |
-|--------|---------|---|--------|---------|
-| → | leads to | | MCP | model context protocol |
-| & | and/with | | impl | implementation |
-| w/ | with | | perf | performance |
+@include shared/constants.yml#Process_Symbols
 
-Execute immediately. Add --plan flag if user wants to see plan first.
+@include shared/command-templates.yml#Universal_Flags
 
 Provide comprehensive explanations of concepts, code, or systems in $ARGUMENTS.
 

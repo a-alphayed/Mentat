@@ -40,7 +40,7 @@ Git operations:
 
 @see shared/git-workflow.yml ∀ best practices
 @see shared/checkpoint.yml ∀ checkpoint system
-@see shared/error-recovery-enhanced.yml ∀ safety checks
+@see shared/error-handling.yml ∀ safety checks
 
 Workflow: Check status→Create chkpt→Execute→Verify→Sync
 

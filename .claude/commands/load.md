@@ -1,11 +1,6 @@
-## Legend
-| Symbol | Meaning | | Abbrev | Meaning |
-|--------|---------|---|--------|---------|
-| → | leads to | | cfg | configuration |
-| & | and/with | | deps | dependencies |
-| w/ | with | | CI/CD | continuous integration/deployment |
+@include shared/constants.yml#Process_Symbols
 
-Execute immediately. Add --plan flag if user wants to see plan first.
+@include shared/command-templates.yml#Universal_Flags
 
 Load & analyze project context in $ARGUMENTS→build comprehensive understanding.
 

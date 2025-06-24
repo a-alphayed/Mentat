@@ -1,6 +1,6 @@
 # /task: - Task Management & Session Recovery
 
-@task-management.yml
+@see shared/task-system.yml
 
 ## Purpose
 Manage complex features & requirements across sessions with automatic breakdown, context preservation & recovery.

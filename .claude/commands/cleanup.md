@@ -1,11 +1,6 @@
-## Legend
-| Symbol | Meaning | | Abbrev | Meaning |
-|--------|---------|---|--------|---------|
-| → | leads to | | cfg | configuration |
-| & | and/with | | deps | dependencies |
-| w/ | with | | perf | performance |
+@include shared/constants.yml#Process_Symbols
 
-Execute immediately. Add --plan flag if user wants to see plan first.
+@include shared/command-templates.yml#Universal_Flags
 
 Clean up project artifacts, code & cfg specified in $ARGUMENTS.
 
@@ -41,13 +36,9 @@ Clean up project artifacts, code & cfg specified in $ARGUMENTS.
 
 ## Integration & Best Practices
 
-Research requirements:
-- Project patterns→C7 framework-specific cleanup | Build tools→verify safe procedures for stack
-- Git ops→WebSearch safe practices & warnings | Deps mgmt→check official package mgr guidance
-- Never cleanup w/o understanding impact - verify patterns | Cite sources: // Source: [cleanup guide ref]
+@include shared/command-templates.yml#Research_Requirements
 
-Report Output:
-- Cleanup summaries: `.claudedocs/reports/cleanup-<type>-<timestamp>.md`
+@include shared/command-templates.yml#Report_Output
 - Space savings: `.claudedocs/metrics/cleanup-savings-<timestamp>.md`
 - Ensure dirs: `mkdir -p .claudedocs/reports/ .claudedocs/metrics/`
 - Include location: "📄 Cleanup report saved to: [path]"

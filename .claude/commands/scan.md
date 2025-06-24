@@ -1,11 +1,6 @@
-## Legend
-| Symbol | Meaning | | Abbrev | Meaning |
-|--------|---------|---|--------|---------|
-| → | leads to | | cfg | configuration |
-| & | and/with | | deps | dependencies |
-| w/ | with | | vuln | vulnerability |
+@include shared/constants.yml#Process_Symbols
 
-Execute immediately. Add --plan flag if user wants to see plan first.
+@include shared/command-templates.yml#Universal_Flags
 
 Scan code, ops, or systems→security vulns & safety issues in $ARGUMENTS.
 
@@ -163,12 +158,6 @@ Best practices:
 - Automate where possible
 - Document exceptions with justification
 
-Report Output:
-- Safety reports: `.claudedocs/reports/safety-scan-<timestamp>.md`
-- Security reports: `.claudedocs/reports/security-scan-<timestamp>.md`
-- Ensure directory exists: `mkdir -p .claudedocs/reports/`
-- Include report location in output: "📄 Scan report saved to: [path]"
+@include shared/command-templates.yml#Report_Output
 
-Deliverables:
-- For validate: Safety report, risk score, proceed/block recommendation
-- For security: Vulnerability report, remediation guide, risk assessment, compliance status
+@include shared/constants.yml#Success_Messages

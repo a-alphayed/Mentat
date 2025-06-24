@@ -1,14 +1,10 @@
-## Legend
-| Symbol | Meaning | | Abbrev | Meaning |
-|--------|---------|---|--------|---------|
-| → | leads to | | anlz | analyze |
-| & | and/with | | perf | performance |
-| w/ | with | | arch | architecture |
+@include shared/constants.yml#Process_Symbols
 
 @include shared/command-templates.yml#Command_Header
 
 Multi-dimensional analysis on code, arch, or problem in $ARGUMENTS.
 
+@include shared/command-templates.yml#Universal_Flags
 @see shared/thinking-modes.yml ∀ thinking flags
 @see shared/mcp-flags.yml ∀ MCP controls
 
@@ -33,8 +29,8 @@ Analysis modes:
 
 **--interactive:** Guided exploration | Step-by-step fixes | Live improvement
 
-@see shared/research-first.yml ∀ research requirements
+@include shared/command-templates.yml#Research_Requirements
 
-Report: `.claudedocs/reports/analysis-<type>-<timestamp>.md` | Create dir: `mkdir -p .claudedocs/reports/` | Ref: "📄 Analysis report→[path]"
+@include shared/command-templates.yml#Report_Output
 
-Deliverables: Analysis report, root causes, prioritized action plan w/ recommendations.
+Deliverables: @include shared/constants.yml#Success_Messages

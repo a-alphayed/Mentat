@@ -1,11 +1,6 @@
-## Legend
-| Symbol | Meaning | | Abbrev | Meaning |
-|--------|---------|---|--------|---------|
-| → | leads to | | API | application programming interface |
-| & | and/with | | UX | user experience |
-| w/ | with | | FAQ | frequently asked questions |
+@include shared/constants.yml#Process_Symbols
 
-Execute immediately. Add --plan flag if user wants to see plan first.
+@include shared/command-templates.yml#Universal_Flags
 
 Create comprehensive docs for code, API, or system specified in $ARGUMENTS.
 

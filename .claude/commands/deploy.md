@@ -1,11 +1,6 @@
-## Legend
-| Symbol | Meaning | | Abbrev | Meaning |
-|--------|---------|---|--------|---------|
-| → | leads to | | env | environment |
-| & | and/with | | prod | production |
-| w/ | with | | perf | performance |
+@include shared/constants.yml#Process_Symbols
 
-Execute immediately. Add --plan flag if user wants to see plan first.
+@include shared/command-templates.yml#Universal_Flags
 
 Deploy application to env specified in $ARGUMENTS.
 
@@ -53,16 +48,8 @@ Safety:
 - Always have rollback plan | Backups before deployment
 - Monitor key metrics during deployment | Gradual rollout→major changes
 
-Research requirements:
-- Infrastructure patterns→WebSearch cloud provider practices & docs
-- CI/CD patterns→verify w/ platform-specific guides | Monitoring→research observability patterns
-- Security hardening→check security guides & compliance | Never deploy on assumptions
-- All cfg cite sources: // Source: [deployment guide ref]
+@include shared/command-templates.yml#Research_Requirements
 
-Report Output:
-- Deployment logs: `.claudedocs/reports/deployment-<env>-<timestamp>.md`
-- Health checks: `.claudedocs/metrics/health-check-<timestamp>.md`
-- Ensure dirs: `mkdir -p .claudedocs/reports/ .claudedocs/metrics/`
-- Include location: "📄 Deployment report saved to: [path]"
+@include shared/command-templates.yml#Report_Output
 
-Deliverables: Deployment log w/ timestamps, health check results, perf metrics comparison, rollback instructions & verification report.
+@include shared/constants.yml#Success_Messages

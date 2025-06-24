@@ -1,11 +1,6 @@
-## Legend
-| Symbol | Meaning | | Abbrev | Meaning |
-|--------|---------|---|--------|---------|
-| → | leads to | | E2E | end-to-end |
-| & | and/with | | MCP | model context protocol |
-| w/ | with | | DB | database |
+@include shared/constants.yml#Process_Symbols
 
-Execute immediately. Add --plan flag if user wants to see plan first.
+@include shared/command-templates.yml#Universal_Flags
 
 Create or run comprehensive tests for code in $ARGUMENTS.
 
@@ -65,18 +60,8 @@ Follow testing standards:
 - Create fixtures for consistent test data
 - Ensure tests are independent and can run in any order
 
-Research requirements for testing:
-- Testing frameworks → C7 documentation lookup for framework-specific patterns
-- Test patterns → Must verify with official testing guides and best practices
-- E2E testing → WebSearch for accessibility and user experience standards
-- Performance testing → Research benchmarking patterns for the specific stack
-- Never implement test patterns without documentation backing
-- All test implementations must cite sources: // Source: [testing guide reference]
+@include shared/command-templates.yml#Research_Requirements
 
-Report Output:
-- Coverage reports: `.claudedocs/metrics/coverage-<timestamp>.html`
-- Test summaries: `.claudedocs/summaries/test-results-<timestamp>.md`
-- Ensure directory exists: `mkdir -p .claudedocs/metrics/ .claudedocs/summaries/`
-- Include report location in output: "📄 Coverage report saved to: [path]"
+@include shared/command-templates.yml#Report_Output
 
-Deliverables: Comprehensive test suite, coverage reports, testing documentation, and test strategy guide.
+@include shared/constants.yml#Success_Messages

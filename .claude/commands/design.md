@@ -1,11 +1,6 @@
-## Legend
-| Symbol | Meaning | | Abbrev | Meaning |
-|--------|---------|---|--------|---------|
-| → | leads to | | API | application programming interface |
-| & | and/with | | DDD | domain-driven design |
-| w/ | with | | PRD | product requirements document |
+@include shared/constants.yml#Process_Symbols
 
-Execute immediately. Add --plan flag if user wants to see plan first.
+@include shared/command-templates.yml#Universal_Flags
 
 Design & architect software solutions based on requirements in $ARGUMENTS.
 

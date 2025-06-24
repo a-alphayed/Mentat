@@ -1,11 +1,6 @@
-## Legend
-| Symbol | Meaning | | Abbrev | Meaning |
-|--------|---------|---|--------|---------|
-| → | leads to | | E2E | end-to-end |
-| & | and/with | | deps | dependencies |
-| w/ | with | | impl | implementation |
+@include shared/constants.yml#Process_Symbols
 
-Execute immediately. Add --plan flag if user wants to see plan first.
+@include shared/command-templates.yml#Universal_Flags
 
 Provide comprehensive time & complexity estimates for task in $ARGUMENTS.
 

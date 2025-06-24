@@ -1,11 +1,6 @@
-## Legend
-| Symbol | Meaning | | Abbrev | Meaning |
-|--------|---------|---|--------|---------|
-| → | leads to | | prod | production |
-| & | and/with | | impl | implementation |
-| w/ | with | | info | information |
+@include shared/constants.yml#Process_Symbols
 
-Execute immediately. Add --plan flag if user wants to see plan first.
+@include shared/command-templates.yml#Universal_Flags
 
 Troubleshoot & resolve issues in code or system in $ARGUMENTS.
 
@@ -91,21 +86,8 @@ For production issues:
 - Analyze resource utilization
 - Consider rollback if critical
 
-Research before fixing:
-- Search for known issues → WebSearch "[error message] [library version]"
-- Check library bug trackers → C7 documentation for known problems
-- Verify error patterns → Official troubleshooting guides required
-- Framework-specific issues → Must check official documentation first
-- Never assume root cause without researching similar cases
-- Document all research sources in fix explanation
+@include shared/command-templates.yml#Research_Requirements
 
-Report Output:
-- Root cause analysis: `.claudedocs/incidents/rca-<timestamp>.md`
-- Incident documentation: `.claudedocs/incidents/incident-<timestamp>.md`
-- Investigation findings: `.claudedocs/reports/investigation-<timestamp>.md`
-- Ensure directory exists: `mkdir -p .claudedocs/incidents/ .claudedocs/reports/`
-- Include report location in output: "📄 Report saved to: [path]"
+@include shared/command-templates.yml#Report_Output
 
-Deliverables: 
-- For investigation: Root cause analysis, detailed findings report, recommended solutions
-- For fix: Implemented solution with tests, prevention measures, incident documentation
+@include shared/constants.yml#Success_Messages

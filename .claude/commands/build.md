@@ -1,14 +1,10 @@
-## Legend  
-| Symbol | Meaning | | Abbrev | Meaning |
-|--------|---------|---|--------|---------|
-| → | leads to | | bld | build |
-| & | and/with | | impl | implementation |
-| w/ | with | | TDD | test-driven development |
+@include shared/constants.yml#Process_Symbols
 
 @include shared/command-templates.yml#Command_Header
 
 Build project/feature based on req in $ARGUMENTS.
 
+@include shared/command-templates.yml#Universal_Flags
 @see shared/mcp-flags.yml ∀ MCP controls
 
 Examples:
@@ -33,8 +29,7 @@ Templates:
 **--watch:** Continuous build | Real-time feedback | Incremental | Live reload
 **--interactive:** Step-by-step cfg | Interactive deps | Build customization
 
-@see shared/research-first.yml ∀ research req
+@include shared/command-templates.yml#Research_Requirements
+@include shared/execution-lifecycle.yml#Standard_Lifecycle
 
-Workflow: Research→Setup→Impl→Test→Integrate
-
-Deliverables: Working code, tests, docs, integration instructions.
+Deliverables: @include shared/constants.yml#Success_Messages

@@ -1,11 +1,6 @@
-## Legend
-| Symbol | Meaning | | Abbrev | Meaning |
-|--------|---------|---|--------|---------|
-| → | leads to | | DB | database |
-| & | and/with | | perf | performance |
-| w/ | with | | arch | architecture |
+@include shared/constants.yml#Process_Symbols
 
-Execute immediately. Add --plan flag if user wants to see plan first.
+@include shared/command-templates.yml#Universal_Flags
 
 Execute comprehensive DB or code migration based on specs in $ARGUMENTS.
 

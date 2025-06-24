@@ -1,11 +1,6 @@
-## Legend
-| Symbol | Meaning | | Abbrev | Meaning |
-|--------|---------|---|--------|---------|
-| → | leads to | | CI/CD | continuous integration/deployment |
-| & | and/with | | cfg | configuration |
-| w/ | with | | env | environment |
+@include shared/constants.yml#Process_Symbols
 
-Execute immediately. Add --plan flag if user wants to see plan first.
+@include shared/command-templates.yml#Universal_Flags
 
 Setup comprehensive dev env or CI/CD pipeline based on $ARGUMENTS.
 
@@ -35,15 +30,8 @@ Examples:
 
 Ensure all cfgs follow security practices & include comprehensive docs.
 
-Research requirements:
-- Dev tools→C7 docs for installation & cfg patterns | CI/CD platforms→WebSearch platform-specific practices & guides
-- Security tools→research OWASP & security scanning docs | Monitoring→check official observability platform docs
-- Never cfg w/o docs - verify setup patterns | All cfgs cite sources: // Source: [setup guide ref]
+@include shared/command-templates.yml#Research_Requirements
 
-Report Output:
-- Setup logs: `.claudedocs/reports/dev-setup-<timestamp>.md`
-- Cfg summaries: `.claudedocs/summaries/environment-config-<timestamp>.md`
-- Ensure dirs: `mkdir -p .claudedocs/reports/ .claudedocs/summaries/`
-- Include location: "📄 Setup report saved to: [path]"
+@include shared/command-templates.yml#Report_Output
 
-Deliverables: Cfg scripts, CI/CD pipeline files, setup docs, env-specific cfgs & security validation report.
+@include shared/constants.yml#Success_Messages

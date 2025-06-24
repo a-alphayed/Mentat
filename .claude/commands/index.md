@@ -1,11 +1,6 @@
 # SuperClaude Commands Index
 
-## Legend
-| Symbol | Meaning | | Abbrev | Meaning |
-|--------|---------|---|--------|---------|
-| → | leads to | | MCP | model context protocol |
-| & | and/with | | UI | user interface |
-| w/ | with | | docs | documentation |
+@include shared/constants.yml#Process_Symbols
 
 ## Command Usage
 All commands use `/user:` prefix. Examples:
@@ -132,23 +127,28 @@ Planning for Complex Operations:
   Cleanup: cleanup --all --dry-run → review → cleanup --all
 ```
 
-## Shared Resources (22 files)
+## Shared Resources (37 files)
 - `ambiguity-check.yml`: Ambiguity detection & resolution
 - `audit.yml`: Audit configurations & logging
 - `checkpoint.yml`: Checkpoint management & rollback
 - `cleanup-patterns.yml`: Cleanup safety rules & patterns
 - `command-memory.yml`: Enhanced command result sharing & context management
+- `command-templates.yml`: Token-optimized reusable command patterns
+- `constants.yml`: Universal constants & shared values
 - `documentation-dirs.yml`: Documentation directory standards
-- `error-recovery.yml`: Error handling & resilience patterns (NEW)
+- `error-handling.yml`: Error handling & resilience patterns
 - `evidence.yml`: Evidence tracking & validation
+- `execution-lifecycle.yml`: Command execution flow & lifecycle management
 - `git-workflow.yml`: Git integration patterns
 - `implementation.yml`: Implementation hooks & behaviors
 - `loading-config.yml`: Token optimization & lazy loading
 - `mcp-flags.yml`: Enhanced MCP server control via flags
 - `patterns.yml`: Enhanced common workflows & command integration patterns
-- `performance-monitoring.yml`: Self-monitoring metrics
+- `performance.yml`: Performance monitoring & metrics
 - `planning-mode.yml`: Risk assessment & planning configuration
 - `research-first.yml`: Mandatory research & documentation requirements
+- `severity-levels.yml`: Severity classification & escalation paths
+- `task-system.yml`: Comprehensive task management & workflow system
 - `thinking-modes.yml`: Thinking depth configuration & flags
 - `ultracompressed.yml`: ~70% token reduction documentation mode
 - `user-experience.yml`: User interface & interaction patterns (NEW)
