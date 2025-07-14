@@ -48,7 +48,8 @@ A comprehensive guide to understanding and using SuperClaude v3.0 effectively. B
 # Try these commands in Claude Code:
 /sc:help                    # See what's available
 /sc:analyze README.md       # SuperClaude analyzes your project
-/sc:build                   # Smart build with auto-optimization
+/sc:implement user-auth     # Create features and components (NEW in v3!)
+/sc:build                   # Smart build with auto-optimization  
 /sc:improve messy-file.js   # Clean up code automatically
 ```
 
@@ -76,12 +77,13 @@ SuperClaude makes Claude Code smarter for development work. Instead of generic r
 
 ### What SuperClaude Adds ✨
 
-**🛠️ 15 Specialized Commands** *(that auto-activate intelligently)*
-- Development tools: `/build`, `/design`
+**🛠️ 16 Specialized Commands** *(that auto-activate intelligently)*
+- Development tools: `/implement`, `/build`, `/design`
 - Analysis tools: `/analyze`, `/troubleshoot`, `/explain` 
 - Quality tools: `/improve`, `/cleanup`, `/test`
 - Plus utilities for documentation, git, deployment, and more
-- **You just use them** - SuperClaude handles the complexity automatically 
+- **You just use them** - SuperClaude handles the complexity automatically
+- **NEW**: `/implement` command for feature creation (restores v2 functionality) 
 
 **🎭 11 Smart Personas** *(that know when to jump in)*
 - AI specialists that adapt behavior for different domains
@@ -113,7 +115,7 @@ SuperClaude makes Claude Code smarter for development work. Instead of generic r
 
 **✅ What's Working Well:**
 - Installation system (completely rewritten, much more reliable)
-- Core framework with 15 commands and 11 personas
+- Core framework with 16 commands and 11 personas
 - MCP server integration (mostly working)
 - Basic task management and workflow automation
 - Documentation and user guides
@@ -2746,7 +2748,7 @@ SuperClaude v3.0 is fresh out of beta, and we're honest about what that means: i
 - Will return in v4 with improved reliability and simpler configuration
 
 **Some Advanced Commands**
-- Consolidated 20+ commands down to 15 essential ones
+- Consolidated 20+ commands down to 16 essential ones
 - Removed experimental commands that weren't stable enough
 - Focus on making core commands excellent rather than having many mediocre ones
 

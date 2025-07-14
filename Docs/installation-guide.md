@@ -64,7 +64,7 @@ python3 SuperClaude.py install --quick
 ```
 
 **What you just got:**
-- ✅ All 15 smart commands that auto-activate experts
+- ✅ All 16 smart commands that auto-activate experts
 - ✅ 11 specialist personas that know when to help
 - ✅ Intelligent routing that figures out complexity for you
 - ✅ About 2 minutes of your time and ~50MB disk space
@@ -94,7 +94,7 @@ python3 SuperClaude.py install --minimal
 ```bash
 python3 SuperClaude.py install --quick
 ```
-- **What**: Core framework + 15 slash commands
+- **What**: Core framework + 16 slash commands
 - **Time**: ~2 minutes
 - **Space**: ~50MB
 - **Good for**: Most users, general development

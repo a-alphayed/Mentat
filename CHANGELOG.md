@@ -10,10 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - **BREAKING**: Commands now use `/sc:` namespace to avoid conflicts with user custom commands
 - Commands are now installed in `~/.claude/commands/sc/` subdirectory
-- All 15 commands updated: `/analyze` ’ `/sc:analyze`, `/build` ’ `/sc:build`, etc.
+- All 16 commands updated: `/analyze` ï¿½ `/sc:analyze`, `/build` ï¿½ `/sc:build`, etc.
 - Automatic migration from old command locations to new `sc/` subdirectory
 
 ### Added
+- **NEW COMMAND**: `/sc:implement` for feature and code implementation (addresses v2 user feedback)
 - Migration logic to move existing commands to new namespace automatically
 - Enhanced uninstaller to handle both old and new command locations
 - Improved command conflict prevention

@@ -12,7 +12,7 @@ A framework that extends Claude Code with specialized commands, personas, and MC
 ## What is SuperClaude? 🤔
 
 SuperClaude tries to make Claude Code more helpful for development work by adding:
-- 🛠️ **15 specialized commands** for common dev tasks (some work better than others!)
+- 🛠️ **16 specialized commands** for common dev tasks (some work better than others!)
 - 🎭 **Smart personas** that usually pick the right expert for different domains 
 - 🔧 **MCP server integration** for docs, UI components, and browser automation
 - 📋 **Task management** that tries to keep track of progress
@@ -25,7 +25,7 @@ This is what we've been building to make development workflows smoother. Still r
 ✅ **What's Working Well:**
 - Installation suite (rewritten from the ground up)
 - Core framework with 9 documentation files 
-- 15 slash commands for various development tasks
+- 16 slash commands for various development tasks
 - MCP server integration (Context7, Sequential, Magic, Playwright)
 - Unified CLI installer for easy setup
 
@@ -38,9 +38,9 @@ This is what we've been building to make development workflows smoother. Still r
 ## Key Features ✨
 
 ### Commands 🛠️
-We focused on 15 essential commands for the most common tasks:
+We focused on 16 essential commands for the most common tasks:
 
-**Development**: `/sc:build`, `/sc:design`  
+**Development**: `/sc:implement`, `/sc:build`, `/sc:design`  
 **Analysis**: `/sc:analyze`, `/sc:troubleshoot`, `/sc:explain`  
 **Quality**: `/sc:improve`, `/sc:test`, `/sc:cleanup`  
 **Others**: `/sc:document`, `/sc:git`, `/sc:estimate`, `/sc:task`, `/sc:index`, `/sc:load`, `/sc:spawn`
@@ -79,6 +79,13 @@ If you're coming from SuperClaude v2, you'll need to clean up first:
 4. **Then proceed** with v3 installation below
 
 This is because v3 has a different structure and the old files can cause conflicts.
+
+### 🔄 **Key Change for v2 Users**
+**The `/build` command changed!** In v2, `/build` was used for feature implementation. In v3:
+- `/sc:build` = compilation/packaging only 
+- `/sc:implement` = feature implementation (NEW!)
+
+**Migration**: Replace `v2 /build myFeature` with `v3 /sc:implement myFeature`
 
 ## Installation 📦
 
@@ -128,7 +135,7 @@ The installer handles everything: framework files, MCP servers, and Claude Code 
 SuperClaude tries to enhance Claude Code through:
 
 1. **Framework Files** - Documentation installed to `~/.claude/` that guides how Claude responds
-2. **Slash Commands** - 15 specialized commands for different dev tasks  
+2. **Slash Commands** - 16 specialized commands for different dev tasks  
 3. **MCP Servers** - External services that add extra capabilities (when they work!)
 4. **Smart Routing** - Attempts to pick the right tools and experts based on what you're doing
 
@@ -158,7 +165,7 @@ Most users probably won't need to change anything - it usually works okay out of
 Want to learn more? Check out our guides:
 
 - 📚 [**User Guide**](Docs/superclaude-user-guide.md) - Complete overview and getting started
-- 🛠️ [**Commands Guide**](Docs/commands-guide.md) - All 15 slash commands explained  
+- 🛠️ [**Commands Guide**](Docs/commands-guide.md) - All 16 slash commands explained  
 - 🏳️ [**Flags Guide**](Docs/flags-guide.md) - Command flags and options
 - 🎭 [**Personas Guide**](Docs/personas-guide.md) - Understanding the persona system
 - 📦 [**Installation Guide**](Docs/installation-guide.md) - Detailed installation instructions
@@ -182,7 +189,7 @@ SuperClaude/
 ├── SuperClaude.py          # Main installer CLI
 ├── SuperClaude/            # Framework files  
 │   ├── Core/              # Behavior documentation (COMMANDS.md, FLAGS.md, etc.)
-│   ├── Commands/          # 15 slash command definitions
+│   ├── Commands/          # 16 slash command definitions
 │   └── Settings/          # Configuration files
 ├── setup/                 # Installation system
 └── profiles/              # Installation profiles (quick, minimal, developer)

@@ -59,6 +59,21 @@ performance-profile: "optimization"
 - **Tool Orchestration**: [Read, Grep, Glob, Bash, TodoWrite, Edit, MultiEdit]
 - **Arguments**: `[target]`, `@<path>`, `!<command>`, `--<flags>`
 
+**`/implement $ARGUMENTS`**
+```yaml
+---
+command: "/implement"
+category: "Development & Implementation"
+purpose: "Feature and code implementation with intelligent persona activation"
+wave-enabled: true
+performance-profile: "standard"
+---
+```
+- **Auto-Persona**: Frontend, Backend, Architect, Security (context-dependent)
+- **MCP Integration**: Magic (UI components), Context7 (patterns), Sequential (complex logic)
+- **Tool Orchestration**: [Read, Write, Edit, MultiEdit, Bash, Glob, TodoWrite, Task]
+- **Arguments**: `[feature-description]`, `--type component|api|service|feature`, `--framework <name>`, `--<flags>`
+
 **`/dev-setup $ARGUMENTS`**
 - **Purpose**: Development environment configuration
 - **Category**: Development & Infrastructure
@@ -174,7 +189,7 @@ complex: "Resource-intensive with comprehensive analysis"
 ```
 
 ### Command Categories
-- **Development**: build, dev-setup, design
+- **Development**: build, implement, dev-setup, design
 - **Analysis**: analyze, troubleshoot, explain, review
 - **Quality**: improve, scan, cleanup
 - **Testing**: test
@@ -186,5 +201,5 @@ complex: "Resource-intensive with comprehensive analysis"
 - **Meta**: index, loop, spawn
 
 ### Wave-Enabled Commands
-8 commands: `/analyze`, `/build`, `/design`, `/improve`, `/review`, `/scan`, `/task`
+9 commands: `/analyze`, `/build`, `/design`, `/implement`, `/improve`, `/review`, `/scan`, `/task`
 

@@ -2,7 +2,7 @@
 
 ## 💡 Don't Overthink It - SuperClaude Tries to Help
 
-**The truth about these 15 commands**: You don't need to memorize them. Just start with `/sc:analyze` or `/sc:build` and see what happens! 
+**The truth about these 16 commands**: You don't need to memorize them. Just start with `/sc:analyze` or `/sc:implement` and see what happens! 
 
 **Here's how it usually works:**
 - Type `/` in Claude Code → See available commands
@@ -20,6 +20,7 @@
 ```bash
 /sc:help                    # See what's available
 /sc:analyze src/            # Tries to analyze your code smartly 
+/sc:implement user-auth     # Creates features and components (replaces v2 /build)
 /sc:build                   # Attempts intelligent project building
 /sc:improve messy-file.js   # Tries to clean up code 
 /sc:troubleshoot "error"    # Attempts to help with problems
@@ -29,7 +30,7 @@
 
 ---
 
-A practical guide to all 15 SuperClaude slash commands. We'll be honest about what works well and what's still rough around the edges.
+A practical guide to all 16 SuperClaude slash commands. We'll be honest about what works well and what's still rough around the edges.
 
 ## Quick Reference 📋
 
@@ -39,6 +40,7 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 |---------|---------|-----------------|----------|
 | `/sc:analyze` | Smart code analysis | Security/performance experts | Finding issues, understanding codebases |
 | `/sc:build` | Intelligent building | Frontend/backend specialists | Compilation, bundling, deployment prep |
+| `/sc:implement` | Feature implementation | Domain-specific experts | Creating features, components, APIs, services |
 | `/sc:improve` | Automatic code cleanup | Quality experts | Refactoring, optimization, quality fixes |
 | `/sc:troubleshoot` | Problem investigation | Debug specialists | Debugging, issue investigation |
 | `/sc:test` | Smart testing | QA experts | Running tests, coverage analysis |
@@ -56,6 +58,56 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 **Pro tip**: Just try the ones that sound useful. SuperClaude usually tries to activate helpful experts and tools for each situation! 🎯
 
 ## Development Commands 🔨
+
+### `/implement` - Feature Implementation
+**What it does**: Implements features, components, and functionality with intelligent expert activation.
+
+**The helpful part**: SuperClaude auto-activates the right experts (frontend, backend, security) and tools based on what you're implementing! 🎯
+
+**When to use it**:
+- Creating new features or components (replaces v2's `/build` functionality)
+- Implementing APIs, services, or modules
+- Building UI components with modern frameworks
+- Developing business logic and integrations
+
+**Basic syntax**:
+```bash
+/sc:implement user authentication system      # Implement complete feature
+/sc:implement --type component LoginForm      # Create specific component  
+/sc:implement --type api user-management      # Build API endpoints
+/sc:implement --framework react dashboard     # Framework-specific implementation
+```
+
+**Useful flags**:
+- `--type component|api|service|feature|module` - Implementation type
+- `--framework react|vue|express|django|etc` - Target framework
+- `--safe` - Conservative implementation approach
+- `--iterative` - Step-by-step development with validation
+- `--with-tests` - Include test implementation
+- `--documentation` - Generate docs alongside code
+
+**Real examples**:
+```bash
+/sc:implement user authentication --type feature --with-tests
+/sc:implement dashboard component --type component --framework react
+/sc:implement REST API for orders --type api --safe
+/sc:implement payment processing --type service --iterative
+/sc:implement search functionality --framework vue --documentation
+```
+
+**Auto-activation patterns**:
+- **Frontend**: UI components, React/Vue/Angular → frontend persona + Magic MCP
+- **Backend**: APIs, services, databases → backend persona + Context7
+- **Security**: Auth, payments, sensitive data → security persona + validation
+- **Complex features**: Multi-step implementations → Sequential MCP + architect persona
+
+**Gotchas**:
+- Specify `--type` for better results (component vs service vs feature)
+- Use `--framework` when working with specific tech stacks
+- Try `--safe` for production code or `--iterative` for complex features
+- Remember: this replaces v2's `/build` for actual code implementation
+
+---
 
 ### `/build` - Project Building
 **What it does**: Builds, compiles, and packages projects with smart error handling.
@@ -552,7 +604,7 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Gotchas**:
 - Simple but useful for discovery
-- Better than trying to remember all 15 commands
+- Better than trying to remember all 16 commands
 
 ---
 

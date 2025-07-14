@@ -72,12 +72,12 @@ complex:
 #### Domain Identification
 ```yaml
 frontend:
-  keywords: [UI, component, React, Vue, CSS, responsive, accessibility]
+  keywords: [UI, component, React, Vue, CSS, responsive, accessibility, implement component, build UI]
   file_patterns: ["*.jsx", "*.tsx", "*.vue", "*.css", "*.scss"]
-  typical_operations: [create, style, optimize, test]
+  typical_operations: [create, implement, style, optimize, test]
 
 backend:
-  keywords: [API, database, server, endpoint, authentication, performance]
+  keywords: [API, database, server, endpoint, authentication, performance, implement API, build service]
   file_patterns: ["*.js", "*.ts", "*.py", "*.go", "controllers/*", "models/*"]
   typical_operations: [implement, optimize, secure, scale]
 
@@ -120,6 +120,11 @@ creation:
   verbs: [create, build, implement, generate, design]
   outputs: [new files, features, components]
   typical_tools: [Write, Magic, Context7]
+
+implementation:
+  verbs: [implement, develop, code, construct, realize]
+  outputs: [working features, functional code, integrated components]
+  typical_tools: [Write, Edit, MultiEdit, Magic, Context7, Sequential]
 
 modification:
   verbs: [update, refactor, improve, optimize, fix]
@@ -193,6 +198,10 @@ wave-strategies:
 |---------|------------|---------|----------------|------------|
 | "analyze architecture" | complex | infrastructure | architect persona, --ultrathink, Sequential | 95% |
 | "create component" | simple | frontend | frontend persona, Magic, --uc | 90% |
+| "implement feature" | moderate | any | domain-specific persona, Context7, Sequential | 88% |
+| "implement API" | moderate | backend | backend persona, --seq, Context7 | 92% |
+| "implement UI component" | simple | frontend | frontend persona, Magic, --c7 | 94% |
+| "implement authentication" | complex | security | security persona, backend persona, --validate | 90% |
 | "fix bug" | moderate | any | analyzer persona, --think, Sequential | 85% |
 | "optimize performance" | complex | backend | performance persona, --think-hard, Playwright | 90% |
 | "security audit" | complex | security | security persona, --ultrathink, Sequential | 95% |
