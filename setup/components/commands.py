@@ -97,8 +97,8 @@ class CommandsComponent(Component):
         
         return files
     
-    def get_settings_modifications(self) -> Dict[str, Any]:
-        """Get settings modifications"""
+    def get_metadata_modifications(self) -> Dict[str, Any]:
+        """Get metadata modifications for commands component"""
         return {
             "components": {
                 "commands": {
@@ -108,6 +108,11 @@ class CommandsComponent(Component):
                 }
             }
         }
+    
+    def get_settings_modifications(self) -> Dict[str, Any]:
+        """Get settings.json modifications (now only Claude Code compatible settings)"""
+        # Return empty dict as we don't modify Claude Code settings
+        return {}
     
     def install(self, config: Dict[str, Any]) -> bool:
         """Install commands component"""
@@ -155,13 +160,17 @@ class CommandsComponent(Component):
                 self.logger.error(f"Only {success_count}/{len(files_to_install)} command files copied successfully")
                 return False
             
-            # Update settings.json
+            # Update metadata
             try:
-                settings_mods = self.get_settings_modifications()
-                self.settings_manager.update_settings(settings_mods)
-                self.logger.info("Updated settings.json with commands component registration")
+                # Add component registration to metadata
+                self.settings_manager.add_component_registration("commands", {
+                    "version": "3.0.0",
+                    "category": "commands",
+                    "files_count": len(self.command_files)
+                })
+                self.logger.info("Updated metadata with commands component registration")
             except Exception as e:
-                self.logger.error(f"Failed to update settings.json: {e}")
+                self.logger.error(f"Failed to update metadata: {e}")
                 return False
             
             self.logger.success(f"Commands component installed successfully ({success_count} command files)")
@@ -198,13 +207,13 @@ class CommandsComponent(Component):
             except Exception as e:
                 self.logger.warning(f"Could not remove commands directory: {e}")
             
-            # Update settings.json to remove commands component
+            # Update metadata to remove commands component
             try:
                 if self.settings_manager.is_component_installed("commands"):
                     self.settings_manager.remove_component_registration("commands")
-                    self.logger.info("Removed commands component from settings.json")
+                    self.logger.info("Removed commands component from metadata")
             except Exception as e:
-                self.logger.warning(f"Could not update settings.json: {e}")
+                self.logger.warning(f"Could not update metadata: {e}")
             
             self.logger.success(f"Commands component uninstalled ({removed_count} files removed)")
             return True
@@ -292,9 +301,9 @@ class CommandsComponent(Component):
             elif not file_path.is_file():
                 errors.append(f"Command file is not a regular file: {filename}")
         
-        # Check settings.json registration
+        # Check metadata registration
         if not self.settings_manager.is_component_installed("commands"):
-            errors.append("Commands component not registered in settings.json")
+            errors.append("Commands component not registered in metadata")
         else:
             # Check version matches
             installed_version = self.settings_manager.get_component_version("commands")

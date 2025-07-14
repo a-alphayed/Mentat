@@ -92,8 +92,8 @@ class CoreComponent(Component):
         
         return files
     
-    def get_settings_modifications(self) -> Dict[str, Any]:
-        """Get settings.json modifications"""
+    def get_metadata_modifications(self) -> Dict[str, Any]:
+        """Get metadata modifications for SuperClaude"""
         return {
             "framework": {
                 "version": "3.0.0",
@@ -109,6 +109,11 @@ class CoreComponent(Component):
                 "auto_update": False
             }
         }
+    
+    def get_settings_modifications(self) -> Dict[str, Any]:
+        """Get settings.json modifications (now only Claude Code compatible settings)"""
+        # Return empty dict as we don't modify Claude Code settings
+        return {}
     
     def install(self, config: Dict[str, Any]) -> bool:
         """Install core component"""
@@ -155,13 +160,20 @@ class CoreComponent(Component):
                 self.logger.error(f"Only {success_count}/{len(files_to_install)} files copied successfully")
                 return False
             
-            # Create or update settings.json
+            # Create or update metadata
             try:
-                settings_mods = self.get_settings_modifications()
-                self.settings_manager.update_settings(settings_mods)
-                self.logger.info("Updated settings.json with framework configuration")
+                metadata_mods = self.get_metadata_modifications()
+                # Update metadata directly
+                existing_metadata = self.settings_manager.load_metadata()
+                merged_metadata = self.settings_manager._deep_merge(existing_metadata, metadata_mods)
+                self.settings_manager.save_metadata(merged_metadata)
+                self.logger.info("Updated metadata with framework configuration")
+                
+                # Migrate any existing SuperClaude data from settings.json
+                if self.settings_manager.migrate_superclaude_data():
+                    self.logger.info("Migrated existing SuperClaude data from settings.json")
             except Exception as e:
-                self.logger.error(f"Failed to update settings.json: {e}")
+                self.logger.error(f"Failed to update metadata: {e}")
                 return False
             
             # Create additional directories for other components
@@ -193,13 +205,13 @@ class CoreComponent(Component):
                 else:
                     self.logger.warning(f"Could not remove {filename}")
             
-            # Update settings.json to remove core component
+            # Update metadata to remove core component
             try:
                 if self.settings_manager.is_component_installed("core"):
                     self.settings_manager.remove_component_registration("core")
-                    self.logger.info("Removed core component from settings.json")
+                    self.logger.info("Removed core component from metadata")
             except Exception as e:
-                self.logger.warning(f"Could not update settings.json: {e}")
+                self.logger.warning(f"Could not update metadata: {e}")
             
             self.logger.success(f"Core component uninstalled ({removed_count} files removed)")
             return True
@@ -278,9 +290,9 @@ class CoreComponent(Component):
             elif not file_path.is_file():
                 errors.append(f"Framework file is not a regular file: {filename}")
         
-        # Check settings.json registration
+        # Check metadata registration
         if not self.settings_manager.is_component_installed("core"):
-            errors.append("Core component not registered in settings.json")
+            errors.append("Core component not registered in metadata")
         else:
             # Check version matches
             installed_version = self.settings_manager.get_component_version("core")
@@ -288,18 +300,18 @@ class CoreComponent(Component):
             if installed_version != expected_version:
                 errors.append(f"Version mismatch: installed {installed_version}, expected {expected_version}")
         
-        # Check settings.json structure
+        # Check metadata structure
         try:
-            framework_config = self.settings_manager.get_setting("framework")
+            framework_config = self.settings_manager.get_metadata_setting("framework")
             if not framework_config:
-                errors.append("Missing framework configuration in settings.json")
+                errors.append("Missing framework configuration in metadata")
             else:
                 required_keys = ["version", "name", "description"]
                 for key in required_keys:
                     if key not in framework_config:
-                        errors.append(f"Missing framework.{key} in settings.json")
+                        errors.append(f"Missing framework.{key} in metadata")
         except Exception as e:
-            errors.append(f"Could not validate settings.json: {e}")
+            errors.append(f"Could not validate metadata: {e}")
         
         return len(errors) == 0, errors
     
