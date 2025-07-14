@@ -77,7 +77,7 @@ SuperClaude makes Claude Code smarter for development work. Instead of generic r
 
 ### What SuperClaude Adds ✨
 
-**🛠️ 16 Specialized Commands** *(that auto-activate intelligently)*
+**🛠️ 16 Specialized Commands**
 - Development tools: `/implement`, `/build`, `/design`
 - Analysis tools: `/analyze`, `/troubleshoot`, `/explain` 
 - Quality tools: `/improve`, `/cleanup`, `/test`
