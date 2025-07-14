@@ -11,7 +11,7 @@ python3 SuperClaude.py install --quick
 # That's it! 🎉
 ```
 
-**What just happened?** SuperClaude set up everything you need automatically. No complex configuration, no dependency hunting, no setup headaches.
+**What just happened?** SuperClaude tried to set up everything you need. Usually no complex configuration, dependency hunting, or setup headaches! 🎉
 
 ---
 
@@ -463,7 +463,7 @@ python3 SuperClaude.py install --profile developer --dev-hooks
 **Now that SuperClaude is installed (that was easy, right?):**
 
 1. **Just start using it** - Try `/analyze some-file.js` or `/build` and see what happens ✨
-2. **Don't stress about learning** - SuperClaude figures out what you need automatically
+2. **Don't stress about learning** - SuperClaude usually figures out what you need
 3. **Experiment freely** - Commands like `/improve` and `/troubleshoot` are pretty forgiving
 4. **Read guides if curious** - Check `Docs/` when you want to understand what just happened
 5. **Give feedback** - Let us know what works and what doesn't

@@ -2,13 +2,13 @@
 
 ## 🤖 Most Flags Activate Automatically - Don't Stress About It!
 
-**The honest truth**: You don't need to memorize these flags. SuperClaude automatically adds the right ones based on what you're doing! 
+**The honest truth**: You don't need to memorize these flags. SuperClaude usually tries to add helpful ones based on what you're doing! 
 
 **Here's what actually happens:**
 - You type `/analyze auth.js` 
 - SuperClaude detects it's security-related code
-- **Automatically adds** `--persona-security`, `--focus security`, `--validate`
-- You get expert security analysis without managing any flags
+- **Usually adds** `--persona-security`, `--focus security`, `--validate`
+- You often get expert security analysis without managing any flags
 
 **When might you manually use flags?**
 - You want to **override** what SuperClaude picked (rare)
@@ -314,7 +314,7 @@ Direct SuperClaude's attention to specific areas.
 
 ## Auto-Activation Examples 🤖
 
-SuperClaude automatically adds flags based on context. Here's when:
+SuperClaude usually adds flags based on context. Here's when it tries:
 
 ### Complexity-Based
 ```bash
@@ -493,10 +493,10 @@ SuperClaude automatically adds flags based on context. Here's when:
 ## Tips for Effective Flag Usage 💡
 
 ### Starting Out (The Honest Truth)
-1. **Just ignore flags at first** - Auto-activation handles 90% of cases perfectly
+1. **Just ignore flags at first** - Auto-activation handles most cases pretty well
 2. **Watch what gets auto-activated** - You'll learn by seeing what SuperClaude picks
 3. **Use `--help` when curious** - Many commands show what flags are available
-4. **Trust the automation** - SuperClaude usually picks better than manual selection
+4. **Trust the automation** - SuperClaude usually picks reasonable defaults
 
 ### Getting Advanced (If You Want To)
 1. **Experiment with overrides** - Try `--persona-security` on non-security code for different perspectives
@@ -515,13 +515,13 @@ SuperClaude automatically adds flags based on context. Here's when:
 ## Final Notes 📝
 
 **The real truth about flags** 💯:
-- **Auto-activation is usually better** than manual flag selection
+- **Auto-activation usually works pretty well** compared to manual flag selection
 - **You can ignore most of this guide** and just use basic commands
 - **Flags are here when you want them** - not because you need them
-- **Learning emerges naturally** through use, not through studying
+- **Learning happens naturally** through use, not through studying guides 😊
 
 **Don't feel overwhelmed** 🧘‍♂️:
-- SuperClaude is designed to work great without flag knowledge
+- SuperClaude tries to work well without flag knowledge
 - The detailed info above is for curiosity, not necessity
 - Auto-activation keeps getting smarter based on usage patterns
 - You're not missing out by not memorizing flags

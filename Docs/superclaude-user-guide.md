@@ -6,7 +6,7 @@
 
 You don't need to learn all the commands, flags, and personas. Just start using it! 🎈
 
-SuperClaude has an **intelligent routing system** that figures out what you need automatically:
+SuperClaude has an **intelligent routing system** that tries to figure out what you need:
 - Type `/analyze some-code/` → It picks the right analysis tools
 - Ask about security → Security expert auto-activates  
 - Work on frontend → UI specialist takes over
@@ -72,14 +72,14 @@ SuperClaude makes Claude Code smarter for development work. Instead of generic r
 
 **The honest truth**: We just released v3.0 and it's fresh out of beta. It works pretty well for what it does, but you should expect some rough edges as we continue improving things. We built this because we wanted Claude Code to be more helpful for real software development workflows.
 
-**The magic part?** You don't need to manage any of this complexity. Just use normal commands like `/analyze` or `/build` and SuperClaude automatically figures out which experts to involve and what tools to use. 🪄
+**The neat part?** You don't need to manage any of this complexity. Just use normal commands like `/analyze` or `/build` and SuperClaude usually figures out which experts to involve and what tools to use. 🪄
 
 ### What SuperClaude Adds ✨
 
 **🛠️ 15 Specialized Commands** *(that auto-activate intelligently)*
-- Development tools: `/build`, `/dev-setup`, `/design`
-- Analysis tools: `/analyze`, `/review`, `/troubleshoot` 
-- Quality tools: `/improve`, `/scan`, `/test`
+- Development tools: `/build`, `/design`
+- Analysis tools: `/analyze`, `/troubleshoot`, `/explain` 
+- Quality tools: `/improve`, `/cleanup`, `/test`
 - Plus utilities for documentation, git, deployment, and more
 - **You just use them** - SuperClaude handles the complexity automatically 
 
@@ -107,7 +107,7 @@ SuperClaude makes Claude Code smarter for development work. Instead of generic r
 - Smart compression when context gets full
 - Symbol system for efficient communication
 - Performance optimization for large operations
-- **Automatic activation** when needed for large projects
+- **Usually activates** when needed for large projects
 
 ### Current Status (v3.0) 📊
 
@@ -142,7 +142,7 @@ We're pretty happy with v3 as a foundation, but there's definitely room for impr
 
 **You don't see any of this complexity** - it just feels like Claude got way smarter about development stuff. 
 
-The beauty is that most of this happens automatically. You make a request, SuperClaude figures out the best approach, and executes with appropriate tools and expertise. No configuration, no setup, no learning curve - just better results. ✨
+The nice thing is that most of this usually happens automatically. You make a request, SuperClaude tries to figure out a good approach, and executes with appropriate tools and expertise. Usually no configuration or setup needed - just hopefully better results. ✨
 
 ### Quick Feature Overview 🎯
 
@@ -155,7 +155,7 @@ The beauty is that most of this happens automatically. You make a request, Super
 | **Modes** | 3 operational modes for different workflows | [This guide](#the-three-operational-modes-🎭) |
 | **Orchestrator** | The smart routing that makes it all work | [This guide](#the-orchestrator-system-🎯) |
 
-**Remember**: You can use SuperClaude effectively without reading any of these guides. They're here when you get curious about how the magic works! 🎪
+**Remember**: You can use SuperClaude effectively without reading any of these guides. They're here when you get curious about how it works! 🎪
 
 ---
 
@@ -171,26 +171,26 @@ Commands are specialized tools that handle specific types of development work. I
 
 **Development** 🔨
 - `/build` - Project building, compilation, bundling
-- `/dev-setup` - Development environment configuration 
 - `/design` - System architecture and component design
 
 **Analysis** 🔍  
 - `/analyze` - Comprehensive code and system analysis
-- `/review` - Code review and quality assessment
 - `/troubleshoot` - Problem investigation and debugging
+- `/explain` - Educational explanations and learning
 
 **Quality** ✨
 - `/improve` - Code enhancement and optimization
-- `/scan` - Security and quality scanning
+- `/cleanup` - Technical debt reduction
 - `/test` - Testing and coverage analysis
 
 **Utilities** 🔧
 - `/document` - Documentation creation
-- `/deploy` - Deployment operations
 - `/git` - Enhanced git workflows
-- `/migrate` - Migration management
+- `/load` - Project context loading
 - `/estimate` - Project estimation
 - `/task` - Long-term project management
+- `/spawn` - Complex operation orchestration
+- `/index` - Command navigation and help
 
 Each command has its own flags, auto-activates appropriate personas, and integrates with relevant MCP servers. For detailed examples and usage patterns, see the [Commands Guide](commands-guide.md).
 
@@ -225,7 +225,7 @@ Flags change how SuperClaude processes your requests. They're like command-line 
 - `--scope project` - Set analysis scope
 - `--persona-[name]` - Activate specific personas
 
-Flags often auto-activate based on context. For example, security-related requests automatically get `--persona-security` and `--focus security`. See the [Flags Guide](flags-guide.md) for comprehensive details and patterns.
+Flags often auto-activate based on context. For example, security-related requests usually get `--persona-security` and `--focus security`. See the [Flags Guide](flags-guide.md) for comprehensive details and patterns.
 
 ### Personas: AI Specialists 🎭
 
@@ -250,7 +250,7 @@ Personas are like having a team of specialists available on demand. Each brings 
 - 👨‍🏫 **mentor** - Education, knowledge transfer
 - ✍️ **scribe** - Documentation, technical writing
 
-Personas auto-activate based on request patterns but you can override with `--persona-[name]` flags. Each has different priorities (e.g., security persona prioritizes security over speed). See the [Personas Guide](personas-guide.md) for detailed descriptions and examples.
+Personas usually auto-activate based on request patterns but you can override with `--persona-[name]` flags. Each has different priorities (e.g., security persona prioritizes security over speed). See the [Personas Guide](personas-guide.md) for detailed descriptions and examples.
 
 ### MCP Servers: External Capabilities 🔧
 
@@ -282,18 +282,18 @@ MCP (Model Context Protocol) servers provide specialized capabilities beyond Cla
 - **What it provides**: Cross-browser testing, visual validation, metrics
 - **Example**: `/test e2e --play` runs comprehensive browser tests
 
-MCP servers coordinate automatically but you can control them with `--all-mcp`, `--no-mcp`, or specific flags like `--c7`.
+MCP servers usually coordinate automatically but you can control them with `--all-mcp`, `--no-mcp`, or specific flags like `--c7`.
 
 ### How Components Work Together 🤝
 
-The magic happens when components coordinate:
+The neat part is when components coordinate:
 
 **Example: Security Analysis Request**
 ```bash
 /sc:analyze auth-system/ --focus security
 ```
 
-**What happens automatically:**
+**What usually happens:**
 1. **Command**: `/analyze` handles code analysis
 2. **Flag**: `--focus security` directs attention
 3. **Persona**: 🛡️ security specialist auto-activates
@@ -302,7 +302,7 @@ The magic happens when components coordinate:
 
 **Result**: Security-focused analysis with threat modeling perspective, systematic methodology, and comprehensive coverage.
 
-This coordination happens for all requests - SuperClaude figures out the best combination of tools and expertise for your specific need.
+This coordination usually happens for most requests - SuperClaude tries to figure out a good combination of tools and expertise for your specific need.
 
 ---
 
@@ -327,7 +327,7 @@ SuperClaude operates in three distinct modes that optimize different aspects of 
 - **Usage**: Real-time progress tracking for immediate work
 
 ```bash
-# SuperClaude automatically creates and manages session tasks
+# SuperClaude usually creates and manages session tasks
 /sc:build large-project/
 # → Creates: "Analyze project structure", "Run build process", "Validate output"
 ```
@@ -372,7 +372,7 @@ SuperClaude operates in three distinct modes that optimize different aspects of 
 - **Real-Time Updates**: Immediate status changes as work progresses
 - **Quality Gates**: Validation before marking tasks complete
 
-**Automatic Task Detection**:
+**Task Detection**:
 - Multi-step operations (3+ steps) → Creates task breakdown
 - Keywords: build, implement, create, fix, optimize → Activates task tracking
 - Scope indicators: system, feature, comprehensive → Adds progress monitoring
@@ -424,7 +424,7 @@ When introspection mode is active, you'll see these markers:
 
 #### When Introspection Activates
 
-**Automatic activation**:
+**Usually activates for**:
 - Complex multi-step problems requiring meta-cognitive oversight
 - Error recovery when outcomes don't match expectations
 - Framework discussions or SuperClaude troubleshooting
@@ -478,7 +478,7 @@ When introspection mode is active, you'll see these markers:
 
 #### Activation Strategy
 
-**Automatic activation**:
+**Usually activates when**:
 - Context usage >75% → Enables compression
 - Large-scale operations → Prevents token overflow
 - Complex orchestration → Optimizes communication
@@ -489,11 +489,11 @@ When introspection mode is active, you'll see these markers:
 /sc:improve legacy-system/ --uc --delegate auto  # Efficient large operations
 ```
 
-**Performance Metrics**:
-- Target: 30-50% token reduction
-- Quality: ≥95% information preservation
-- Speed: <100ms compression decisions
-- Integration: Seamless framework compliance
+**Performance Goals** (still improving!):
+- Target: ~30-50% token reduction
+- Quality: Tries to preserve ~95% of information
+- Speed: Usually <100ms compression decisions
+- Integration: Works with framework components
 
 #### Mode Integration
 
@@ -512,7 +512,7 @@ The three modes often work together:
 
 ## The Orchestrator System 🎯
 
-The orchestrator is SuperClaude's intelligent routing system that analyzes your requests and coordinates the optimal combination of tools, personas, and integrations. It's what makes SuperClaude feel smart and responsive rather than just a collection of separate tools.
+The orchestrator is SuperClaude's intelligent routing system that tries to analyze your requests and coordinate a good combination of tools, personas, and integrations. It's what hopefully makes SuperClaude feel smart and responsive rather than just a collection of separate tools.
 
 ### How the Orchestrator Works 🔄
 
@@ -573,13 +573,13 @@ The routing system uses dynamic decision trees to map detected patterns to optim
 
 #### Master Routing Table
 
-| Request Pattern | Auto-Activates | Confidence | Why |
+| Request Pattern | Usually Auto-Activates | How Often | Why |
 |----------------|----------------|------------|-----|
-| "analyze architecture" | 🏗️ architect + --ultrathink + Sequential | 95% | Complex system analysis |
-| "create UI component" | 🎨 frontend + Magic + --uc | 90% | Frontend domain with generation |
-| "security audit" | 🛡️ security + --ultrathink + Sequential | 95% | Security expertise needed |
-| "debug complex issue" | 🔍 analyzer + --think + Sequential | 85% | Investigation methodology |
-| "improve performance" | ⚡ performance + --think-hard + Playwright | 90% | Performance expertise + testing |
+| "analyze architecture" | 🏗️ architect + --ultrathink + Sequential | Most times | Complex system analysis |
+| "create UI component" | 🎨 frontend + Magic + --uc | Pretty often | Frontend domain with generation |
+| "security audit" | 🛡️ security + --ultrathink + Sequential | Most times | Security expertise needed |
+| "debug complex issue" | 🔍 analyzer + --think + Sequential | Often | Investigation methodology |
+| "improve performance" | ⚡ performance + --think-hard + Playwright | Pretty often | Performance expertise + testing |
 
 #### Intelligent Coordination
 
@@ -587,7 +587,7 @@ The routing system uses dynamic decision trees to map detected patterns to optim
 ```bash
 /sc:design user-dashboard --type api
 ```
-**Orchestrator coordinates**:
+**Orchestrator usually coordinates**:
 - 🏗️ architect persona (system design)
 - 🎨 frontend persona (UI design) 
 - Context7 MCP (framework patterns)
@@ -600,7 +600,7 @@ The routing system uses dynamic decision trees to map detected patterns to optim
 
 ### Quality Gates & Validation Framework ✅
 
-SuperClaude implements an 8-step validation cycle for all operations:
+SuperClaude tries to implement an 8-step validation cycle for operations:
 
 #### 8-Step Quality Process
 
@@ -608,7 +608,7 @@ SuperClaude implements an 8-step validation cycle for all operations:
 2. **Type Checking** - Sequential analysis + compatibility verification
 3. **Linting** - Context7 rules + quality analysis
 4. **Security Review** - Sequential analysis + OWASP compliance
-5. **Testing** - Playwright E2E + coverage analysis (≥80% unit, ≥70% integration)
+5. **Testing** - Playwright E2E + coverage analysis (aiming for good coverage)
 6. **Performance** - Sequential analysis + benchmarking
 7. **Documentation** - Context7 patterns + completeness validation
 8. **Integration** - Playwright testing + deployment validation
@@ -627,7 +627,7 @@ SuperClaude implements an 8-step validation cycle for all operations:
 
 ### Performance Optimization ⚡
 
-The orchestrator optimizes for sub-100ms performance targets through several strategies:
+The orchestrator tries to optimize for good performance through several strategies:
 
 #### Resource Management
 
@@ -663,7 +663,7 @@ The orchestrator optimizes for sub-100ms performance targets through several str
 
 #### Example 1: Security Analysis Request
 ```bash
-/sc:scan user-auth/ --focus security
+/sc:analyze user-auth/ --focus security
 ```
 
 **Orchestrator Analysis**:
@@ -671,7 +671,7 @@ The orchestrator optimizes for sub-100ms performance targets through several str
 - Complexity: Moderate (authentication system)
 - Operation: Analysis + scanning
 
-**Auto-Coordination**:
+**Usually coordinates**:
 - 🛡️ security persona (threat modeling perspective)
 - Sequential MCP (systematic analysis)
 - --validate flag (pre-operation safety check)
@@ -689,7 +689,7 @@ The orchestrator optimizes for sub-100ms performance targets through several str
 - Complexity: High (performance optimization)
 - Operation: Improvement + validation
 
-**Auto-Coordination**:
+**Usually coordinates**:
 - ⚡ performance persona (primary)
 - 🎨 frontend persona (secondary, if UI detected)
 - Playwright MCP (performance testing)
@@ -707,7 +707,7 @@ The orchestrator optimizes for sub-100ms performance targets through several str
 - Complexity: High (enterprise-scale)
 - Resources: High token usage predicted
 
-**Auto-Coordination**:
+**Usually coordinates**:
 - --delegate auto flag (parallel processing)
 - --uc flag (token optimization)
 - 🏗️ architect persona (system-level analysis)
@@ -735,7 +735,7 @@ orchestrator_config:
   wave_score_threshold: 0.7
 ```
 
-The orchestrator continuously learns from successful patterns and optimizes future routing decisions based on outcomes.
+The orchestrator tries to learn from successful patterns and improve future routing decisions based on outcomes.
 
 ---
 
@@ -745,7 +745,7 @@ SuperClaude operates according to core rules and principles that ensure consiste
 
 ### Core Operational Rules ⚖️
 
-These are the non-negotiable rules that SuperClaude always follows:
+These are the core rules that SuperClaude tries to follow:
 
 #### File Operation Security 🔐
 - **Always Read before Write/Edit** - SuperClaude never modifies files without understanding current content
@@ -759,7 +759,7 @@ These are the non-negotiable rules that SuperClaude always follows:
 - **Evidence-based progress** - Tasks are only marked complete when there's measurable evidence
 - **Single focus protocol** - Only one task is "in_progress" at a time for clarity
 - **Quality gates** - All operations include validation steps before completion
-- **Context retention** - ≥90% context preservation across operations
+- **Context retention** - Tries to preserve context well across operations
 
 **Why this matters**: Ensures reliable progress tracking and prevents work from being lost or forgotten.
 
@@ -830,13 +830,13 @@ Because SuperClaude follows consistent rules, you can predict how it will approa
 #### Quality Assurance
 The principles ensure high-quality outcomes:
 
-- **No magic changes** - SuperClaude explains its reasoning
-- **No breaking changes** - Existing functionality is preserved
-- **No security compromises** - Security principles are non-negotiable
-- **No technical debt introduction** - Improvements maintain or reduce complexity
+- **Tries to avoid magic changes** - SuperClaude usually explains its reasoning
+- **Aims for no breaking changes** - Tries to preserve existing functionality
+- **Security-conscious** - Security principles are important
+- **Debt-aware** - Tries to maintain or reduce complexity
 
 #### Transparency
-You always understand what SuperClaude is doing and why:
+You should usually understand what SuperClaude is doing and why:
 
 ```bash
 /sc:analyze --introspect complex-system/
@@ -868,7 +868,7 @@ You always understand what SuperClaude is doing and why:
 **Request**: "Add authentication to our API"
 
 **Rules Applied**:
-- Security persona auto-activates
+- Security persona usually auto-activates
 - Never compromise on security fundamentals
 - Check existing patterns first
 - Quality gates include security validation
@@ -898,7 +898,7 @@ You always understand what SuperClaude is doing and why:
 
 SuperClaude enforces rules through its quality gate system:
 
-#### Automatic Enforcement
+#### Enforcement Approach
 - **Pre-operation validation** - Checks risks before starting
 - **Real-time monitoring** - Tracks rule compliance during execution
 - **Post-operation verification** - Confirms rules were followed
@@ -963,7 +963,7 @@ Try these commands to see how SuperClaude automatically chooses the right tools:
 /sc:build src/components/
 
 # Security analysis → security persona + Sequential MCP  
-/sc:scan auth/ --focus security
+/sc:analyze auth/ --focus security
 
 # Performance investigation → performance persona + Playwright MCP
 /sc:analyze --focus performance slow-endpoints/
@@ -986,7 +986,7 @@ When starting work on an unfamiliar project:
 # → 🏗️ architect persona provides system understanding
 
 # 3. Check code quality
-/sc:scan --focus quality
+/sc:analyze --focus quality
 # → 🧪 qa persona identifies potential issues
 
 # 4. Review documentation
@@ -1062,10 +1062,10 @@ For improving existing code:
 #### Security-First Development
 ```bash
 # Development with security focus
-/sc:scan --persona-security --focus security
+/sc:analyze --persona-security --focus security
 /sc:build --validate --safe-mode  
 /sc:test --type security
-/sc:deploy --persona-security --validate
+/sc:git --persona-security --validate
 ```
 
 #### Performance-Optimized Workflow
@@ -1074,13 +1074,13 @@ For improving existing code:
 /sc:analyze --focus performance --persona-performance
 /sc:improve --type performance --benchmark
 /sc:test --focus performance --play
-/sc:deploy --monitor-performance
+/sc:test --focus performance --play
 ```
 
 #### Team Collaboration Workflow
 ```bash
 # Collaborative development patterns
-/sc:review team-code/ --persona-qa --focus quality
+/sc:analyze team-code/ --persona-qa --focus quality
 /sc:document features/ --persona-scribe --type guide
 /sc:git --smart-commit --branch-strategy
 /sc:task status  # Check team progress
@@ -1101,7 +1101,7 @@ For working with enterprise-scale projects:
 # → Multi-stage improvements with safety checks
 
 # Comprehensive quality review
-/sc:scan enterprise-app/ --delegate folders --focus quality
+/sc:analyze enterprise-app/ --delegate folders --focus quality
 # → Distributed quality analysis
 ```
 
@@ -1577,7 +1577,7 @@ Real-world scenarios showing SuperClaude in action. These examples demonstrate h
 
 #### Step 2: Code Quality Assessment
 ```bash
-/sc:scan --focus quality
+/sc:analyze --focus quality
 ```
 **Auto-coordination**:
 - 🧪 qa persona activates (quality focus)
@@ -2922,9 +2922,9 @@ SuperClaude transforms Claude Code from a general-purpose AI assistant into a sp
 - **Intelligent orchestration** that coordinates tools automatically
 - **Quality-first approach** that maintains safety and reliability
 
-#### The Magic is in the Coordination
+#### The Power is in the Coordination
 SuperClaude's power comes not from any single feature, but from how components work together:
-- Commands activate appropriate personas and MCP servers automatically
+- Commands usually activate appropriate personas and MCP servers
 - Personas coordinate with each other for multi-domain problems
 - The orchestrator optimizes tool selection and resource usage
 - Quality gates ensure consistent, reliable outcomes

@@ -1,16 +1,16 @@
 # SuperClaude Commands Guide 🛠️
 
-## 💡 Don't Overthink It - SuperClaude Picks the Right Tools
+## 💡 Don't Overthink It - SuperClaude Tries to Help
 
-**The truth about these 15 commands**: You don't need to memorize them. Just start with `/analyze` or `/build` and let SuperClaude figure out the rest! 
+**The truth about these 15 commands**: You don't need to memorize them. Just start with `/sc:analyze` or `/sc:build` and see what happens! 
 
-**Here's how it actually works:**
+**Here's how it usually works:**
 - Type `/` in Claude Code → See available commands
-- Use basic ones like `/analyze`, `/build`, `/improve` 
-- **SuperClaude automatically picks the best tools and experts** for each situation
+- Use basic ones like `/sc:analyze`, `/sc:build`, `/sc:improve` 
+- **SuperClaude tries to pick helpful tools and experts** for each situation
 - More commands become useful as you get comfortable
 
-**Auto-activation is the secret sauce** 🪄 - SuperClaude detects what you're trying to do and activates the right specialists (security expert, performance optimizer, etc.) without you managing any of it.
+**Auto-activation is pretty neat** 🪄 - SuperClaude attempts to detect what you're trying to do and activate relevant specialists (security expert, performance optimizer, etc.) without you managing it. Usually works well! 😊
 
 ---
 
@@ -19,13 +19,13 @@
 **Start here** (no reading required):
 ```bash
 /sc:help                    # See what's available
-/sc:analyze src/            # Smart analysis of your code  
-/sc:build                   # Intelligent project building
-/sc:improve messy-file.js   # Clean up code automatically
-/sc:troubleshoot "error"    # Get help with problems
+/sc:analyze src/            # Tries to analyze your code smartly 
+/sc:build                   # Attempts intelligent project building
+/sc:improve messy-file.js   # Tries to clean up code 
+/sc:troubleshoot "error"    # Attempts to help with problems
 ```
 
-**That's honestly enough to get started.** Everything else below is here when you get curious about what other tools are available.
+**That's honestly enough to get started.** Everything else below is here when you get curious about what other tools are available. 🛠️
 
 ---
 
@@ -37,35 +37,35 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 | Command | Purpose | Auto-Activates | Best For |
 |---------|---------|-----------------|----------|
-| `/analyze` | Smart code analysis | Security/performance experts | Finding issues, understanding codebases |
-| `/build` | Intelligent building | Frontend/backend specialists | Compilation, bundling, deployment prep |
-| `/improve` | Automatic code cleanup | Quality experts | Refactoring, optimization, quality fixes |
-| `/troubleshoot` | Problem investigation | Debug specialists | Debugging, issue investigation |
-| `/test` | Smart testing | QA experts | Running tests, coverage analysis |
-| `/document` | Auto documentation | Writing specialists | README files, code comments, guides |
-| `/git` | Enhanced git workflows | DevOps specialists | Smart commits, branch management |
-| `/design` | System design help | Architecture experts | Architecture planning, API design |
-| `/explain` | Learning assistant | Teaching specialists | Learning concepts, understanding code |
-| `/cleanup` | Debt reduction | Refactoring experts | Removing dead code, organizing files |
-| `/scan` | Security/quality scans | Security experts | Vulnerability detection, compliance |
-| `/load` | Context understanding | Analysis experts | Project analysis, codebase understanding |
-| `/estimate` | Smart estimation | Planning experts | Time/effort planning, complexity analysis |
-| `/spawn` | Complex workflows | Orchestration system | Multi-step operations, workflow automation |
-| `/task` | Project management | Planning system | Long-term feature planning, task tracking |
+| `/sc:analyze` | Smart code analysis | Security/performance experts | Finding issues, understanding codebases |
+| `/sc:build` | Intelligent building | Frontend/backend specialists | Compilation, bundling, deployment prep |
+| `/sc:improve` | Automatic code cleanup | Quality experts | Refactoring, optimization, quality fixes |
+| `/sc:troubleshoot` | Problem investigation | Debug specialists | Debugging, issue investigation |
+| `/sc:test` | Smart testing | QA experts | Running tests, coverage analysis |
+| `/sc:document` | Auto documentation | Writing specialists | README files, code comments, guides |
+| `/sc:git` | Enhanced git workflows | DevOps specialists | Smart commits, branch management |
+| `/sc:design` | System design help | Architecture experts | Architecture planning, API design |
+| `/sc:explain` | Learning assistant | Teaching specialists | Learning concepts, understanding code |
+| `/sc:cleanup` | Debt reduction | Refactoring experts | Removing dead code, organizing files |
+| `/sc:load` | Context understanding | Analysis experts | Project analysis, codebase understanding |
+| `/sc:estimate` | Smart estimation | Planning experts | Time/effort planning, complexity analysis |
+| `/sc:spawn` | Complex workflows | Orchestration system | Multi-step operations, workflow automation |
+| `/sc:task` | Project management | Planning system | Long-term feature planning, task tracking |
+| `/sc:index` | Command navigation | Help system | Finding the right command for your task |
 
-**Pro tip**: Just try the ones that sound useful. SuperClaude will automatically activate the right experts and tools for each situation! 🎯
+**Pro tip**: Just try the ones that sound useful. SuperClaude usually tries to activate helpful experts and tools for each situation! 🎯
 
 ## Development Commands 🔨
 
 ### `/build` - Project Building
 **What it does**: Builds, compiles, and packages projects with smart error handling.
 
-**The easy way**: Just type `/build` and SuperClaude figures out your build system automatically! 🎯
+**The easy way**: Just type `/sc:build` and SuperClaude tries to figure out your build system! 🎯
 
 **When to use it**:
-- You need to compile/bundle your project (just try `/build`)
+- You need to compile/bundle your project (just try `/sc:build`)
 - Build process is failing and you want help debugging  
-- Setting up build optimization (it auto-detects what you need)
+- Setting up build optimization (it tries to detect what you need)
 - Preparing for deployment
 
 **Basic syntax**:
@@ -135,13 +135,13 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 ### `/analyze` - Code Analysis  
 **What it does**: Comprehensive analysis of code quality, security, performance, and architecture.
 
-**The magic**: SuperClaude automatically detects what kind of analysis you need and activates the right experts! 🔍
+**The helpful part**: SuperClaude tries to detect what kind of analysis you need and usually picks relevant experts! 🔍
 
 **When to use it**:
 - Understanding unfamiliar codebases (just point it at any folder)
-- Finding security vulnerabilities (security expert auto-activates)
-- Performance bottleneck hunting (performance expert jumps in)
-- Code quality assessment (quality specialist takes over)
+- Finding security vulnerabilities (security expert usually jumps in)
+- Performance bottleneck hunting (performance expert usually helps)
+- Code quality assessment (quality specialist often takes over)
 
 **Basic syntax**:
 ```bash
@@ -448,7 +448,7 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 ```
 
 **Gotchas**:
-- Still experimental - may not persist perfectly across sessions
+- Still experimental - doesn't always persist across sessions reliably 😅
 - Better for planning than actual project management
 - Works best when you're specific about requirements
 
@@ -674,11 +674,11 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 **The real truth about these commands** 💯:
 - **Just try them** - You don't need to study this guide first
 - **Start with the basics** - `/analyze`, `/build`, `/improve` cover most needs
-- **Let auto-activation work** - SuperClaude picks the right experts automatically
+- **Let auto-activation work** - SuperClaude usually picks helpful experts
 - **Experiment freely** - Use `--preview` if you want to see what would happen first
 
 **Still rough around the edges:**
-- Complex orchestration (spawn, task) may not work perfectly
+- Complex orchestration (spawn, task) can be a bit flaky
 - Some analysis depends heavily on your project setup  
 - Error handling could be better in some commands
 

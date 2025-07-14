@@ -2,13 +2,13 @@
 
 ## 🎭 Personas Auto-Activate - No Need to Choose!
 
-**The simple truth**: You don't need to pick personas or memorize what they do. SuperClaude automatically brings in the right expert for each situation! 
+**The simple truth**: You don't need to pick personas or memorize what they do. SuperClaude usually tries to bring in helpful experts for each situation! 
 
 **Here's what actually happens:**
-- You type `/analyze auth.js` → Security expert automatically jumps in 🛡️
-- You work on React components → Frontend specialist takes over 🎨  
-- You debug performance issues → Performance optimizer activates ⚡
-- You write documentation → Professional writer helps out ✍️
+- You type `/analyze auth.js` → Security expert usually jumps in 🛡️
+- You work on React components → Frontend specialist often takes over 🎨  
+- You debug performance issues → Performance optimizer often helps ⚡
+- You write documentation → Professional writer usually helps out ✍️
 
 **It's like having a smart team** that knows when to jump in and help, without you managing who does what. 
 
@@ -34,22 +34,22 @@ Think of SuperClaude personas as having a team of specialists on demand. Each pe
 
 ## What Are Personas? 🤔
 
-**Personas are AI specialists** that automatically adapt SuperClaude's behavior for different types of work. Instead of generic responses, you get expert-level help from the right specialist.
+**Personas are AI specialists** that try to adapt SuperClaude's behavior for different types of work. Instead of generic responses, you often get expert-level help from relevant specialists.
 
 **How they actually work in practice:**
-- **Auto-activation** - SuperClaude automatically picks the right expert (90% of the time this is all you need!)
+- **Auto-activation** - SuperClaude usually tries to pick helpful experts (most of the time this works pretty well!)
 - **Smart detection** - Recognizes security work, frontend tasks, performance issues, etc.
 - **Seamless switching** - Different experts jump in as needed within the same conversation
-- **Team coordination** - Multiple experts collaborate automatically on complex tasks
+- **Team coordination** - Multiple experts often coordinate on complex tasks
 - **Manual override available** - You can explicitly choose with `--persona-name` flags when you want a different perspective
 
-**Why this matters (automatically):**
-- Get expert-level advice without knowing which expert to ask
-- Better decision-making aligned with what you're actually working on
+**Why this matters:**
+- Often get expert-level advice without knowing which expert to ask
+- Usually get better decision-making aligned with what you're actually working on
 - More focused and relevant responses based on the task
 - Access to specialized workflows that activate when useful
 
-**The magic**: You just work on your stuff, and the right experts show up when needed. 🎯
+**The neat part**: You just work on your stuff, and helpful experts usually show up when needed. 🎯
 
 ## The SuperClaude Team 👥
 
@@ -107,7 +107,7 @@ Think of SuperClaude personas as having a team of specialists on demand. Each pe
 **Performance budgets they enforce**:
 - Load time: <3s on 3G, <1s on WiFi
 - Bundle size: <500KB initial, <2MB total
-- Accessibility: 90%+ WCAG compliance
+- Accessibility: WCAG compliance target
 
 **Example workflows**:
 ```bash
@@ -756,14 +756,14 @@ Personas often work together automatically. Here are common collaboration patter
 
 ### Auto-Activation Triggers
 
-**High confidence triggers** (90%+ activation):
+**Strong triggers** (usually work well):
 - "security audit" → 🛡️ security
-- "UI component" → 🎨 frontend
+- "UI component" → 🎨 frontend  
 - "API design" → ⚙️ backend
 - "system architecture" → 🏗️ architect
 - "debug issue" → 🔍 analyzer
 
-**Medium confidence triggers** (70-90% activation):
+**Moderate triggers** (often work):
 - "improve performance" → ⚡ performance
 - "write tests" → 🧪 qa
 - "clean up code" → 🔄 refactorer
@@ -843,14 +843,14 @@ Personas often work together automatically. Here are common collaboration patter
 ## Final Notes 📝
 
 **The real truth about personas** 💯:
-- **Auto-activation is usually better** than trying to pick the right expert yourself
-- **You can completely ignore this guide** and still get expert help automatically
+- **Auto-activation usually works pretty well** compared to trying to pick experts yourself
+- **You can completely ignore this guide** and still often get helpful expert assistance
 - **Personas exist to help you** - not to create complexity you need to manage
-- **Learning happens naturally** through use, not through studying persona descriptions
+- **Learning happens naturally** through use, not through studying persona descriptions 😊
 
 **Don't feel overwhelmed by the team** 🧘‍♂️:
 - You don't need to know what each persona does
-- SuperClaude handles expert selection intelligently
+- SuperClaude usually handles expert selection reasonably well
 - The detailed descriptions above are for curiosity, not necessity
 - You're not missing anything by letting auto-activation work
 
@@ -868,4 +868,4 @@ Personas often work together automatically. Here are common collaboration patter
 
 ---
 
-*Behind all this apparent complexity of having 11 specialists, SuperClaude is actually simple to use. Just start coding and let the experts show up automatically! 🚀*
+*Behind all this apparent complexity of having 11 specialists, SuperClaude tries to be simple to use. Just start coding and helpful experts usually show up when needed! 🚀*
