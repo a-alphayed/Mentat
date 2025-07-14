@@ -90,6 +90,18 @@ python3 SuperClaude.py install --quick
 # That's it! 🎉
 ```
 
+**Missing Python?**
+```bash
+# Linux (Ubuntu/Debian)
+sudo apt update && sudo apt install python3 python3-pip
+
+# macOS  
+brew install python3
+
+# Windows
+# Download from https://python.org/downloads/
+```
+
 ### Other Installation Options
 ```bash
 # Minimal install (just core framework)
