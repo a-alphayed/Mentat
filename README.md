@@ -5,7 +5,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/NomenAK/SuperClaude/blob/master/CONTRIBUTING.md)
 [![Contributors](https://img.shields.io/github/contributors/NomenAK/SuperClaude)](https://github.com/NomenAK/SuperClaude/graphs/contributors)
 
-An enhancement framework for Claude Code that adds extra capabilities through specialized commands, personas, and MCP server integration.
+A framework that extends Claude Code with specialized commands, personas, and MCP server integration.
 
 **📢 Status**: Initial release, fresh out of beta! Bugs may occur as we continue improving things.
 
@@ -18,16 +18,16 @@ SuperClaude extends Claude Code with:
 - 📋 **Enhanced task management** with progress tracking and validation
 - ⚡ **Token optimization** for more efficient conversations
 
-We built this because we wanted Claude Code to be even more helpful for software development workflows.
+This is what we've been working on to make Claude Code more helpful for development workflows.
 
 ## Current Status 📊
 
 ✅ **What's Working Well:**
-- Installation suite (completely rewritten, much more reliable)
+- Installation suite (rewritten from the ground up)
 - Core framework with 9 documentation files 
 - 15 slash commands for various development tasks
 - MCP server integration (Context7, Sequential, Magic, Playwright)
-- Unified CLI installer that actually works
+- Unified CLI installer for easy setup
 
 ⚠️ **Known Issues:**
 - This is an initial release - bugs are expected
@@ -38,7 +38,7 @@ We built this because we wanted Claude Code to be even more helpful for software
 ## Key Features ✨
 
 ### Commands 🛠️
-We've streamlined from 20+ commands down to 15 essential ones:
+We focused on 15 essential commands for the most common tasks:
 
 **Development**: `/build`, `/dev-setup`  
 **Analysis**: `/analyze`, `/review`, `/troubleshoot`  
@@ -61,6 +61,19 @@ Specialized servers for different tasks:
 - **Sequential** - Complex multi-step analysis and reasoning  
 - **Magic** - Modern UI component generation
 - **Playwright** - Browser automation and E2E testing
+
+## ⚠️ Upgrading from v2? Important!
+
+If you're coming from SuperClaude v2, you'll need to clean up first:
+
+1. **Uninstall v2** using its uninstaller if available
+2. **Manual cleanup** - delete these if they exist:
+   - `~/.claude/shared/`
+   - `~/.claude/commands/` 
+   - `~/.claude/CLAUDE.md`
+3. **Then proceed** with v3 installation below
+
+This is because v3 has a different structure and the old files can cause conflicts.
 
 ## Installation 📦
 
@@ -121,6 +134,18 @@ After installation, you can customize SuperClaude by editing:
 
 Most users won't need to change anything - it works well out of the box.
 
+## Documentation 📖
+
+Want to learn more? Check out our guides:
+
+- 📚 [**User Guide**](Docs/superclaude-user-guide.md) - Complete overview and getting started
+- 🛠️ [**Commands Guide**](Docs/commands-guide.md) - All 15 slash commands explained  
+- 🏳️ [**Flags Guide**](Docs/flags-guide.md) - Command flags and options
+- 🎭 [**Personas Guide**](Docs/personas-guide.md) - Understanding the persona system
+- 📦 [**Installation Guide**](Docs/installation-guide.md) - Detailed installation instructions
+
+These guides have more details than this README and are kept up to date.
+
 ## Contributing 🤝
 
 We welcome contributions! Areas where we could use help:
@@ -152,7 +177,7 @@ The v3 architecture focuses on:
 - **Modularity** - Pick only the components you want
 - **Performance** - Faster operations with smarter caching
 
-We learned a lot from v2 and tried to fix the things that were frustrating.
+We learned a lot from v2 and tried to address the main pain points.
 
 ## FAQ 🙋
 
