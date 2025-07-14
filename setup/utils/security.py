@@ -301,7 +301,7 @@ class SecurityValidator:
     @classmethod
     def validate_installation_target(cls, target_dir: Path) -> Tuple[bool, List[str]]:
         """
-        Validate installation target directory
+        Validate installation target directory with enhanced Windows compatibility
         
         Args:
             target_dir: Target installation directory
@@ -311,37 +311,97 @@ class SecurityValidator:
         """
         errors = []
         
-        # Special handling for Claude installation directory
-        abs_target = target_dir.resolve()
-        abs_target_str = str(abs_target).lower()
+        # Enhanced path resolution with Windows normalization
+        try:
+            abs_target = target_dir.resolve()
+        except Exception as e:
+            errors.append(f"Cannot resolve target path: {e}")
+            return False, errors
+            
+        # Windows-specific path normalization
+        if os.name == 'nt':
+            # Normalize Windows paths for consistent comparison
+            abs_target_str = str(abs_target).lower().replace('/', '\\')
+        else:
+            abs_target_str = str(abs_target).lower()
         
-        # Allow installation to .claude directory in user home
-        if abs_target_str.endswith('.claude') or abs_target_str.endswith('.claude' + os.sep):
-            home_path = Path.home()
+        # Special handling for Claude installation directory
+        claude_patterns = ['.claude', '.claude' + os.sep, '.claude\\', '.claude/']
+        is_claude_dir = any(abs_target_str.endswith(pattern) for pattern in claude_patterns)
+        
+        if is_claude_dir:
             try:
-                # Check if it's under user home directory
-                abs_target.relative_to(home_path)
-                # If we reach here, it's under home directory - allow it
-                # Still check permissions
-                has_perms, missing = cls.check_permissions(target_dir, {'read', 'write'})
-                if not has_perms:
-                    errors.append(f"Insufficient permissions: missing {missing}")
-                return len(errors) == 0, errors
-            except ValueError:
-                # Not under home directory, continue with normal validation
-                pass
+                home_path = Path.home()
+            except (RuntimeError, OSError):
+                # If we can't determine home directory, skip .claude special handling
+                cls._log_security_decision("WARN", f"Cannot determine home directory for .claude validation: {abs_target}")
+                # Fall through to regular validation
+            else:
+                try:
+                    # Verify it's specifically the current user's home directory
+                    abs_target.relative_to(home_path)
+                    
+                    # Enhanced Windows security checks for .claude directories
+                    if os.name == 'nt':
+                        # Check for junction points and symbolic links on Windows
+                        if cls._is_windows_junction_or_symlink(abs_target):
+                            errors.append("Installation to junction points or symbolic links is not allowed for security")
+                            return False, errors
+                        
+                        # Additional validation: verify it's in a user profile directory structure
+                        # Only check if it looks like a Windows path (contains drive letter)
+                        if ':' in abs_target_str and '\\users\\' in abs_target_str:
+                            current_user = os.environ.get('USERNAME', '')
+                            if current_user and f'\\users\\{current_user.lower()}\\' not in abs_target_str:
+                                errors.append(f"Installation must be in current user's directory ({current_user})")
+                                return False, errors
+                    
+                    # Check permissions
+                    has_perms, missing = cls.check_permissions(target_dir, {'read', 'write'})
+                    if not has_perms:
+                        if os.name == 'nt':
+                            errors.append(f"Insufficient permissions for Windows installation: {missing}. Try running as administrator or check folder permissions.")
+                        else:
+                            errors.append(f"Insufficient permissions: missing {missing}")
+                    
+                    # Log successful validation for audit trail
+                    cls._log_security_decision("ALLOW", f"Claude directory installation validated: {abs_target}")
+                    return len(errors) == 0, errors
+                    
+                except ValueError:
+                    # Not under current user's home directory
+                    if os.name == 'nt':
+                        errors.append("Claude installation must be in your user directory (e.g., C:\\Users\\YourName\\.claude)")
+                    else:
+                        errors.append("Claude installation must be in your home directory (e.g., ~/.claude)")
+                    cls._log_security_decision("DENY", f"Claude directory outside user home: {abs_target}")
+                    return False, errors
         
         # Validate path for non-.claude directories
         is_safe, msg = cls.validate_path(target_dir)
         if not is_safe:
-            errors.append(f"Invalid target path: {msg}")
+            if os.name == 'nt':
+                # Enhanced Windows error messages
+                if "dangerous path pattern" in msg.lower():
+                    errors.append(f"Invalid Windows path: {msg}. Ensure path doesn't contain dangerous patterns or reserved directories.")
+                elif "path too long" in msg.lower():
+                    errors.append(f"Windows path too long: {msg}. Windows has a 260 character limit for most paths.")
+                elif "reserved" in msg.lower():
+                    errors.append(f"Windows reserved name: {msg}. Avoid names like CON, PRN, AUX, NUL, COM1-9, LPT1-9.")
+                else:
+                    errors.append(f"Invalid target path: {msg}")
+            else:
+                errors.append(f"Invalid target path: {msg}")
         
-        # Check permissions
+        # Check permissions with platform-specific guidance
         has_perms, missing = cls.check_permissions(target_dir, {'read', 'write'})
         if not has_perms:
-            errors.append(f"Insufficient permissions: missing {missing}")
+            if os.name == 'nt':
+                errors.append(f"Insufficient Windows permissions: {missing}. Try running as administrator or check folder security settings in Properties > Security.")
+            else:
+                errors.append(f"Insufficient permissions: {missing}. Try: chmod 755 {target_dir}")
         
-        # Check if it's a system directory
+        # Check if it's a system directory with enhanced messages
         system_dirs = [
             Path('/etc'), Path('/bin'), Path('/sbin'), Path('/usr/bin'), Path('/usr/sbin'),
             Path('/var'), Path('/tmp'), Path('/dev'), Path('/proc'), Path('/sys')
@@ -355,7 +415,11 @@ class SecurityValidator:
         for sys_dir in system_dirs:
             try:
                 if abs_target.is_relative_to(sys_dir):
-                    errors.append(f"Cannot install to system directory: {sys_dir}")
+                    if os.name == 'nt':
+                        errors.append(f"Cannot install to Windows system directory: {sys_dir}. Use a location in your user profile instead (e.g., C:\\Users\\YourName\\).")
+                    else:
+                        errors.append(f"Cannot install to system directory: {sys_dir}. Use a location in your home directory instead (~/).")
+                    cls._log_security_decision("DENY", f"Attempted installation to system directory: {sys_dir}")
                     break
             except (ValueError, AttributeError):
                 # is_relative_to not available in older Python versions
@@ -400,6 +464,91 @@ class SecurityValidator:
                 errors.append(f"File {source}: {msg}")
         
         return len(errors) == 0, errors
+    
+    @classmethod
+    def _is_windows_junction_or_symlink(cls, path: Path) -> bool:
+        """
+        Check if path is a Windows junction point or symbolic link
+        
+        Args:
+            path: Path to check
+            
+        Returns:
+            True if path is a junction point or symlink, False otherwise
+        """
+        if os.name != 'nt':
+            return False
+            
+        try:
+            # Only check if path exists to avoid filesystem errors during testing
+            if not path.exists():
+                return False
+                
+            # Check if path is a symlink (covers most cases)
+            if path.is_symlink():
+                return True
+                
+            # Additional Windows-specific checks for junction points
+            try:
+                import stat
+                st = path.stat()
+                # Check for reparse point (junction points have this attribute)
+                if hasattr(st, 'st_reparse_tag') and st.st_reparse_tag != 0:
+                    return True
+            except (OSError, AttributeError):
+                pass
+                    
+            # Alternative method using os.path.islink
+            try:
+                if os.path.islink(str(path)):
+                    return True
+            except (OSError, AttributeError):
+                pass
+                
+        except (OSError, AttributeError, NotImplementedError):
+            # If we can't determine safely, default to False
+            # This ensures the function doesn't break validation
+            pass
+            
+        return False
+    
+    @classmethod
+    def _log_security_decision(cls, action: str, message: str) -> None:
+        """
+        Log security validation decisions for audit trail
+        
+        Args:
+            action: Security action taken (ALLOW, DENY, WARN)
+            message: Description of the decision
+        """
+        try:
+            import logging
+            import datetime
+            
+            # Create security logger if it doesn't exist
+            security_logger = logging.getLogger('superclaude.security')
+            if not security_logger.handlers:
+                # Set up basic logging if not already configured
+                handler = logging.StreamHandler()
+                formatter = logging.Formatter(
+                    '%(asctime)s - SECURITY - %(levelname)s - %(message)s'
+                )
+                handler.setFormatter(formatter)
+                security_logger.addHandler(handler)
+                security_logger.setLevel(logging.INFO)
+            
+            # Log the security decision
+            timestamp = datetime.datetime.now().isoformat()
+            log_message = f"[{action}] {message} (PID: {os.getpid()})"
+            
+            if action == "DENY":
+                security_logger.warning(log_message)
+            else:
+                security_logger.info(log_message)
+                
+        except Exception:
+            # Don't fail security validation if logging fails
+            pass
     
     @classmethod
     def create_secure_temp_dir(cls, prefix: str = "superclaude_") -> Path:
