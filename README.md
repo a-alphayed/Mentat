@@ -1,4 +1,9 @@
 # SuperClaude v3 🚀
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://github.com/NomenAK/SuperClaude)
+[![GitHub issues](https://img.shields.io/github/issues/NomenAK/SuperClaude)](https://github.com/NomenAK/SuperClaude/issues)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/NomenAK/SuperClaude/blob/master/CONTRIBUTING.md)
+[![Contributors](https://img.shields.io/github/contributors/NomenAK/SuperClaude)](https://github.com/NomenAK/SuperClaude/graphs/contributors)
 
 An enhancement framework for Claude Code that adds extra capabilities through specialized commands, personas, and MCP server integration.
 
@@ -160,10 +165,25 @@ A: Currently Claude Code only, but v4 will have broader compatibility.
 **Q: Is this stable enough for daily use?**  
 A: The core features work well, but expect some rough edges since it's a fresh release.
 
-## License 📄
+## SuperClaude Contributors
 
-MIT - See LICENSE file for details.
+[![Contributors](https://contrib.rocks/image?repo=NomenAk/SuperClaude)](https://github.com/NomenAK/SuperClaude/graphs/contributors)
 
+## License
+
+MIT - [See LICENSE file for details](https://opensource.org/licenses/MIT)
+
+## Star History
+
+<a href="https://www.star-history.com/#NomenAK/SuperClaude&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=NomenAK/SuperClaude&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=NomenAK/SuperClaude&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=NomenAK/SuperClaude&type=Date" />
+ </picture>
+</a>
 ---
 
 *Built by developers, for developers. We hope you find it useful! 🙂*
+
+---
