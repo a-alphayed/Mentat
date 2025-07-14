@@ -28,8 +28,6 @@ Analyzes requests to understand intent, complexity, and requirements.
 
 **Validation Logic**: Resource availability, flag compatibility, risk assessment, outcome prediction, and safety recommendations. Operations with risk scores >0.8 trigger safe mode suggestions.
 
-*Implementation: See `Scripts/orchestrator_implementation.py` - `validate_operation()`*
-
 **Resource Management Thresholds**:
 - **Green Zone** (0-60%): Full operations, predictive monitoring active
 - **Yellow Zone** (60-75%): Resource optimization, caching, suggest --uc mode
@@ -166,8 +164,6 @@ wave_operations:
 - **Thresholds**: Default 0.7, customizable via `--wave-threshold`, enterprise strategy lowers file thresholds
 - **Decision Logic**: Sum all indicators, trigger waves when total ≥ threshold
 
-*Implementation: See `Scripts/orchestrator_implementation.py` - `detect_wave_eligibility()`*
-
 ## 🚦 Routing Intelligence
 
 Dynamic decision trees that map detected patterns to optimal tool combinations, persona activation, and orchestration strategies.
@@ -189,8 +185,8 @@ wave-strategies:
 ```
 
 **Wave-Enabled Commands**:
-- **Tier 1**: `/analyze`, `/improve`, `/build`, `/scan`, `/review`
-- **Tier 2**: `/design`, `/troubleshoot`, `/task`
+- **Tier 1**: `/analyze`, `/build`, `/implement`, `/improve`
+- **Tier 2**: `/design`, `/task`
 
 ### Master Routing Table
 
@@ -235,8 +231,6 @@ wave-strategies:
 - High complexity + critical quality → `--wave-mode --wave-validation`
 - Multiple operation types → `--wave-mode --adaptive-waves`
 
-*Implementation: See `Scripts/orchestrator_implementation.py` - `select_tools()`*
-
 #### Task Delegation Intelligence
 
 **Sub-Agent Delegation Decision Matrix**:
@@ -269,8 +263,6 @@ wave-strategies:
 - **Multiple Operations**: `adaptive_waves`
 - **Enterprise Scale**: `enterprise_waves`
 - **Default**: `systematic_waves`
-
-*Implementation: See `Scripts/orchestrator_implementation.py` - delegation & wave evaluation functions*
 
 **Auto-Delegation Triggers**:
 ```yaml

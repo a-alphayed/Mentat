@@ -39,8 +39,8 @@ performance-profile: "optimization|standard|complex"
 **Wave Orchestration Engine**: Multi-stage command execution with compound intelligence. Auto-activates on complexity ≥0.7 + files >20 + operation_types >2.
 
 **Wave-Enabled Commands**:
-- **Tier 1**: `/analyze`, `/improve`, `/build`, `/scan`, `/review`
-- **Tier 2**: `/design`, `/troubleshoot`, `/task`
+- **Tier 1**: `/analyze`, `/build`, `/implement`, `/improve`
+- **Tier 2**: `/design`, `/task`
 
 ### Development Commands
 
@@ -74,12 +74,6 @@ performance-profile: "standard"
 - **Tool Orchestration**: [Read, Write, Edit, MultiEdit, Bash, Glob, TodoWrite, Task]
 - **Arguments**: `[feature-description]`, `--type component|api|service|feature`, `--framework <name>`, `--<flags>`
 
-**`/dev-setup $ARGUMENTS`**
-- **Purpose**: Development environment configuration
-- **Category**: Development & Infrastructure
-- **Auto-Persona**: DevOps, Backend
-- **MCP Integration**: Context7, Sequential
-- **Workflow**: Detect requirements → Configure environment → Setup tooling → Validate
 
 ### Analysis Commands
 
@@ -102,20 +96,6 @@ performance-profile: "complex"
 
 **`/explain [topic] [flags]`** - Educational explanations | Auto-Persona: Mentor, Scribe | MCP: Context7, Sequential
 
-**`/review [target] [flags]`**
-```yaml
----
-command: "/review"
-category: "Analysis & Quality Assurance"
-purpose: "Comprehensive code review and quality analysis"
-wave-enabled: true
-performance-profile: "complex"
----
-```
-- **Auto-Persona**: QA, Analyzer, Architect
-- **MCP Integration**: Context7 (standards), Sequential (methodology), Magic (UI review)
-- **Tool Orchestration**: [Read, Grep, Glob, TodoWrite]
-- **Arguments**: `[target]`, `@<path>`, `!<command>`, `--<flags>`
 
 ### Quality Commands
 
@@ -134,20 +114,6 @@ performance-profile: "optimization"
 - **Tool Orchestration**: [Read, Grep, Glob, Edit, MultiEdit, Bash]
 - **Arguments**: `[target]`, `@<path>`, `!<command>`, `--<flags>`
 
-**`/scan [target] [flags]`**
-```yaml
----
-command: "/scan"
-category: "Quality & Security"
-purpose: "Security and code quality scanning"
-wave-enabled: true
-performance-profile: "complex"
----
-```
-- **Auto-Persona**: Security, QA, Analyzer
-- **MCP Integration**: Sequential (scanning), Context7 (patterns), Playwright (dynamic testing)
-- **Tool Orchestration**: [Read, Grep, Glob, Bash, TodoWrite]
-- **Arguments**: `[target]`, `@<path>`, `!<command>`, `--<flags>`
 
 **`/cleanup [target] [flags]`** - Project cleanup and technical debt reduction | Auto-Persona: Refactorer | MCP: Sequential
 
@@ -161,11 +127,7 @@ performance-profile: "complex"
 
 **`/test [type] [flags]`** - Testing workflows | Auto-Persona: QA | MCP: Playwright, Sequential
 
-**`/deploy [environment] [flags]`** - Deployment operations | Auto-Persona: DevOps, Backend | MCP: Playwright, Sequential
-
 **`/git [operation] [flags]`** - Git workflow assistant | Auto-Persona: DevOps, Scribe, QA | MCP: Sequential
-
-**`/migrate [type] [flags]`** - Migration management | Auto-Persona: Backend, DevOps | MCP: Sequential, Context7
 
 **`/design [domain] [flags]`** - Design orchestration | Auto-Persona: Architect, Frontend | MCP: Magic, Sequential, Context7
 
@@ -189,17 +151,15 @@ complex: "Resource-intensive with comprehensive analysis"
 ```
 
 ### Command Categories
-- **Development**: build, implement, dev-setup, design
-- **Analysis**: analyze, troubleshoot, explain, review
-- **Quality**: improve, scan, cleanup
+- **Development**: build, implement, design
+- **Analysis**: analyze, troubleshoot, explain
+- **Quality**: improve, cleanup
 - **Testing**: test
 - **Documentation**: document
 - **Planning**: estimate, task
-- **Deployment**: deploy
 - **Version-Control**: git
-- **Data-Operations**: migrate, load
-- **Meta**: index, loop, spawn
+- **Meta**: index, load, spawn
 
 ### Wave-Enabled Commands
-9 commands: `/analyze`, `/build`, `/design`, `/implement`, `/improve`, `/review`, `/scan`, `/task`
+6 commands: `/analyze`, `/build`, `/design`, `/implement`, `/improve`, `/task`
 
