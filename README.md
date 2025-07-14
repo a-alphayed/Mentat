@@ -68,10 +68,11 @@ If you're coming from SuperClaude v2, you'll need to clean up first:
 
 1. **Uninstall v2** using its uninstaller if available
 2. **Manual cleanup** - delete these if they exist:
+   - `SuperClaude/`
    - `~/.claude/shared/`
    - `~/.claude/commands/` 
    - `~/.claude/CLAUDE.md`
-3. **Then proceed** with v3 installation below
+4. **Then proceed** with v3 installation below
 
 This is because v3 has a different structure and the old files can cause conflicts.
 
