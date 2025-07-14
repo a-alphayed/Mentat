@@ -214,13 +214,13 @@ class MCPComponent(Component):
             
             # Install using Claude CLI
             if config.get("dry_run", False):
-                self.logger.info(f"Would install MCP server: claude mcp add {server_name} {command}")
+                self.logger.info(f"Would install MCP server (user scope): claude mcp add -s user {server_name} {command}")
                 return True
             
-            self.logger.debug(f"Running: claude mcp add {server_name} {command}")
+            self.logger.debug(f"Running: claude mcp add -s user {server_name} {command}")
             
             result = subprocess.run(
-                ["claude", "mcp", "add", server_name, command],
+                ["claude", "mcp", "add", "-s", "user", server_name, command],
                 capture_output=True,
                 text=True,
                 timeout=120,  # 2 minutes timeout for installation
@@ -228,7 +228,7 @@ class MCPComponent(Component):
             )
             
             if result.returncode == 0:
-                self.logger.success(f"Successfully installed MCP server: {server_name}")
+                self.logger.success(f"Successfully installed MCP server (user scope): {server_name}")
                 return True
             else:
                 error_msg = result.stderr.strip() if result.stderr else "Unknown error"
@@ -252,7 +252,7 @@ class MCPComponent(Component):
                 self.logger.info(f"MCP server {server_name} not installed")
                 return True
             
-            self.logger.debug(f"Running: claude mcp remove {server_name}")
+            self.logger.debug(f"Running: claude mcp remove {server_name} (auto-detect scope)")
             
             result = subprocess.run(
                 ["claude", "mcp", "remove", server_name],
