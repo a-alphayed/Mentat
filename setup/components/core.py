@@ -169,6 +169,14 @@ class CoreComponent(Component):
                 self.settings_manager.save_metadata(merged_metadata)
                 self.logger.info("Updated metadata with framework configuration")
                 
+                # Add component registration to metadata
+                self.settings_manager.add_component_registration("core", {
+                    "version": "3.0.0",
+                    "category": "core",
+                    "files_count": len(self.framework_files)
+                })
+                self.logger.info("Updated metadata with core component registration")
+                
                 # Migrate any existing SuperClaude data from settings.json
                 if self.settings_manager.migrate_superclaude_data():
                     self.logger.info("Migrated existing SuperClaude data from settings.json")
