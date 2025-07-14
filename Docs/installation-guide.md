@@ -257,10 +257,10 @@ Try these commands to get started:
 
 ```bash
 # In Claude Code, try these:
-/help                    # See available commands
-/analyze README.md       # Analyze a file
-/build --help           # See build options
-/improve --help         # See improvement options
+/sc:help                    # See available commands
+/sc:analyze README.md       # Analyze a file
+/sc:build --help           # See build options
+/sc:improve --help         # See improvement options
 ```
 
 **Don't worry if it seems overwhelming** - SuperClaude enhances Claude Code gradually. You can use as much or as little as you want.

@@ -18,11 +18,11 @@
 
 **Start here** (no reading required):
 ```bash
-/help                    # See what's available
-/analyze src/            # Smart analysis of your code  
-/build                   # Intelligent project building
-/improve messy-file.js   # Clean up code automatically
-/troubleshoot "error"    # Get help with problems
+/sc:help                    # See what's available
+/sc:analyze src/            # Smart analysis of your code  
+/sc:build                   # Intelligent project building
+/sc:improve messy-file.js   # Clean up code automatically
+/sc:troubleshoot "error"    # Get help with problems
 ```
 
 **That's honestly enough to get started.** Everything else below is here when you get curious about what other tools are available.
@@ -70,11 +70,11 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Basic syntax**:
 ```bash
-/build                          # Build current project
-/build --type prod              # Production build
-/build --clean                  # Clean build (remove old artifacts)
-/build --optimize               # Enable optimizations
-/build src/                     # Build specific directory
+/sc:build                          # Build current project
+/sc:build --type prod              # Production build
+/sc:build --clean                  # Clean build (remove old artifacts)
+/sc:build --optimize               # Enable optimizations
+/sc:build src/                     # Build specific directory
 ```
 
 **Useful flags**:
@@ -85,9 +85,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Real examples**:
 ```bash
-/build --type prod --optimize   # Production build with optimizations
-/build --clean --verbose        # Clean build with detailed output
-/build src/components           # Build just the components folder
+/sc:build --type prod --optimize   # Production build with optimizations
+/sc:build --clean --verbose        # Clean build with detailed output
+/sc:build src/components           # Build just the components folder
 ```
 
 **Gotchas**:
@@ -108,9 +108,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Basic syntax**:
 ```bash
-/design user-auth-system        # Design a user authentication system
-/design --type api auth         # Design just the API part
-/design --format spec payment   # Create formal specification
+/sc:design user-auth-system        # Design a user authentication system
+/sc:design --type api auth         # Design just the API part
+/sc:design --format spec payment   # Create formal specification
 ```
 
 **Useful flags**:
@@ -120,9 +120,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Real examples**:
 ```bash
-/design --type api user-management    # Design user management API
-/design --format spec chat-system     # Create chat system specification
-/design --type database ecommerce     # Design database schema
+/sc:design --type api user-management    # Design user management API
+/sc:design --format spec chat-system     # Create chat system specification
+/sc:design --type database ecommerce     # Design database schema
 ```
 
 **Gotchas**:
@@ -145,9 +145,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Basic syntax**:
 ```bash
-/analyze src/                   # Analyze entire src directory
-/analyze --focus security       # Focus on security issues
-/analyze --depth deep app.js    # Deep analysis of specific file
+/sc:analyze src/                   # Analyze entire src directory
+/sc:analyze --focus security       # Focus on security issues
+/sc:analyze --depth deep app.js    # Deep analysis of specific file
 ```
 
 **Useful flags**:
@@ -157,9 +157,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Real examples**:
 ```bash
-/analyze --focus security --depth deep     # Deep security analysis
-/analyze --focus performance src/api/      # Performance analysis of API
-/analyze --format report .                 # Generate analysis report
+/sc:analyze --focus security --depth deep     # Deep security analysis
+/sc:analyze --focus performance src/api/      # Performance analysis of API
+/sc:analyze --format report .                 # Generate analysis report
 ```
 
 **Gotchas**:
@@ -180,9 +180,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Basic syntax**:
 ```bash
-/troubleshoot "login not working"     # Investigate login issue
-/troubleshoot --logs error.log        # Analyze error logs
-/troubleshoot performance             # Performance troubleshooting
+/sc:troubleshoot "login not working"     # Investigate login issue
+/sc:troubleshoot --logs error.log        # Analyze error logs
+/sc:troubleshoot performance             # Performance troubleshooting
 ```
 
 **Useful flags**:
@@ -192,9 +192,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Real examples**:
 ```bash
-/troubleshoot "API returning 500" --logs server.log
-/troubleshoot --focus database "slow queries"
-/troubleshoot "build failing" --systematic
+/sc:troubleshoot "API returning 500" --logs server.log
+/sc:troubleshoot --focus database "slow queries"
+/sc:troubleshoot "build failing" --systematic
 ```
 
 **Gotchas**:
@@ -215,9 +215,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Basic syntax**:
 ```bash
-/explain async/await               # Explain async/await concept
-/explain --code src/utils.js       # Explain specific code file
-/explain --beginner React hooks    # Beginner-friendly explanation
+/sc:explain async/await               # Explain async/await concept
+/sc:explain --code src/utils.js       # Explain specific code file
+/sc:explain --beginner React hooks    # Beginner-friendly explanation
 ```
 
 **Useful flags**:
@@ -228,9 +228,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Real examples**:
 ```bash
-/explain --beginner "what is REST API"
-/explain --code src/auth.js --advanced
-/explain --examples "React context patterns"
+/sc:explain --beginner "what is REST API"
+/sc:explain --code src/auth.js --advanced
+/sc:explain --examples "React context patterns"
 ```
 
 **Gotchas**:
@@ -251,9 +251,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Basic syntax**:
 ```bash
-/improve src/legacy/            # Improve legacy code
-/improve --type performance     # Focus on performance
-/improve --safe src/utils.js    # Safe, low-risk improvements only
+/sc:improve src/legacy/            # Improve legacy code
+/sc:improve --type performance     # Focus on performance
+/sc:improve --safe src/utils.js    # Safe, low-risk improvements only
 ```
 
 **Useful flags**:
@@ -263,9 +263,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Real examples**:
 ```bash
-/improve --type performance --safe src/api/
-/improve --preview src/components/LegacyComponent.js
-/improve --type style . --safe
+/sc:improve --type performance --safe src/api/
+/sc:improve --preview src/components/LegacyComponent.js
+/sc:improve --type style . --safe
 ```
 
 **Gotchas**:
@@ -286,9 +286,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Basic syntax**:
 ```bash
-/cleanup src/                   # Clean up src directory
-/cleanup --dead-code            # Focus on dead code removal
-/cleanup --imports package.js   # Clean up imports in specific file
+/sc:cleanup src/                   # Clean up src directory
+/sc:cleanup --dead-code            # Focus on dead code removal
+/sc:cleanup --imports package.js   # Clean up imports in specific file
 ```
 
 **Useful flags**:
@@ -299,9 +299,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Real examples**:
 ```bash
-/cleanup --dead-code --safe src/utils/
-/cleanup --imports src/components/
-/cleanup --files . --safe
+/sc:cleanup --dead-code --safe src/utils/
+/sc:cleanup --imports src/components/
+/sc:cleanup --files . --safe
 ```
 
 **Gotchas**:
@@ -322,10 +322,10 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Basic syntax**:
 ```bash
-/test                           # Run all tests
-/test --type unit               # Run only unit tests
-/test --coverage                # Generate coverage report
-/test --watch src/              # Watch mode for development
+/sc:test                           # Run all tests
+/sc:test --type unit               # Run only unit tests
+/sc:test --coverage                # Generate coverage report
+/sc:test --watch src/              # Watch mode for development
 ```
 
 **Useful flags**:
@@ -336,9 +336,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Real examples**:
 ```bash
-/test --type unit --coverage
-/test --watch src/components/
-/test --type e2e --fix
+/sc:test --type unit --coverage
+/sc:test --watch src/components/
+/sc:test --type e2e --fix
 ```
 
 **Gotchas**:
@@ -359,9 +359,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Basic syntax**:
 ```bash
-/document src/api/auth.js       # Document authentication module
-/document --type api            # API documentation
-/document --style brief README  # Brief README file
+/sc:document src/api/auth.js       # Document authentication module
+/sc:document --type api            # API documentation
+/sc:document --style brief README  # Brief README file
 ```
 
 **Useful flags**:
@@ -371,9 +371,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Real examples**:
 ```bash
-/document --type api src/controllers/
-/document --style detailed --type guide user-onboarding
-/document --type inline src/utils/helpers.js
+/sc:document --type api src/controllers/
+/sc:document --style detailed --type guide user-onboarding
+/sc:document --type inline src/utils/helpers.js
 ```
 
 **Gotchas**:
@@ -394,9 +394,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Basic syntax**:
 ```bash
-/estimate "add user authentication"    # Estimate auth feature
-/estimate --detailed shopping-cart     # Detailed breakdown
-/estimate --complexity user-dashboard  # Complexity analysis
+/sc:estimate "add user authentication"    # Estimate auth feature
+/sc:estimate --detailed shopping-cart     # Detailed breakdown
+/sc:estimate --complexity user-dashboard  # Complexity analysis
 ```
 
 **Useful flags**:
@@ -406,9 +406,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Real examples**:
 ```bash
-/estimate --detailed "implement payment system"
-/estimate --complexity --team-size 3 "migrate to microservices"
-/estimate "add real-time chat" --detailed
+/sc:estimate --detailed "implement payment system"
+/sc:estimate --complexity --team-size 3 "migrate to microservices"
+/sc:estimate "add real-time chat" --detailed
 ```
 
 **Gotchas**:
@@ -429,9 +429,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Basic syntax**:
 ```bash
-/task create "implement user dashboard"  # Create new task
-/task status                            # Check task status
-/task breakdown "payment integration"    # Break down into subtasks
+/sc:task create "implement user dashboard"  # Create new task
+/sc:task status                            # Check task status
+/sc:task breakdown "payment integration"    # Break down into subtasks
 ```
 
 **Useful flags**:
@@ -442,9 +442,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Real examples**:
 ```bash
-/task create "migrate from REST to GraphQL" --priority high
-/task breakdown "e-commerce checkout flow"
-/task status
+/sc:task create "migrate from REST to GraphQL" --priority high
+/sc:task breakdown "e-commerce checkout flow"
+/sc:task status
 ```
 
 **Gotchas**:
@@ -465,9 +465,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Basic syntax**:
 ```bash
-/spawn deploy-pipeline          # Orchestrate deployment
-/spawn --parallel migrate-data  # Parallel data migration
-/spawn setup-dev-environment    # Complex environment setup
+/sc:spawn deploy-pipeline          # Orchestrate deployment
+/sc:spawn --parallel migrate-data  # Parallel data migration
+/sc:spawn setup-dev-environment    # Complex environment setup
 ```
 
 **Useful flags**:
@@ -477,9 +477,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Real examples**:
 ```bash
-/spawn --parallel "test and deploy to staging"
-/spawn setup-ci-cd --monitor
-/spawn --sequential database-migration
+/sc:spawn --parallel "test and deploy to staging"
+/sc:spawn setup-ci-cd --monitor
+/sc:spawn --sequential database-migration
 ```
 
 **Gotchas**:
@@ -500,9 +500,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Basic syntax**:
 ```bash
-/git commit                     # Smart commit with auto-generated message
-/git --smart-commit add .       # Add and commit with smart message
-/git branch feature/new-auth    # Create and switch to new branch
+/sc:git commit                     # Smart commit with auto-generated message
+/sc:git --smart-commit add .       # Add and commit with smart message
+/sc:git branch feature/new-auth    # Create and switch to new branch
 ```
 
 **Useful flags**:
@@ -512,9 +512,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Real examples**:
 ```bash
-/git --smart-commit "fixed login bug"
-/git branch feature/user-dashboard --branch-strategy
-/git merge develop --interactive
+/sc:git --smart-commit "fixed login bug"
+/sc:git branch feature/user-dashboard --branch-strategy
+/sc:git merge develop --interactive
 ```
 
 **Gotchas**:
@@ -534,9 +534,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Basic syntax**:
 ```bash
-/index                          # List all commands
-/index testing                  # Find commands related to testing
-/index --category analysis      # Commands in analysis category
+/sc:index                          # List all commands
+/sc:index testing                  # Find commands related to testing
+/sc:index --category analysis      # Commands in analysis category
 ```
 
 **Useful flags**:
@@ -545,9 +545,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Real examples**:
 ```bash
-/index --search "performance"
-/index --category quality
-/index git
+/sc:index --search "performance"
+/sc:index --category quality
+/sc:index git
 ```
 
 **Gotchas**:
@@ -567,9 +567,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Basic syntax**:
 ```bash
-/load                           # Load current project context
-/load src/                      # Load specific directory context
-/load --deep                    # Deep analysis of project structure
+/sc:load                           # Load current project context
+/sc:load src/                      # Load specific directory context
+/sc:load --deep                    # Deep analysis of project structure
 ```
 
 **Useful flags**:
@@ -579,9 +579,9 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 
 **Real examples**:
 ```bash
-/load --deep --summary
-/load src/components/ --focus architecture
-/load . --focus dependencies
+/sc:load --deep --summary
+/sc:load src/components/ --focus architecture
+/sc:load . --focus dependencies
 ```
 
 **Gotchas**:
@@ -594,55 +594,55 @@ A practical guide to all 15 SuperClaude slash commands. We'll be honest about wh
 ### Effective Flag Combinations
 ```bash
 # Safe improvement workflow
-/improve --preview src/component.js    # See what would change
-/improve --safe src/component.js       # Apply safe changes only
+/sc:improve --preview src/component.js    # See what would change
+/sc:improve --safe src/component.js       # Apply safe changes only
 
 # Comprehensive analysis
-/analyze --focus security --depth deep
-/test --coverage
-/document --type api
+/sc:analyze --focus security --depth deep
+/sc:test --coverage
+/sc:document --type api
 
 # Smart git workflow
-/git add .
-/git --smart-commit --branch-strategy
+/sc:git add .
+/sc:git --smart-commit --branch-strategy
 
 # Project understanding workflow
-/load --deep --summary
-/analyze --focus architecture
-/document --type guide
+/sc:load --deep --summary
+/sc:analyze --focus architecture
+/sc:document --type guide
 ```
 
 ### Common Workflows
 
 **New Project Onboarding**:
 ```bash
-/load --deep --summary
-/analyze --focus architecture
-/test --coverage
-/document README
+/sc:load --deep --summary
+/sc:analyze --focus architecture
+/sc:test --coverage
+/sc:document README
 ```
 
 **Bug Investigation**:
 ```bash
-/troubleshoot "specific error message" --logs
-/analyze --focus security
-/test --type unit affected-component
+/sc:troubleshoot "specific error message" --logs
+/sc:analyze --focus security
+/sc:test --type unit affected-component
 ```
 
 **Code Quality Improvement**:
 ```bash
-/analyze --focus quality
-/improve --preview src/
-/cleanup --safe
-/test --coverage
+/sc:analyze --focus quality
+/sc:improve --preview src/
+/sc:cleanup --safe
+/sc:test --coverage
 ```
 
 **Pre-deployment Checklist**:
 ```bash
-/test --type all --coverage
-/analyze --focus security
-/build --type prod --optimize
-/git --smart-commit
+/sc:test --type all --coverage
+/sc:analyze --focus security
+/sc:build --type prod --optimize
+/sc:git --smart-commit
 ```
 
 ### Troubleshooting Command Issues

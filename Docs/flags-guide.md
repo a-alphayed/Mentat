@@ -23,10 +23,10 @@
 
 ```bash
 # These work great with zero flag knowledge:
-/analyze src/                    # Auto-picks the right analysis flags
-/build                          # Auto-optimizes based on your project  
-/improve messy-code.js          # Auto-activates quality and safety flags
-/troubleshoot "weird error"     # Auto-activates debugging and analysis flags
+/sc:analyze src/                    # Auto-picks the right analysis flags
+/sc:build                          # Auto-optimizes based on your project  
+/sc:improve messy-code.js          # Auto-activates quality and safety flags
+/sc:troubleshoot "weird error"     # Auto-activates debugging and analysis flags
 ```
 
 **See? No flags needed.** Everything below is for when you get curious about what's happening behind the scenes.
@@ -41,9 +41,9 @@ A practical guide to SuperClaude's flag system. Flags are like command-line opti
 
 **Basic syntax** (but you usually don't need to know this):
 ```bash
-/command --flag-name
-/command --flag-name value  
-/analyze src/ --focus security --depth deep
+/sc:command --flag-name
+/sc:command --flag-name value  
+/sc:analyze src/ --focus security --depth deep
 ```
 
 **How flags actually work in practice**:
@@ -234,38 +234,38 @@ Direct SuperClaude's attention to specific areas.
 
 ### Quick Analysis
 ```bash
-/analyze src/ --focus quality          # Quick quality check
-/analyze --uc --focus security         # Fast security scan
+/sc:analyze src/ --focus quality          # Quick quality check
+/sc:analyze --uc --focus security         # Fast security scan
 ```
 
 ### Deep Investigation  
 ```bash
-/troubleshoot "bug" --think --seq      # Systematic debugging
-/analyze --think-hard --focus architecture  # Architectural analysis
+/sc:troubleshoot "bug" --think --seq      # Systematic debugging
+/sc:analyze --think-hard --focus architecture  # Architectural analysis
 ```
 
 ### Large Project Work
 ```bash
-/analyze monorepo/ --delegate auto --uc     # Efficient large analysis
-/improve legacy/ --wave-mode auto --safe-mode  # Safe systematic improvement
+/sc:analyze monorepo/ --delegate auto --uc     # Efficient large analysis
+/sc:improve legacy/ --wave-mode auto --safe-mode  # Safe systematic improvement
 ```
 
 ### Learning & Documentation
 ```bash
-/explain React hooks --c7 --verbose    # Detailed explanation with docs
-/document api/ --persona-scribe        # Professional documentation
+/sc:explain React hooks --c7 --verbose    # Detailed explanation with docs
+/sc:document api/ --persona-scribe        # Professional documentation
 ```
 
 ### Performance-Focused
 ```bash
-/analyze --focus performance --play     # Performance analysis with testing
-/build --uc --no-mcp                   # Fast build without extra features
+/sc:analyze --focus performance --play     # Performance analysis with testing
+/sc:build --uc --no-mcp                   # Fast build without extra features
 ```
 
 ### Security-Focused
 ```bash
-/analyze --focus security --think --validate  # Thorough security analysis
-/scan --persona-security --safe-mode         # Conservative security scan
+/sc:analyze --focus security --think --validate  # Thorough security analysis
+/sc:scan --persona-security --safe-mode         # Conservative security scan
 ```
 
 ## Practical Examples 💡
@@ -273,13 +273,13 @@ Direct SuperClaude's attention to specific areas.
 ### Before/After: Basic Analysis
 **Before** (basic):
 ```bash
-/analyze auth.js
+/sc:analyze auth.js
 # → Simple file analysis
 ```
 
 **After** (with flags):
 ```bash
-/analyze auth.js --focus security --think --c7
+/sc:analyze auth.js --focus security --think --c7
 # → Security-focused analysis with deep thinking and official docs
 # → Much more thorough, finds security patterns, checks against best practices
 ```
@@ -287,13 +287,13 @@ Direct SuperClaude's attention to specific areas.
 ### Before/After: Large Project
 **Before** (slow):
 ```bash
-/analyze huge-monorepo/
+/sc:analyze huge-monorepo/
 # → Tries to analyze everything at once, may timeout or use too many tokens
 ```
 
 **After** (efficient):
 ```bash
-/analyze huge-monorepo/ --delegate auto --uc --focus architecture
+/sc:analyze huge-monorepo/ --delegate auto --uc --focus architecture
 # → Delegates work to sub-agents, compresses output, focuses on architecture
 # → Faster, more focused, better results
 ```
@@ -301,13 +301,13 @@ Direct SuperClaude's attention to specific areas.
 ### Before/After: Improvement Work
 **Before** (risky):
 ```bash
-/improve legacy-system/
+/sc:improve legacy-system/
 # → May make too many changes, could break things
 ```
 
 **After** (safe):
 ```bash
-/improve legacy-system/ --safe-mode --loop --validate --preview
+/sc:improve legacy-system/ --safe-mode --loop --validate --preview
 # → Safe changes only, iterative approach, validates first, shows preview
 # → Much safer, progressive improvement
 ```
@@ -318,22 +318,22 @@ SuperClaude automatically adds flags based on context. Here's when:
 
 ### Complexity-Based
 ```bash
-/analyze huge-codebase/
+/sc:analyze huge-codebase/
 # Auto-adds: --delegate auto --uc
 # Why: >50 files detected, context management needed
 
-/troubleshoot "complex system issue"  
+/sc:troubleshoot "complex system issue"  
 # Auto-adds: --think --seq
 # Why: Multi-component problem detected
 ```
 
 ### Domain-Based
 ```bash
-/build react-app/
+/sc:build react-app/
 # Auto-adds: --c7 --persona-frontend
 # Why: Frontend framework detected
 
-/analyze --focus security
+/sc:analyze --focus security
 # Auto-adds: --persona-security --validate
 # Why: Security focus triggers security specialist
 ```
@@ -341,12 +341,12 @@ SuperClaude automatically adds flags based on context. Here's when:
 ### Performance-Based
 ```bash
 # When context usage >75%
-/analyze large-project/
+/sc:analyze large-project/
 # Auto-adds: --uc
 # Why: Token optimization needed
 
 # When risk score >0.7
-/improve production-code/
+/sc:improve production-code/
 # Auto-adds: --safe-mode --validate
 # Why: High-risk operation detected
 ```
@@ -357,19 +357,19 @@ SuperClaude automatically adds flags based on context. Here's when:
 
 **Comprehensive Code Review**:
 ```bash
-/review codebase/ --persona-qa --think-hard --focus quality --validate --c7
+/sc:review codebase/ --persona-qa --think-hard --focus quality --validate --c7
 # → QA specialist + deep thinking + quality focus + validation + docs
 ```
 
 **Legacy System Modernization**:
 ```bash
-/improve legacy/ --wave-mode force --persona-architect --safe-mode --loop --c7
+/sc:improve legacy/ --wave-mode force --persona-architect --safe-mode --loop --c7
 # → Wave orchestration + architect perspective + safety + iteration + docs
 ```
 
 **Security Audit**:
 ```bash
-/scan --persona-security --ultrathink --focus security --validate --seq
+/sc:scan --persona-security --ultrathink --focus security --validate --seq
 # → Security specialist + maximum thinking + security focus + validation + systematic analysis
 ```
 
@@ -377,13 +377,13 @@ SuperClaude automatically adds flags based on context. Here's when:
 
 **For Speed**:
 ```bash
-/analyze --no-mcp --uc --scope file
+/sc:analyze --no-mcp --uc --scope file
 # → Disable extra features, compress output, limit scope
 ```
 
 **For Thoroughness**:
 ```bash
-/analyze --all-mcp --think-hard --delegate auto
+/sc:analyze --all-mcp --think-hard --delegate auto
 # → All capabilities, deep thinking, parallel processing
 ```
 
@@ -391,17 +391,17 @@ SuperClaude automatically adds flags based on context. Here's when:
 
 **Bug Investigation Workflow**:
 ```bash
-/troubleshoot "specific error" --seq --think --validate
-/analyze affected-files/ --focus quality --persona-analyzer  
-/test --play --coverage
+/sc:troubleshoot "specific error" --seq --think --validate
+/sc:analyze affected-files/ --focus quality --persona-analyzer  
+/sc:test --play --coverage
 ```
 
 **Feature Development Workflow**:
 ```bash
-/design new-feature --persona-architect --c7
-/build --magic --persona-frontend --validate
-/test --play --coverage
-/document --persona-scribe --c7
+/sc:design new-feature --persona-architect --c7
+/sc:build --magic --persona-frontend --validate
+/sc:test --play --coverage
+/sc:document --persona-scribe --c7
 ```
 
 ## Quick Reference 📋

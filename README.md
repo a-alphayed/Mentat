@@ -40,10 +40,10 @@ This is what we've been working on to make Claude Code more helpful for developm
 ### Commands 🛠️
 We focused on 15 essential commands for the most common tasks:
 
-**Development**: `/build`, `/dev-setup`  
-**Analysis**: `/analyze`, `/review`, `/troubleshoot`  
-**Quality**: `/improve`, `/scan`, `/test`  
-**Others**: `/document`, `/deploy`, `/git`, `/migrate`, `/estimate`, `/task`, `/design`
+**Development**: `/sc:build`, `/sc:dev-setup`  
+**Analysis**: `/sc:analyze`, `/sc:review`, `/sc:troubleshoot`  
+**Quality**: `/sc:improve`, `/sc:scan`, `/sc:test`  
+**Others**: `/sc:document`, `/sc:deploy`, `/sc:git`, `/sc:migrate`, `/sc:estimate`, `/sc:task`, `/sc:design`
 
 ### Smart Personas 🎭
 Auto-activating specialists that adapt Claude's behavior:

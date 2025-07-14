@@ -20,10 +20,10 @@
 
 ```bash
 # These automatically activate the right experts:
-/analyze payment-system/         # → Security + backend experts auto-activate
-/build react-app/               # → Frontend specialist takes over  
-/improve slow-queries.sql       # → Performance optimizer jumps in
-/troubleshoot "auth failing"    # → Debug specialist + security expert coordinate
+/sc:analyze payment-system/         # → Security + backend experts auto-activate
+/sc:build react-app/               # → Frontend specialist takes over  
+/sc:improve slow-queries.sql       # → Performance optimizer jumps in
+/sc:troubleshoot "auth failing"    # → Debug specialist + security expert coordinate
 ```
 
 **See the pattern?** You focus on what you want to do, SuperClaude figures out who should help. Everything below is for when you get curious about who's on the team.
@@ -74,9 +74,9 @@ Think of SuperClaude personas as having a team of specialists on demand. Each pe
 
 **Example workflows**:
 ```bash
-/design microservices-migration --persona-architect
-/analyze --focus architecture large-system/
-/estimate "redesign auth system" --persona-architect
+/sc:design microservices-migration --persona-architect
+/sc:analyze --focus architecture large-system/
+/sc:estimate "redesign auth system" --persona-architect
 ```
 
 **What they prioritize**:
@@ -111,9 +111,9 @@ Think of SuperClaude personas as having a team of specialists on demand. Each pe
 
 **Example workflows**:
 ```bash
-/build dashboard --persona-frontend
-/improve --focus accessibility components/
-/analyze --persona-frontend --focus performance
+/sc:build dashboard --persona-frontend
+/sc:improve --focus accessibility components/
+/sc:analyze --persona-frontend --focus performance
 ```
 
 **What they prioritize**:
@@ -149,9 +149,9 @@ Think of SuperClaude personas as having a team of specialists on demand. Each pe
 
 **Example workflows**:
 ```bash
-/design user-api --persona-backend
-/analyze --focus security api/
-/improve --persona-backend database-layer/
+/sc:design user-api --persona-backend
+/sc:analyze --focus security api/
+/sc:improve --persona-backend database-layer/
 ```
 
 **What they prioritize**:
@@ -187,9 +187,9 @@ Think of SuperClaude personas as having a team of specialists on demand. Each pe
 
 **Example workflows**:
 ```bash
-/scan --persona-security --focus security
-/analyze auth-system/ --persona-security
-/improve --focus security --persona-security
+/sc:scan --persona-security --focus security
+/sc:analyze auth-system/ --persona-security
+/sc:improve --focus security --persona-security
 ```
 
 **What they prioritize**:
@@ -225,9 +225,9 @@ Think of SuperClaude personas as having a team of specialists on demand. Each pe
 
 **Example workflows**:
 ```bash
-/analyze --focus performance --persona-performance
-/improve --type performance slow-endpoints/
-/test --benchmark --persona-performance
+/sc:analyze --focus performance --persona-performance
+/sc:improve --type performance slow-endpoints/
+/sc:test --benchmark --persona-performance
 ```
 
 **What they prioritize**:
@@ -263,9 +263,9 @@ Think of SuperClaude personas as having a team of specialists on demand. Each pe
 
 **Example workflows**:
 ```bash
-/troubleshoot "auth randomly fails" --persona-analyzer
-/analyze --persona-analyzer mysterious-bug/
-/explain --detailed "why is this slow" --persona-analyzer
+/sc:troubleshoot "auth randomly fails" --persona-analyzer
+/sc:analyze --persona-analyzer mysterious-bug/
+/sc:explain --detailed "why is this slow" --persona-analyzer
 ```
 
 **What they prioritize**:
@@ -301,9 +301,9 @@ Think of SuperClaude personas as having a team of specialists on demand. Each pe
 
 **Example workflows**:
 ```bash
-/test --persona-qa comprehensive-suite
-/analyze --focus quality --persona-qa
-/review --persona-qa critical-features/
+/sc:test --persona-qa comprehensive-suite
+/sc:analyze --focus quality --persona-qa
+/sc:review --persona-qa critical-features/
 ```
 
 **What they prioritize**:
@@ -339,9 +339,9 @@ Think of SuperClaude personas as having a team of specialists on demand. Each pe
 
 **Example workflows**:
 ```bash
-/improve --type quality --persona-refactorer
-/cleanup legacy-module/ --persona-refactorer
-/analyze --focus maintainability --persona-refactorer
+/sc:improve --type quality --persona-refactorer
+/sc:cleanup legacy-module/ --persona-refactorer
+/sc:analyze --focus maintainability --persona-refactorer
 ```
 
 **What they prioritize**:
@@ -377,9 +377,9 @@ Think of SuperClaude personas as having a team of specialists on demand. Each pe
 
 **Example workflows**:
 ```bash
-/deploy production --persona-devops
-/analyze infrastructure/ --persona-devops
-/improve deployment-pipeline --persona-devops
+/sc:deploy production --persona-devops
+/sc:analyze infrastructure/ --persona-devops
+/sc:improve deployment-pipeline --persona-devops
 ```
 
 **What they prioritize**:
@@ -415,9 +415,9 @@ Think of SuperClaude personas as having a team of specialists on demand. Each pe
 
 **Example workflows**:
 ```bash
-/explain React hooks --persona-mentor
-/document --type guide --persona-mentor
-/analyze complex-algorithm.js --persona-mentor
+/sc:explain React hooks --persona-mentor
+/sc:document --type guide --persona-mentor
+/sc:analyze complex-algorithm.js --persona-mentor
 ```
 
 **What they prioritize**:
@@ -451,9 +451,9 @@ Think of SuperClaude personas as having a team of specialists on demand. Each pe
 
 **Example workflows**:
 ```bash
-/document api/ --persona-scribe
-/git commit --persona-scribe
-/explain --persona-scribe=es complex-feature
+/sc:document api/ --persona-scribe
+/sc:git commit --persona-scribe
+/sc:explain --persona-scribe=es complex-feature
 ```
 
 **What they prioritize**:
@@ -510,31 +510,31 @@ Personas often work together automatically. Here are common collaboration patter
 
 ### Design & Implementation
 ```bash
-/design user-dashboard
+/sc:design user-dashboard
 # Auto-activates: 🏗️ architect (system design) + 🎨 frontend (UI design)
 ```
 
 ### Security Review
 ```bash
-/analyze --focus security api/
+/sc:analyze --focus security api/
 # Auto-activates: 🛡️ security (primary) + ⚙️ backend (API expertise)
 ```
 
 ### Performance Optimization
 ```bash
-/improve --focus performance slow-app/
+/sc:improve --focus performance slow-app/
 # Auto-activates: ⚡ performance (primary) + 🎨 frontend (if UI) or ⚙️ backend (if API)
 ```
 
 ### Quality Improvement
 ```bash
-/improve --focus quality legacy-code/
+/sc:improve --focus quality legacy-code/
 # Auto-activates: 🔄 refactorer (primary) + 🧪 qa (testing) + 🏗️ architect (design)
 ```
 
 ### Documentation & Learning
 ```bash
-/document complex-feature --type guide
+/sc:document complex-feature --type guide
 # Auto-activates: ✍️ scribe (writing) + 👨‍🏫 mentor (educational approach)
 ```
 
@@ -544,13 +544,13 @@ Personas often work together automatically. Here are common collaboration patter
 
 **Before** (generic):
 ```bash
-/analyze auth.js
+/sc:analyze auth.js
 # → Basic analysis, generic advice
 ```
 
 **After** (security persona):
 ```bash
-/analyze auth.js --persona-security
+/sc:analyze auth.js --persona-security
 # → Security-focused analysis
 # → Threat modeling perspective
 # → OWASP compliance checking
@@ -561,7 +561,7 @@ Personas often work together automatically. Here are common collaboration patter
 
 **Frontend work detection**:
 ```bash
-/build react-components/
+/sc:build react-components/
 # Auto-activates: 🎨 frontend
 # → UI-focused build optimization
 # → Accessibility checking
@@ -571,7 +571,7 @@ Personas often work together automatically. Here are common collaboration patter
 
 **Complex debugging**:
 ```bash
-/troubleshoot "payment processing randomly fails"
+/sc:troubleshoot "payment processing randomly fails"
 # Auto-activates: 🔍 analyzer
 # → Systematic investigation approach
 # → Evidence collection methodology
@@ -583,7 +583,7 @@ Personas often work together automatically. Here are common collaboration patter
 
 **Force security perspective**:
 ```bash
-/analyze react-app/ --persona-security
+/sc:analyze react-app/ --persona-security
 # Even though it's frontend code, analyze from security perspective
 # → XSS vulnerability checking
 # → Authentication flow analysis
@@ -592,7 +592,7 @@ Personas often work together automatically. Here are common collaboration patter
 
 **Get architectural advice on small changes**:
 ```bash
-/improve small-utility.js --persona-architect
+/sc:improve small-utility.js --persona-architect
 # Apply architectural thinking to small code
 # → Design pattern opportunities
 # → Future extensibility
@@ -611,30 +611,30 @@ Personas often work together automatically. Here are common collaboration patter
 **How to override**:
 ```bash
 # Explicit persona selection
-/analyze frontend-code/ --persona-security  # Security view of frontend
-/improve backend-api/ --persona-performance # Performance view of backend
+/sc:analyze frontend-code/ --persona-security  # Security view of frontend
+/sc:improve backend-api/ --persona-performance # Performance view of backend
 
 # Multiple persona flags (last one wins)
-/analyze --persona-frontend --persona-security # Uses security persona
+/sc:analyze --persona-frontend --persona-security # Uses security persona
 ```
 
 ### Persona-Specific Flags and Settings
 
 **Security persona + validation**:
 ```bash
-/analyze --persona-security --focus security --validate
+/sc:analyze --persona-security --focus security --validate
 # → Maximum security focus with validation
 ```
 
 **Performance persona + benchmarking**:
 ```bash
-/test --persona-performance --benchmark --focus performance
+/sc:test --persona-performance --benchmark --focus performance
 # → Performance-focused testing with metrics
 ```
 
 **Mentor persona + detailed explanations**:
 ```bash
-/explain complex-concept --persona-mentor --verbose
+/sc:explain complex-concept --persona-mentor --verbose
 # → Educational explanation with full detail
 ```
 
@@ -643,12 +643,12 @@ Personas often work together automatically. Here are common collaboration patter
 **When you need multiple perspectives**:
 ```bash
 # Sequential analysis with different personas
-/analyze --persona-security api/auth.js
-/analyze --persona-performance api/auth.js  
-/analyze --persona-refactorer api/auth.js
+/sc:analyze --persona-security api/auth.js
+/sc:analyze --persona-performance api/auth.js  
+/sc:analyze --persona-refactorer api/auth.js
 
 # Or let SuperClaude coordinate automatically
-/analyze --focus quality api/auth.js
+/sc:analyze --focus quality api/auth.js
 # Auto-coordinates: security + performance + refactorer insights
 ```
 
@@ -657,56 +657,56 @@ Personas often work together automatically. Here are common collaboration patter
 ### 🏗️ Architect Workflows
 ```bash
 # System design
-/design microservices-architecture --persona-architect
-/estimate "migrate monolith to microservices" --persona-architect
+/sc:design microservices-architecture --persona-architect
+/sc:estimate "migrate monolith to microservices" --persona-architect
 
 # Architecture review
-/analyze --focus architecture --persona-architect large-system/
-/review --persona-architect critical-components/
+/sc:analyze --focus architecture --persona-architect large-system/
+/sc:review --persona-architect critical-components/
 ```
 
 ### 🎨 Frontend Workflows
 ```bash
 # Component development
-/build dashboard-components/ --persona-frontend
-/improve --focus accessibility --persona-frontend ui/
+/sc:build dashboard-components/ --persona-frontend
+/sc:improve --focus accessibility --persona-frontend ui/
 
 # Performance optimization
-/analyze --focus performance --persona-frontend bundle/
-/test --persona-frontend --focus performance
+/sc:analyze --focus performance --persona-frontend bundle/
+/sc:test --persona-frontend --focus performance
 ```
 
 ### ⚙️ Backend Workflows
 ```bash
 # API development
-/design rest-api --persona-backend
-/build api-endpoints/ --persona-backend
+/sc:design rest-api --persona-backend
+/sc:build api-endpoints/ --persona-backend
 
 # Reliability improvements
-/improve --focus reliability --persona-backend services/
-/analyze --persona-backend --focus security api/
+/sc:improve --focus reliability --persona-backend services/
+/sc:analyze --persona-backend --focus security api/
 ```
 
 ### 🛡️ Security Workflows
 ```bash
 # Security assessment
-/scan --persona-security --focus security entire-app/
-/analyze --persona-security auth-flow/
+/sc:scan --persona-security --focus security entire-app/
+/sc:analyze --persona-security auth-flow/
 
 # Vulnerability fixing
-/improve --focus security --persona-security vulnerable-code/
-/review --persona-security --focus security critical-paths/
+/sc:improve --focus security --persona-security vulnerable-code/
+/sc:review --persona-security --focus security critical-paths/
 ```
 
 ### 🔍 Analyzer Workflows
 ```bash
 # Bug investigation
-/troubleshoot "intermittent failures" --persona-analyzer
-/analyze --persona-analyzer --focus debugging problem-area/
+/sc:troubleshoot "intermittent failures" --persona-analyzer
+/sc:analyze --persona-analyzer --focus debugging problem-area/
 
 # System understanding
-/explain --persona-analyzer complex-system/
-/load --persona-analyzer unfamiliar-codebase/
+/sc:explain --persona-analyzer complex-system/
+/sc:load --persona-analyzer unfamiliar-codebase/
 ```
 
 ## Quick Reference 📋
@@ -808,14 +808,14 @@ Personas often work together automatically. Here are common collaboration patter
 **How to override effectively**:
 ```bash
 # Force specific perspective
-/analyze frontend-code/ --persona-security  # Security view of frontend
+/sc:analyze frontend-code/ --persona-security  # Security view of frontend
 
 # Combine multiple perspectives
-/analyze api/ --persona-security
-/analyze api/ --persona-performance  # Run separately for different views
+/sc:analyze api/ --persona-security
+/sc:analyze api/ --persona-performance  # Run separately for different views
 
 # Use general analysis
-/analyze --no-persona  # Disable persona auto-activation
+/sc:analyze --no-persona  # Disable persona auto-activation
 ```
 
 ## Tips for Effective Persona Usage 💡
