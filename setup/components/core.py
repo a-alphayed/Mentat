@@ -24,18 +24,8 @@ class CoreComponent(Component):
         self.file_manager = FileManager()
         self.settings_manager = SettingsManager(self.install_dir)
         
-        # Define framework files to install
-        self.framework_files = [
-            "CLAUDE.md",
-            "COMMANDS.md", 
-            "FLAGS.md",
-            "PRINCIPLES.md",
-            "RULES.md",
-            "MCP.md",
-            "PERSONAS.md",
-            "ORCHESTRATOR.md",
-            "MODES.md"
-        ]
+        # Dynamically discover framework files to install
+        self.framework_files = self._discover_framework_files()
     
     def get_metadata(self) -> Dict[str, str]:
         """Get component metadata"""
@@ -323,6 +313,68 @@ class CoreComponent(Component):
         
         return len(errors) == 0, errors
     
+    def _discover_framework_files(self) -> List[str]:
+        """
+        Dynamically discover framework .md files in the Core directory
+        
+        Returns:
+            List of framework filenames (e.g., ['CLAUDE.md', 'COMMANDS.md', ...])
+        """
+        return self._discover_files_in_directory(
+            self._get_source_dir(),
+            extension='.md',
+            exclude_patterns=['README.md', 'CHANGELOG.md', 'LICENSE.md']
+        )
+    
+    def _discover_files_in_directory(self, directory: Path, extension: str = '.md', 
+                                   exclude_patterns: List[str] = None) -> List[str]:
+        """
+        Shared utility for discovering files in a directory
+        
+        Args:
+            directory: Directory to scan
+            extension: File extension to look for (default: '.md')
+            exclude_patterns: List of filename patterns to exclude
+            
+        Returns:
+            List of filenames found in the directory
+        """
+        if exclude_patterns is None:
+            exclude_patterns = []
+        
+        try:
+            if not directory.exists():
+                self.logger.warning(f"Source directory not found: {directory}")
+                return []
+            
+            if not directory.is_dir():
+                self.logger.warning(f"Source path is not a directory: {directory}")
+                return []
+            
+            # Discover files with the specified extension
+            files = []
+            for file_path in directory.iterdir():
+                if (file_path.is_file() and 
+                    file_path.suffix.lower() == extension.lower() and
+                    file_path.name not in exclude_patterns):
+                    files.append(file_path.name)
+            
+            # Sort for consistent ordering
+            files.sort()
+            
+            self.logger.debug(f"Discovered {len(files)} {extension} files in {directory}")
+            if files:
+                self.logger.debug(f"Files found: {files}")
+            
+            return files
+            
+        except PermissionError:
+            self.logger.error(f"Permission denied accessing directory: {directory}")
+            return []
+        except Exception as e:
+            self.logger.error(f"Error discovering files in {directory}: {e}")
+            return []
+
     def _get_source_dir(self) -> Path:
         """Get source directory for framework files"""
         # Assume we're in SuperClaude/setup/components/core.py
