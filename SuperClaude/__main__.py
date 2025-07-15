@@ -4,11 +4,11 @@ SuperClaude Framework Management Hub
 Unified entry point for all SuperClaude operations
 
 Usage:
-    SuperClaude.py install [options]
-    SuperClaude.py update [options]
-    SuperClaude.py uninstall [options]
-    SuperClaude.py backup [options]
-    SuperClaude.py --help
+    SuperClaude install [options]
+    SuperClaude update [options]
+    SuperClaude uninstall [options]
+    SuperClaude backup [options]
+    SuperClaude --help
 """
 
 import sys
@@ -19,7 +19,8 @@ from pathlib import Path
 from typing import Dict, Callable
 
 # Add the 'setup' directory to the Python import path
-setup_dir = Path(__file__).parent / "setup"
+from pkg_resources import resource_filename
+setup_dir = resource_filename('setup', '')
 sys.path.insert(0, str(setup_dir))
 
 # Try to import utilities from the setup package
@@ -77,9 +78,9 @@ def create_parser():
         description="SuperClaude Framework Management Hub - Unified CLI",
         epilog="""
 Examples:
-  SuperClaude.py install --dry-run
-  SuperClaude.py update --verbose
-  SuperClaude.py backup --create
+  SuperClaude install --dry-run
+  SuperClaude update --verbose
+  SuperClaude backup --create
         """,
         formatter_class=argparse.RawDescriptionHelpFormatter,
         parents=[global_parser]
@@ -113,7 +114,7 @@ def setup_global_environment(args: argparse.Namespace):
     # Log startup context
     logger = get_logger()
     if logger:
-        logger.debug(f"SuperClaude.py called with operation: {getattr(args, 'operation', 'None')}")
+        logger.debug(f"SuperClaude called with operation: {getattr(args, 'operation', 'None')}")
         logger.debug(f"Arguments: {vars(args)}")
 
 
@@ -239,3 +240,4 @@ def main() -> int:
 if __name__ == "__main__":
     sys.exit(main())
     
+
