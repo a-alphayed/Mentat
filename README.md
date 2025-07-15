@@ -1,5 +1,7 @@
 # SuperClaude v3 🚀
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PyPI version](https://badge.fury.io/py/SuperClaude.svg)](https://pypi.org/project/SuperClaude/)
+
 [![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://github.com/NomenAK/SuperClaude)
 [![GitHub issues](https://img.shields.io/github/issues/NomenAK/SuperClaude)](https://github.com/NomenAK/SuperClaude/issues)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/NomenAK/SuperClaude/blob/master/CONTRIBUTING.md)
@@ -91,15 +93,21 @@ This is because v3 has a different structure and the old files can cause conflic
 
 ### Quick Start
 ```bash
+pip install SuperClaude
+#Install with python-pip
+```
+### Install via Git
+```bash
 # Clone the repo
 git clone https://github.com/NomenAK/SuperClaude.git
 cd SuperClaude
 
 # Install with our unified CLI
-python3 SuperClaude.py install --quick
+pip install .
 
 # That's it! 🎉
 ```
+
 
 **Missing Python?**
 ```bash
@@ -116,16 +124,16 @@ brew install python3
 ### Other Installation Options
 ```bash
 # Minimal install (just core framework)
-python3 SuperClaude.py install --minimal
+python3 SuperClaude install --minimal
 
 # Developer setup (everything)  
-python3 SuperClaude.py install --profile developer
+python3 SuperClaude install --profile developer
 
 # Interactive selection
-python3 SuperClaude.py install
+python3 SuperClaude install
 
 # See what's available
-python3 SuperClaude.py install --list-components
+python3 SuperClaude install --list-components
 ```
 
 The installer handles everything: framework files, MCP servers, and Claude Code configuration.
@@ -186,7 +194,7 @@ The codebase is pretty straightforward Python + documentation files.
 
 ```
 SuperClaude/
-├── SuperClaude.py         # Main installer CLI
+├── setup.py               # pypi setup file
 ├── SuperClaude/           # Framework files  
 │   ├── Core/              # Behavior documentation (COMMANDS.md, FLAGS.md, etc.)
 │   ├── Commands/          # 16 slash command definitions
