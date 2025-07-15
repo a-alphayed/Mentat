@@ -186,8 +186,8 @@ The codebase is pretty straightforward Python + documentation files.
 
 ```
 SuperClaude/
-├── SuperClaude.py          # Main installer CLI
-├── SuperClaude/            # Framework files  
+├── SuperClaude.py         # Main installer CLI
+├── SuperClaude/           # Framework files  
 │   ├── Core/              # Behavior documentation (COMMANDS.md, FLAGS.md, etc.)
 │   ├── Commands/          # 16 slash command definitions
 │   └── Settings/          # Configuration files
