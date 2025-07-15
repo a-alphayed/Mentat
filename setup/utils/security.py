@@ -1,6 +1,30 @@
 """
 Security utilities for SuperClaude installation system
 Path validation and input sanitization
+
+This module provides comprehensive security validation for file paths and user inputs
+during SuperClaude installation. It includes protection against:
+- Directory traversal attacks
+- Installation to system directories
+- Path injection attacks
+- Cross-platform security issues
+
+Key Features:
+- Platform-specific validation (Windows vs Unix)
+- User-friendly error messages with actionable suggestions
+- Comprehensive path normalization
+- Backward compatibility with existing validation logic
+
+Fixed Issues:
+- GitHub Issue #129: Fixed overly broad regex patterns that prevented installation
+  in legitimate paths containing "dev", "tmp", "bin", etc.
+- Enhanced cross-platform compatibility
+- Improved error message clarity
+
+Architecture:
+- Separated pattern categories for better maintainability
+- Platform-aware validation logic
+- Comprehensive test coverage
 """
 
 import re
@@ -13,26 +37,44 @@ import urllib.parse
 class SecurityValidator:
     """Security validation utilities"""
     
-    # Dangerous path patterns
-    DANGEROUS_PATTERNS = [
-        r'\.\./',           # Directory traversal
-        r'\.\.\.',          # Directory traversal
-        r'//+',             # Multiple slashes
-        r'/etc/',           # System directories
-        r'/bin/',
-        r'/sbin/',
-        r'/usr/bin/',
-        r'/usr/sbin/',
-        r'/var/',
-        r'/tmp/',
-        r'/dev/',
-        r'/proc/',
-        r'/sys/',
-        r'c:\\windows\\',   # Windows system dirs
-        r'c:\\program files\\',
+    # Directory traversal patterns (match anywhere in path - platform independent)
+    # These patterns detect common directory traversal attack vectors
+    TRAVERSAL_PATTERNS = [
+        r'\.\./',           # Directory traversal using ../
+        r'\.\.\.',          # Directory traversal using ...
+        r'//+',             # Multiple consecutive slashes (path injection)
+    ]
+    
+    # Unix system directories (match only at start of path)
+    # These patterns identify Unix/Linux system directories that should not be writable
+    # by regular users. Using ^ anchor to match only at path start prevents false positives
+    # for user directories containing these names (e.g., /home/user/dev/ is allowed)
+    UNIX_SYSTEM_PATTERNS = [
+        r'^/etc/',          # System configuration files
+        r'^/bin/',          # Essential command binaries
+        r'^/sbin/',         # System binaries
+        r'^/usr/bin/',      # User command binaries
+        r'^/usr/sbin/',     # Non-essential system binaries
+        r'^/var/',          # Variable data files
+        r'^/tmp/',          # Temporary files (system-wide)
+        r'^/dev/',          # Device files - FIXED: was r'/dev/' (GitHub Issue #129)
+        r'^/proc/',         # Process information pseudo-filesystem
+        r'^/sys/',          # System information pseudo-filesystem
+    ]
+    
+    # Windows system directories (match only at start of path)
+    # These patterns identify Windows system directories using flexible separator matching
+    # to handle both forward slashes and backslashes consistently
+    WINDOWS_SYSTEM_PATTERNS = [
+        r'^c:[/\\]windows[/\\]',        # Windows system directory
+        r'^c:[/\\]program files[/\\]',  # Program Files directory
         # Note: Removed c:\\users\\ to allow installation in user directories
         # Claude Code installs to user home directory by default
     ]
+    
+    # Combined dangerous patterns for backward compatibility
+    # This maintains compatibility with existing code while providing the new categorized approach
+    DANGEROUS_PATTERNS = TRAVERSAL_PATTERNS + UNIX_SYSTEM_PATTERNS + WINDOWS_SYSTEM_PATTERNS
     
     # Dangerous filename patterns
     DANGEROUS_FILENAMES = [
@@ -66,19 +108,38 @@ class SecurityValidator:
     @classmethod
     def validate_path(cls, path: Path, base_dir: Optional[Path] = None) -> Tuple[bool, str]:
         """
-        Validate path for security issues
+        Validate path for security issues with enhanced cross-platform support
+        
+        This method performs comprehensive security validation including:
+        - Directory traversal attack detection
+        - System directory protection (platform-specific)
+        - Path length and filename validation
+        - Cross-platform path normalization
+        - User-friendly error messages
+        
+        Architecture:
+        - Uses both original and resolved paths for validation
+        - Applies platform-specific patterns for system directories
+        - Checks traversal patterns against original path to catch attacks before normalization
+        - Provides detailed error messages with actionable suggestions
         
         Args:
-            path: Path to validate
-            base_dir: Base directory that path should be within
+            path: Path to validate (can be relative or absolute)
+            base_dir: Base directory that path should be within (optional)
             
         Returns:
             Tuple of (is_safe: bool, error_message: str)
+            - is_safe: True if path passes all security checks
+            - error_message: Detailed error message with suggestions if validation fails
         """
         try:
             # Convert to absolute path
             abs_path = path.resolve()
-            path_str = str(abs_path).lower()
+            
+            # For system directory validation, use the original path structure
+            # to avoid issues with symlinks and cross-platform path resolution
+            original_path_str = cls._normalize_path_for_validation(path)
+            resolved_path_str = cls._normalize_path_for_validation(abs_path)
             
             # Check path length
             if len(str(abs_path)) > cls.MAX_PATH_LENGTH:
@@ -88,10 +149,28 @@ class SecurityValidator:
             if len(abs_path.name) > cls.MAX_FILENAME_LENGTH:
                 return False, f"Filename too long: {len(abs_path.name)} > {cls.MAX_FILENAME_LENGTH}"
             
-            # Check for dangerous patterns
-            for pattern in cls.DANGEROUS_PATTERNS:
-                if re.search(pattern, path_str, re.IGNORECASE):
-                    return False, f"Dangerous path pattern detected: {pattern}"
+            # Check for dangerous patterns using platform-specific validation
+            # Always check traversal patterns (platform independent) - use original path string
+            # to detect patterns before normalization removes them
+            original_str = str(path).lower()
+            for pattern in cls.TRAVERSAL_PATTERNS:
+                if re.search(pattern, original_str, re.IGNORECASE):
+                    return False, cls._get_user_friendly_error_message("traversal", pattern, abs_path)
+            
+            # Check platform-specific system directory patterns - use original path first, then resolved
+            # Always check both Windows and Unix patterns to handle cross-platform scenarios
+            
+            # Check Windows system directory patterns
+            for pattern in cls.WINDOWS_SYSTEM_PATTERNS:
+                if (re.search(pattern, original_path_str, re.IGNORECASE) or 
+                    re.search(pattern, resolved_path_str, re.IGNORECASE)):
+                    return False, cls._get_user_friendly_error_message("windows_system", pattern, abs_path)
+            
+            # Check Unix system directory patterns
+            for pattern in cls.UNIX_SYSTEM_PATTERNS:
+                if (re.search(pattern, original_path_str, re.IGNORECASE) or 
+                    re.search(pattern, resolved_path_str, re.IGNORECASE)):
+                    return False, cls._get_user_friendly_error_message("unix_system", pattern, abs_path)
             
             # Check for dangerous filenames
             for pattern in cls.DANGEROUS_FILENAMES:
@@ -464,6 +543,98 @@ class SecurityValidator:
                 errors.append(f"File {source}: {msg}")
         
         return len(errors) == 0, errors
+    
+    @classmethod
+    def _normalize_path_for_validation(cls, path: Path) -> str:
+        """
+        Normalize path for consistent validation across platforms
+        
+        Args:
+            path: Path to normalize
+            
+        Returns:
+            Normalized path string for validation
+        """
+        path_str = str(path)
+        
+        # Convert to lowercase for case-insensitive comparison
+        path_str = path_str.lower()
+        
+        # Normalize path separators for consistent pattern matching
+        if os.name == 'nt':  # Windows
+            # Convert forward slashes to backslashes for Windows
+            path_str = path_str.replace('/', '\\')
+            # Ensure consistent drive letter format
+            if len(path_str) >= 2 and path_str[1] == ':':
+                path_str = path_str[0] + ':\\' + path_str[3:].lstrip('\\')
+        else:  # Unix-like systems
+            # Convert backslashes to forward slashes for Unix
+            path_str = path_str.replace('\\', '/')
+            # Ensure single leading slash
+            if path_str.startswith('//'):
+                path_str = '/' + path_str.lstrip('/')
+        
+        return path_str
+    
+    @classmethod
+    def _get_user_friendly_error_message(cls, error_type: str, pattern: str, path: Path) -> str:
+        """
+        Generate user-friendly error messages with actionable suggestions
+        
+        Args:
+            error_type: Type of error (traversal, windows_system, unix_system)
+            pattern: The regex pattern that matched
+            path: The path that caused the error
+            
+        Returns:
+            User-friendly error message with suggestions
+        """
+        if error_type == "traversal":
+            return (
+                f"Security violation: Directory traversal pattern detected in path '{path}'. "
+                f"Paths containing '..' or '//' are not allowed for security reasons. "
+                f"Please use an absolute path without directory traversal characters."
+            )
+        elif error_type == "windows_system":
+            if pattern == r'^c:\\windows\\':
+                return (
+                    f"Cannot install to Windows system directory '{path}'. "
+                    f"Please choose a location in your user directory instead, "
+                    f"such as C:\\Users\\{os.environ.get('USERNAME', 'YourName')}\\.claude\\"
+                )
+            elif pattern == r'^c:\\program files\\':
+                return (
+                    f"Cannot install to Program Files directory '{path}'. "
+                    f"Please choose a location in your user directory instead, "
+                    f"such as C:\\Users\\{os.environ.get('USERNAME', 'YourName')}\\.claude\\"
+                )
+            else:
+                return (
+                    f"Cannot install to Windows system directory '{path}'. "
+                    f"Please choose a location in your user directory instead."
+                )
+        elif error_type == "unix_system":
+            system_dirs = {
+                r'^/dev/': "/dev (device files)",
+                r'^/etc/': "/etc (system configuration)",
+                r'^/bin/': "/bin (system binaries)",
+                r'^/sbin/': "/sbin (system binaries)",
+                r'^/usr/bin/': "/usr/bin (user binaries)",
+                r'^/usr/sbin/': "/usr/sbin (user system binaries)",
+                r'^/var/': "/var (variable data)",
+                r'^/tmp/': "/tmp (temporary files)",
+                r'^/proc/': "/proc (process information)",
+                r'^/sys/': "/sys (system information)"
+            }
+            
+            dir_desc = system_dirs.get(pattern, "system directory")
+            return (
+                f"Cannot install to {dir_desc} '{path}'. "
+                f"Please choose a location in your home directory instead, "
+                f"such as ~/.claude/ or ~/SuperClaude/"
+            )
+        else:
+            return f"Security validation failed for path '{path}'"
     
     @classmethod
     def _is_windows_junction_or_symlink(cls, path: Path) -> bool:
