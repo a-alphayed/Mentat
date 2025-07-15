@@ -13,10 +13,10 @@ def get_version():
             return f.read().strip()
     except FileNotFoundError:
         logger.warning("VERSION file not found, using fallback version")
-        return "0.1.0"
+        return "3.0.0"
     except Exception as e:
         logger.error(f"Error reading VERSION file: {e}")
-        return "0.1.0"
+        return "3.0.0"
 
 def get_long_description():
     """Get long description from README with error handling."""
