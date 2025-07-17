@@ -107,7 +107,56 @@ git clone https://github.com/NomenAK/SuperClaude.git
 cd SuperClaude
 pip install .
 ```
+## 🔧 UV / UVX Setup Guide
 
+SuperClaude v3 also supports installation via [`uv`](https://github.com/astral-sh/uv) (a faster, modern Python package manager) or `uvx` for cross-platform usage.
+
+### 🌀 Install with `uv`
+
+Make sure `uv` is installed:
+
+```bash
+curl -Ls https://astral.sh/uv/install.sh | sh
+```
+
+> Or follow instructions from: [https://github.com/astral-sh/uv](https://github.com/astral-sh/uv)
+
+Once `uv` is available, you can install SuperClaude like this:
+
+```bash
+uv venv
+source .venv/bin/activate
+uv pip install SuperClaude
+```
+
+### ⚡ Install with `uvx` (Cross-platform CLI)
+
+If you’re using `uvx`, just run:
+
+```bash
+uvx pip install SuperClaude
+```
+
+### ✅ Finish Installation
+
+After installing, continue with the usual installer step:
+
+```bash
+python3 -m SuperClaude install
+```
+
+Or using bash-style CLI:
+
+```bash
+SuperClaude install
+```
+
+### 🧠 Note:
+
+* `uv` provides better caching and performance.
+* Compatible with Python 3.8+ and works smoothly with SuperClaude.
+
+---
 **Missing Python?** Install Python 3.7+ first:
 ```bash
 # Linux (Ubuntu/Debian)
