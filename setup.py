@@ -63,6 +63,7 @@ setuptools.setup(
     entry_points={
         "console_scripts": [
             "SuperClaude=SuperClaude.__main__:main",
+            "superclaude=SuperClaude.__main__:main",
         ],
     },
     python_requires=">=3.8",
