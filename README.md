@@ -122,7 +122,7 @@ brew install python3
 
 ### Step 2: Run the Installer
 
-After installing the package, run the SuperClaude installer to configure Claude Code:
+After installing the package, run the SuperClaude installer to configure Claude Code (You can use any of the method):
 
 ```bash
 # Quick setup (recommended for most users)
