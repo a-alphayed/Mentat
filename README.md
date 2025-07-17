@@ -107,7 +107,7 @@ git clone https://github.com/NomenAK/SuperClaude.git
 cd SuperClaude
 pip install .
 ```
-## 🔧 UV / UVX Setup Guide
+### 🔧 UV / UVX Setup Guide
 
 SuperClaude v3 also supports installation via [`uv`](https://github.com/astral-sh/uv) (a faster, modern Python package manager) or `uvx` for cross-platform usage.
 
