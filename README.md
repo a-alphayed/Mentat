@@ -140,6 +140,40 @@ python3 SuperClaude install --profile developer
 # See all available options
 python3 SuperClaude install --help
 ```
+### Or Python Modular Usage
+```bash
+# Quick setup (recommended for most users)
+python3 -m SuperClaude install
+
+# Interactive selection (choose components)
+python3 -m SuperClaude install --interactive
+
+# Minimal install (just core framework)
+python3 -m SuperClaude install --minimal
+
+# Developer setup (everything included)
+python3 -m SuperClaude install --profile developer
+
+# See all available options
+python3 -m SuperClaude install --help
+```
+### Simple bash Command Usage 
+```bash
+# Quick setup (recommended for most users)
+SuperClaude install
+
+# Interactive selection (choose components)
+SuperClaude install --interactive
+
+# Minimal install (just core framework)
+SuperClaude install --minimal
+
+# Developer setup (everything included)
+SuperClaude install --profile developer
+
+# See all available options
+SuperClaude install --help
+```
 
 **That's it! 🎉** The installer handles everything: framework files, MCP servers, and Claude Code configuration.
 
