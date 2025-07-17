@@ -211,11 +211,11 @@ Most users probably won't need to change anything - it usually works okay out of
 
 Want to learn more? Check out our guides:
 
-- 📚 [**User Guide**](Docs/superclaude-user-guide.md) - Complete overview and getting started
-- 🛠️ [**Commands Guide**](Docs/commands-guide.md) - All 16 slash commands explained  
-- 🏳️ [**Flags Guide**](Docs/flags-guide.md) - Command flags and options
-- 🎭 [**Personas Guide**](Docs/personas-guide.md) - Understanding the persona system
-- 📦 [**Installation Guide**](Docs/installation-guide.md) - Detailed installation instructions
+- 📚 [**User Guide**](https://github.com/NomenAK/SuperClaude/blob/master/Docs/superclaude-user-guide.md) - Complete overview and getting started
+- 🛠️ [**Commands Guide**](https://github.com/NomenAK/SuperClaude/blob/master/Docs/commands-guide.md) - All 16 slash commands explained  
+- 🏳️ [**Flags Guide**](https://github.com/NomenAK/SuperClaude/blob/master/Docs/flags-guide.md) - Command flags and options
+- 🎭 [**Personas Guide**](https://github.com/NomenAK/SuperClaude/blob/master/Docs/personas-guide.md) - Understanding the persona system
+- 📦 [**Installation Guide**](https://github.com/NomenAK/SuperClaude/blob/master/Docs/installation-guide.md) - Detailed installation instructions
 
 These guides have more details than this README and are kept up to date.
 
