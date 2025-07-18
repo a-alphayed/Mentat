@@ -1,5 +1,5 @@
 """
-Base installer logic for SuperClaude installation system
+Base installer logic for SuperClaude installation system fixed some issues
 """
 
 from typing import List, Dict, Optional, Set, Tuple, Any
@@ -217,6 +217,7 @@ class Installer:
                 
             if success:
                 self.installed_components.add(component_name)
+                self._update_settings_registry(component)
                 # Component handles its own metadata registration
             else:
                 self.failed_components.add(component_name)
