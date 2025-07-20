@@ -1,5 +1,5 @@
 # SuperClaude v3 🚀
-[![Website Preview](https://img.shields.io/badge/Visit-Website-blue?style=for-the-badge&logo=google-chrome)](https://superclaude-org.github.io/SuperClaude_Website/)
+[![Website Preview](https://img.shields.io/badge/Visit-Website-blue?logo=google-chrome)](https://superclaude-org.github.io/SuperClaude_Website/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PyPI version](https://img.shields.io/pypi/v/SuperClaude.svg)](https://pypi.org/project/SuperClaude/)
 [![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://github.com/NomenAK/SuperClaude)
