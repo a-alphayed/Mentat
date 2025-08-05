@@ -49,13 +49,23 @@ When reporting a vulnerability, please provide:
 - Configuration issues with security implications
 - Dependency vulnerabilities with low exploitability
 
+## 🔐 Supported Versions
+
+| Version | Supported          |
+| ------- | ------------------ |
+| 4.0.0-beta.x | ✅ Active Development |
+| 3.0.x   | ⚠️ Security fixes only |
+| < 3.0   | ❌ End of life |
+
 ## 🛡️ Security Features
 
-### Hook Execution Security
-- **Timeout protection**: All hooks have configurable timeouts
+### Hook Execution Security (V4 Enhanced)
+- **Timeout protection**: All hooks have configurable timeouts (default 30s)
 - **Input validation**: JSON schema validation for all hook inputs
 - **Sandboxed execution**: Hooks run with limited system permissions
 - **Error containment**: Hook failures don't affect framework stability
+- **Performance monitoring**: Real-time hook execution tracking
+- **Session lifecycle integration**: Secure checkpoint and recovery
 
 ### File System Protection
 - **Path validation**: Prevents directory traversal attacks
@@ -63,11 +73,13 @@ When reporting a vulnerability, please provide:
 - **Secure defaults**: Conservative file access patterns
 - **Backup mechanisms**: Safe fallback when operations fail
 
-### MCP Server Security
+### MCP Server Security (6 Servers in V4)
 - **Server validation**: Verify MCP server authenticity and integrity
 - **Communication encryption**: Secure channels for all MCP communication
 - **Timeout handling**: Prevent resource exhaustion from unresponsive servers
 - **Fallback mechanisms**: Graceful degradation when servers are compromised
+- **Serena MCP**: Secure memory management with access controls
+- **Morphllm MCP**: Validated file editing with permission checks
 
 ### Configuration Security
 - **Input sanitization**: All configuration inputs are validated and sanitized
@@ -194,7 +206,7 @@ For general security questions (not vulnerabilities):
 
 ---
 
-**Last Updated**: July 2025  
-**Next Review**: October 2025
+**Last Updated**: February 2025 (V4 Beta)  
+**Next Review**: May 2025
 
 Thank you for helping keep SuperClaude Framework secure! 🙏

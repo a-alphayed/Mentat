@@ -2,7 +2,7 @@
 
 ## 💡 Don't Overthink It - SuperClaude Tries to Help
 
-**The truth about these 17 commands**: You don't need to memorize them. Just start with `/sc:analyze` or `/sc:implement` and see what happens! 
+**The truth about these 21 commands**: You don't need to memorize them. Just start with `/sc:analyze` or `/sc:implement` and see what happens! 
 
 **Here's how it usually works:**
 - Type `/` in Claude Code → See available commands
@@ -20,18 +20,20 @@
 ```bash
 /sc:index                    # See what's available
 /sc:analyze src/            # Tries to analyze your code smartly 
+/sc:brainstorm "app idea"   # Interactive help for exploring ideas
 /sc:workflow feature-100-prd.md  # Creates step-by-step implementation workflow from PRD
 /sc:implement user-auth     # Creates features and components (replaces v2 /build)
 /sc:build                   # Attempts intelligent project building
 /sc:improve messy-file.js   # Tries to clean up code 
 /sc:troubleshoot "error"    # Attempts to help with problems
+/sc:save --checkpoint       # Save your work and progress
 ```
 
 **That's honestly enough to get started.** Everything else below is here when you get curious about what other tools are available. 🛠️
 
 ---
 
-A practical guide to all 16 SuperClaude slash commands. We'll be honest about what works well and what's still rough around the edges.
+A practical guide to all 21 SuperClaude V4 Beta slash commands. We'll be honest about what works well and what's still rough around the edges.
 
 ## Quick Reference 📋
 
@@ -56,6 +58,10 @@ A practical guide to all 16 SuperClaude slash commands. We'll be honest about wh
 | `/sc:task` | Project management | Planning system | Long-term feature planning, task tracking |
 | `/sc:workflow` | Implementation planning | Workflow system | Creating step-by-step workflows from PRDs |
 | `/sc:index` | Command navigation | Help system | Finding the right command for your task |
+| `/sc:brainstorm` | Interactive discovery | Socratic dialogue | Requirements gathering, idea exploration |
+| `/sc:reflect` | Task validation | Serena intelligence | Progress checking, completion validation |
+| `/sc:save` | Session persistence | Checkpoint system | Context saving, session management |
+| `/sc:select-tool` | Tool selection | Intelligence routing | Complex operation optimization |
 
 **Pro tip**: Just try the ones that sound useful. SuperClaude usually tries to activate helpful experts and tools for each situation! 🎯
 
@@ -634,7 +640,7 @@ A practical guide to all 16 SuperClaude slash commands. We'll be honest about wh
 
 **Gotchas**:
 - Simple but useful for discovery
-- Better than trying to remember all 16 commands
+- Better than trying to remember all 21 commands
 
 ---
 
@@ -671,6 +677,146 @@ A practical guide to all 16 SuperClaude slash commands. We'll be honest about wh
 - More useful at project start than during development
 - Helps with onboarding but not a replacement for good docs
 
+## Session & Intelligence Commands 🧠
+
+### `/brainstorm` - Interactive Requirements Discovery
+**What it does**: Interactive Socratic dialogue for exploring ideas and discovering requirements.
+
+**When to use it**:
+- Starting with vague project ideas ("I want to build something...")
+- Need help figuring out what to build
+- Exploring requirements for new features
+- Creative problem solving and ideation
+
+**Basic syntax**:
+```bash
+/sc:brainstorm "mobile app idea"        # Explore app concept
+/sc:brainstorm --depth deep startup     # Deep exploration of startup idea
+/sc:brainstorm --focus business ecom    # Business-focused e-commerce planning
+```
+
+**Useful flags**:
+- `--depth normal|deep` - Exploration thoroughness
+- `--focus business|technical|user` - Conversation focus area
+- `--prd` - Generate Product Requirements Document after dialogue
+
+**Real examples**:
+```bash
+/sc:brainstorm "task management app" --prd
+/sc:brainstorm --depth deep --focus technical "real-time chat system"
+/sc:brainstorm "improve user onboarding" --focus user
+```
+
+**Gotchas**:
+- Works best when you're genuinely uncertain about requirements
+- Quality of output depends on engagement in the dialogue
+- Can take 10-15 minutes for thorough exploration
+
+---
+
+### `/reflect` - Task Reflection and Validation
+**What it does**: Uses Serena intelligence for task validation, progress analysis, and completion verification.
+
+**When to use it**:
+- Checking if you're on the right track with a task
+- Validating task completion before marking done
+- Analyzing collected information during complex work
+- Getting intelligent feedback on progress
+
+**Basic syntax**:
+```bash
+/sc:reflect --type task                 # Reflect on current task approach
+/sc:reflect --type completion          # Validate task completion
+/sc:reflect --type session            # Analyze session progress
+```
+
+**Useful flags**:
+- `--type task|completion|session` - Type of reflection
+- `--analyze` - Deep analysis of current context
+- `--validate` - Validation-focused reflection
+
+**Real examples**:
+```bash
+/sc:reflect --type completion "implemented user auth"
+/sc:reflect --analyze --type session
+/sc:reflect --type task --validate "refactoring approach"
+```
+
+**Gotchas**:
+- Requires Serena MCP server to be available
+- Most effective when you provide context about what you're working on
+- Best used at natural stopping points in work
+
+---
+
+### `/save` - Session Persistence and Checkpointing
+**What it does**: Saves session context, creates checkpoints, and manages project memory through Serena.
+
+**When to use it**:
+- Saving work progress before ending session
+- Creating checkpoints before risky operations
+- Preserving insights and decisions for future sessions
+- Managing long-term project context
+
+**Basic syntax**:
+```bash
+/sc:save                               # Basic session save
+/sc:save --checkpoint                  # Create checkpoint with analysis
+/sc:save --type summary               # Save with session summary
+```
+
+**Useful flags**:
+- `--checkpoint` - Create detailed checkpoint
+- `--type session|summary|insights` - Save type
+- `--analyze` - Include session analysis in save
+
+**Real examples**:
+```bash
+/sc:save --checkpoint "before major refactoring"
+/sc:save --type summary --analyze
+/sc:save "completed authentication implementation"
+```
+
+**Gotchas**:
+- Requires Serena MCP server for full functionality
+- Checkpoint creation may take a moment for analysis
+- Most valuable for complex, multi-session projects
+
+---
+
+### `/select-tool` - Intelligent Tool Selection
+**What it does**: Analyzes complex operations and recommends optimal tool combinations and approaches.
+
+**When to use it**:
+- Uncertain about best approach for complex tasks
+- Want to optimize tool selection for efficiency
+- Need guidance on MCP server coordination
+- Planning multi-step technical operations
+
+**Basic syntax**:
+```bash
+/sc:select-tool "large codebase refactoring"    # Get tool recommendations
+/sc:select-tool --analyze "performance audit"   # Analyze optimal approach
+/sc:select-tool --context react-app "UI testing" # Context-aware selection
+```
+
+**Useful flags**:
+- `--analyze` - Deep analysis of optimal approach
+- `--context <tech>` - Provide technical context
+- `--efficiency` - Focus on performance optimization
+
+**Real examples**:
+```bash
+/sc:select-tool --analyze "migrate 100+ files to TypeScript"
+/sc:select-tool --context nodejs --efficiency "API performance testing"
+/sc:select-tool "cross-browser testing setup"
+```
+
+**Gotchas**:
+- Recommendations are guidance, not requirements
+- Most valuable for complex, multi-faceted operations
+- Consider your specific project context when following recommendations
+
 ## Command Tips & Patterns 💡
 
 ### Effective Flag Combinations
@@ -696,6 +842,14 @@ A practical guide to all 16 SuperClaude slash commands. We'll be honest about wh
 
 ### Common Workflows
 
+**New Project Discovery** (V4 Beta):
+```bash
+/sc:brainstorm "project idea" --prd         # Explore and define requirements
+/sc:load --deep --summary                   # Understand existing codebase
+/sc:workflow requirements.md                # Create implementation plan
+/sc:save --checkpoint "project planning"    # Save planning insights
+```
+
 **New Project Onboarding**:
 ```bash
 /sc:load --deep --summary
@@ -709,6 +863,7 @@ A practical guide to all 16 SuperClaude slash commands. We'll be honest about wh
 /sc:troubleshoot "specific error message" --logs
 /sc:analyze --focus security
 /sc:test --type unit affected-component
+/sc:reflect --type completion "bug analysis"
 ```
 
 **Code Quality Improvement**:
@@ -717,6 +872,7 @@ A practical guide to all 16 SuperClaude slash commands. We'll be honest about wh
 /sc:improve --preview src/
 /sc:cleanup --safe
 /sc:test --coverage
+/sc:reflect --type completion "quality improvements"
 ```
 
 **Pre-deployment Checklist**:
@@ -725,6 +881,15 @@ A practical guide to all 16 SuperClaude slash commands. We'll be honest about wh
 /sc:analyze --focus security
 /sc:build --type prod --optimize
 /sc:git --smart-commit
+/sc:save --checkpoint "pre-deployment validation"
+```
+
+**Complex Task Planning** (V4 Beta):
+```bash
+/sc:select-tool "migrate to microservices"  # Get approach recommendations
+/sc:reflect --type task "migration strategy" # Validate approach
+/sc:workflow migration-plan.md              # Create detailed workflow
+/sc:save "migration planning complete"      # Preserve insights
 ```
 
 ### Troubleshooting Command Issues

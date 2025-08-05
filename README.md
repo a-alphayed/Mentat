@@ -1,100 +1,157 @@
-# SuperClaude v3 🚀
+# SuperClaude v4 Beta 🚀
 [![Website Preview](https://img.shields.io/badge/Visit-Website-blue?logo=google-chrome)](https://superclaude-org.github.io/SuperClaude_Website/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PyPI version](https://img.shields.io/pypi/v/SuperClaude.svg)](https://pypi.org/project/SuperClaude/)
-[![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://github.com/NomenAK/SuperClaude)
-[![GitHub issues](https://img.shields.io/github/issues/NomenAK/SuperClaude)](https://github.com/NomenAK/SuperClaude/issues)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/NomenAK/SuperClaude/blob/master/CONTRIBUTING.md)
-[![Contributors](https://img.shields.io/github/contributors/NomenAK/SuperClaude)](https://github.com/NomenAK/SuperClaude/graphs/contributors)
+[![Version](https://img.shields.io/badge/version-4.0.0--beta.1-blue.svg)](https://github.com/SuperClaude-Org/SuperClaude_Framework)
+[![GitHub issues](https://img.shields.io/github/issues/SuperClaude-Org/SuperClaude_Framework)](https://github.com/SuperClaude-Org/SuperClaude_Framework/issues)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/SuperClaude-Org/SuperClaude_Framework/blob/master/CONTRIBUTING.md)
+[![Contributors](https://img.shields.io/github/contributors/SuperClaude-Org/SuperClaude_Framework)](https://github.com/SuperClaude-Org/SuperClaude_Framework/graphs/contributors)
 [![Website](https://img.shields.io/website?url=https://superclaude-org.github.io/SuperClaude_Website/)](https://superclaude-org.github.io/SuperClaude_Website/)
 
-A framework that extends Claude Code with specialized commands, personas, and MCP server integration.
+An intelligent framework that transforms Claude Code into a comprehensive development environment with specialized agents, behavioral modes, and advanced MCP integration.
 
-**📢 Status**: Initial release, fresh out of beta! Bugs may occur as we continue improving things.
+**📢 Status**: V4 Beta is here! Major architecture overhaul with new behavioral modes, session lifecycle, and comprehensive agent system.
 
-## What is SuperClaude? 🤔
+## What is SuperClaude V4? 🤔
 
-SuperClaude tries to make Claude Code more helpful for development work by adding:
-- 🛠️ **16 specialized commands** for common dev tasks (some work better than others!)
-- 🎭 **Smart personas** that usually pick the right expert for different domains 
-- 🔧 **MCP server integration** for docs, UI components, and browser automation
-- 📋 **Task management** that tries to keep track of progress
-- ⚡ **Token optimization** to help with longer conversations
+SuperClaude V4 represents a complete evolution of the development framework, now featuring:
+- 🛠️ **21 specialized commands** for comprehensive development workflows
+- 🤖 **13 specialized agents** with domain expertise and intelligent routing
+- 🧠 **4 Behavioral Modes** for different types of work (Brainstorming, Introspection, Task Management, Token Efficiency)
+- 🔧 **6 MCP servers** including the powerful new Morphllm and Serena agents
+- 💾 **Session Lifecycle** with persistent context via /sc:load and /sc:save
+- 🎣 **Hooks System** for extensibility and customization
+- ⚡ **SuperClaude-Lite** for lightweight usage
 
-This is what we've been building to make development workflows smoother. Still rough around the edges, but getting better! 😊
+This is a complete rethink of how AI-assisted development should work - more intelligent, more capable, and more adaptable to your workflow! 🎯
 
 ## Current Status 📊
 
-✅ **What's Working Well:**
-- Installation suite (rewritten from the ground up)
-- Core framework with 9 documentation files 
-- 16 slash commands for various development tasks
-- MCP server integration (Context7, Sequential, Magic, Playwright)
-- Unified CLI installer for easy setup
+✅ **What's New in V4:**
+- Complete architecture redesign with behavioral modes
+- Session persistence with intelligent context management
+- 13 specialized agents replacing the old persona system
+- Advanced MCP integration with Morphllm and Serena
+- Hooks system for extensibility (now implemented!)
+- SuperClaude-Lite for resource-constrained environments
 
-⚠️ **Known Issues:**
-- This is an initial release - bugs are expected
-- Some features may not work perfectly yet
-- Documentation is still being improved
-- Hooks system was removed (coming back in v4)
+✅ **What's Working Well:**
+- All 21 commands with enhanced capabilities
+- Full MCP server integration suite
+- Session lifecycle with /sc:load and /sc:save
+- Behavioral modes with automatic activation
+- Intelligent agent routing and coordination
+
+⚠️ **Beta Limitations:**
+- Some advanced features still being refined
+- Documentation being updated for new features
+- Performance optimizations ongoing
 
 ## Key Features ✨
 
-### Commands 🛠️
-We focused on 16 essential commands for the most common tasks:
+### 21 Specialized Commands 🛠️
+Enhanced command suite for comprehensive development workflows:
 
 **Development**: `/sc:implement`, `/sc:build`, `/sc:design`  
 **Analysis**: `/sc:analyze`, `/sc:troubleshoot`, `/sc:explain`  
 **Quality**: `/sc:improve`, `/sc:test`, `/sc:cleanup`  
-**Others**: `/sc:document`, `/sc:git`, `/sc:estimate`, `/sc:task`, `/sc:index`, `/sc:load`, `/sc:spawn`
+**Session**: `/sc:load`, `/sc:save`, `/sc:brainstorm`, `/sc:reflect`  
+**Workflow**: `/sc:task`, `/sc:spawn`, `/sc:workflow`, `/sc:select-tool`  
+**Others**: `/sc:document`, `/sc:git`, `/sc:estimate`, `/sc:index`
 
-### Smart Personas 🎭
-AI specialists that try to jump in when they seem relevant:
-- 🏗️ **architect** - Systems design and architecture stuff
-- 🎨 **frontend** - UI/UX and accessibility  
-- ⚙️ **backend** - APIs and infrastructure
-- 🔍 **analyzer** - Debugging and figuring things out
-- 🛡️ **security** - Security concerns and vulnerabilities
-- ✍️ **scribe** - Documentation and writing
-- *...and 5 more specialists*
+### 13 Specialized Agents 🤖
+AI specialists with deep domain expertise and intelligent coordination:
+- 🏗️ **architect** - System design and architecture
+- 🎨 **frontend** - UI/UX and modern frontend development
+- ⚙️ **backend** - APIs, infrastructure, and server-side logic
+- 🔍 **analyzer** - Debugging and system analysis
+- 🛡️ **security** - Security assessment and vulnerability analysis
+- ✍️ **scribe** - Technical documentation and writing
+- ⚡ **performance** - Optimization and performance engineering
+- 🧪 **qa** - Quality assurance and testing strategies
+- 📊 **data** - Data analysis and processing
+- 🤖 **devops** - Infrastructure and deployment automation
+- 🔧 **sre** - Site reliability and system operations
+- 💼 **product** - Product strategy and requirements
+- 🎯 **specialist** - Adaptive expertise for unique domains
 
-*(They don't always pick perfectly, but usually get it right!)*
+*These agents feature intelligent routing, context awareness, and collaborative problem-solving capabilities.*
 
-### MCP Integration 🔧
-External tools that connect when useful:
-- **Context7** - Grabs official library docs and patterns 
-- **Sequential** - Helps with complex multi-step thinking  
-- **Magic** - Generates modern UI components 
-- **Playwright** - Browser automation and testing stuff
+### 4 Behavioral Modes 🧠
+Revolutionary behavioral system that adapts SuperClaude's approach:
 
-*(These work pretty well when they connect properly! 🤞)*
+#### Brainstorming Mode
+- **Purpose**: Interactive requirements discovery and ideation
+- **Triggers**: Ambiguous requests, exploration keywords, uncertainty indicators
+- **Features**: Socratic dialogue, collaborative discovery, automated brief generation
 
-## ⚠️ Upgrading from v2? Important!
+#### Introspection Mode  
+- **Purpose**: Meta-cognitive analysis and framework troubleshooting
+- **Triggers**: Self-analysis requests, complex problem solving, error recovery
+- **Features**: Reasoning analysis, decision validation, pattern recognition
 
-If you're coming from SuperClaude v2, you'll need to clean up first:
+#### Task Management Mode
+- **Purpose**: Multi-layer orchestration with wave systems and delegation
+- **Triggers**: Multi-step operations, complex builds, system-wide changes
+- **Features**: Wave orchestration, sub-agent delegation, performance analytics
 
-1. **Uninstall v2** using its uninstaller if available
-2. **Manual cleanup** - delete these if they exist:
-   - `SuperClaude/`
-   - `~/.claude/shared/`
-   - `~/.claude/commands/` 
-   - `~/.claude/CLAUDE.md`
-4. **Then proceed** with v3 installation below
+#### Token Efficiency Mode
+- **Purpose**: Intelligent optimization with symbol systems and compression
+- **Triggers**: Resource constraints, large contexts, performance needs
+- **Features**: 30-50% token reduction, quality preservation, adaptive compression
 
-This is because v3 has a different structure and the old files can cause conflicts.
+### 6 MCP Server Integration 🔧
+Comprehensive external tool ecosystem:
+- **Context7** - Official library documentation and patterns
+- **Sequential** - Multi-step analysis and complex reasoning
+- **Magic** - Modern UI component generation
+- **Playwright** - Browser automation and E2E testing
+- **Morphllm** - Intelligent file editing with Fast Apply capability
+- **Serena** - Semantic code analysis and project-wide operations
 
-### 🔄 **Key Change for v2 Users**
-**The `/build` command changed!** In v2, `/build` was used for feature implementation. In v3:
-- `/sc:build` = compilation/packaging only 
-- `/sc:implement` = feature implementation (NEW!)
+### Session Lifecycle System 💾
+Persistent development context with intelligent management:
+- **`/sc:load`** - Initialize projects with full context restoration
+- **`/sc:save`** - Create checkpoints and preserve session state
+- **Automatic Checkpoints** - Task completion, time-based, risk-based triggers
+- **Cross-Session Learning** - Accumulated insights and pattern recognition
 
-**Migration**: Replace `v2 /build myFeature` with `v3 /sc:implement myFeature`
+### Hooks System 🎣
+Extensible architecture for customization:
+- **Framework Coordinator** - Cross-component orchestration
+- **Performance Monitor** - Real-time metrics and optimization
+- **Quality Gates** - 8-step validation pipeline
+- **Session Lifecycle** - Event-driven session management
+
+### SuperClaude-Lite ⚡
+Lightweight variant for resource-constrained environments:
+- Streamlined feature set
+- Reduced resource requirements
+- Core functionality preservation
+- Easy upgrade path to full SuperClaude
+
+## ⚠️ Upgrading from v3? Important!
+
+SuperClaude V4 is a major architectural upgrade. Clean installation recommended:
+
+1. **Backup Important Data** - Save any custom configurations
+2. **Clean Previous Installation**:
+   ```bash
+   python3 -m SuperClaude uninstall  # If available
+   rm -rf ~/.claude/SuperClaude/
+   rm -rf ~/.claude/shared/
+   ```
+3. **Install V4 Beta** - Follow installation instructions below
+
+### 🔄 **Key Changes for v3 Users**
+- **New Commands**: `/sc:brainstorm`, `/sc:reflect`, `/sc:save`, `/sc:select-tool`
+- **Session Management**: Use `/sc:load` to initialize projects, `/sc:save` for persistence
+- **Agent System**: Enhanced from personas to full agent coordination
+- **Behavioral Modes**: Automatic activation based on context and needs
 
 ## Installation 📦
 
-SuperClaude installation is a **two-step process**:
-1. First install the Python package
-2. Then run the installer to set up Claude Code integration
+SuperClaude V4 Beta installation with enhanced capabilities:
 
 ### Step 1: Install the Package
 
@@ -109,9 +166,10 @@ git clone https://github.com/SuperClaude-Org/SuperClaude_Framework.git
 cd SuperClaude_Framework
 uv sync
 ```
+
 ### 🔧 UV / UVX Setup Guide
 
-SuperClaude v3 also supports installation via [`uv`](https://github.com/astral-sh/uv) (a faster, modern Python package manager) or `uvx` for cross-platform usage.
+SuperClaude V4 fully supports installation via [`uv`](https://github.com/astral-sh/uv) for optimal performance.
 
 ### 🌀 Install with `uv`
 
@@ -123,7 +181,7 @@ curl -Ls https://astral.sh/uv/install.sh | sh
 
 > Or follow instructions from: [https://github.com/astral-sh/uv](https://github.com/astral-sh/uv)
 
-Once `uv` is available, you can install SuperClaude like this:
+Once `uv` is available:
 
 ```bash
 uv venv
@@ -133,33 +191,20 @@ uv pip install SuperClaude
 
 ### ⚡ Install with `uvx` (Cross-platform CLI)
 
-If you’re using `uvx`, just run:
-
 ```bash
 uvx pip install SuperClaude
 ```
 
-### ✅ Finish Installation
+### ✅ SuperClaude-Lite Installation
 
-After installing, continue with the usual installer step:
-
-```bash
-python3 -m SuperClaude install
-```
-
-Or using bash-style CLI:
+For lightweight usage:
 
 ```bash
-SuperClaude install
+python3 -m SuperClaude install --lite
 ```
-
-### 🧠 Note:
-
-* `uv` provides better caching and performance.
-* Compatible with Python 3.8+ and works smoothly with SuperClaude.
 
 ---
-**Missing Python?** Install Python 3.7+ first:
+**Missing Python?** Install Python 3.8+ first:
 ```bash
 # Linux (Ubuntu/Debian)
 sudo apt update && sudo apt install python3 python3-pip
@@ -171,155 +216,162 @@ brew install python3
 # Download from https://python.org/downloads/
 ```
 
-### Step 2: Run the Installer
+### Step 2: Run the V4 Installer
 
-After installing the package, run the SuperClaude installer to configure Claude Code (You can use any of the method):
-### ⚠️ Important Note 
-**After installing the SuperClaude.**
-**You can use `SuperClaude commands`
-, `python3 -m SuperClaude commands` or also `python3 SuperClaude commands`**
+Enhanced installer with behavioral modes and session lifecycle:
+
 ```bash
-# Quick setup (recommended for most users)
-python3 SuperClaude install
-
-# Interactive selection (choose components)
-python3 SuperClaude install --interactive
-
-# Minimal install (just core framework)
-python3 SuperClaude install --minimal
-
-# Developer setup (everything included)
-python3 SuperClaude install --profile developer
-
-# See all available options
-python3 SuperClaude install --help
-```
-### Or Python Modular Usage
-```bash
-# Quick setup (recommended for most users)
+# V4 Beta setup (recommended for most users)
 python3 -m SuperClaude install
 
-# Interactive selection (choose components)
+# Interactive selection with V4 features
 python3 -m SuperClaude install --interactive
 
-# Minimal install (just core framework)
+# Minimal install (core framework only)
 python3 -m SuperClaude install --minimal
 
-# Developer setup (everything included)
+# Full developer setup (all V4 features)
 python3 -m SuperClaude install --profile developer
 
-# See all available options
+# SuperClaude-Lite installation
+python3 -m SuperClaude install --lite
+
+# See all V4 options
 python3 -m SuperClaude install --help
 ```
+
 ### Simple bash Command Usage 
 ```bash
-# Quick setup (recommended for most users)
+# V4 Beta setup
 SuperClaude install
 
-# Interactive selection (choose components)
+# Interactive V4 installation
 SuperClaude install --interactive
 
-# Minimal install (just core framework)
-SuperClaude install --minimal
+# Lightweight installation
+SuperClaude install --lite
 
-# Developer setup (everything included)
+# Full V4 developer setup
 SuperClaude install --profile developer
-
-# See all available options
-SuperClaude install --help
 ```
 
-**That's it! 🎉** The installer handles everything: framework files, MCP servers, and Claude Code configuration.
+**That's it! 🎉** The V4 installer configures everything: behavioral modes, MCP servers, session lifecycle, and hooks system.
 
-## How It Works 🔄
+## How V4 Works 🔄
 
-SuperClaude tries to enhance Claude Code through:
+SuperClaude V4 transforms Claude Code through intelligent architecture:
 
-1. **Framework Files** - Documentation installed to `~/.claude/` that guides how Claude responds
-2. **Slash Commands** - 16 specialized commands for different dev tasks  
-3. **MCP Servers** - External services that add extra capabilities (when they work!)
-4. **Smart Routing** - Attempts to pick the right tools and experts based on what you're doing
+1. **Behavioral Modes** - Adaptive behavior based on context and task requirements
+2. **Agent Coordination** - 13 specialized agents with intelligent routing and collaboration
+3. **Session Lifecycle** - Persistent context with /sc:load and /sc:save commands
+4. **MCP Integration** - 6 powerful servers for extended capabilities
+5. **Hooks System** - Extensible architecture for customization and monitoring
+6. **Quality Gates** - 8-step validation pipeline ensuring excellence
 
-Most of the time it plays nicely with Claude Code's existing stuff. 🤝
+The system intelligently adapts to your workflow, automatically activating appropriate modes and agents. 🧠
 
-## What's Coming in v4 🔮
+## V4 Architecture Highlights 🏗️
 
-We're hoping to work on these things for the next version:
-- **Hooks System** - Event-driven stuff (removed from v3, trying to redesign it properly)
-- **MCP Suite** - More external tool integrations  
-- **Better Performance** - Trying to make things faster and less buggy
-- **More Personas** - Maybe a few more domain specialists
-- **Cross-CLI Support** - Might work with other AI coding assistants
+### Behavioral Intelligence
+- **Automatic Mode Detection** - Context-aware behavioral adaptation
+- **Cross-Mode Coordination** - Seamless integration between behavioral patterns
+- **Progressive Enhancement** - Capabilities scale with complexity
 
-*(No promises on timeline though - we're still figuring v3 out! 😅)*
+### Agent Orchestration
+- **Intelligent Routing** - Smart agent selection based on domain expertise
+- **Collaborative Problem-Solving** - Multi-agent coordination for complex tasks
+- **Context Preservation** - Agents maintain awareness across interactions
+
+### Session Management
+- **Persistent Context** - Full project state preservation across sessions
+- **Intelligent Checkpointing** - Automatic saves based on risk and completion
+- **Cross-Session Learning** - Accumulated insights and pattern recognition
 
 ## Configuration ⚙️
 
-After installation, you can customize SuperClaude by editing:
-- `~/.claude/settings.json` - Main configuration
-- `~/.claude/*.md` - Framework behavior files
+V4 configuration with enhanced behavioral controls:
+- `~/.claude/settings.json` - Main V4 configuration with modes and agents
+- `~/.claude/*.md` - Behavioral mode configurations
+- `~/.claude/agents/` - Agent-specific customizations
+- `~/.serena/` - Session lifecycle and memory management
 
-Most users probably won't need to change anything - it usually works okay out of the box. 🎛️
+Most users can use defaults - V4 intelligently adapts to your workflow! 🎛️
 
 ## Documentation 📖
 
-Want to learn more? Check out our guides:
+Comprehensive V4 guides and documentation:
 
-- 📚 [**User Guide**](https://github.com/NomenAK/SuperClaude/blob/master/Docs/superclaude-user-guide.md) - Complete overview and getting started
-- 🛠️ [**Commands Guide**](https://github.com/NomenAK/SuperClaude/blob/master/Docs/commands-guide.md) - All 16 slash commands explained  
-- 🏳️ [**Flags Guide**](https://github.com/NomenAK/SuperClaude/blob/master/Docs/flags-guide.md) - Command flags and options
-- 🎭 [**Personas Guide**](https://github.com/NomenAK/SuperClaude/blob/master/Docs/personas-guide.md) - Understanding the persona system
-- 📦 [**Installation Guide**](https://github.com/NomenAK/SuperClaude/blob/master/Docs/installation-guide.md) - Detailed installation instructions
-
-These guides have more details than this README and are kept up to date.
+- 📚 [**V4 User Guide**](https://github.com/SuperClaude-Org/SuperClaude_Framework/blob/master/Docs/superclaude-user-guide.md) - Complete V4 overview and getting started
+- 🛠️ [**Commands Guide**](https://github.com/SuperClaude-Org/SuperClaude_Framework/blob/master/Docs/commands-guide.md) - All 21 commands with V4 enhancements
+- 🧠 [**Behavioral Modes Guide**](https://github.com/SuperClaude-Org/SuperClaude_Framework/blob/master/Docs/behavioral-modes-guide.md) - Understanding the 4 behavioral modes
+- 🤖 [**Agent System Guide**](https://github.com/SuperClaude-Org/SuperClaude_Framework/blob/master/Docs/agent-system-guide.md) - Working with 13 specialized agents
+- 💾 [**Session Lifecycle Guide**](https://github.com/SuperClaude-Org/SuperClaude_Framework/blob/master/Docs/session-lifecycle-guide.md) - /sc:load and /sc:save workflows
+- 🎣 [**Hooks System Guide**](https://github.com/SuperClaude-Org/SuperClaude_Framework/blob/master/Docs/hooks-guide.md) - Extending and customizing V4
+- 🏳️ [**Flags Guide**](https://github.com/SuperClaude-Org/SuperClaude_Framework/blob/master/Docs/flags-guide.md) - V4 command flags and behavioral controls
+- 📦 [**Installation Guide**](https://github.com/SuperClaude-Org/SuperClaude_Framework/blob/master/Docs/installation-guide.md) - Detailed V4 installation and setup
 
 ## Contributing 🤝
 
-We welcome contributions! Areas where we could use help:
-- 🐛 **Bug Reports** - Let us know what's broken
-- 📝 **Documentation** - Help us explain things better  
-- 🧪 **Testing** - More test coverage for different setups
-- 💡 **Ideas** - Suggestions for new features or improvements
+V4 opens new contribution opportunities:
+- 🐛 **Bug Reports** - Help us refine the beta
+- 📝 **Documentation** - V4 features need clear explanation
+- 🧪 **Testing** - Beta testing across different environments
+- 🎣 **Hooks Development** - Extend the hooks system
+- 🤖 **Agent Enhancement** - Improve specialized agent capabilities
+- 🧠 **Behavioral Modes** - Contribute to mode intelligence
 
-The codebase is pretty straightforward Python + documentation files.
+The V4 architecture is modular and extensible - many ways to contribute!
 
 ## Project Structure 📁
 
 ```
 SuperClaude/
-├── setup.py               # pypi setup file
-├── SuperClaude/           # Framework files  
-│   ├── Core/              # Behavior documentation (COMMANDS.md, FLAGS.md, etc.)
-│   ├── Commands/          # 16 slash command definitions
-│   └── Settings/          # Configuration files
-├── setup/                 # Installation system
-└── profiles/              # Installation profiles (quick, minimal, developer)
+├── setup.py                    # PyPI setup for V4
+├── SuperClaude/                # V4 Framework files  
+│   ├── Core/                   # Behavioral mode documentation
+│   ├── Commands/               # 21 specialized command definitions
+│   ├── Agents/                 # 13 agent specifications
+│   ├── Modes/                  # 4 behavioral mode configurations
+│   ├── MCP/                    # 6 MCP server integrations
+│   ├── Hooks/                  # Extensible hooks system
+│   └── Config/                 # V4 configuration management
+├── SuperClaude-Lite/           # Lightweight variant
+├── setup/                      # V4 installation system
+└── profiles/                   # Installation profiles with V4 features
 ```
 
-## Architecture Notes 🏗️
+## V4 Architecture Notes 🏗️
 
-The v3 architecture focuses on:
-- **Simplicity** - Removed complexity that wasn't adding value
-- **Reliability** - Better installation and fewer breaking changes  
-- **Modularity** - Pick only the components you want
-- **Performance** - Faster operations with smarter caching
+The V4beta architecture focuses on:
+- **Behavioral Intelligence** - Context-aware adaptive behavior
+- **Agent Orchestration** - Sophisticated multi-agent coordination
+- **Session Persistence** - Continuous learning and context preservation
+- **Extensibility** - Hooks system for customization and enhancement
+- **Performance** - Token efficiency and resource optimization
+- **Quality** - 8-step validation gates ensuring excellence
 
-We learned a lot from v2 and tried to address the main pain points.
+V4 represents a fundamental evolution in AI-assisted development frameworks.
 
 ## FAQ 🙋
 
-**Q: Why was the hooks system removed?**  
-A: It was getting complex and buggy. We're redesigning it properly for v4.
+**Q: What's new in V4 compared to V3?**  
+A: Complete architecture overhaul with behavioral modes, session lifecycle, 13 agents, 6 MCP servers, and hooks system.
 
-**Q: Does this work with other AI assistants?**  
-A: Currently Claude Code only, but v4 will have broader compatibility.
+**Q: Is the hooks system back?**  
+A: Yes! Completely redesigned and implemented with extensible architecture.
 
-**Q: Is this stable enough for daily use?**  
-A: The basic stuff works pretty well, but definitely expect some rough edges since it's a fresh release. Probably fine for experimenting! 🧪
+**Q: Should I upgrade from V3?**  
+A: V4 beta offers significant improvements, but clean installation recommended for stability.
+
+**Q: What is SuperClaude-Lite?**  
+A: Lightweight variant with core functionality for resource-constrained environments.
+
+**Q: How stable is V4 beta?**  
+A: Core functionality is solid, with some advanced features still being refined. Great for development and testing!
 
 ## SuperClaude Contributors
 
-[![Contributors](https://contrib.rocks/image?repo=NomenAk/SuperClaude)](https://github.com/NomenAK/SuperClaude/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=SuperClaude-Org/SuperClaude_Framework)](https://github.com/SuperClaude-Org/SuperClaude_Framework/graphs/contributors)
 
 ## License
 
@@ -327,15 +379,15 @@ MIT - [See LICENSE file for details](https://opensource.org/licenses/MIT)
 
 ## Star History
 
-<a href="https://www.star-history.com/#NomenAK/SuperClaude&Date">
+<a href="https://www.star-history.com/#SuperClaude-Org/SuperClaude_Framework&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=NomenAK/SuperClaude&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=NomenAK/SuperClaude&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=NomenAK/SuperClaude&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=SuperClaude-Org/SuperClaude_Framework&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=SuperClaude-Org/SuperClaude_Framework&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=SuperClaude-Org/SuperClaude_Framework&type=Date" />
  </picture>
 </a>
 ---
 
-*Built by developers who got tired of generic responses. Hope you find it useful! 🙂*
+*V4 Beta: The future of AI-assisted development is here. Experience intelligent, adaptive, and powerful development workflows! 🚀*
 
 ---

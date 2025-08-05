@@ -1,4 +1,4 @@
-# SuperClaude Installation Guide 📦
+# SuperClaude V4 Beta Installation Guide 📦
 
 ## 🎯 It's Easier Than It Looks!
 
@@ -13,13 +13,13 @@ uv add SuperClaude
 
 **Option B: From Source**
 ```bash
-git clone https://github.com/NomenAK/SuperClaude.git
-cd SuperClaude
+git clone https://github.com/SuperClaude-Org/SuperClaude_Framework.git
+cd SuperClaude_Framework
 uv sync
 ```
 ### 🔧 UV / UVX Setup Guide
 
-SuperClaude v3 also supports installation via [`uv`](https://github.com/astral-sh/uv) (a faster, modern Python package manager) or `uvx` for cross-platform usage.
+SuperClaude V4 Beta supports installation via [`uv`](https://github.com/astral-sh/uv) (a faster, modern Python package manager) or `uvx` for cross-platform usage.
 
 ### 🌀 Install with `uv`
 
@@ -48,7 +48,7 @@ uvx pip install SuperClaude
 ```
 ## 🔧 UV / UVX Setup Guide
 
-SuperClaude v3 also supports installation via [`uv`](https://github.com/astral-sh/uv) (a faster, modern Python package manager) or `uvx` for cross-platform usage.
+SuperClaude V4 Beta supports installation via [`uv`](https://github.com/astral-sh/uv) (a faster, modern Python package manager) or `uvx` for cross-platform usage.
 
 ### 🌀 Install with `uv`
 
@@ -106,7 +106,7 @@ SuperClaude install
 
 ---
 
-A comprehensive guide to installing SuperClaude v3. But remember - most people never need to read past the quick start above! 😊
+A comprehensive guide to installing SuperClaude V4 Beta. But remember - most people never need to read past the quick start above! 😊
 
 ## Before You Start 🔍
 
@@ -169,8 +169,10 @@ SuperClaude install --quick
 , `python3 -m SuperClaude commands` or also `python3 SuperClaude commands`**
 
 **What you just got:**
-- ✅ All 16 smart commands that auto-activate experts
-- ✅ 11 specialist personas that know when to help
+- ✅ All 16 smart commands that auto-activate experts  
+- ✅ 13 specialized domain expert agents that know when to help
+- ✅ Advanced session management with brainstorming mode
+- ✅ Python hooks system for intelligent framework coordination
 - ✅ Intelligent routing that figures out complexity for you
 - ✅ About 2 minutes of your time and ~50MB disk space
 
@@ -205,15 +207,25 @@ SuperClaude install --quick
 - **Good for**: Most users, general development
 - **Includes**: Everything in minimal + specialized commands like `/analyze`, `/build`, `/improve`
 
+### 🪶 SuperClaude-Lite Installation (V4 Beta)
+```bash
+SuperClaude install --lite
+```
+- **What**: Streamlined version with core features only
+- **Time**: ~1 minute
+- **Space**: ~25MB
+- **Good for**: Resource-constrained environments, basic enhancement
+- **Includes**: Essential framework features without advanced orchestration
+
 ### 🔧 Developer Installation  
 ```bash
 SuperClaude install --profile developer
 ```
-- **What**: Everything including MCP server integration
+- **What**: Everything including MCP server integration + Hooks system
 - **Time**: ~5 minutes
 - **Space**: ~100MB
 - **Good for**: Power users, contributors, advanced workflows
-- **Includes**: Everything + Context7, Sequential, Magic, Playwright servers
+- **Includes**: Everything + Context7, Sequential, Magic, Playwright, Morphllm, Serena servers + Python hooks
 
 ### 🎛️ Interactive Installation
 ```bash
@@ -278,8 +290,8 @@ pip install .
 
 **Option 3: Clone from Git**
 ```bash
-git clone <repository-url>
-cd SuperClaude
+git clone https://github.com/SuperClaude-Org/SuperClaude_Framework.git
+cd SuperClaude_Framework
 pip install .
 ```
 
@@ -316,8 +328,9 @@ Here's what happens when you install:
 3. **Core Files** - Copies framework documentation files
 4. **Commands** - Installs slash command definitions (if selected)
 5. **MCP Servers** - Downloads and configures MCP servers (if selected)
-6. **Configuration** - Sets up `settings.json` with your preferences
-7. **Validation** - Tests that everything works
+6. **Hooks System** - Installs Python hooks for framework coordination (developer profile)
+7. **Configuration** - Sets up `settings.json` with your preferences
+8. **Validation** - Tests that everything works
 
 The installer shows progress and will tell you if anything goes wrong.
 
@@ -341,19 +354,18 @@ ls ~/.claude/
 
 ### What Got Installed 📂
 
-SuperClaude installs to `~/.claude/` by default. Here's what you'll find:
+SuperClaude V4 Beta installs to `~/.claude/` by default. Here's what you'll find:
 
 ```
 ~/.claude/
 ├── CLAUDE.md              # Main framework entry point
-├── COMMANDS.md             # Available slash commands  
 ├── FLAGS.md                # Command flags and options
-├── PERSONAS.md             # Smart persona system
 ├── PRINCIPLES.md           # Development principles
 ├── RULES.md                # Operational rules
-├── MCP.md                  # MCP server integration
-├── MODES.md                # Operational modes
 ├── ORCHESTRATOR.md         # Intelligent routing
+├── MCP_*.md                # MCP server configurations
+├── MODE_*.md               # Operational modes
+├── SESSION_LIFECYCLE.md    # Session management
 ├── settings.json           # Configuration file
 └── commands/               # Individual command definitions
     ├── analyze.md
@@ -362,10 +374,23 @@ SuperClaude installs to `~/.claude/` by default. Here's what you'll find:
     └── ... (13 more)
 ```
 
+**For Developer Installation (+Hooks System)**:
+```
+~/.claude/
+├── [above files]           # Core framework files
+└── hooks/                  # Python hooks system (developer profile)
+    ├── framework_coordinator/
+    ├── session_lifecycle/
+    ├── performance_monitor/
+    ├── quality_gates/
+    └── install_hooks.py    # Hook installation script
+```
+
 **What each file does:**
 - **CLAUDE.md** - Tells Claude Code about SuperClaude and loads other files
 - **settings.json** - Configuration (MCP servers, hooks, etc.)
 - **commands/** - Detailed definitions for each slash command
+- **hooks/** - Python hooks for advanced framework coordination (developer only)
 
 ### First Steps 🎯
 
@@ -377,9 +402,38 @@ Try these commands to get started:
 /sc:analyze README.md       # Analyze a file
 /sc:build --help           # See build options
 /sc:improve --help         # See improvement options
+/sc:brainstorm "my app idea" # Try V4 Beta brainstorming mode
 ```
 
 **Don't worry if it seems overwhelming** - SuperClaude enhances Claude Code gradually. You can use as much or as little as you want.
+
+### Installing Hooks System (V4 Beta) 🔗
+
+If you want to add the Python hooks system to an existing installation:
+
+```bash
+# Install hooks to existing SuperClaude installation
+cd SuperClaude_Framework
+python3 SuperClaude/Hooks/scripts/install_hooks.py
+
+# Or upgrade existing installation with hooks
+SuperClaude install --upgrade --hooks
+```
+
+**What the hooks system provides:**
+- **Framework Coordinator**: Intelligent MCP server suggestions
+- **Session Lifecycle**: Automatic checkpoint triggers  
+- **Performance Monitor**: Real-time performance tracking (<100ms targets)
+- **Quality Gates**: 8-step validation system
+
+**Verification:**
+```bash
+# Test hooks installation
+python3 SuperClaude/Hooks/scripts/test_hooks.py
+
+# Check hook status
+SuperClaude hooks --status
+```
 
 ## Managing Your Installation 🛠️
 
@@ -516,7 +570,7 @@ SuperClaude install --quick --dry-run
 ### Still Having Issues? 🤔
 
 **Check our troubleshooting resources:**
-- GitHub Issues: https://github.com/NomenAK/SuperClaude/issues
+- GitHub Issues: https://github.com/SuperClaude-Org/SuperClaude_Framework/issues
 - Look for existing issues similar to yours
 - Create a new issue if you can't find a solution
 
@@ -606,4 +660,4 @@ Thanks for trying SuperClaude! We hope it makes your development workflow a bit 
 
 ---
 
-*Last updated: July 2024 - Let us know if anything in this guide is wrong or confusing!*
+*Last updated: January 2025 (V4 Beta) - Let us know if anything in this guide is wrong or confusing!*

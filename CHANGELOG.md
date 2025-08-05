@@ -26,6 +26,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Installation process detects and migrates existing commands automatically
 - Tab completion support for `/sc:` prefix to discover all SuperClaude commands
 
+## [4.0.0-beta.1] - 2025-02-05
+
+### Added
+- **Agent System**: 13 specialized domain experts replacing personas
+- **Behavioral Modes**: 4 intelligent modes for different workflows (Brainstorming, Introspection, Task Management, Token Efficiency)
+- **Session Lifecycle**: /sc:load and /sc:save for cross-session persistence with Serena MCP
+- **New Commands**: /sc:brainstorm, /sc:reflect, /sc:save, /sc:select-tool (21 total commands)
+- **Serena MCP**: Semantic code analysis and memory management
+- **Morphllm MCP**: Intelligent file editing with Fast Apply capability
+- **Hooks System**: Python-based framework integration (completely redesigned and implemented)
+- **SuperClaude-Lite**: Minimal implementation with YAML configuration
+- **Templates**: Comprehensive templates for creating new components
+- **Python-Ultimate-Expert Agent**: Master Python architect for production-ready code
+
+### Changed
+- Commands expanded from 16 to 21 specialized commands
+- Personas replaced with 13 specialized Agents
+- Enhanced MCP integration (6 servers total)
+- Improved token efficiency (30-50% reduction with Token Efficiency Mode)
+- Session management now uses Serena integration for persistence
+- Framework structure reorganized for better modularity
+
+### Improved
+- Task management with multi-layer orchestration (TodoWrite, /task, /spawn, /loop)
+- Quality gates with 8-step validation cycle
+- Performance monitoring and optimization
+- Cross-session context preservation
+- Intelligent routing with ORCHESTRATOR.md enhancements
+
 ## [3.0.0] - 2025-07-14
 
 ### Added

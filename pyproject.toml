@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "SuperClaude"
 dynamic = ["version"]
-description = "SuperClaude Framework Management Hub"
+description = "SuperClaude V4 Beta - Advanced orchestration framework for Claude Code with 21 commands, 13 agents, and 6 MCP servers"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
@@ -30,12 +30,13 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/NomenAK/SuperClaude"
-Repository = "https://github.com/NomenAK/SuperClaude"
-"Bug Tracker" = "https://github.com/NomenAK/SuperClaude/issues"
-"GitHub" = "https://github.com/NomenAK/SuperClaude"
+Homepage = "https://github.com/SuperClaude-Org/SuperClaude_Framework"
+Repository = "https://github.com/SuperClaude-Org/SuperClaude_Framework"
+"Bug Tracker" = "https://github.com/SuperClaude-Org/SuperClaude_Framework/issues"
+"GitHub" = "https://github.com/SuperClaude-Org/SuperClaude_Framework"
 "Mithun Gowda B" = "https://github.com/mithun50"
 "NomenAK" = "https://github.com/NomenAK"
+"Anton Nesterov" = "https://github.com/anton-nesterov"
 
 [project.scripts]
 SuperClaude = "SuperClaude.__main__:main"

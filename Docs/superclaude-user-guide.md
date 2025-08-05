@@ -22,21 +22,22 @@ The detailed guides below? They're here **when you want to understand** what jus
 
 ---
 
-A comprehensive guide to understanding and using SuperClaude v3.0 effectively. But remember - you can skip straight to trying it out!
+A comprehensive guide to understanding and using SuperClaude V4 Beta effectively. But remember - you can skip straight to trying it out!
 
 ## Table of Contents 📖
 
 1. [Welcome & Overview](#welcome--overview-)
 2. [Core Components](#core-components-)
-3. [The Three Operational Modes](#the-three-operational-modes-)
-4. [The Orchestrator System](#the-orchestrator-system-)
-5. [Rules & Principles](#rules--principles-)
-6. [Getting Started Workflows](#getting-started-workflows-)
-7. [Integration & Coordination](#integration--coordination-)
-8. [Practical Examples](#practical-examples-)
-9. [Tips & Best Practices](#tips--best-practices-)
-10. [Troubleshooting](#troubleshooting--common-issues-)
-11. [What's Next](#whats-next-)
+3. [The Four Behavioral Modes](#the-four-behavioral-modes-)
+4. [Session Lifecycle System](#session-lifecycle-system-)
+5. [The Orchestrator System](#the-orchestrator-system-)
+6. [Rules & Principles](#rules--principles-)
+7. [Getting Started Workflows](#getting-started-workflows-)
+8. [Integration & Coordination](#integration--coordination-)
+9. [Practical Examples](#practical-examples-)
+10. [Tips & Best Practices](#tips--best-practices-)
+11. [Troubleshooting](#troubleshooting--common-issues-)
+12. [What's Next](#whats-next-)
 
 ---
 
@@ -46,19 +47,22 @@ A comprehensive guide to understanding and using SuperClaude v3.0 effectively. B
 
 ```bash
 # Try these commands in Claude Code:
-/sc:help                    # See what's available
+/sc:load                    # Initialize session with project context (NEW!)
 /sc:analyze README.md       # SuperClaude analyzes your project
-/sc:workflow feature-prd.md # Generate implementation workflow from PRD (NEW!)
-/sc:implement user-auth     # Create features and components (NEW in v3!)
+/sc:brainstorm "task app"   # Interactive requirements discovery (NEW!)
+/sc:implement user-auth     # Create features and components
 /sc:build                   # Smart build with auto-optimization  
 /sc:improve messy-file.js   # Clean up code automatically
+/sc:save                    # Save session state and insights (NEW!)
 ```
 
 **What just happened?** SuperClaude automatically:
+- Initialized persistent session context 🧠
 - Picked the right tools for each task 🛠️
-- Activated appropriate experts (security, performance, etc.) 🎭  
+- Activated appropriate specialized agents 🎭  
 - Applied intelligent flags and optimizations ⚡
 - Provided evidence-based suggestions 📊
+- Saved insights for future sessions 💾
 
 **See how easy that was?** No studying required - SuperClaude figures out the complexity so you don't have to.
 
@@ -70,69 +74,87 @@ Want to understand how it works? Keep reading. Want to just keep experimenting? 
 
 ### What is SuperClaude Really? 🤔
 
-SuperClaude makes Claude Code smarter for development work. Instead of generic responses, you get specialized help from different experts (security, performance, frontend, etc.) who know their stuff.
+SuperClaude makes Claude Code smarter for development work. Instead of generic responses, you get specialized help from different agents (security, performance, frontend, etc.) who know their stuff, plus session persistence and behavioral intelligence.
 
-**The honest truth**: We just released v3.0 and it's fresh out of beta. It works pretty well for what it does, but you should expect some rough edges as we continue improving things. We built this because we wanted Claude Code to be more helpful for real software development workflows.
+**The honest truth**: V4 Beta represents a major architectural evolution with new session lifecycle management, behavioral modes, and an advanced hooks system. While still in beta, it's significantly more capable than v3, with better context management and intelligent agent coordination.
 
 **The neat part?** You don't need to manage any of this complexity. Just use normal commands like `/analyze` or `/build` and SuperClaude usually figures out which experts to involve and what tools to use. 🪄
 
 ### What SuperClaude Adds ✨
 
-**🛠️ 17 Specialized Commands**
-- Planning tools: `/workflow` (NEW!), `/estimate`, `/task`
-- Development tools: `/implement`, `/build`, `/design`
-- Analysis tools: `/analyze`, `/troubleshoot`, `/explain` 
-- Quality tools: `/improve`, `/cleanup`, `/test`
-- Plus utilities for documentation, git, deployment, and more
+**🛠️ 21 Specialized Commands**
+- **Planning tools**: `/estimate`, `/task`, `/brainstorm` (NEW!)
+- **Development tools**: `/implement`, `/build`, `/design`, `/select-tool` (NEW!)
+- **Analysis tools**: `/analyze`, `/troubleshoot`, `/explain`
+- **Quality tools**: `/improve`, `/cleanup`, `/test`
+- **Session tools**: `/load` (NEW!), `/save` (NEW!), `/reflect` (NEW!)
+- **Plus utilities** for documentation, git, deployment, and more
 - **You just use them** - SuperClaude handles the complexity automatically
-- **NEW**: `/workflow` command for PRD-to-implementation planning
-- **NEW**: `/implement` command for feature creation (restores v2 functionality) 
+- **V4 NEW**: Session lifecycle commands for persistent context
+- **V4 NEW**: Interactive brainstorming and reflection capabilities 
 
-**🎭 11 Smart Personas** *(that know when to jump in)*
-- AI specialists that adapt behavior for different domains
-- **Auto-activate based on your requests** (security expert for security tasks, etc.)
-- Manual control available, but usually not needed
+**🤖 13 Specialized Agents** *(that know when to jump in)*
+- AI agents that adapt behavior for different domains
+- **Auto-activate based on your requests** (security agent for security tasks, etc.)
+- Manual control available, but usually not needed  
 - Think of it as having a whole dev team that knows when to help
+- **V4 NEW**: Enhanced agent system with better specialization
 
-**🔧 MCP Server Integration** *(smart external tools)*
-- Context7: Official library documentation lookup
-- Sequential: Complex multi-step analysis
-- Magic: Modern UI component generation
-- Playwright: Browser automation and testing
+**🔧 MCP Server Integration** *(6 smart external tools)*
+- **Context7**: Official library documentation lookup
+- **Sequential**: Complex multi-step analysis  
+- **Magic**: Modern UI component generation
+- **Playwright**: Browser automation and testing
+- **Morphllm**: Intelligent file editing (NEW!)
+- **Serena**: Semantic code analysis and memory (NEW!)
 - **Auto-connects when needed** - you don't manage this stuff
 
-**📋 Enhanced Task Management** *(happens behind the scenes)*
-- Progress tracking with TodoRead/TodoWrite
-- Multi-session project management with `/task`
-- Complex orchestration with `/spawn`
-- Iterative improvement with `/loop`
-- **Mostly automatic** - SuperClaude tracks what you're doing
+**🧠 4 Behavioral Modes** *(intelligent adaptation)*
+- **Brainstorming Mode**: Interactive requirements discovery (NEW!)
+- **Introspection Mode**: Meta-cognitive analysis and debugging (NEW!) 
+- **Task Management Mode**: Multi-layer orchestration with wave systems (NEW!)
+- **Token Efficiency Mode**: Smart compression and optimization (NEW!)
+- **Auto-activate based on context** - you don't configure them
 
-**⚡ Token Optimization** *(smart efficiency)*
-- Smart compression when context gets full
-- Symbol system for efficient communication
-- Performance optimization for large operations
-- **Usually activates** when needed for large projects
+**🏗️ Session Lifecycle System** *(persistent intelligence)*
+- Session initialization with `/sc:load` (NEW!)
+- Persistent context and memory across sessions (NEW!)
+- Automatic checkpoints and progress tracking (NEW!)
+- Session reflection and insights with `/sc:reflect` (NEW!)
+- **Cross-session learning** - SuperClaude remembers and improves
 
-### Current Status (v3.0) 📊
+**🔌 Hooks System** *(extensible architecture)*
+- Performance monitoring and optimization (NEW!)
+- Quality gates with 8-step validation (NEW!)
+- Framework coordination and orchestration (NEW!)
+- Session lifecycle integration (NEW!)
+- **SuperClaude-Lite** variant for streamlined usage (NEW!)
+
+### Current Status (V4 Beta) 📊
 
 **✅ What's Working Well:**
-- Installation system (completely rewritten, much more reliable)
-- Core framework with 16 commands and 11 personas
-- MCP server integration (mostly working)
-- Basic task management and workflow automation
-- Documentation and user guides
+- Complete session lifecycle with persistent memory
+- 21 commands including new brainstorming and reflection tools  
+- 13 specialized agents with enhanced coordination
+- 6 MCP servers with Morphllm and Serena integration
+- 4 behavioral modes with intelligent auto-activation
+- Advanced hooks system with performance monitoring
+- SuperClaude-Lite for streamlined workflows
 
-**⚠️ What's Still Rough:**
-- This is an initial release - bugs are expected
-- Some MCP integrations could be smoother
-- Performance isn't optimized yet for all operations
-- Some advanced features are experimental
+**⚠️ What's Still Beta:**
+- Session persistence optimization (performance tuning ongoing)
+- Behavioral mode coordination (refining trigger patterns)
+- Hooks system reliability (extensive testing in progress)
+- Agent handoff protocols (improving seamless transitions)
 
-**❌ What We Removed:**
-- Hooks system (got too complex, coming back in v4)
+**🚀 Major V4 Improvements:**
+- **Session Intelligence**: Persistent context across sessions
+- **Behavioral Modes**: Adaptive intelligence based on task type
+- **Enhanced Memory**: Cross-session learning and pattern recognition
+- **Advanced Orchestration**: Multi-layer task coordination
+- **Extensible Architecture**: Robust hooks system for customization
 
-We're pretty happy with v3 as a foundation, but there's definitely room for improvement.
+V4 Beta represents a significant architectural evolution with much more sophisticated context management and intelligent coordination.
 
 ### How It Works 🔄
 
@@ -153,12 +175,13 @@ The nice thing is that most of this usually happens automatically. You make a re
 
 | Component | What It Does | Learn More *(optional!)* |
 |-----------|--------------|------------|
-| **Commands** | 15 specialized tools that auto-activate | [Commands Guide](commands-guide.md) |
+| **Commands** | 21 specialized tools that auto-activate | [Commands Guide](commands-guide.md) |
 | **Flags** | Modifiers that mostly activate automatically | [Flags Guide](flags-guide.md) |
-| **Personas** | 11 AI specialists that know when to help | [Personas Guide](personas-guide.md) |
-| **MCP Servers** | External integrations that connect when useful | [This guide](#core-components-🧩) |
-| **Modes** | 3 operational modes for different workflows | [This guide](#the-three-operational-modes-🎭) |
-| **Orchestrator** | The smart routing that makes it all work | [This guide](#the-orchestrator-system-🎯) |
+| **Agents** | 13 AI specialists that know when to help | [This guide](#agents-ai-specialists-) |
+| **MCP Servers** | 6 external integrations that connect when useful | [This guide](#mcp-servers-external-capabilities-) |
+| **Behavioral Modes** | 4 adaptive modes for different workflows | [This guide](#the-four-behavioral-modes-) |
+| **Session Lifecycle** | Persistent context across sessions | [This guide](#session-lifecycle-system-) |
+| **Orchestrator** | The smart routing that makes it all work | [This guide](#the-orchestrator-system-) |
 
 **Remember**: You can use SuperClaude effectively without reading any of these guides. They're here when you get curious about how it works! 🎪
 
@@ -172,11 +195,12 @@ SuperClaude is built from several interconnected systems that work together. Her
 
 Commands are specialized tools that handle specific types of development work. Instead of generic "help me with this," you get purpose-built tools for different scenarios.
 
-**15 Commands Organized by Purpose:**
+**21 Commands Organized by Purpose:**
 
 **Development** 🔨
 - `/build` - Project building, compilation, bundling
 - `/design` - System architecture and component design
+- `/implement` - Feature creation and code generation
 
 **Analysis** 🔍  
 - `/analyze` - Comprehensive code and system analysis
@@ -188,12 +212,20 @@ Commands are specialized tools that handle specific types of development work. I
 - `/cleanup` - Technical debt reduction
 - `/test` - Testing and coverage analysis
 
+**Session Management** 🧠 *(NEW in V4!)*
+- `/load` - Initialize session with persistent context
+- `/save` - Save session state and insights  
+- `/reflect` - Task validation and completion analysis
+
+**Planning & Discovery** 🎯
+- `/brainstorm` - Interactive requirements discovery *(NEW!)*  
+- `/estimate` - Project estimation and planning
+- `/task` - Long-term project management
+
 **Utilities** 🔧
 - `/document` - Documentation creation
 - `/git` - Enhanced git workflows
-- `/load` - Project context loading
-- `/estimate` - Project estimation
-- `/task` - Long-term project management
+- `/select-tool` - Smart tool selection assistance *(NEW!)*
 - `/spawn` - Complex operation orchestration
 - `/index` - Command navigation and help
 
@@ -232,11 +264,11 @@ Flags change how SuperClaude processes your requests. They're like command-line 
 
 Flags often auto-activate based on context. For example, security-related requests usually get `--persona-security` and `--focus security`. See the [Flags Guide](flags-guide.md) for comprehensive details and patterns.
 
-### Personas: AI Specialists 🎭
+### Agents: AI Specialists 🤖
 
-Personas are like having a team of specialists available on demand. Each brings different expertise, priorities, and approaches to problems.
+Agents are like having a team of specialists available on demand. Each brings different expertise, priorities, and approaches to problems. V4 Beta features an enhanced agent system with better specialization and coordination.
 
-**11 Personas Organized by Domain:**
+**13 Agents Organized by Domain:**
 
 **Technical Specialists** 🔧
 - 🏗️ **architect** - Systems design, long-term architecture
@@ -255,13 +287,17 @@ Personas are like having a team of specialists available on demand. Each brings 
 - 👨‍🏫 **mentor** - Education, knowledge transfer
 - ✍️ **scribe** - Documentation, technical writing
 
-Personas usually auto-activate based on request patterns but you can override with `--persona-[name]` flags. Each has different priorities (e.g., security persona prioritizes security over speed). See the [Personas Guide](personas-guide.md) for detailed descriptions and examples.
+**V4 Beta Enhancements** 🆕
+- 🎯 **brainstorm-PRD** - Requirements analysis and PRD generation *(NEW!)*
+- 🔮 **workflow-agent** - Advanced workflow orchestration *(NEW!)*
+
+Agents usually auto-activate based on request patterns but you can override with `--agent-[name]` flags. Each has different priorities (e.g., security agent prioritizes security over speed). V4 Beta improves agent handoff and coordination patterns.
 
 ### MCP Servers: External Capabilities 🔧
 
 MCP (Model Context Protocol) servers provide specialized capabilities beyond Claude's native abilities.
 
-**4 Integrated Servers:**
+**6 Integrated Servers:**
 
 **Context7** 📚
 - **Purpose**: Official library documentation and best practices
@@ -287,6 +323,18 @@ MCP (Model Context Protocol) servers provide specialized capabilities beyond Cla
 - **What it provides**: Cross-browser testing, visual validation, metrics
 - **Example**: `/test e2e --play` runs comprehensive browser tests
 
+**Morphllm** 🔧 *(NEW in V4!)*
+- **Purpose**: Intelligent file editing with Fast Apply capability
+- **When it activates**: Complex refactoring, multi-file edits
+- **What it provides**: Context-aware code modifications, pattern transformations
+- **Example**: `/improve legacy-code/ --morph` applies intelligent refactoring
+
+**Serena** 🧠 *(NEW in V4!)*
+- **Purpose**: Semantic code analysis and persistent memory
+- **When it activates**: Project analysis, session persistence, memory operations
+- **What it provides**: Cross-session context, semantic understanding, project memory
+- **Example**: `/load --serena` initializes persistent project context
+
 MCP servers usually coordinate automatically but you can control them with `--all-mcp`, `--no-mcp`, or specific flags like `--c7`.
 
 ### How Components Work Together 🤝
@@ -311,17 +359,61 @@ This coordination usually happens for most requests - SuperClaude tries to figur
 
 ---
 
-## The Three Operational Modes 🎭
+## The Four Behavioral Modes 🧠
 
-SuperClaude operates in three distinct modes that optimize different aspects of the development workflow. Understanding these modes helps you get the most out of the framework.
+SuperClaude V4 Beta features four intelligent behavioral modes that automatically adapt to different types of work. These modes provide specialized behavior patterns while maintaining the same command interface.
 
-### Task Management Mode 📋
+### 1. Brainstorming Mode 🎯 *(NEW!)*
 
-**What it is**: Structured workflow execution with progress tracking and validation.
+**What it is**: Interactive requirements discovery through collaborative dialogue.
 
-**When it's used**: Any multi-step operation that needs tracking and coordination.
+**When it activates**: Vague project requests, exploration keywords, uncertainty indicators.
 
-**How it works**: SuperClaude breaks work into manageable tasks, tracks progress, and ensures quality through validation gates.
+**How it works**: 
+- Socratic dialogue to clarify requirements
+- Interactive exploration of possibilities  
+- Consensus building and brief generation
+- Automatic handoff to PRD agent
+
+**Example Usage**:
+```bash
+/sc:brainstorm "task management app"
+# → Interactive dialogue to discover requirements
+# → Generates comprehensive project brief
+# → Hands off to brainstorm-PRD agent
+```
+
+### 2. Introspection Mode 🧠 *(NEW!)*
+
+**What it is**: Meta-cognitive analysis of SuperClaude's own reasoning and decision-making.
+
+**When it activates**: Complex problem-solving, error recovery, framework troubleshooting.
+
+**How it works**:
+- Self-reflective analysis of reasoning patterns
+- Framework compliance validation  
+- Error pattern recognition
+- Performance optimization insights
+
+**Example Usage**:
+```bash
+/sc:analyze complex-issue/ --introspect
+# → Meta-cognitive analysis of approach
+# → Framework compliance checking
+# → Alternative strategy consideration
+```
+
+### 3. Task Management Mode 📋
+
+**What it is**: Multi-layer orchestration with wave systems and advanced delegation.
+
+**When it activates**: Multi-step operations, complex projects, large-scale work.
+
+**How it works**: 
+- Four-layer task hierarchy (Session → Project → Orchestration → Iterative)
+- Wave orchestration for compound intelligence
+- Sub-agent delegation for parallel processing
+- Real-time analytics and performance monitoring
 
 #### Four Layers of Task Management
 
@@ -369,38 +461,196 @@ SuperClaude operates in three distinct modes that optimize different aspects of 
 # → Iteratively improves code with validation between cycles
 ```
 
-#### Task State Management
+### 4. Token Efficiency Mode ⚡ *(NEW!)*
 
-**Core Principles**:
-- **Evidence-Based Progress**: Measurable outcomes, not just activity
-- **Single Focus Protocol**: Only one task in_progress at a time
-- **Real-Time Updates**: Immediate status changes as work progresses
-- **Quality Gates**: Validation before marking tasks complete
+**What it is**: Intelligent token optimization with adaptive compression strategies.
 
-**Task Detection**:
-- Multi-step operations (3+ steps) → Creates task breakdown
-- Keywords: build, implement, create, fix, optimize → Activates task tracking
-- Scope indicators: system, feature, comprehensive → Adds progress monitoring
+**When it activates**: Context usage >75%, large-scale operations, resource constraints.
 
-### Introspection Mode 🧠
+**How it works**:
+- 5-level compression strategy (Minimal → Emergency)
+- Symbol systems for efficient communication
+- Adaptive compression based on content type
+- Quality-gated validation (≥95% information preservation)
 
-**What it is**: Meta-cognitive analysis that lets SuperClaude examine its own reasoning and decision-making processes.
+**Example Features**:
+```bash
+# Automatically activates for large operations
+/sc:analyze enterprise-codebase/ 
+# → Token Efficiency Mode activates
+# → Applies symbol systems and compression
+# → Maintains quality while reducing tokens by 30-50%
+```
 
-**When it's used**: Complex problem-solving, framework troubleshooting, learning moments, or when you explicitly request it with `--introspect`.
+**Compression Techniques**:
+- **Smart Symbol Systems**: →, ⇒, ✅, ❌, 🔄 for status and flow
+- **Intelligent Abbreviations**: cfg, impl, perf, sec for common terms  
+- **Selective Compression**: Framework content preserved, operational data compressed
+- **Quality Validation**: Real-time monitoring of information preservation
 
-**How it works**: SuperClaude steps outside normal operation to analyze its thinking patterns, decision logic, and action sequences.
+---
 
-#### Core Capabilities
+## Session Lifecycle System 🏗️ *(NEW in V4!)*
 
-**Reasoning Analysis** 🧠
-- Examines logical flow and decision rationale
-- Evaluates chain of thought coherence
-- Identifies assumptions and potential biases
-- Validates reasoning against evidence
+SuperClaude V4 Beta introduces persistent session management that remembers your work across multiple sessions, enabling continuous learning and context preservation.
 
-**Action Sequence Review** 🔄
-- Analyzes tool selection effectiveness
-- Reviews workflow patterns and efficiency
+### Core Concept
+
+```
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│  /sc:load   │────▶│    WORK     │────▶│  /sc:save   │────▶│    NEXT     │
+│  (INIT)     │     │  (ACTIVE)   │     │ (CHECKPOINT)│     │  SESSION    │
+└─────────────┘     └─────────────┘     └─────────────┘     └─────────────┘
+       │                                                              │
+       └──────────────────── Enhanced Context ───────────────────────┘
+```
+
+### Session States
+
+**1. INITIALIZING** (`/sc:load`)
+- Activate project via Serena memory system
+- Load existing memories and context
+- Initialize session metadata and tracking
+- **Performance Target**: <500ms
+
+**2. ACTIVE** (Working Session)
+- Full project context available
+- Changes tracked for persistence
+- Decisions logged for replay
+- Automatic checkpoint triggers
+
+**3. CHECKPOINTED** (`/sc:save`)
+- Analyze session changes and insights  
+- Persist discoveries to memory
+- Create checkpoint records
+- Generate summaries if requested
+
+**4. RESUMED** (Next `/sc:load`)
+- Load latest checkpoint and context
+- Restore session state and data
+- Display resumption summary
+- Continue from previous state
+
+### Key Session Commands
+
+**`/sc:load` - Session Initialization**
+```bash
+/sc:load                    # Initialize current project
+/sc:load --deep            # Deep context loading
+/sc:load --resume          # Resume from last checkpoint
+```
+
+**`/sc:save` - Session Persistence**
+```bash
+/sc:save                    # Save current session state
+/sc:save --checkpoint       # Create checkpoint
+/sc:save --summarize        # Include session summary
+```
+
+**`/sc:reflect` - Session Analysis**
+```bash
+/sc:reflect --type task     # Validate current task
+/sc:reflect --type session # Analyze session progress
+/sc:reflect --type completion # Check if work is complete
+```
+
+### Automatic Checkpoints
+
+SuperClaude automatically creates checkpoints:
+- **Task-Based**: Major task completion
+- **Time-Based**: Every 30 minutes of active work
+- **Risk-Based**: Before high-risk operations  
+- **Error Recovery**: After recovering from errors
+
+### Session Memory Organization
+
+```
+memories/
+├── session/
+│   ├── current              # Latest session
+│   ├── {timestamp}          # Individual sessions
+│   └── history/             # Archived sessions
+├── checkpoints/
+│   ├── latest              # Latest checkpoint
+│   ├── {timestamp}         # Individual checkpoints
+│   └── task-{id}           # Task-specific checkpoints
+├── summaries/
+│   ├── daily/{date}        # Daily summaries
+│   └── insights/{topic}    # Topical insights
+└── project_state/
+    ├── context_enhanced    # Accumulated context
+    └── decisions_log       # Architecture decisions
+```
+
+### Benefits
+
+**Cross-Session Learning**
+- SuperClaude remembers project patterns and decisions
+- Context builds over time rather than starting fresh
+- Previous work informs future recommendations
+
+**Reliable Progress Tracking**
+- Work is never lost due to session interruptions
+- Resume exactly where you left off
+- Complete audit trail of decisions and changes
+
+**Enhanced Context Understanding**
+- Deeper project comprehension over time
+- Pattern recognition across multiple sessions
+- Better recommendations based on project history
+
+---
+
+## Hooks System & SuperClaude-Lite 🔌 *(NEW in V4!)*
+
+V4 Beta introduces an advanced hooks system for extensibility and SuperClaude-Lite for streamlined workflows.
+
+### Hooks System Architecture
+
+**8-Step Quality Gates**
+1. **Syntax Validation**: Language-specific syntax checking
+2. **Type Analysis**: Type compatibility and inference  
+3. **Code Quality**: Linting rules and quality standards
+4. **Security Assessment**: Vulnerability analysis and compliance
+5. **E2E Testing**: End-to-end test execution and validation
+6. **Performance Analysis**: Performance benchmarking and optimization
+7. **Documentation**: Documentation completeness and accuracy
+8. **Integration Testing**: Deployment and cross-browser validation
+
+**Performance Monitoring**
+- Real-time operation timing and resource usage
+- Automatic performance optimization suggestions
+- Bottleneck detection and resolution
+- Quality preservation metrics
+
+**Framework Coordination**
+- Seamless integration with all SuperClaude components
+- Session lifecycle management and checkpointing
+- Cross-mode behavioral coordination
+- MCP server orchestration
+
+### SuperClaude-Lite Variant
+
+**What it is**: Streamlined version of SuperClaude optimized for specific workflows.
+
+**Key Features**:
+- **Reduced complexity**: Simplified command set focused on core functionality
+- **Faster performance**: Optimized for speed with minimal overhead
+- **Targeted use cases**: Specialized for quick analysis, code review, and documentation
+- **Easy deployment**: Lighter installation with fewer dependencies
+
+**When to use SuperClaude-Lite**:
+- Quick code reviews and analysis
+- Documentation generation workflows
+- Performance-critical environments
+- Teams wanting focused functionality
+- CI/CD pipeline integration
+
+**Relationship to Full SuperClaude**:
+- Shares core architecture and quality standards
+- Compatible session formats and memory systems
+- Can upgrade to full SuperClaude when needed
+- Maintains behavioral consistency
 - Considers alternative approaches
 - Identifies optimization opportunities
 
@@ -956,21 +1206,42 @@ If you haven't installed SuperClaude yet, see the [Installation Guide](installat
 ```bash
 # Test basic functionality
 /sc:help                    # Should show SuperClaude commands
+/sc:load                    # Initialize session (NEW!)
 /sc:analyze README.md       # Try analyzing a simple file
-/sc:build --help           # Check command options
+/sc:save                    # Save session state (NEW!)
+```
+
+#### V4 Beta Session Workflow
+Experience the new session persistence:
+
+```bash
+# Initialize your first session
+/sc:load --deep             # Deep project context loading
+
+# Try the new brainstorming command
+/sc:brainstorm "improve this project"  # Interactive requirements discovery
+
+# Work with enhanced context
+/sc:analyze codebase/ --focus architecture  # Persistent context helps
+
+# Save your session  
+/sc:save --checkpoint       # Persistent memory for next session
 ```
 
 #### Understanding Auto-Activation
 Try these commands to see how SuperClaude automatically chooses the right tools:
 
 ```bash
-# Frontend work → frontend persona + Magic MCP
+# Frontend work → frontend agent + Magic MCP
 /sc:build src/components/
 
-# Security analysis → security persona + Sequential MCP  
+# Security analysis → security agent + Sequential MCP  
 /sc:analyze auth/ --focus security
 
-# Performance investigation → performance persona + Playwright MCP
+# Complex refactoring → Morphllm MCP + intelligent editing
+/sc:improve legacy-code/ --focus quality
+
+# Performance investigation → performance agent + Playwright MCP  
 /sc:analyze --focus performance slow-endpoints/
 ```
 
@@ -978,46 +1249,59 @@ Watch for auto-activated flags and personas in the output. This shows SuperClaud
 
 ### Development Workflow Patterns 🔄
 
-#### New Project Onboarding
+#### New Project Onboarding *(Enhanced in V4!)*
 When starting work on an unfamiliar project:
 
 ```bash
-# 1. Load project context
+# 1. Initialize persistent session
 /sc:load --deep --summary
+# → Serena MCP loads project context persistently
 # → Gives overview of structure, dependencies, patterns
 
-# 2. Analyze architecture  
+# 2. Interactive project discovery
+/sc:brainstorm "understand this project"
+# → Brainstorming Mode helps discover project goals
+# → Interactive dialogue to understand requirements
+
+# 3. Analyze architecture with enhanced context
 /sc:analyze --focus architecture
-# → 🏗️ architect persona provides system understanding
+# → 🏗️ architect agent with persistent memory
+# → Serena provides semantic understanding
 
-# 3. Check code quality
-/sc:analyze --focus quality
-# → 🧪 qa persona identifies potential issues
-
-# 4. Review documentation
-/sc:document README --type guide
-# → ✍️ scribe persona improves project documentation
+# 4. Save discoveries for future sessions
+/sc:save --checkpoint --summarize
+# → Persistent memory of project insights
+# → Available in future sessions
 ```
 
 #### Feature Development Cycle
 For developing new features:
 
 ```bash
-# 1. Design phase
+# 1. Requirements discovery (NEW!)
+/sc:brainstorm "user dashboard feature"
+# → Interactive requirements gathering
+# → Generates comprehensive feature brief
+
+# 2. Design with persistent context
 /sc:design user-dashboard --type component
-# → 🏗️ architect + 🎨 frontend personas coordinate
+# → 🏗️ architect + 🎨 frontend agents coordinate
+# → Leverages session memory for consistency
 
-# 2. Implementation
-/sc:build dashboard-components/ 
-# → 🎨 frontend persona + Magic MCP for UI generation
+# 3. Implementation with intelligent editing
+/sc:build dashboard-components/
+# → 🎨 frontend agent + Magic MCP for UI generation
+# → Morphllm for intelligent code modifications
 
-# 3. Testing
+# 4. Testing with cross-session context
 /sc:test --type e2e dashboard/
-# → 🧪 qa persona + Playwright MCP for testing
+# → 🧪 qa agent + Playwright MCP for testing
+# → Session memory ensures test consistency
 
-# 4. Documentation  
-/sc:document dashboard/ --type api
-# → ✍️ scribe persona creates comprehensive docs
+# 5. Reflection and checkpoint
+/sc:reflect --type completion
+# → Validates feature completeness
+# → Creates checkpoint for future work
 ```
 
 #### Bug Investigation & Resolution
@@ -2916,38 +3200,43 @@ We believe SuperClaude can become significantly more helpful for software develo
 
 ## Conclusion 🎉
 
-You've now got a comprehensive understanding of SuperClaude v3.0 - its components, capabilities, and how to use them effectively. Let's wrap up with the key takeaways that will help you get the most out of the framework.
+You've now got a comprehensive understanding of SuperClaude V4 Beta - its components, capabilities, and how to use them effectively. Let's wrap up with the key takeaways that will help you get the most out of the framework.
 
 ### Key Takeaways 🎯
 
 #### SuperClaude's Core Value
-SuperClaude transforms Claude Code from a general-purpose AI assistant into a specialized development partner through:
-- **15 specialized commands** that understand development workflows
-- **11 expert personas** that bring domain-specific knowledge
-- **Intelligent orchestration** that coordinates tools automatically
-- **Quality-first approach** that maintains safety and reliability
+SuperClaude V4 Beta transforms Claude Code into an intelligent development partner through:
+- **21 specialized commands** including session management and brainstorming
+- **13 expert agents** with enhanced coordination and specialization  
+- **4 behavioral modes** that adapt intelligently to different work types
+- **Session persistence** that remembers and learns across sessions
+- **Advanced orchestration** with hooks system and quality gates
+- **6 MCP servers** including intelligent editing and semantic analysis
 
 #### The Power is in the Coordination
-SuperClaude's power comes not from any single feature, but from how components work together:
-- Commands usually activate appropriate personas and MCP servers
-- Personas coordinate with each other for multi-domain problems
-- The orchestrator optimizes tool selection and resource usage
-- Quality gates ensure consistent, reliable outcomes
+SuperClaude V4's power comes from intelligent system integration:
+- **Session lifecycle** maintains context across all interactions
+- **Behavioral modes** adapt automatically to different work patterns
+- **Agents coordinate** seamlessly for multi-domain problems  
+- **MCP servers** integrate intelligently based on task requirements
+- **Quality gates** ensure consistent, reliable outcomes through 8-step validation
+- **Memory system** enables continuous learning and improvement
 
 #### Start Simple, Scale Intelligently
-The best approach to SuperClaude is progressive:
-1. **Begin with basic commands** to understand core functionality
-2. **Trust auto-activation** to learn optimal tool combinations
-3. **Add manual control** when you need specific perspectives
-4. **Experiment with advanced features** as your confidence grows
+The best approach to SuperClaude V4 Beta is progressive:
+1. **Initialize sessions** with `/sc:load` to experience persistent context
+2. **Try brainstorming** with `/sc:brainstorm` for interactive discovery
+3. **Trust behavioral modes** to adapt automatically to your work patterns
+4. **Use session persistence** with `/sc:save` to build continuous context
+5. **Experiment with advanced features** like hooks and multi-layer orchestration
 
 ### What Makes SuperClaude Different 🌟
 
 #### Honest About Limitations
-- We acknowledge v3.0 is fresh out of beta with rough edges
-- We clearly document what works well vs. what's still experimental
-- We prioritize reliability over flashy features
-- We provide realistic timelines and expectations
+- V4 Beta represents major architectural improvements but is still in beta
+- We clearly document what's working well vs. what's still being refined
+- Session persistence and behavioral modes are sophisticated but still evolving
+- We prioritize reliability and user experience over flashy features
 
 #### Evidence-Based Development
 - All recommendations backed by verifiable data
@@ -2965,24 +3254,27 @@ The best approach to SuperClaude is progressive:
 
 #### For New Users
 1. **Start with installation**: Follow the [Installation Guide](installation-guide.md)
-2. **Try basic commands**: `/help`, `/analyze README.md`, `/build --help`
-3. **Explore domain guides**: [Commands](commands-guide.md), [Flags](flags-guide.md), [Personas](personas-guide.md)
-4. **Build confidence gradually**: Simple tasks → complex workflows → advanced features
+2. **Initialize your first session**: `/sc:load` to experience persistent context
+3. **Try interactive discovery**: `/sc:brainstorm "project idea"` for requirements
+4. **Experience the lifecycle**: Use `/sc:save` to persist your session
+5. **Build confidence gradually**: Session basics → behavioral modes → advanced orchestration
 
 #### For Experienced Users
-1. **Optimize your workflows**: Identify flag combinations that work well for your needs
-2. **Experiment with coordination**: Try different persona combinations on complex problems
-3. **Contribute feedback**: Share what works (and what doesn't) in your environment
-4. **Explore advanced features**: Wave orchestration, sub-agent delegation, introspection mode
+1. **Leverage session persistence**: Build long-term project context across sessions
+2. **Master behavioral modes**: Understand how brainstorming, introspection, task management, and token efficiency work
+3. **Explore advanced orchestration**: Wave systems, hooks integration, and multi-layer coordination
+4. **Contribute feedback**: Share what works (and what doesn't) with V4 Beta features
+5. **Try SuperClaude-Lite**: Experiment with the streamlined variant for specific workflows
 
 ### When to Use SuperClaude 🤔
 
-#### SuperClaude Excels At
-- **Development workflows**: Building, testing, deploying, documenting
-- **Code analysis**: Quality assessment, security scanning, performance optimization
-- **Learning and understanding**: Explaining complex systems, onboarding to new projects
-- **Quality improvement**: Systematic refactoring, technical debt reduction
-- **Multi-domain problems**: Issues requiring multiple types of expertise
+#### SuperClaude V4 Beta Excels At
+- **Persistent development workflows**: Long-term projects with cross-session context
+- **Interactive requirements discovery**: Brainstorming and clarifying project goals
+- **Intelligent code analysis**: Semantic understanding with Serena and Morphllm
+- **Adaptive task management**: Multi-layer orchestration with behavioral intelligence
+- **Cross-domain coordination**: Complex problems requiring multiple agents and modes
+- **Session-based learning**: Building project understanding over time
 
 #### When to Use Standard Claude Code
 - **Simple questions**: Quick explanations that don't need specialized tools
@@ -3028,7 +3320,7 @@ The framework gets better through:
 
 ### Final Thoughts 🎉
 
-SuperClaude v3.0 represents a solid foundation for enhanced software development workflows. While it's not perfect and still has room for improvement, it demonstrates how AI can be thoughtfully integrated into development practices without disrupting existing workflows or replacing human expertise.
+SuperClaude V4 Beta represents a significant architectural evolution in AI-assisted development. With persistent sessions, behavioral intelligence, and advanced orchestration, it demonstrates how AI can become a true development partner that learns and adapts while respecting existing workflows and human expertise.
 
 The framework succeeds when it makes you more productive, helps you learn new things, or catches issues you might have missed. It's designed to be a helpful colleague rather than a replacement for understanding your craft.
 
@@ -3042,7 +3334,7 @@ Whether you use SuperClaude occasionally for specific tasks or integrate it deep
 
 ---
 
-*Last updated: July 2024*  
-*SuperClaude v3.0 User Guide*
+*Last updated: January 2025*  
+*SuperClaude V4 Beta User Guide*
 
 *For questions, feedback, or contributions, visit our GitHub repository or join the community discussions. We're always happy to hear from users and learn about your experiences with the framework.*

@@ -1,4 +1,4 @@
-# SuperClaude Flags User Guide 🏁
+# SuperClaude V4 Beta Flags User Guide 🏁
 
 ## 🤖 Most Flags Activate Automatically - Don't Stress About It!
 
@@ -7,7 +7,7 @@
 **Here's what actually happens:**
 - You type `/analyze auth.js` 
 - SuperClaude detects it's security-related code
-- **Usually adds** `--persona-security`, `--focus security`, `--validate`
+- **Usually activates** security-auditor agent, `--focus security`, `--validate`
 - You often get expert security analysis without managing any flags
 
 **When might you manually use flags?**
@@ -23,10 +23,11 @@
 
 ```bash
 # These work great with zero flag knowledge:
-/sc:analyze src/                    # Auto-picks the right analysis flags
+/sc:analyze src/                    # Auto-activates appropriate expert agents
 /sc:build                          # Auto-optimizes based on your project  
-/sc:improve messy-code.js          # Auto-activates quality and safety flags
-/sc:troubleshoot "weird error"     # Auto-activates debugging and analysis flags
+/sc:improve messy-code.js          # Auto-activates quality agents and safety flags
+/sc:troubleshoot "weird error"     # Auto-activates root-cause-analyzer and debugging flags
+/sc:brainstorm "my app idea"       # Auto-activates brainstorm-PRD agent for requirements
 ```
 
 **See? No flags needed.** Everything below is for when you get curious about what's happening behind the scenes.
@@ -153,8 +154,20 @@ Enable specialized capabilities through MCP servers.
 #### `--play` / `--playwright`
 **What it does**: Enables Playwright for browser automation and testing  
 **When to use**: E2E testing, performance monitoring  
-**Auto-activates**: Test workflows, QA persona  
+**Auto-activates**: Test workflows, QA specialist agent  
 **Example**: `/test e2e --play`
+
+#### `--morph` / `--fast-apply`
+**What it does**: Enables Morphllm for intelligent file editing with Fast Apply  
+**When to use**: Multi-file edits, pattern-based transformations  
+**Auto-activates**: Complex refactoring, bulk file updates  
+**Example**: `/refactor --morph pattern-updates/`
+
+#### `--serena` / `--semantic`
+**What it does**: Enables Serena for semantic analysis and memory operations  
+**When to use**: Symbol analysis, project-wide context, session management  
+**Auto-activates**: Complex symbol operations, memory commands  
+**Example**: `/analyze --serena --semantic large-codebase/`
 
 #### `--all-mcp`
 **What it does**: Enables all MCP servers simultaneously  
@@ -167,7 +180,7 @@ Enable specialized capabilities through MCP servers.
 **When to use**: Faster execution, don't need specialized features  
 **Example**: `/analyze simple-script.js --no-mcp`
 
-**💡 Tip**: MCP servers add capabilities but use more tokens. `--c7` for docs, `--seq` for thinking, `--magic` for UI.
+**💡 Tip**: MCP servers add capabilities but use more tokens. `--c7` for docs, `--seq` for thinking, `--magic` for UI, `--serena` for memory & semantic analysis.
 
 ---
 
@@ -198,12 +211,47 @@ For complex operations and workflows.
 **Auto-activates**: Polish, refine, enhance keywords  
 **Example**: `/improve messy-code.js --loop`
 
+#### `--iterations [n]`
+**What it does**: Control number of improvement cycles (1-10)  
+**When to use**: Controlling iterative enhancement depth  
+**Example**: `/improve --loop --iterations 5`
+
+#### `--interactive`
+**What it does**: Enables user confirmation between iterations  
+**When to use**: Want control over iterative process  
+**Example**: `/improve --loop --interactive`
+
 #### `--concurrency [n]`
 **What it does**: Control max concurrent sub-agents (1-15)  
 **When to use**: Controlling resource usage  
 **Example**: `/analyze --delegate auto --concurrency 3`
 
 **💡 Tip**: These are powerful but complex. Start with `--delegate auto` for big projects, `--loop` for improvements.
+
+---
+
+### Session & Workflow Flags 🔄
+
+These V4 Beta flags control session management and advanced workflows.
+
+#### `--brainstorm`
+**What it does**: Activates brainstorming mode for requirements discovery  
+**When to use**: Ambiguous project ideas, need specification development  
+**Auto-activates**: Exploration keywords, "not sure", project planning  
+**Example**: `/brainstorm "task management app" --brainstorm`
+
+#### `--max-rounds [n]`
+**What it does**: Controls brainstorming dialogue rounds (default: 15)  
+**When to use**: Controlling brainstorming session depth  
+**Example**: `/brainstorm idea --max-rounds 10`
+
+#### `--prd`
+**What it does**: Generates Product Requirements Document from brainstorming  
+**When to use**: Convert discussions to formal specifications  
+**Auto-activates**: End of successful brainstorming sessions  
+**Example**: `/brainstorm app-idea --prd`
+
+**💡 Tip**: V4 Beta introduces powerful session management - let brainstorming mode guide requirement discovery naturally.
 
 ---
 
@@ -221,12 +269,12 @@ Direct SuperClaude's attention to specific areas.
 **What it does**: Focuses analysis on specific domain  
 **Example**: `/analyze --focus security --scope project`
 
-#### Persona Flags
-**Available personas**: architect, frontend, backend, analyzer, security, mentor, refactorer, performance, qa, devops, scribe  
-**What they do**: Activates specialist behavior patterns  
-**Example**: `/analyze --persona-security` - Security-focused analysis
+#### Agent Flags
+**Available agents**: system-architect, frontend-specialist, backend-engineer, root-cause-analyzer, security-auditor, code-educator, code-refactorer, performance-optimizer, qa-specialist, devops-engineer, technical-writer, python-ultimate-expert, brainstorm-PRD  
+**What they do**: Activates specialized domain expert agents (V4 Beta enhancement)  
+**Example**: `/analyze --agent security-auditor` - Security-focused analysis with expert agent
 
-**💡 Tip**: `--focus` is great for targeted analysis. Personas auto-activate but manual control helps.
+**💡 Tip**: `--focus` is great for targeted analysis. Expert agents auto-activate but manual control helps.
 
 ---
 
@@ -330,11 +378,11 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 ### Domain-Based
 ```bash
 /sc:build react-app/
-# Auto-adds: --c7 --persona-frontend
+# Auto-activates: frontend-specialist agent + --c7
 # Why: Frontend framework detected
 
 /sc:analyze --focus security
-# Auto-adds: --persona-security --validate
+# Auto-activates: security-auditor agent + --validate
 # Why: Security focus triggers security specialist
 ```
 
@@ -357,20 +405,20 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 
 **Comprehensive Code Review**:
 ```bash
-/sc:review codebase/ --persona-qa --think-hard --focus quality --validate --c7
-# → QA specialist + deep thinking + quality focus + validation + docs
+/sc:review codebase/ --agent qa-specialist --think-hard --focus quality --validate --c7
+# → QA specialist agent + deep thinking + quality focus + validation + docs
 ```
 
 **Legacy System Modernization**:
 ```bash
-/sc:improve legacy/ --wave-mode force --persona-architect --safe-mode --loop --c7
-# → Wave orchestration + architect perspective + safety + iteration + docs
+/sc:improve legacy/ --wave-mode force --agent system-architect --safe-mode --loop --c7
+# → Wave orchestration + architect agent + safety + iteration + docs
 ```
 
 **Security Audit**:
 ```bash
-/sc:scan --persona-security --ultrathink --focus security --validate --seq
-# → Security specialist + maximum thinking + security focus + validation + systematic analysis
+/sc:scan --agent security-auditor --ultrathink --focus security --validate --seq
+# → Security auditor agent + maximum thinking + security focus + validation + systematic analysis
 ```
 
 ### Performance Optimization
@@ -392,16 +440,16 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 **Bug Investigation Workflow**:
 ```bash
 /sc:troubleshoot "specific error" --seq --think --validate
-/sc:analyze affected-files/ --focus quality --persona-analyzer  
+/sc:analyze affected-files/ --focus quality --agent root-cause-analyzer  
 /sc:test --play --coverage
 ```
 
 **Feature Development Workflow**:
 ```bash
-/sc:design new-feature --persona-architect --c7
-/sc:build --magic --persona-frontend --validate
+/sc:design new-feature --agent system-architect --c7
+/sc:build --magic --agent frontend-specialist --validate
 /sc:test --play --coverage
-/sc:document --persona-scribe --c7
+/sc:document --agent technical-writer --c7
 ```
 
 ## Quick Reference 📋
@@ -417,6 +465,8 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 | `--focus security` | Security focus | Security concerns |
 | `--delegate auto` | Parallel processing | Large codebases |
 | `--validate` | Check before action | Risky operations |
+| `--brainstorm` | Requirements discovery | Ambiguous projects |
+| `--serena` | Semantic analysis | Symbol operations |
 
 ### Flag Combinations That Work Well
 ```bash
@@ -430,13 +480,16 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 --delegate auto --uc --focus
 
 # Learning
---verbose --c7 --persona-mentor
+--verbose --c7 --agent code-educator
 
 # Security work
---persona-security --focus security --validate
+--agent security-auditor --focus security --validate
 
 # Performance work
---persona-performance --focus performance --play
+--agent performance-optimizer --focus performance --play
+
+# Requirements discovery
+--brainstorm --max-rounds 10 --prd
 ```
 
 ### Auto-Activation Triggers
@@ -446,16 +499,18 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 - **--delegate**: >7 directories or >50 files
 - **--c7**: Framework imports, documentation requests
 - **--seq**: Debugging keywords, --think flags
-- **Personas**: Domain-specific keywords and patterns
+- **--serena**: Symbol operations, memory commands
+- **--brainstorm**: Exploration keywords, ambiguous requests
+- **Expert Agents**: Domain-specific keywords and patterns
 
 ## Troubleshooting Flag Issues 🚨
 
 ### Common Problems
 
 **"Flags don't seem to work"**
-- Check spelling (common typos: `--ultracompresed`, `--persona-fronted`)
+- Check spelling (common typos: `--ultracompresed`, `--agent fronted-specialist`)
 - Some flags need values: `--scope project`, `--focus security`
-- Flag conflicts: `--no-mcp` overrides `--c7`, `--seq`, etc.
+- Flag conflicts: `--no-mcp` overrides `--c7`, `--seq`, `--serena`, etc.
 
 **"Operation too slow"**
 - Try `--uc` for compression
@@ -470,7 +525,7 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 **"Not thorough enough"**
 - Add `--think` or `--think-hard`
 - Enable relevant MCP servers: `--seq`, `--c7`
-- Use appropriate persona: `--persona-analyzer`
+- Use appropriate agent: `--agent root-cause-analyzer`
 
 **"Changes too risky"**
 - Always use `--safe-mode` for important code
@@ -480,9 +535,9 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 ### Flag Conflicts
 
 **These override others**:
-- `--no-mcp` overrides all MCP flags (`--c7`, `--seq`, etc.)
+- `--no-mcp` overrides all MCP flags (`--c7`, `--seq`, `--serena`, etc.)
 - `--safe-mode` overrides optimization flags
-- Last persona flag wins: `--persona-frontend --persona-backend` → backend
+- Last agent flag wins: `--agent frontend-specialist --agent backend-engineer` → backend-engineer
 
 **Precedence order**:
 1. Safety flags (`--safe-mode`) beat optimization
@@ -499,8 +554,8 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 4. **Trust the automation** - SuperClaude usually picks reasonable defaults
 
 ### Getting Advanced (If You Want To)
-1. **Experiment with overrides** - Try `--persona-security` on non-security code for different perspectives
-2. **Learn the useful combos** - `--safe-mode --validate` for important stuff
+1. **Experiment with overrides** - Try `--agent security-auditor` on non-security code for different perspectives
+2. **Learn the useful combos** - `--safe-mode --validate` for important stuff, `--brainstorm --prd` for new projects
 3. **Understand the performance trade-offs** - Fast (`--uc --no-mcp`) vs thorough (`--think-hard --all-mcp`)
 4. **Use flags for learning** - `--verbose` when you want to understand what's happening
 
@@ -508,7 +563,8 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 - **For speed**: `--uc --no-mcp --scope file`
 - **For thoroughness**: `--think-hard --all-mcp --delegate auto`
 - **For safety**: `--safe-mode --validate --preview`
-- **For learning**: `--verbose --c7 --persona-mentor`
+- **For learning**: `--verbose --c7 --agent code-educator`
+- **For project discovery**: `--brainstorm --max-rounds 15 --prd`
 
 ---
 
