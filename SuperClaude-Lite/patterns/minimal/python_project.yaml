@@ -1,0 +1,45 @@
+# Minimal Python Project Pattern
+# Lightweight bootstrap pattern for Python projects
+
+project_type: "python"
+detection_patterns:
+  - "*.py files present"
+  - "requirements.txt or pyproject.toml"
+  - "__pycache__/ directories"
+
+auto_flags:
+  - "--serena"  # Semantic analysis
+  - "--context7"  # Python documentation
+
+mcp_servers:
+  primary: "serena"
+  secondary: ["context7", "sequential", "morphllm"]
+
+patterns:
+  file_structure:
+    - "src/ or lib/"
+    - "tests/"
+    - "docs/"
+    - "requirements.txt"
+  
+  common_tasks:
+    - "function refactoring"
+    - "class extraction"
+    - "import optimization"
+    - "testing setup"
+
+intelligence:
+  mode_triggers:
+    - "token_efficiency: context >75%"
+    - "task_management: refactor|test|analyze"
+  
+  validation_focus:
+    - "python_syntax"
+    - "pep8_compliance"
+    - "type_hints"
+    - "testing_coverage"
+
+performance_targets:
+  bootstrap_ms: 40
+  context_size: "4KB"
+  cache_duration: "45min"

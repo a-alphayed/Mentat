@@ -1,0 +1,367 @@
+# SuperClaude-Lite Modes Configuration
+# Mode detection patterns and behavioral configurations
+
+# Mode Detection Patterns
+mode_detection:
+  brainstorming:
+    description: "Interactive requirements discovery and exploration"
+    activation_type: "automatic"
+    confidence_threshold: 0.7
+    
+    trigger_patterns:
+      vague_requests:
+        - "i want to build"
+        - "thinking about"
+        - "not sure"
+        - "maybe we could"
+        - "what if we"
+        - "considering"
+        
+      exploration_keywords:
+        - "brainstorm"
+        - "explore"
+        - "discuss"
+        - "figure out"
+        - "work through"
+        - "think through"
+        
+      uncertainty_indicators:
+        - "maybe"
+        - "possibly"
+        - "perhaps"
+        - "could we"
+        - "would it be possible"
+        - "wondering if"
+        
+      project_initiation:
+        - "new project"
+        - "startup idea"
+        - "feature concept"
+        - "app idea"
+        - "building something"
+        
+    behavioral_settings:
+      dialogue_style: "collaborative_non_presumptive"
+      discovery_depth: "adaptive"
+      context_retention: "cross_session"
+      handoff_automation: true
+      
+    integration:
+      command_trigger: "/sc:brainstorm"
+      mcp_servers: ["sequential", "context7"]
+      quality_gates: ["requirements_clarity", "brief_completeness"]
+      
+  task_management:
+    description: "Multi-layer task orchestration with delegation and wave systems"
+    activation_type: "automatic"
+    confidence_threshold: 0.8
+    
+    trigger_patterns:
+      multi_step_operations:
+        - "build"
+        - "implement"
+        - "create"
+        - "develop"
+        - "set up"
+        - "establish"
+        
+      scope_indicators:
+        - "system"
+        - "feature"
+        - "comprehensive"
+        - "complete"
+        - "entire"
+        - "full"
+        
+      complexity_indicators:
+        - "complex"
+        - "multiple"
+        - "several"
+        - "many"
+        - "various"
+        - "different"
+        
+    auto_activation_thresholds:
+      file_count: 3
+      directory_count: 2
+      complexity_score: 0.4
+      operation_types: 2
+      
+    delegation_strategies:
+      files: "individual_file_analysis"
+      folders: "directory_level_analysis"
+      auto: "intelligent_auto_detection"
+      
+    wave_orchestration:
+      enabled: true
+      strategies: ["progressive", "systematic", "adaptive", "enterprise"]
+      
+    behavioral_settings:
+      coordination_mode: "intelligent"
+      parallel_optimization: true
+      learning_integration: true
+      analytics_tracking: true
+      
+  token_efficiency:
+    description: "Intelligent token optimization with adaptive compression"
+    activation_type: "automatic"
+    confidence_threshold: 0.75
+    
+    trigger_patterns:
+      resource_constraints:
+        - "context usage >75%"
+        - "large-scale operations"
+        - "resource constraints"
+        - "memory pressure"
+        
+      user_requests:
+        - "brief"
+        - "concise"
+        - "compressed"
+        - "short"
+        - "efficient"
+        - "minimal"
+        
+      efficiency_needs:
+        - "token optimization"
+        - "resource optimization"
+        - "efficiency"
+        - "performance"
+        
+    compression_levels:
+      minimal: "0-40%"
+      efficient: "40-70%"
+      compressed: "70-85%"
+      critical: "85-95%"
+      emergency: "95%+"
+      
+    behavioral_settings:
+      symbol_systems: true
+      abbreviation_systems: true
+      selective_compression: true
+      quality_preservation: 0.95
+      
+  introspection:
+    description: "Meta-cognitive analysis and framework troubleshooting"
+    activation_type: "automatic"
+    confidence_threshold: 0.6
+    
+    trigger_patterns:
+      self_analysis:
+        - "analyze reasoning"
+        - "examine decision"
+        - "reflect on"
+        - "thinking process"
+        - "decision logic"
+        
+      problem_solving:
+        - "complex problem"
+        - "multi-step"
+        - "meta-cognitive"
+        - "systematic thinking"
+        
+      error_recovery:
+        - "outcomes don't match"
+        - "errors occur"
+        - "unexpected results"
+        - "troubleshoot"
+        
+      framework_discussion:
+        - "SuperClaude"
+        - "framework"
+        - "meta-conversation"
+        - "system analysis"
+        
+    behavioral_settings:
+      analysis_depth: "meta_cognitive"
+      transparency_level: "high"
+      pattern_recognition: "continuous"
+      learning_integration: "active"
+
+# Mode Coordination Patterns
+mode_coordination:
+  concurrent_modes:
+    allowed_combinations:
+      - ["brainstorming", "token_efficiency"]
+      - ["task_management", "token_efficiency"]
+      - ["introspection", "token_efficiency"]
+      - ["task_management", "introspection"]
+      
+    coordination_strategies:
+      brainstorming_efficiency: "compress_non_dialogue_content"
+      task_management_efficiency: "compress_session_metadata"
+      introspection_efficiency: "selective_analysis_compression"
+      
+  mode_transitions:
+    brainstorming_to_task_management:
+      trigger: "requirements_clarified"
+      handoff_data: ["brief", "requirements", "constraints"]
+      
+    task_management_to_introspection:
+      trigger: "complex_issues_encountered"
+      handoff_data: ["task_context", "performance_metrics", "issues"]
+      
+    any_to_token_efficiency:
+      trigger: "resource_pressure"
+      activation_priority: "immediate"
+
+# Performance Profiles
+performance_profiles:
+  lightweight:
+    target_response_time_ms: 100
+    memory_usage_mb: 25
+    cpu_utilization_percent: 20
+    token_optimization: "standard"
+    
+  standard:
+    target_response_time_ms: 200
+    memory_usage_mb: 50
+    cpu_utilization_percent: 40
+    token_optimization: "balanced"
+    
+  intensive:
+    target_response_time_ms: 500
+    memory_usage_mb: 100
+    cpu_utilization_percent: 70
+    token_optimization: "aggressive"
+
+# Mode-Specific Configurations
+mode_configurations:
+  brainstorming:
+    dialogue:
+      max_rounds: 15
+      convergence_threshold: 0.85
+      context_preservation: "full"
+      
+    brief_generation:
+      min_requirements: 3
+      include_context: true
+      validation_criteria: ["clarity", "completeness", "actionability"]
+      
+    integration:
+      auto_handoff: true
+      prd_agent: "brainstorm-PRD"
+      command_coordination: "/sc:brainstorm"
+      
+  task_management:
+    delegation:
+      default_strategy: "auto"
+      concurrency_limit: 7
+      performance_monitoring: true
+      
+    wave_orchestration:
+      auto_activation: true
+      complexity_threshold: 0.4
+      coordination_strategy: "adaptive"
+      
+    analytics:
+      real_time_tracking: true
+      performance_metrics: true
+      optimization_suggestions: true
+      
+  token_efficiency:
+    compression:
+      adaptive_levels: true
+      quality_thresholds: [0.98, 0.95, 0.90, 0.85, 0.80]
+      symbol_systems: true
+      abbreviation_systems: true
+      
+    selective_compression:
+      framework_exclusion: true
+      user_content_preservation: true
+      session_data_optimization: true
+      
+    performance:
+      processing_target_ms: 150
+      efficiency_target: 0.50
+      quality_preservation: 0.95
+      
+  introspection:
+    analysis:
+      reasoning_depth: "comprehensive"
+      pattern_detection: "continuous"
+      bias_recognition: "active"
+      
+    transparency:
+      thinking_process_exposure: true
+      decision_logic_analysis: true
+      assumption_validation: true
+      
+    learning:
+      pattern_recognition: "continuous"
+      effectiveness_tracking: true
+      adaptation_suggestions: true
+
+# Learning Integration
+learning_integration:
+  mode_effectiveness_tracking:
+    enabled: true
+    metrics:
+      - "activation_accuracy"
+      - "user_satisfaction"
+      - "task_completion_rates"
+      - "performance_improvements"
+      
+  adaptation_triggers:
+    effectiveness_threshold: 0.7
+    user_preference_weight: 0.8
+    performance_impact_weight: 0.6
+    
+  pattern_learning:
+    user_specific: true
+    project_specific: true
+    context_aware: true
+    cross_session: true
+
+# Quality Gates
+quality_gates:
+  mode_activation:
+    pattern_confidence: 0.6
+    context_appropriateness: 0.7
+    performance_readiness: true
+    
+  mode_coordination:
+    conflict_resolution: "automatic"
+    resource_allocation: "intelligent"
+    performance_monitoring: "continuous"
+    
+  mode_effectiveness:
+    real_time_monitoring: true
+    adaptation_triggers: true
+    quality_preservation: true
+
+# Error Handling
+error_handling:
+  mode_activation_failures:
+    fallback_strategy: "graceful_degradation"
+    retry_mechanism: "adaptive"
+    error_learning: true
+    
+  coordination_conflicts:
+    resolution_strategy: "priority_based"
+    resource_arbitration: "intelligent"
+    performance_preservation: true
+    
+  performance_degradation:
+    detection: "real_time"
+    mitigation: "automatic"
+    learning_integration: true
+
+# Integration Points
+integration_points:
+  commands:
+    brainstorming: "/sc:brainstorm"
+    task_management: ["/task", "/spawn", "/loop"]
+    reflection: "/sc:reflect"
+    
+  mcp_servers:
+    brainstorming: ["sequential", "context7"]
+    task_management: ["serena", "morphllm"]
+    token_efficiency: ["morphllm"]
+    introspection: ["sequential"]
+    
+  hooks:
+    session_start: "mode_initialization"
+    pre_tool_use: "mode_coordination"
+    post_tool_use: "mode_effectiveness_tracking"
+    stop: "mode_analytics_consolidation"

@@ -1,11 +1,23 @@
 ---
-allowed-tools: [Read, Glob, Grep, TodoWrite, Task, mcp__sequential-thinking__sequentialthinking]
-description: "Execute complex tasks with intelligent workflow management and cross-session persistence"
-wave-enabled: true
-complexity-threshold: 0.7
+name: task
+description: "Execute complex tasks with intelligent workflow management, cross-session persistence, hierarchical task organization, and advanced wave system orchestration"
+allowed-tools: [Read, Write, Edit, MultiEdit, Bash, Grep, Glob, TodoWrite, Task, WebSearch, sequentialthinking]
+
+# Command Classification
+category: orchestration
+complexity: advanced
+scope: cross-session
+
+# Integration Configuration
+mcp-integration:
+  servers: [sequential, context7, magic, playwright, morphllm, serena]
+  personas: [architect, analyzer, frontend, backend, security, devops, project-manager]
+  wave-enabled: true
+  complexity-threshold: 0.7
+
+# Performance Profile
 performance-profile: complex
 personas: [architect, analyzer, project-manager]
-mcp-servers: [sequential, context7]
 ---
 
 # /sc:task - Enhanced Task Management
@@ -13,29 +25,33 @@ mcp-servers: [sequential, context7]
 ## Purpose
 Execute complex tasks with intelligent workflow management, cross-session persistence, hierarchical task organization, and advanced orchestration capabilities.
 
-## Usage
+## Usage  
 ```
-/sc:task [action] [target] [--strategy systematic|agile|enterprise] [--persist] [--hierarchy] [--delegate]
+/sc:task [action] [target] [--strategy systematic|agile|enterprise] [--depth shallow|normal|deep] [--parallel] [--validate] [--mcp-routing]
 ```
-
-## Actions
-- `create` - Create new project-level task hierarchy
-- `execute` - Execute task with intelligent orchestration
-- `status` - View task status across sessions
-- `analytics` - Task performance and analytics dashboard
-- `optimize` - Optimize task execution strategies
-- `delegate` - Delegate tasks across multiple agents
-- `validate` - Validate task completion with evidence
 
 ## Arguments
-- `target` - Task description, project scope, or existing task ID
-- `--strategy` - Execution strategy (systematic, agile, enterprise)
+- `action` - Task management action (create, execute, status, analytics, optimize, delegate, validate)
+- `target` - Task description, project scope, or existing task ID for comprehensive management
+- `--strategy` - Task execution strategy selection with specialized orchestration approaches
+- `--depth` - Task analysis depth and thoroughness level
+- `--parallel` - Enable parallel task processing with multi-agent coordination
+- `--validate` - Comprehensive validation and task completion quality gates
+- `--mcp-routing` - Intelligent MCP server routing for specialized task analysis
+- `--wave-mode` - Enable wave-based execution with progressive task enhancement
+- `--cross-session` - Enable cross-session persistence and task continuity
 - `--persist` - Enable cross-session task persistence
 - `--hierarchy` - Create hierarchical task breakdown
 - `--delegate` - Enable multi-agent task delegation
-- `--wave-mode` - Enable wave-based execution
-- `--validate` - Enforce quality gates and validation
-- `--mcp-routing` - Enable intelligent MCP server routing
+
+## Actions
+- `create` - Create new project-level task hierarchy with advanced orchestration
+- `execute` - Execute task with intelligent orchestration and wave system integration
+- `status` - View task status across sessions with comprehensive analytics
+- `analytics` - Task performance and analytics dashboard with optimization insights
+- `optimize` - Optimize task execution strategies with wave system coordination
+- `delegate` - Delegate tasks across multiple agents with intelligent coordination
+- `validate` - Validate task completion with evidence and quality assurance
 
 ## Execution Modes
 
@@ -120,7 +136,31 @@ Execute complex tasks with intelligent workflow management, cross-session persis
 - **Learning Systems**: Continuous improvement from execution patterns
 - **Optimization Recommendations**: Data-driven improvement suggestions
 
-## Usage Examples
+## Examples
+
+### Comprehensive Project Analysis
+```
+/sc:task create "enterprise authentication system" --strategy systematic --depth deep --validate --mcp-routing
+# Comprehensive analysis with full orchestration capabilities
+```
+
+### Agile Multi-Sprint Coordination
+```
+/sc:task execute "feature backlog" --strategy agile --parallel --cross-session
+# Agile coordination with cross-session persistence
+```
+
+### Enterprise-Scale Operation
+```
+/sc:task create "digital transformation" --strategy enterprise --wave-mode --all-personas
+# Enterprise-scale coordination with full persona orchestration
+```
+
+### Complex Integration Project
+```  
+/sc:task execute "microservices platform" --depth deep --parallel --validate --sequential
+# Complex integration with sequential thinking and validation
+```
 
 ### Create Project-Level Task Hierarchy
 ```
@@ -141,6 +181,26 @@ Execute complex tasks with intelligent workflow management, cross-session persis
 ```
 /sc:task status --all-sessions --detailed-breakdown
 ```
+
+## Boundaries
+
+**This advanced command will:**
+- Orchestrate complex multi-domain task operations with expert coordination
+- Provide sophisticated analysis and strategic task planning capabilities
+- Coordinate multiple MCP servers and personas for optimal task outcomes
+- Maintain cross-session persistence and progressive enhancement for task continuity
+- Apply comprehensive quality gates and validation throughout task execution
+- Execute complex tasks with intelligent workflow management and wave system integration
+- Create hierarchical task breakdown with advanced orchestration capabilities
+- Track task performance and analytics with optimization recommendations
+
+**This advanced command will not:**
+- Execute without proper analysis and planning phases for task management
+- Operate without appropriate error handling and recovery mechanisms for tasks
+- Proceed without stakeholder alignment and clear success criteria for task completion
+- Compromise quality standards for speed or convenience in task execution
+
+---
 
 ## Claude Code Integration
 - **TodoWrite Integration**: Seamless session-level task coordination

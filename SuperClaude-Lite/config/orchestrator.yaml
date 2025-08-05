@@ -1,0 +1,195 @@
+# SuperClaude-Lite Orchestrator Configuration
+# MCP routing patterns and intelligent coordination strategies
+
+# MCP Server Routing Patterns
+routing_patterns:
+  ui_components:
+    triggers: ["component", "button", "form", "modal", "dialog", "card", "input", "design", "frontend", "ui", "interface"]
+    mcp_server: "magic"
+    persona: "frontend-specialist"
+    confidence_threshold: 0.8
+    priority: "high"
+    performance_profile: "standard"
+    capabilities: ["ui_generation", "design_systems", "component_patterns"]
+    
+  deep_analysis:
+    triggers: ["analyze", "complex", "system-wide", "architecture", "debug", "troubleshoot", "investigate", "root cause"]
+    mcp_server: "sequential"
+    thinking_mode: "--think-hard"
+    confidence_threshold: 0.75
+    priority: "high"
+    performance_profile: "intensive"
+    capabilities: ["complex_reasoning", "systematic_analysis", "hypothesis_testing"]
+    context_expansion: true
+    
+  library_documentation:
+    triggers: ["library", "framework", "package", "import", "dependency", "documentation", "docs", "api", "reference"]
+    mcp_server: "context7"
+    persona: "architect"
+    confidence_threshold: 0.85
+    priority: "medium"
+    performance_profile: "standard"
+    capabilities: ["documentation_access", "framework_patterns", "best_practices"]
+    
+  testing_automation:
+    triggers: ["test", "testing", "e2e", "end-to-end", "browser", "automation", "validation", "verify"]
+    mcp_server: "playwright"
+    confidence_threshold: 0.8
+    priority: "medium"
+    performance_profile: "intensive"
+    capabilities: ["browser_automation", "testing_frameworks", "performance_testing"]
+    
+  intelligent_editing:
+    triggers: ["edit", "modify", "refactor", "update", "change", "fix", "improve"]
+    mcp_server: "morphllm"
+    confidence_threshold: 0.7
+    priority: "medium"
+    performance_profile: "lightweight"
+    capabilities: ["pattern_application", "fast_apply", "intelligent_editing"]
+    complexity_threshold: 0.6
+    file_count_threshold: 10
+    
+  semantic_analysis:
+    triggers: ["semantic", "symbol", "reference", "find", "search", "navigate", "explore"]
+    mcp_server: "serena"
+    confidence_threshold: 0.8
+    priority: "high"
+    performance_profile: "standard"
+    capabilities: ["semantic_understanding", "project_context", "memory_management"]
+    
+  multi_file_operations:
+    triggers: ["multiple files", "batch", "bulk", "project-wide", "codebase", "entire"]
+    mcp_server: "serena"
+    confidence_threshold: 0.9
+    priority: "high"
+    performance_profile: "intensive"
+    capabilities: ["multi_file_coordination", "project_analysis"]
+
+# Hybrid Intelligence Selection
+hybrid_intelligence:
+  morphllm_vs_serena:
+    decision_factors:
+      - file_count
+      - complexity_score
+      - operation_type
+      - symbol_operations_required
+      - project_size
+      
+    morphllm_criteria:
+      file_count_max: 10
+      complexity_max: 0.6
+      preferred_operations: ["edit", "modify", "update", "pattern_application"]
+      optimization_focus: "token_efficiency"
+      
+    serena_criteria:
+      file_count_min: 5
+      complexity_min: 0.4
+      preferred_operations: ["analyze", "refactor", "navigate", "symbol_operations"]
+      optimization_focus: "semantic_understanding"
+      
+    fallback_strategy:
+      - try_primary_choice
+      - fallback_to_alternative
+      - use_native_tools
+
+# Auto-Activation Rules
+auto_activation:
+  complexity_thresholds:
+    enable_sequential:
+      complexity_score: 0.6
+      file_count: 5
+      operation_types: ["analyze", "debug", "complex"]
+      
+    enable_delegation:
+      file_count: 3
+      directory_count: 2
+      complexity_score: 0.4
+      
+    enable_validation:
+      is_production: true
+      risk_level: ["high", "critical"]
+      operation_types: ["deploy", "refactor", "delete"]
+
+# Performance Optimization
+performance_optimization:
+  parallel_execution:
+    file_threshold: 3
+    estimated_speedup_min: 1.4
+    max_concurrency: 7
+    
+  caching_strategy:
+    enable_for_operations: ["documentation_lookup", "analysis_results", "pattern_matching"]
+    cache_duration_minutes: 30
+    max_cache_size_mb: 100
+    
+  resource_management:
+    memory_threshold_percent: 85
+    token_threshold_percent: 75
+    fallback_to_lightweight: true
+
+# Quality Gates Integration
+quality_gates:
+  validation_levels:
+    basic: ["syntax_validation"]
+    standard: ["syntax_validation", "type_analysis", "code_quality"]
+    comprehensive: ["syntax_validation", "type_analysis", "code_quality", "security_assessment", "performance_analysis"]
+    production: ["syntax_validation", "type_analysis", "code_quality", "security_assessment", "performance_analysis", "integration_testing", "deployment_validation"]
+    
+  trigger_conditions:
+    comprehensive:
+      - is_production: true
+      - complexity_score: ">0.7"
+      - operation_types: ["refactor", "architecture"]
+      
+    production:
+      - is_production: true
+      - operation_types: ["deploy", "release"]
+
+# Fallback Strategies
+fallback_strategies:
+  mcp_server_unavailable:
+    context7: ["web_search", "cached_documentation", "native_analysis"]
+    sequential: ["native_step_by_step", "basic_analysis"]
+    magic: ["manual_component_generation", "template_suggestions"]
+    playwright: ["manual_testing_suggestions", "test_case_generation"]
+    morphllm: ["native_edit_tools", "manual_editing"]
+    serena: ["basic_file_operations", "simple_search"]
+    
+  performance_degradation:
+    high_latency: ["reduce_analysis_depth", "enable_caching", "parallel_processing"]
+    resource_constraints: ["lightweight_alternatives", "compression_mode", "minimal_features"]
+    
+  quality_issues:
+    validation_failures: ["increase_validation_depth", "manual_review", "rollback_capability"]
+    error_rates_high: ["enable_pre_validation", "reduce_complexity", "step_by_step_execution"]
+
+# Learning Integration
+learning_integration:
+  effectiveness_tracking:
+    track_server_performance: true
+    track_routing_decisions: true
+    track_user_satisfaction: true
+    
+  adaptation_triggers:
+    effectiveness_threshold: 0.6
+    confidence_threshold: 0.7
+    usage_count_min: 3
+    
+  optimization_feedback:
+    performance_degradation: "adjust_routing_weights"
+    user_preference_detected: "update_server_priorities"
+    error_patterns_found: "enhance_fallback_strategies"
+
+# Mode Integration
+mode_integration:
+  brainstorming:
+    preferred_servers: ["sequential", "context7"]
+    thinking_modes: ["--think", "--think-hard"]
+    
+  task_management:
+    coordination_servers: ["serena", "morphllm"]
+    delegation_strategies: ["files", "folders", "auto"]
+    
+  token_efficiency:
+    optimization_servers: ["morphllm"]
+    compression_strategies: ["symbol_systems", "abbreviations"]

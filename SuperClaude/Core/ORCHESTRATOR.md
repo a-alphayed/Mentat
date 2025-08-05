@@ -1,533 +1,380 @@
 # ORCHESTRATOR.md - SuperClaude Intelligent Routing System
 
-Intelligent routing system for Claude Code SuperClaude framework.
+Streamlined routing and coordination guide for Claude Code operations.
 
-## 🧠 Detection Engine
+## 🎯 Quick Pattern Matching
 
-Analyzes requests to understand intent, complexity, and requirements.
+Match user requests to appropriate tools and strategies:
 
-### Pre-Operation Validation Checks
-
-**Resource Validation**:
-- Token usage prediction based on operation complexity and scope
-- Memory and processing requirements estimation
-- File system permissions and available space verification
-- MCP server availability and response time checks
-
-**Compatibility Validation**:
-- Flag combination conflict detection (e.g., `--no-mcp` with `--seq`)
-- Persona + command compatibility verification
-- Tool availability for requested operations
-- Project structure requirements validation
-
-**Risk Assessment**:
-- Operation complexity scoring (0.0-1.0 scale)
-- Failure probability based on historical patterns
-- Resource exhaustion likelihood prediction
-- Cascading failure potential analysis
-
-**Validation Logic**: Resource availability, flag compatibility, risk assessment, outcome prediction, and safety recommendations. Operations with risk scores >0.8 trigger safe mode suggestions.
-
-**Resource Management Thresholds**:
-- **Green Zone** (0-60%): Full operations, predictive monitoring active
-- **Yellow Zone** (60-75%): Resource optimization, caching, suggest --uc mode
-- **Orange Zone** (75-85%): Warning alerts, defer non-critical operations  
-- **Red Zone** (85-95%): Force efficiency modes, block resource-intensive operations
-- **Critical Zone** (95%+): Emergency protocols, essential operations only
-
-### Pattern Recognition Rules
-
-#### Complexity Detection
 ```yaml
-simple:
-  indicators:
-    - single file operations
-    - basic CRUD tasks
-    - straightforward queries
-    - < 3 step workflows
-  token_budget: 5K
-  time_estimate: < 5 min
-
-moderate:
-  indicators:
-    - multi-file operations
-    - analysis tasks
-    - refactoring requests
-    - 3-10 step workflows
-  token_budget: 15K
-  time_estimate: 5-30 min
-
-complex:
-  indicators:
-    - system-wide changes
-    - architectural decisions
-    - performance optimization
-    - > 10 step workflows
-  token_budget: 30K+
-  time_estimate: > 30 min
+ui_component: [component, design, frontend, UI] → Magic + frontend persona
+deep_analysis: [architecture, complex, system-wide] → Sequential + think modes  
+quick_tasks: [simple, basic, straightforward] → Morphllm + Direct execution
+large_scope: [many files, entire codebase] → Serena + Enable delegation
+symbol_operations: [rename, refactor, extract, move] → Serena + LSP precision
+pattern_edits: [framework, style, cleanup] → Morphllm + token optimization
+performance: [optimize, slow, bottleneck] → Performance persona + profiling
+security: [vulnerability, audit, secure] → Security persona + validation
+documentation: [document, README, guide] → Scribe persona + Context7
+brainstorming: [explore, figure out, not sure, new project] → MODE_Brainstorming + /sc:brainstorm
+memory_operations: [save, load, checkpoint] → Serena + session management
+session_lifecycle: [init, work, checkpoint, complete] → /sc:load + /sc:save + /sc:reflect
+task_reflection: [validate, analyze, complete] → /sc:reflect + Serena reflection tools
 ```
 
-#### Domain Identification
+## 🚦 Resource Management
+
+Simple zones for resource-aware operation:
+
 ```yaml
-frontend:
-  keywords: [UI, component, React, Vue, CSS, responsive, accessibility, implement component, build UI]
-  file_patterns: ["*.jsx", "*.tsx", "*.vue", "*.css", "*.scss"]
-  typical_operations: [create, implement, style, optimize, test]
+green_zone (0-75%):
+  - Full capabilities available
+  - Proactive caching enabled
+  - Normal verbosity
 
-backend:
-  keywords: [API, database, server, endpoint, authentication, performance, implement API, build service]
-  file_patterns: ["*.js", "*.ts", "*.py", "*.go", "controllers/*", "models/*"]
-  typical_operations: [implement, optimize, secure, scale]
+yellow_zone (75-85%):
+  - Activate efficiency mode
+  - Reduce verbosity
+  - Defer non-critical operations
 
-infrastructure:
-  keywords: [deploy, Docker, CI/CD, monitoring, scaling, configuration]
-  file_patterns: ["Dockerfile", "*.yml", "*.yaml", ".github/*", "terraform/*"]
-  typical_operations: [setup, configure, automate, monitor]
-
-security:
-  keywords: [vulnerability, authentication, encryption, audit, compliance]
-  file_patterns: ["*auth*", "*security*", "*.pem", "*.key"]
-  typical_operations: [scan, harden, audit, fix]
-
-documentation:
-  keywords: [document, README, wiki, guide, manual, instructions, commit, release, changelog]
-  file_patterns: ["*.md", "*.rst", "*.txt", "docs/*", "README*", "CHANGELOG*"]
-  typical_operations: [write, document, explain, translate, localize]
-
-iterative:
-  keywords: [improve, refine, enhance, correct, polish, fix, iterate, loop, repeatedly]
-  file_patterns: ["*.*"]  # Can apply to any file type
-  typical_operations: [improve, refine, enhance, correct, polish, fix, iterate]
-
-wave_eligible:
-  keywords: [comprehensive, systematically, thoroughly, enterprise, large-scale, multi-stage, progressive, iterative, campaign, audit]
-  complexity_indicators: [system-wide, architecture, performance, security, quality, scalability]
-  operation_indicators: [improve, optimize, refactor, modernize, enhance, audit, transform]
-  scale_indicators: [entire, complete, full, comprehensive, enterprise, large, massive]
-  typical_operations: [comprehensive_improvement, systematic_optimization, enterprise_transformation, progressive_enhancement]
+red_zone (85%+):
+  - Essential operations only
+  - Minimize output verbosity  
+  - Fail fast on complex requests
 ```
 
-#### Operation Type Classification
+## 🔧 Tool Selection Guide
+
+### When to use MCP Servers:
+- **Context7**: Library docs, framework patterns, best practices
+- **Sequential**: Multi-step problems, complex analysis, debugging
+- **Magic**: UI components, design systems, frontend generation
+- **Playwright**: Browser testing, E2E validation, visual testing
+- **Morphllm**: Pattern-based editing, token optimization, fast edits
+- **Serena**: Symbol-level operations, large refactoring, multi-language projects
+
+### Hybrid Intelligence Routing:
+**Serena vs Morphllm Decision Matrix**:
 ```yaml
-analysis:
-  verbs: [analyze, review, explain, understand, investigate, troubleshoot]
-  outputs: [insights, recommendations, reports]
-  typical_tools: [Grep, Read, Sequential]
+serena_triggers:
+  file_count: >10
+  symbol_operations: [rename, extract, move, analyze]
+  multi_language: true
+  lsp_required: true
+  shell_integration: true
+  complexity_score: >0.6
 
-creation:
-  verbs: [create, build, implement, generate, design]
-  outputs: [new files, features, components]
-  typical_tools: [Write, Magic, Context7]
-
-implementation:
-  verbs: [implement, develop, code, construct, realize]
-  outputs: [working features, functional code, integrated components]
-  typical_tools: [Write, Edit, MultiEdit, Magic, Context7, Sequential]
-
-modification:
-  verbs: [update, refactor, improve, optimize, fix]
-  outputs: [edited files, improvements]
-  typical_tools: [Edit, MultiEdit, Sequential]
-
-debugging:
-  verbs: [debug, fix, troubleshoot, resolve, investigate]
-  outputs: [fixes, root causes, solutions]
-  typical_tools: [Grep, Sequential, Playwright]
-
-iterative:
-  verbs: [improve, refine, enhance, correct, polish, fix, iterate, loop]
-  outputs: [progressive improvements, refined results, enhanced quality]
-  typical_tools: [Sequential, Read, Edit, MultiEdit, TodoWrite]
-
-wave_operations:
-  verbs: [comprehensively, systematically, thoroughly, progressively, iteratively]
-  modifiers: [improve, optimize, refactor, modernize, enhance, audit, transform]
-  outputs: [comprehensive improvements, systematic enhancements, progressive transformations]
-  typical_tools: [Sequential, Task, Read, Edit, MultiEdit, Context7]
-  wave_patterns: [review-plan-implement-validate, assess-design-execute-verify, analyze-strategize-transform-optimize]
+morphllm_triggers:
+  framework_patterns: true
+  token_optimization: required
+  simple_edits: true
+  fast_apply_suitable: true
+  complexity_score: ≤0.6
 ```
 
-### Intent Extraction Algorithm
+### Simple Fallback Strategy:
 ```
-1. Parse user request for keywords and patterns
-2. Match against domain/operation matrices
-3. Score complexity based on scope and steps
-4. Evaluate wave opportunity scoring
-5. Estimate resource requirements
-6. Generate routing recommendation (traditional vs wave mode)
-7. Apply auto-detection triggers for wave activation
+Serena unavailable → Morphllm → Native Claude Code tools → Explain limitations if needed
 ```
 
-**Enhanced Wave Detection Algorithm**:
-- **Flag Overrides**: `--single-wave` disables, `--force-waves`/`--wave-mode` enables
-- **Scoring Factors**: Complexity (0.2-0.4), scale (0.2-0.3), operations (0.2), domains (0.1), flag modifiers (0.05-0.1)
-- **Thresholds**: Default 0.7, customizable via `--wave-threshold`, enterprise strategy lowers file thresholds
-- **Decision Logic**: Sum all indicators, trigger waves when total ≥ threshold
+## ⚡ Auto-Activation Rules
 
-## 🚦 Routing Intelligence
+Clear triggers for automatic enhancements:
 
-Dynamic decision trees that map detected patterns to optimal tool combinations, persona activation, and orchestration strategies.
-
-### Wave Orchestration Engine
-Multi-stage command execution with compound intelligence. Automatic complexity assessment or explicit flag control.
-
-**Wave Control Matrix**:
 ```yaml
-wave-activation:
-  automatic: "complexity >= 0.7"
-  explicit: "--wave-mode, --force-waves"
-  override: "--single-wave, --wave-dry-run"
+enable_sequential:
+  - Complexity appears high (multi-file, architectural)
+  - User explicitly requests thinking/analysis
+  - Debugging complex issues
+
+enable_serena:
+  - File count >5 or symbol operations detected
+  - Multi-language projects or LSP integration required
+  - Shell command integration needed
+  - Complex refactoring or project-wide analysis
+  - Memory operations (save/load/checkpoint)
+
+enable_morphllm:
+  - Framework patterns or token optimization critical
+  - Simple edits or fast apply suitable
+  - Pattern-based modifications needed
+
+enable_delegation:
+  - More than 3 files in scope
+  - More than 2 directories to analyze
+  - Explicit parallel processing request
+  - Multi-file edit operations detected
+
+enable_efficiency:
+  - Resource usage above 75%
+  - Very long conversation context
+  - User requests concise mode
+
+enable_validation:
+  - Production code changes
+  - Security-sensitive operations
+  - User requests verification
+
+enable_brainstorming:
+  - Ambiguous project requests ("I want to build...")
+  - Exploration keywords (brainstorm, explore, figure out)
+  - Uncertainty indicators (not sure, maybe, possibly)
+  - Planning needs (new project, startup idea, feature concept)
+
+enable_session_lifecycle:
+  - Project work without active session → /sc:load automatic activation
+  - 30 minutes elapsed → /sc:reflect --type session + checkpoint evaluation
+  - High priority task completion → /sc:reflect --type completion
+  - Session end detection → /sc:save with metadata
+  - Error recovery situations → /sc:reflect --analyze + checkpoint
+
+enable_task_reflection:
+  - Complex task initiation → /sc:reflect --type task for validation
+  - Task completion requests → /sc:reflect --type completion mandatory
+  - Progress check requests → /sc:reflect --type task or session
+  - Quality validation needs → /sc:reflect --analyze
+```
+
+## 🧠 MODE-Command Architecture
+
+### Brainstorming Pattern: MODE_Brainstorming + /sc:brainstorm
+
+**Core Philosophy**: Behavioral Mode provides lightweight detection triggers, Command provides full execution engine
+
+#### Activation Flow Architecture
+
+```yaml
+automatic_activation:
+  trigger_detection: MODE_Brainstorming evaluates user request
+  pattern_matching: Keywords → ambiguous, explore, uncertain, planning
+  command_invocation: /sc:brainstorm with inherited parameters
+  behavioral_enforcement: MODE communication patterns applied
+
+manual_activation:
+  direct_command: /sc:brainstorm bypasses mode detection
+  explicit_flags: --brainstorm forces mode + command coordination
+  parameter_override: Command flags override mode defaults
+```
+
+#### Configuration Parameter Mapping
+
+```yaml
+mode_to_command_inheritance:
+  # MODE_Brainstorming.md → /sc:brainstorm parameters
+  brainstorming:
+    dialogue:
+      max_rounds: 15           → --max-rounds parameter
+      convergence_threshold: 0.85 → internal quality gate
+    brief_generation:
+      min_requirements: 3      → completion validation
+      include_context: true    → metadata enrichment
+    integration:
+      auto_handoff: true       → --prd flag behavior
+      prd_agent: brainstorm-PRD → agent selection
+```
+
+#### Behavioral Pattern Coordination
+
+```yaml
+communication_patterns:
+  discovery_markers: 🔍 Exploring, ❓ Questioning, 🎯 Focusing
+  synthesis_markers: 💡 Insight, 🔗 Connection, ✨ Possibility
+  progress_markers: ✅ Agreement, 🔄 Iteration, 📊 Summary
   
-wave-strategies:
-  progressive: "Incremental enhancement"
-  systematic: "Methodical analysis"
-  adaptive: "Dynamic configuration"
+dialogue_states:
+  discovery: "Let me understand..." → Open exploration
+  exploration: "What if we..." → Possibility analysis
+  convergence: "Based on our discussion..." → Decision synthesis
+  handoff: "Here's what we've discovered..." → Brief generation
+
+quality_enforcement:
+  behavioral_compliance: MODE patterns enforced during execution
+  communication_style: Collaborative, non-presumptive maintained
+  framework_integration: SuperClaude principles preserved
 ```
 
-**Wave-Enabled Commands**:
-- **Tier 1**: `/analyze`, `/build`, `/implement`, `/improve`
-- **Tier 2**: `/design`, `/task`
+#### Integration Handoff Protocol
 
-### Master Routing Table
-
-| Pattern | Complexity | Domain | Auto-Activates | Confidence |
-|---------|------------|---------|----------------|------------|
-| "analyze architecture" | complex | infrastructure | architect persona, --ultrathink, Sequential | 95% |
-| "create component" | simple | frontend | frontend persona, Magic, --uc | 90% |
-| "implement feature" | moderate | any | domain-specific persona, Context7, Sequential | 88% |
-| "implement API" | moderate | backend | backend persona, --seq, Context7 | 92% |
-| "implement UI component" | simple | frontend | frontend persona, Magic, --c7 | 94% |
-| "implement authentication" | complex | security | security persona, backend persona, --validate | 90% |
-| "fix bug" | moderate | any | analyzer persona, --think, Sequential | 85% |
-| "optimize performance" | complex | backend | performance persona, --think-hard, Playwright | 90% |
-| "security audit" | complex | security | security persona, --ultrathink, Sequential | 95% |
-| "write documentation" | moderate | documentation | scribe persona, --persona-scribe=en, Context7 | 95% |
-| "improve iteratively" | moderate | iterative | intelligent persona, --seq, loop creation | 90% |
-| "analyze large codebase" | complex | any | --delegate --parallel-dirs, domain specialists | 95% |
-| "comprehensive audit" | complex | multi | --multi-agent --parallel-focus, specialized agents | 95% |
-| "improve large system" | complex | any | --wave-mode --adaptive-waves | 90% |
-| "security audit enterprise" | complex | security | --wave-mode --wave-validation | 95% |
-| "modernize legacy system" | complex | legacy | --wave-mode --enterprise-waves --wave-checkpoint | 92% |
-| "comprehensive code review" | complex | quality | --wave-mode --wave-validation --systematic-waves | 94% |
-
-### Decision Trees
-
-#### Tool Selection Logic
-
-**Base Tool Selection**:
-- **Search**: Grep (specific patterns) or Agent (open-ended)
-- **Understanding**: Sequential (complexity >0.7) or Read (simple)  
-- **Documentation**: Context7
-- **UI**: Magic
-- **Testing**: Playwright
-
-**Delegation & Wave Evaluation**:
-- **Delegation Score >0.6**: Add Task tool, auto-enable delegation flags based on scope
-- **Wave Score >0.7**: Add Sequential for coordination, auto-enable wave strategies based on requirements
-
-**Auto-Flag Assignment**:
-- Directory count >7 → `--delegate --parallel-dirs`
-- Focus areas >2 → `--multi-agent --parallel-focus`  
-- High complexity + critical quality → `--wave-mode --wave-validation`
-- Multiple operation types → `--wave-mode --adaptive-waves`
-
-#### Task Delegation Intelligence
-
-**Sub-Agent Delegation Decision Matrix**:
-
-**Delegation Scoring Factors**:
-- **Complexity >0.6**: +0.3 score
-- **Parallelizable Operations**: +0.4 (scaled by opportunities/5, max 1.0)
-- **High Token Requirements >15K**: +0.2 score  
-- **Multi-domain Operations >2**: +0.1 per domain
-
-**Wave Opportunity Scoring**:
-- **High Complexity >0.8**: +0.4 score
-- **Multiple Operation Types >2**: +0.3 score
-- **Critical Quality Requirements**: +0.2 score
-- **Large File Count >50**: +0.1 score
-- **Iterative Indicators**: +0.2 (scaled by indicators/3)
-- **Enterprise Scale**: +0.15 score
-
-**Strategy Recommendations**:
-- **Wave Score >0.7**: Use wave strategies
-- **Directories >7**: `parallel_dirs`
-- **Focus Areas >2**: `parallel_focus`  
-- **High Complexity**: `adaptive_delegation`
-- **Default**: `single_agent`
-
-**Wave Strategy Selection**:
-- **Security Focus**: `wave_validation`
-- **Performance Focus**: `progressive_waves`
-- **Critical Operations**: `wave_validation`
-- **Multiple Operations**: `adaptive_waves`
-- **Enterprise Scale**: `enterprise_waves`
-- **Default**: `systematic_waves`
-
-**Auto-Delegation Triggers**:
 ```yaml
-directory_threshold:
-  condition: directory_count > 7
-  action: auto_enable --delegate --parallel-dirs
-  confidence: 95%
+mode_command_handoff:
+  1. detection: MODE_Brainstorming evaluates request context
+  2. parameter_mapping: YAML settings → command parameters
+  3. invocation: /sc:brainstorm executed with behavioral patterns
+  4. enforcement: MODE communication markers applied
+  5. brief_generation: Structured brief with mode metadata
+  6. agent_handoff: brainstorm-PRD receives enhanced brief
+  7. completion: Mode + Command coordination documented
 
-file_threshold:
-  condition: file_count > 50 AND complexity > 0.6
-  action: auto_enable --delegate --sub-agents [calculated]
-  confidence: 90%
-
-multi_domain:
-  condition: domains.length > 3
-  action: auto_enable --delegate --parallel-focus
-  confidence: 85%
-
-complex_analysis:
-  condition: complexity > 0.8 AND scope = comprehensive
-  action: auto_enable --delegate --focus-agents
-  confidence: 90%
-
-token_optimization:
-  condition: estimated_tokens > 20000
-  action: auto_enable --delegate --aggregate-results
-  confidence: 80%
+agent_coordination:
+  brief_enhancement: MODE metadata enriches brief structure
+  handoff_preparation: brainstorm-PRD receives validated brief
+  context_preservation: Session history and mode patterns maintained
+  quality_validation: Framework compliance enforced throughout
 ```
 
-**Wave Auto-Delegation Triggers**:
-- Complex improvement: complexity > 0.8 AND files > 20 AND operation_types > 2 → --wave-count 5 (95%)
-- Multi-domain analysis: domains > 3 AND tokens > 15K → --adaptive-waves (90%)
-- Critical operations: production_deploy OR security_audit → --wave-validation (95%)
-- Enterprise scale: files > 100 AND complexity > 0.7 AND domains > 2 → --enterprise-waves (85%)
-- Large refactoring: large_scope AND structural_changes AND complexity > 0.8 → --systematic-waves --wave-validation (93%)
+## 🛡️ Error Recovery
 
-**Delegation Routing Table**:
+Simple, effective error handling:
 
-| Operation | Complexity | Auto-Delegates | Performance Gain |
-|-----------|------------|----------------|------------------|
-| `/load @monorepo/` | moderate | --delegate --parallel-dirs | 65% |
-| `/analyze --comprehensive` | high | --multi-agent --parallel-focus | 70% |
-| Comprehensive system improvement | high | --wave-mode --progressive-waves | 80% |
-| Enterprise security audit | high | --wave-mode --wave-validation | 85% |
-| Large-scale refactoring | high | --wave-mode --systematic-waves | 75% |
-
-**Sub-Agent Specialization Matrix**:
-- **Quality**: qa persona, complexity/maintainability focus, Read/Grep/Sequential tools
-- **Security**: security persona, vulnerabilities/compliance focus, Grep/Sequential/Context7 tools
-- **Performance**: performance persona, bottlenecks/optimization focus, Read/Sequential/Playwright tools
-- **Architecture**: architect persona, patterns/structure focus, Read/Sequential/Context7 tools
-- **API**: backend persona, endpoints/contracts focus, Grep/Context7/Sequential tools
-
-**Wave-Specific Specialization Matrix**:
-- **Review**: analyzer persona, current_state/quality_assessment focus, Read/Grep/Sequential tools
-- **Planning**: architect persona, strategy/design focus, Sequential/Context7/Write tools
-- **Implementation**: intelligent persona, code_modification/feature_creation focus, Edit/MultiEdit/Task tools
-- **Validation**: qa persona, testing/validation focus, Sequential/Playwright/Context7 tools
-- **Optimization**: performance persona, performance_tuning/resource_optimization focus, Read/Sequential/Grep tools
-
-#### Persona Auto-Activation System
-
-**Multi-Factor Activation Scoring**:
-- **Keyword Matching**: Base score from domain-specific terms (30%)
-- **Context Analysis**: Project phase, urgency, complexity assessment (40%)
-- **User History**: Past preferences and successful outcomes (20%)
-- **Performance Metrics**: Current system state and bottlenecks (10%)
-
-**Intelligent Activation Rules**:
-
-**Performance Issues** → `--persona-performance` + `--focus performance`
-- **Trigger Conditions**: Response time >500ms, error rate >1%, high resource usage
-- **Confidence Threshold**: 85% for automatic activation
-
-**Security Concerns** → `--persona-security` + `--focus security`
-- **Trigger Conditions**: Vulnerability detection, auth failures, compliance gaps
-- **Confidence Threshold**: 90% for automatic activation
-
-**UI/UX Tasks** → `--persona-frontend` + `--magic`
-- **Trigger Conditions**: Component creation, responsive design, accessibility
-- **Confidence Threshold**: 80% for automatic activation
-
-**Complex Debugging** → `--persona-analyzer` + `--think` + `--seq`
-- **Trigger Conditions**: Multi-component failures, root cause investigation
-- **Confidence Threshold**: 75% for automatic activation
-
-**Documentation Tasks** → `--persona-scribe=en`
-- **Trigger Conditions**: README, wiki, guides, commit messages, API docs
-- **Confidence Threshold**: 70% for automatic activation
-
-#### Flag Auto-Activation Patterns
-
-**Context-Based Auto-Activation**:
-- Performance issues → --persona-performance + --focus performance + --think
-- Security concerns → --persona-security + --focus security + --validate
-- UI/UX tasks → --persona-frontend + --magic + --c7
-- Complex debugging → --think + --seq + --persona-analyzer
-- Large codebase → --uc when context >75% + --delegate auto
-- Testing operations → --persona-qa + --play + --validate
-- DevOps operations → --persona-devops + --safe-mode + --validate
-- Refactoring → --persona-refactorer + --wave-strategy systematic + --validate
-- Iterative improvement → --loop for polish, refine, enhance keywords
-
-**Wave Auto-Activation**:
-- Complex multi-domain → --wave-mode auto when complexity >0.8 AND files >20 AND types >2
-- Enterprise scale → --wave-strategy enterprise when files >100 AND complexity >0.7 AND domains >2
-- Critical operations → Wave validation enabled by default for production deployments
-- Legacy modernization → --wave-strategy enterprise --wave-delegation tasks
-- Performance optimization → --wave-strategy progressive --wave-delegation files
-- Large refactoring → --wave-strategy systematic --wave-delegation folders
-
-**Sub-Agent Auto-Activation**:
-- File analysis → --delegate files when >50 files detected
-- Directory analysis → --delegate folders when >7 directories detected
-- Mixed scope → --delegate auto for complex project structures
-- High concurrency → --concurrency auto-adjusted based on system resources
-
-**Loop Auto-Activation**:
-- Quality improvement → --loop for polish, refine, enhance, improve keywords
-- Iterative requests → --loop when "iteratively", "step by step", "incrementally" detected
-- Refinement operations → --loop for cleanup, fix, correct operations on existing code
-
-#### Flag Precedence Rules
-1. Safety flags (--safe-mode) > optimization flags
-2. Explicit flags > auto-activation
-3. Thinking depth: --ultrathink > --think-hard > --think
-4. --no-mcp overrides all individual MCP flags
-5. Scope: system > project > module > file
-6. Last specified persona takes precedence
-7. Wave mode: --wave-mode off > --wave-mode force > --wave-mode auto
-8. Sub-Agent delegation: explicit --delegate > auto-detection
-9. Loop mode: explicit --loop > auto-detection based on refinement keywords
-10. --uc auto-activation overrides verbose flags
-
-### Confidence Scoring
-Based on pattern match strength (40%), historical success rate (30%), context completeness (20%), resource availability (10%).
-
-## Quality Gates & Validation Framework
-
-### 8-Step Validation Cycle with AI Integration
 ```yaml
-quality_gates:
-  step_1_syntax: "language parsers, Context7 validation, intelligent suggestions"
-  step_2_type: "Sequential analysis, type compatibility, context-aware suggestions"
-  step_3_lint: "Context7 rules, quality analysis, refactoring suggestions"
-  step_4_security: "Sequential analysis, vulnerability assessment, OWASP compliance"
-  step_5_test: "Playwright E2E, coverage analysis (≥80% unit, ≥70% integration)"
-  step_6_performance: "Sequential analysis, benchmarking, optimization suggestions"
-  step_7_documentation: "Context7 patterns, completeness validation, accuracy verification"
-  step_8_integration: "Playwright testing, deployment validation, compatibility verification"
+error_response:
+  1. Try operation once
+  2. If fails → Try simpler approach
+  3. If still fails → Explain limitation clearly
+  4. Always preserve user context
 
-validation_automation:
-  continuous_integration: "CI/CD pipeline integration, progressive validation, early failure detection"
-  intelligent_monitoring: "success rate monitoring, ML prediction, adaptive validation"
-  evidence_generation: "comprehensive evidence, validation metrics, improvement recommendations"
+recovery_principles:
+  - Fail fast and transparently
+  - Explain what went wrong
+  - Suggest alternatives
+  - Never hide errors
 
-wave_integration:
-  validation_across_waves: "wave boundary gates, progressive validation, rollback capability"
-  compound_validation: "AI orchestration, domain-specific patterns, intelligent aggregation"
+mode_command_recovery:
+  mode_failure: Continue with command-only execution
+  command_failure: Provide mode-based dialogue patterns
+  coordination_failure: Fallback to manual parameter setting
+  agent_handoff_failure: Generate brief without PRD automation
 ```
 
-### Task Completion Criteria
-```yaml
-completion_requirements:
-  validation: "all 8 steps pass, evidence provided, metrics documented"
-  ai_integration: "MCP coordination, persona integration, tool orchestration, ≥90% context retention"
-  performance: "response time targets, resource limits, success thresholds, token efficiency"
-  quality: "code quality standards, security compliance, performance assessment, integration testing"
+## 🧠 Trust Claude's Judgment
 
-evidence_requirements:
-  quantitative: "performance/quality/security metrics, coverage percentages, response times"
-  qualitative: "code quality improvements, security enhancements, UX improvements"
-  documentation: "change rationale, test results, performance benchmarks, security scans"
+**When to override rules and use adaptive intelligence:**
+
+- User request doesn't fit clear patterns
+- Context suggests different approach than rules
+- Multiple valid approaches exist
+- Rules would create unnecessary complexity
+
+**Core Philosophy**: These patterns guide but don't constrain. Claude Code's natural language understanding and adaptive reasoning should take precedence when it leads to better outcomes.
+
+## 🔍 Common Routing Patterns
+
+### Simple Examples:
+```
+"Build a login form" → Magic + frontend persona
+"Why is this slow?" → Sequential + performance analysis
+"Document this API" → Scribe + Context7 patterns
+"Fix this bug" → Read code → Sequential analysis → Morphllm targeted fix
+"Refactor this mess" → Serena symbol analysis → plan changes → execute systematically
+"Rename function across project" → Serena LSP precision + dependency tracking
+"Apply code style patterns" → Morphllm pattern matching + token optimization
+"Save my work" → Serena memory operations → /sc:save
+"Load project context" → Serena project activation → /sc:load
+"Check my progress" → Task reflection → /sc:reflect --type task
+"Am I done with this?" → Completion validation → /sc:reflect --type completion
+"Save checkpoint" → Session persistence → /sc:save --checkpoint
+"Resume last session" → Session restoration → /sc:load --resume
+"I want to build something for task management" → MODE_Brainstorming → /sc:brainstorm
+"Not sure what to build" → MODE_Brainstorming → /sc:brainstorm --depth deep
 ```
 
-## ⚡ Performance Optimization
+### Parallel Execution Examples:
+```
+"Edit these 4 components" → Auto-suggest --delegate files (est. 1.2s savings)
+"Update imports in src/ files" → Parallel processing detected (3+ files)  
+"Analyze auth system" → Multiple files detected → Wave coordination suggested
+"Format the codebase" → Batch parallel operations (60% faster execution)
+"Read package.json and requirements.txt" → Parallel file reading suggested
+```
 
-Resource management, operation batching, and intelligent optimization for sub-100ms performance targets.
-
-**Token Management**: Intelligent resource allocation based on unified Resource Management Thresholds (see Detection Engine section)
-
-**Operation Batching**:
-- **Tool Coordination**: Parallel operations when no dependencies
-- **Context Sharing**: Reuse analysis results across related routing decisions
-- **Cache Strategy**: Store successful routing patterns for session reuse
-- **Task Delegation**: Intelligent sub-agent spawning for parallel processing
-- **Resource Distribution**: Dynamic token allocation across sub-agents
-
-**Resource Allocation**:
-- **Detection Engine**: 1-2K tokens for pattern analysis
-- **Decision Trees**: 500-1K tokens for routing logic
-- **MCP Coordination**: Variable based on servers activated
-
-
-## 🔗 Integration Intelligence
-
-Smart MCP server selection and orchestration.
-
-### MCP Server Selection Matrix
-**Reference**: See MCP.md for detailed server capabilities, workflows, and integration patterns.
-
-**Quick Selection Guide**:
-- **Context7**: Library docs, framework patterns
-- **Sequential**: Complex analysis, multi-step reasoning
-- **Magic**: UI components, design systems
-- **Playwright**: E2E testing, performance metrics
-
-### Intelligent Server Coordination
-**Reference**: See MCP.md for complete server orchestration patterns and fallback strategies.
-
-**Core Coordination Logic**: Multi-server operations, fallback chains, resource optimization
-
-### Persona Integration
-**Reference**: See PERSONAS.md for detailed persona specifications and MCP server preferences.
-
-## 🚨 Emergency Protocols
-
-Handling resource constraints and failures gracefully.
-
-### Resource Management
-Threshold-based resource management follows the unified Resource Management Thresholds (see Detection Engine section above).
-
-### Graceful Degradation
-- **Level 1**: Reduce verbosity, skip optional enhancements, use cached results
-- **Level 2**: Disable advanced features, simplify operations, batch aggressively
-- **Level 3**: Essential operations only, maximum compression, queue non-critical
-
-### Error Recovery Patterns
-- **MCP Timeout**: Use fallback server
-- **Token Limit**: Activate compression
-- **Tool Failure**: Try alternative tool
-- **Parse Error**: Request clarification
-
-
-
-
-## 🔧 Configuration
-
-### Orchestrator Settings
+### Brainstorming-Specific Patterns:
 ```yaml
-orchestrator_config:
-  # Performance
-  enable_caching: true
-  cache_ttl: 3600
-  parallel_operations: true
-  max_parallel: 3
+ambiguous_requests:
+  "I have an idea for an app" → MODE detection → /sc:brainstorm "app idea"
+  "Thinking about a startup" → MODE detection → /sc:brainstorm --focus business
+  "Need help figuring this out" → MODE detection → /sc:brainstorm --depth normal
+
+explicit_brainstorming:
+  /sc:brainstorm "specific idea" → Direct execution with MODE patterns
+  --brainstorm → MODE activation → Command coordination
+  --no-brainstorm → Disable MODE detection
+```
+
+### Complexity Indicators:
+- **Simple**: Single file, clear goal, standard pattern → **Morphllm + Direct execution**
+- **Moderate**: Multiple files, some analysis needed, standard tools work → **Context-dependent routing**
+- **Complex**: System-wide, architectural, needs coordination, custom approach → **Serena + Sequential coordination**
+- **Exploratory**: Ambiguous requirements, need discovery, brainstorming beneficial → **MODE_Brainstorming + /sc:brainstorm**
+
+### Hybrid Intelligence Examples:
+- **Simple text replacement**: Morphllm (30-50% token savings, <100ms)
+- **Function rename across 15 files**: Serena (LSP precision, dependency tracking)
+- **Framework pattern application**: Morphllm (pattern recognition, efficiency)
+- **Architecture refactoring**: Serena + Sequential (comprehensive analysis + systematic planning)
+- **Style guide enforcement**: Morphllm (pattern matching, batch operations)
+- **Multi-language project migration**: Serena (native language support, project indexing)
+
+### Performance Benchmarks & Fallbacks:
+- **3-5 files**: 40-60% faster with parallel execution (2.1s → 0.8s typical)
+- **6-10 files**: 50-70% faster with delegation (4.5s → 1.4s typical)
+- **Issues detected**: Auto-suggest `--sequential` flag for debugging
+- **Resource constraints**: Automatic throttling with clear user feedback
+- **Error recovery**: Graceful fallback to sequential with preserved context
+
+## 📊 Quality Checkpoints
+
+Minimal validation at key points:
+
+1. **Before changes**: Understand existing code
+2. **During changes**: Maintain consistency
+3. **After changes**: Verify functionality preserved
+4. **Before completion**: Run relevant lints/tests if available
+
+### Brainstorming Quality Gates:
+1. **Mode Detection**: Validate trigger patterns and context
+2. **Parameter Mapping**: Ensure configuration inheritance
+3. **Behavioral Enforcement**: Apply communication patterns
+4. **Brief Validation**: Check completeness criteria
+5. **Agent Handoff**: Verify PRD readiness
+6. **Framework Compliance**: Validate SuperClaude integration
+
+## ⚙️ Configuration Philosophy
+
+**Defaults work for 90% of cases**. Only adjust when:
+- Specific performance requirements exist
+- Custom project patterns need recognition
+- Organization has unique conventions
+- MODE-Command coordination needs tuning
+
+### MODE-Command Configuration Hierarchy:
+1. **Explicit Command Parameters** (highest precedence)
+2. **Mode Configuration Settings** (YAML from MODE files)
+3. **Framework Defaults** (SuperClaude standards)
+4. **System Defaults** (fallback values)
+
+## 🎯 Architectural Integration Points
+
+### SuperClaude Framework Compliance
+
+```yaml
+framework_integration:
+  quality_gates: 8-step validation cycle applied
+  mcp_coordination: Server selection based on task requirements
+  agent_orchestration: Proper handoff protocols maintained
+  document_persistence: All artifacts saved with metadata
   
-  # Intelligence
-  learning_enabled: true
-  confidence_threshold: 0.7
-  pattern_detection: aggressive
-  
-  # Resource Management
-  token_reserve: 10%
-  emergency_threshold: 90%
-  compression_threshold: 75%
-  
-  # Wave Mode Settings
-  wave_mode:
-    enable_auto_detection: true
-    wave_score_threshold: 0.7
-    max_waves_per_operation: 5
-    adaptive_wave_sizing: true
-    wave_validation_required: true
+mode_command_patterns:
+  behavioral_modes: Provide detection and framework patterns
+  command_implementations: Execute with behavioral enforcement
+  shared_configuration: YAML settings coordinated across components
+  quality_validation: Framework standards maintained throughout
 ```
 
-### Custom Routing Rules
-Users can add custom routing patterns via YAML configuration files.
+### Cross-Mode Coordination
+
+```yaml
+mode_interactions:
+  task_management: Multi-session brainstorming project tracking
+  token_efficiency: Compressed dialogue for extended sessions
+  introspection: Self-analysis of brainstorming effectiveness
+  
+orchestration_principles:
+  behavioral_consistency: MODE patterns preserved across commands
+  configuration_harmony: YAML settings shared and coordinated
+  quality_enforcement: SuperClaude standards maintained
+  agent_coordination: Proper handoff protocols for all modes
+```
+
+---
+
+*Remember: This orchestrator guides coordination. It shouldn't create more complexity than it solves. When in doubt, use natural judgment over rigid rules. The MODE-Command pattern ensures behavioral consistency while maintaining execution flexibility.*

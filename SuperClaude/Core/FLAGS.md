@@ -1,221 +1,105 @@
-# FLAGS.md - SuperClaude Flag Reference
+# FLAGS.md - Claude Code Behavior Flags
 
-Flag system for Claude Code SuperClaude framework with auto-activation and conflict resolution.
+Quick reference for flags that modify how I approach tasks. **Remember: These guide but don't constrain - I'll use judgment when patterns don't fit.**
 
-## Flag System Architecture
+## 🎯 Flag Categories
 
-**Priority Order**:
-1. Explicit user flags override auto-detection
-2. Safety flags override optimization flags
-3. Performance flags activate under resource pressure
-4. Persona flags based on task patterns
-5. MCP server flags with context-sensitive activation
-6. Wave flags based on complexity thresholds
+### Thinking Flags
+```yaml
+--think         # Analyze multi-file problems (~4K tokens)
+--think-hard    # Deep system analysis (~10K tokens)  
+--ultrathink    # Critical architectural decisions (~32K tokens)
+```
 
-## Planning & Analysis Flags
+### Execution Control
+```yaml
+--plan          # Show what I'll do before starting
+--validate      # Check risks before operations
+--answer-only   # Skip automation, just respond directly
+```
 
-**`--plan`**
-- Display execution plan before operations
-- Shows tools, outputs, and step sequence
+### Delegation & Parallelism
+```yaml
+--delegate [auto|files|folders]  # Split work across agents (auto-detects best approach)
+--concurrency [n]                # Control parallel operations (default: 7)
+```
 
-**`--think`**
-- Multi-file analysis (~4K tokens)
-- Enables Sequential MCP for structured problem-solving
-- Auto-activates: Import chains >5 files, cross-module calls >10 references
-- Auto-enables `--seq` and suggests `--persona-analyzer`
+### MCP Servers
+```yaml
+--all-mcp       # Enable all MCP servers (Context7, Sequential, Magic, Playwright, Morphllm, Serena)
+--no-mcp        # Disable all MCP servers, use native tools
+# Individual server flags: see MCP/*.md docs
+```
 
-**`--think-hard`**
-- Deep architectural analysis (~10K tokens)
-- System-wide analysis with cross-module dependencies
-- Auto-activates: System refactoring, bottlenecks >3 modules, security vulnerabilities
-- Auto-enables `--seq --c7` and suggests `--persona-architect`
+### Scope & Focus
+```yaml
+--scope [file|module|project|system]         # Analysis scope
+--focus [performance|security|quality|architecture|testing]  # Domain focus
+```
 
-**`--ultrathink`**
-- Critical system redesign analysis (~32K tokens)
-- Maximum depth analysis for complex problems
-- Auto-activates: Legacy modernization, critical vulnerabilities, performance degradation >50%
-- Auto-enables `--seq --c7 --all-mcp` for comprehensive analysis
+### Iteration
+```yaml
+--loop          # Iterative improvement mode (default: 3 cycles)
+--iterations n  # Set specific number of iterations
+--interactive   # Pause for confirmation between iterations
+```
 
-## Compression & Efficiency Flags
+## ⚡ Auto-Activation
 
-**`--uc` / `--ultracompressed`**
-- 30-50% token reduction using symbols and structured output
-- Auto-activates: Context usage >75% or large-scale operations
-- Auto-generated symbol legend, maintains technical accuracy
+I'll automatically enable appropriate flags when I detect:
 
-**`--answer-only`**
-- Direct response without task creation or workflow automation
-- Explicit use only, no auto-activation
+```yaml
+thinking_modes:
+  complex_imports → --think
+  system_architecture → --think-hard  
+  critical_decisions → --ultrathink
 
-**`--validate`**
-- Pre-operation validation and risk assessment
-- Auto-activates: Risk score >0.7 or resource usage >75%
-- Risk algorithm: complexity*0.3 + vulnerabilities*0.25 + resources*0.2 + failure_prob*0.15 + time*0.1
+parallel_work:
+  many_files (>50) → --delegate auto
+  many_dirs (>7) → --delegate folders
 
-**`--safe-mode`**
-- Maximum validation with conservative execution
-- Auto-activates: Resource usage >85% or production environment
-- Enables validation checks, forces --uc mode, blocks risky operations
+mcp_servers:
+  ui_components → Magic
+  library_docs → Context7
+  complex_analysis → Sequential
+  browser_testing → Playwright
 
-**`--verbose`**
-- Maximum detail and explanation
-- High token usage for comprehensive output
+safety:
+  high_risk → --validate
+  production_code → --validate
+```
 
-## MCP Server Control Flags
+## 📋 Simple Precedence
 
-**`--c7` / `--context7`**
-- Enable Context7 for library documentation lookup
-- Auto-activates: External library imports, framework questions
-- Detection: import/require/from/use statements, framework keywords
-- Workflow: resolve-library-id → get-library-docs → implement
+When flags conflict, I follow this order:
 
-**`--seq` / `--sequential`**
-- Enable Sequential for complex multi-step analysis
-- Auto-activates: Complex debugging, system design, --think flags
-- Detection: debug/trace/analyze keywords, nested conditionals, async chains
+1. **Your explicit flags** > auto-detection
+2. **Safety** > performance  
+3. **Deeper thinking** > shallow analysis
+4. **Specific scope** > general scope
+5. **--no-mcp** overrides individual server flags
 
-**`--magic`**
-- Enable Magic for UI component generation
-- Auto-activates: UI component requests, design system queries
-- Detection: component/button/form keywords, JSX patterns, accessibility requirements
+## 💡 Common Patterns
 
-**`--play` / `--playwright`**
-- Enable Playwright for cross-browser automation and E2E testing
-- Detection: test/e2e keywords, performance monitoring, visual testing, cross-browser requirements
+Quick examples of flag combinations:
 
-**`--all-mcp`**
-- Enable all MCP servers simultaneously
-- Auto-activates: Problem complexity >0.8, multi-domain indicators
-- Higher token usage, use judiciously
+```
+"analyze this architecture" → --think-hard
+"build a login form" → Magic server (auto)
+"fix this bug" → --think + focused analysis
+"process entire codebase" → --delegate auto
+"just explain this" → --answer-only
+"make this code better" → --loop (auto)
+```
 
-**`--no-mcp`**
-- Disable all MCP servers, use native tools only
-- 40-60% faster execution, WebSearch fallback
+## 🧠 Advanced Features
 
-**`--no-[server]`**
-- Disable specific MCP server (e.g., --no-magic, --no-seq)
-- Server-specific fallback strategies, 10-30% faster per disabled server
+For complex scenarios, additional flags available:
 
-## Sub-Agent Delegation Flags
+- **Wave orchestration**: For enterprise-scale operations (see MODE_Task_Management.md)
+- **Token efficiency**: Compression modes (see MODE_Token_Efficiency.md)
+- **Introspection**: Self-analysis mode (see MODE_Introspection.md)
 
-**`--delegate [files|folders|auto]`**
-- Enable Task tool sub-agent delegation for parallel processing
-- **files**: Delegate individual file analysis to sub-agents
-- **folders**: Delegate directory-level analysis to sub-agents  
-- **auto**: Auto-detect delegation strategy based on scope and complexity
-- Auto-activates: >7 directories or >50 files
-- 40-70% time savings for suitable operations
+---
 
-**`--concurrency [n]`**
-- Control max concurrent sub-agents and tasks (default: 7, range: 1-15)
-- Dynamic allocation based on resources and complexity
-- Prevents resource exhaustion in complex scenarios
-
-## Wave Orchestration Flags
-
-**`--wave-mode [auto|force|off]`**
-- Control wave orchestration activation
-- **auto**: Auto-activates based on complexity >0.8 AND file_count >20 AND operation_types >2
-- **force**: Override auto-detection and force wave mode for borderline cases
-- **off**: Disable wave mode, use Sub-Agent delegation instead
-- 30-50% better results through compound intelligence and progressive enhancement
-
-**`--wave-strategy [progressive|systematic|adaptive|enterprise]`**
-- Select wave orchestration strategy
-- **progressive**: Iterative enhancement for incremental improvements
-- **systematic**: Comprehensive methodical analysis for complex problems
-- **adaptive**: Dynamic configuration based on varying complexity
-- **enterprise**: Large-scale orchestration for >100 files with >0.7 complexity
-- Auto-selects based on project characteristics and operation type
-
-**`--wave-delegation [files|folders|tasks]`**
-- Control how Wave system delegates work to Sub-Agent
-- **files**: Sub-Agent delegates individual file analysis across waves
-- **folders**: Sub-Agent delegates directory-level analysis across waves
-- **tasks**: Sub-Agent delegates by task type (security, performance, quality, architecture)
-- Integrates with `--delegate` flag for coordinated multi-phase execution
-
-## Scope & Focus Flags
-
-**`--scope [level]`**
-- file: Single file analysis
-- module: Module/directory level
-- project: Entire project scope
-- system: System-wide analysis
-
-**`--focus [domain]`**
-- performance: Performance optimization
-- security: Security analysis and hardening
-- quality: Code quality and maintainability
-- architecture: System design and structure
-- accessibility: UI/UX accessibility compliance
-- testing: Test coverage and quality
-
-## Iterative Improvement Flags
-
-**`--loop`**
-- Enable iterative improvement mode for commands
-- Auto-activates: Quality improvement requests, refinement operations, polish tasks
-- Compatible commands: /improve, /refine, /enhance, /fix, /cleanup, /analyze
-- Default: 3 iterations with automatic validation
-
-**`--iterations [n]`**
-- Control number of improvement cycles (default: 3, range: 1-10)
-- Overrides intelligent default based on operation complexity
-
-**`--interactive`**
-- Enable user confirmation between iterations
-- Pauses for review and approval before each cycle
-- Allows manual guidance and course correction
-
-## Persona Activation Flags
-
-**Available Personas**:
-- `--persona-architect`: Systems architecture specialist
-- `--persona-frontend`: UX specialist, accessibility advocate
-- `--persona-backend`: Reliability engineer, API specialist
-- `--persona-analyzer`: Root cause specialist
-- `--persona-security`: Threat modeler, vulnerability specialist
-- `--persona-mentor`: Knowledge transfer specialist
-- `--persona-refactorer`: Code quality specialist
-- `--persona-performance`: Optimization specialist
-- `--persona-qa`: Quality advocate, testing specialist
-- `--persona-devops`: Infrastructure specialist
-- `--persona-scribe=lang`: Professional writer, documentation specialist
-
-## Introspection & Transparency Flags
-
-**`--introspect` / `--introspection`**
-- Deep transparency mode exposing thinking process
-- Auto-activates: SuperClaude framework work, complex debugging
-- Transparency markers: 🤔 Thinking, 🎯 Decision, ⚡ Action, 📊 Check, 💡 Learning
-- Conversational reflection with shared uncertainties
-
-## Flag Integration Patterns
-
-### MCP Server Auto-Activation
-
-**Auto-Activation Logic**:
-- **Context7**: External library imports, framework questions, documentation requests
-- **Sequential**: Complex debugging, system design, any --think flags  
-- **Magic**: UI component requests, design system queries, frontend persona
-- **Playwright**: Testing workflows, performance monitoring, QA persona
-
-### Flag Precedence
-
-1. Safety flags (--safe-mode) > optimization flags
-2. Explicit flags > auto-activation
-3. Thinking depth: --ultrathink > --think-hard > --think
-4. --no-mcp overrides all individual MCP flags
-5. Scope: system > project > module > file
-6. Last specified persona takes precedence
-7. Wave mode: --wave-mode off > --wave-mode force > --wave-mode auto
-8. Sub-Agent delegation: explicit --delegate > auto-detection
-9. Loop mode: explicit --loop > auto-detection based on refinement keywords
-10. --uc auto-activation overrides verbose flags
-
-### Context-Based Auto-Activation
-
-**Wave Auto-Activation**: complexity ≥0.7 AND files >20 AND operation_types >2
-**Sub-Agent Auto-Activation**: >7 directories OR >50 files OR complexity >0.8
-**Loop Auto-Activation**: polish, refine, enhance, improve keywords detected
+*These flags help me work more effectively, but my natural understanding of your needs takes precedence. When in doubt, I'll choose the approach that best serves your goal.*

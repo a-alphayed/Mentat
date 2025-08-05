@@ -44,6 +44,11 @@ wheels/
 # Claude Code
 .claude/
 
+# Project specific
+Tests/
+ClaudeDocs/
+.serena/
+
 # Temporary files
 *.tmp
 *.temp

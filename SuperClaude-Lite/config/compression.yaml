@@ -1,0 +1,314 @@
+# SuperClaude-Lite Compression Configuration
+# Token efficiency strategies and selective compression patterns
+
+# Compression Levels and Strategies
+compression_levels:
+  minimal: # 0-40% compression
+    symbol_systems: false
+    abbreviation_systems: false
+    structural_optimization: false
+    quality_threshold: 0.98
+    use_cases: ["user_content", "low_resource_usage", "high_quality_required"]
+    
+  efficient: # 40-70% compression  
+    symbol_systems: true
+    abbreviation_systems: false
+    structural_optimization: true
+    quality_threshold: 0.95
+    use_cases: ["moderate_resource_usage", "balanced_efficiency"]
+    
+  compressed: # 70-85% compression
+    symbol_systems: true
+    abbreviation_systems: true
+    structural_optimization: true
+    quality_threshold: 0.90
+    use_cases: ["high_resource_usage", "user_requests_brevity"]
+    
+  critical: # 85-95% compression
+    symbol_systems: true
+    abbreviation_systems: true
+    structural_optimization: true
+    advanced_techniques: true
+    quality_threshold: 0.85
+    use_cases: ["resource_constraints", "emergency_compression"]
+    
+  emergency: # 95%+ compression
+    symbol_systems: true
+    abbreviation_systems: true
+    structural_optimization: true
+    advanced_techniques: true
+    aggressive_optimization: true
+    quality_threshold: 0.80
+    use_cases: ["critical_resource_constraints", "emergency_situations"]
+
+# Selective Compression Patterns
+selective_compression:
+  content_classification:
+    framework_exclusions:
+      patterns:
+        - "/SuperClaude/SuperClaude/"
+        - "~/.claude/"
+        - ".claude/"
+        - "SuperClaude/*"
+        - "CLAUDE.md"
+        - "FLAGS.md"
+        - "PRINCIPLES.md"
+        - "ORCHESTRATOR.md"
+        - "MCP_*.md"
+        - "MODE_*.md"
+        - "SESSION_LIFECYCLE.md"
+      compression_level: "preserve" # 0% compression
+      reasoning: "Framework content must be preserved for proper operation"
+      
+    user_content_preservation:
+      patterns:
+        - "project_files"
+        - "user_documentation"
+        - "source_code"
+        - "configuration_files"
+        - "custom_content"
+      compression_level: "minimal" # Light compression only
+      reasoning: "User content requires high fidelity preservation"
+      
+    session_data_optimization:
+      patterns:
+        - "session_metadata"
+        - "checkpoint_data"
+        - "cache_content"
+        - "working_artifacts"
+        - "analysis_results"
+      compression_level: "efficient" # 40-70% compression
+      reasoning: "Session data can be compressed while maintaining utility"
+      
+    compressible_content:
+      patterns:
+        - "framework_repetition"
+        - "historical_session_data"
+        - "cached_analysis_results"
+        - "temporary_working_data"
+      compression_level: "compressed" # 70-85% compression
+      reasoning: "Highly compressible content with acceptable quality trade-offs"
+
+# Symbol Systems Configuration
+symbol_systems:
+  core_logic_flow:
+    enabled: true
+    mappings:
+      "leads to": "→"
+      "implies": "→"
+      "transforms to": "⇒"
+      "converts to": "⇒"
+      "rollback": "←"
+      "reverse": "←"
+      "bidirectional": "⇄"
+      "sync": "⇄"
+      "and": "&"
+      "combine": "&"
+      "separator": "|"
+      "or": "|"
+      "define": ":"
+      "specify": ":"
+      "sequence": "»"
+      "then": "»"
+      "therefore": "∴"
+      "because": "∵"
+      "equivalent": "≡"
+      "approximately": "≈"
+      "not equal": "≠"
+      
+  status_progress:
+    enabled: true
+    mappings:
+      "completed": "✅"
+      "passed": "✅"
+      "failed": "❌"
+      "error": "❌"
+      "warning": "⚠️"
+      "information": "ℹ️"
+      "in progress": "🔄"
+      "processing": "🔄"
+      "waiting": "⏳"
+      "pending": "⏳"
+      "critical": "🚨"
+      "urgent": "🚨"
+      "target": "🎯"
+      "goal": "🎯"
+      "metrics": "📊"
+      "data": "📊"
+      "insight": "💡"
+      "learning": "💡"
+      
+  technical_domains:
+    enabled: true
+    mappings:
+      "performance": "⚡"
+      "optimization": "⚡"
+      "analysis": "🔍"
+      "investigation": "🔍"
+      "configuration": "🔧"
+      "setup": "🔧"
+      "security": "🛡️"
+      "protection": "🛡️"
+      "deployment": "📦"
+      "package": "📦"
+      "design": "🎨"
+      "frontend": "🎨"
+      "network": "🌐"
+      "connectivity": "🌐"
+      "mobile": "📱"
+      "responsive": "📱"
+      "architecture": "🏗️"
+      "system structure": "🏗️"
+      "components": "🧩"
+      "modular": "🧩"
+
+# Abbreviation Systems Configuration
+abbreviation_systems:
+  system_architecture:
+    enabled: true
+    mappings:
+      "configuration": "cfg"
+      "settings": "cfg"
+      "implementation": "impl"
+      "code structure": "impl"
+      "architecture": "arch"
+      "system design": "arch"
+      "performance": "perf"
+      "optimization": "perf"
+      "operations": "ops"
+      "deployment": "ops"
+      "environment": "env"
+      "runtime context": "env"
+      
+  development_process:
+    enabled: true
+    mappings:
+      "requirements": "req"
+      "dependencies": "deps"
+      "packages": "deps"
+      "validation": "val"
+      "verification": "val"
+      "testing": "test"
+      "quality assurance": "test"
+      "documentation": "docs"
+      "guides": "docs"
+      "standards": "std"
+      "conventions": "std"
+      
+  quality_analysis:
+    enabled: true
+    mappings:
+      "quality": "qual"
+      "maintainability": "qual"
+      "security": "sec"
+      "safety measures": "sec"
+      "error": "err"
+      "exception handling": "err"
+      "recovery": "rec"
+      "resilience": "rec"
+      "severity": "sev"
+      "priority level": "sev"
+      "optimization": "opt"
+      "improvement": "opt"
+
+# Structural Optimization Techniques
+structural_optimization:
+  whitespace_optimization:
+    enabled: true
+    remove_redundant_spaces: true
+    normalize_line_breaks: true
+    preserve_code_formatting: true
+    
+  phrase_simplification:
+    enabled: true
+    common_phrase_replacements:
+      "in order to": "to"
+      "it is important to note that": "note:"
+      "please be aware that": "note:"
+      "it should be noted that": "note:"
+      "for the purpose of": "for"
+      "with regard to": "regarding"
+      "in relation to": "regarding"
+      
+  redundancy_removal:
+    enabled: true
+    remove_articles: ["the", "a", "an"] # Only in high compression levels
+    remove_filler_words: ["very", "really", "quite", "rather"]
+    combine_repeated_concepts: true
+
+# Quality Preservation Standards
+quality_preservation:
+  minimum_thresholds:
+    information_preservation: 0.95
+    semantic_accuracy: 0.95
+    technical_correctness: 0.98
+    user_content_fidelity: 0.99
+    
+  validation_criteria:
+    key_concept_retention: true
+    technical_term_preservation: true
+    code_example_accuracy: true
+    reference_link_preservation: true
+    
+  quality_monitoring:
+    real_time_validation: true
+    effectiveness_tracking: true
+    user_feedback_integration: true
+    adaptive_threshold_adjustment: true
+
+# Adaptive Compression Strategy
+adaptive_compression:
+  context_awareness:
+    user_expertise_factor: true
+    project_complexity_factor: true
+    domain_specific_optimization: true
+    
+  learning_integration:
+    effectiveness_feedback: true
+    user_preference_learning: true
+    pattern_optimization: true
+    
+  dynamic_adjustment:
+    resource_pressure_response: true
+    quality_threshold_adaptation: true
+    performance_optimization: true
+
+# Performance Targets
+performance_targets:
+  processing_time_ms: 150
+  compression_ratio_target: 0.50 # 50% compression
+  quality_preservation_target: 0.95
+  token_efficiency_gain: 0.40 # 40% token reduction
+  
+# Cache Configuration  
+caching:
+  compression_results:
+    enabled: true
+    cache_duration_minutes: 30
+    max_cache_size_mb: 50
+    invalidation_strategy: "content_change_detection"
+    
+  symbol_mappings:
+    enabled: true
+    preload_common_patterns: true
+    learning_based_optimization: true
+    
+  pattern_recognition:
+    enabled: true
+    adaptive_pattern_learning: true
+    user_specific_patterns: true
+
+# Integration with Other Systems
+integration:
+  mcp_servers:
+    morphllm: "coordinate_compression_with_editing"
+    serena: "memory_compression_strategies"
+    
+  modes:
+    token_efficiency: "primary_compression_mode"
+    task_management: "session_data_compression"
+    
+  learning_engine:
+    effectiveness_tracking: true
+    pattern_learning: true
+    adaptation_feedback: true

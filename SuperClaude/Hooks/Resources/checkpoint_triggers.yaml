@@ -1,0 +1,36 @@
+# Checkpoint Triggers Configuration for Session Lifecycle Management
+# Based on SESSION_LIFECYCLE.md specifications
+
+checkpoint_triggers:
+  # Time-based automatic checkpoints
+  time_based:
+    enabled: true
+    interval_minutes: 30        # Every 30 minutes of active work per SESSION_LIFECYCLE.md
+    
+  # Task completion based checkpoints  
+  task_based:
+    enabled: true
+    high_priority_only: true    # Only trigger on high priority task completion
+    
+  # Risk-based checkpoints for major operations
+  risk_based:
+    enabled: true
+    major_operations:           # Operations that trigger checkpoint
+      - Write
+      - Edit  
+      - MultiEdit
+      - Delete
+    file_threshold: 50          # Major refactoring threshold (>50 files)
+    
+  # Error recovery checkpoints
+  error_recovery:
+    enabled: true
+    auto_checkpoint: true       # Automatically checkpoint after error recovery
+
+# Memory key patterns for different checkpoint types
+memory_key_patterns:
+  time_based: "checkpoints/auto-{timestamp}"
+  task_based: "checkpoints/task-{task_id}-{timestamp}"
+  risk_based: "checkpoints/risk-{operation}-{timestamp}"
+  error_recovery: "checkpoints/recovery-{timestamp}"
+  manual: "checkpoints/manual-{timestamp}"

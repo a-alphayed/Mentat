@@ -1,0 +1,291 @@
+# SuperClaude-Lite Validation Configuration
+# RULES.md + PRINCIPLES.md enforcement and quality standards
+
+# Core SuperClaude Rules Validation
+rules_validation:
+  file_operations:
+    read_before_write:
+      enabled: true
+      severity: "error"
+      message: "RULES violation: No Read operation detected before Write/Edit"
+      check_recent_tools: 3
+      exceptions: ["new_file_creation"]
+      
+    absolute_paths_only:
+      enabled: true
+      severity: "error"
+      message: "RULES violation: Relative path used"
+      path_parameters: ["file_path", "path", "directory", "output_path"]
+      allowed_prefixes: ["http://", "https://", "/"]
+      
+    validate_before_execution:
+      enabled: true
+      severity: "warning"
+      message: "RULES recommendation: High-risk operation should include validation"
+      high_risk_operations: ["delete", "refactor", "deploy", "migrate"]
+      complexity_threshold: 0.7
+      
+  security_requirements:
+    input_validation:
+      enabled: true
+      severity: "error"
+      message: "RULES violation: User input handling without validation"
+      check_patterns: ["user_input", "external_data", "api_input"]
+      
+    no_hardcoded_secrets:
+      enabled: true
+      severity: "critical"
+      message: "RULES violation: Hardcoded sensitive information detected"
+      patterns: ["password", "api_key", "secret", "token"]
+      
+    production_safety:
+      enabled: true
+      severity: "error"
+      message: "RULES violation: Unsafe operation in production context"
+      production_indicators: ["is_production", "prod_env", "production"]
+
+# SuperClaude Principles Validation  
+principles_validation:
+  evidence_over_assumptions:
+    enabled: true
+    severity: "warning"
+    message: "PRINCIPLES: Provide evidence to support assumptions"
+    check_for_assumptions: true
+    require_evidence: true
+    confidence_threshold: 0.7
+    
+  code_over_documentation:
+    enabled: true
+    severity: "warning"
+    message: "PRINCIPLES: Documentation should follow working code, not precede it"
+    documentation_operations: ["document", "readme", "guide"]
+    require_working_code: true
+    
+  efficiency_over_verbosity:
+    enabled: true
+    severity: "suggestion"
+    message: "PRINCIPLES: Consider token efficiency techniques for large outputs"
+    output_size_threshold: 5000
+    verbosity_indicators: ["repetitive_content", "unnecessary_detail"]
+    
+  test_driven_development:
+    enabled: true
+    severity: "warning"
+    message: "PRINCIPLES: Logic changes should include tests"
+    logic_operations: ["write", "edit", "generate", "implement"]
+    test_file_patterns: ["*test*", "*spec*", "test_*", "*_test.*"]
+    
+  single_responsibility:
+    enabled: true
+    severity: "suggestion"
+    message: "PRINCIPLES: Functions/classes should have single responsibility"
+    complexity_indicators: ["multiple_purposes", "large_function", "many_parameters"]
+    
+  error_handling_required:
+    enabled: true
+    severity: "warning"
+    message: "PRINCIPLES: Error handling not implemented"
+    critical_operations: ["write", "edit", "deploy", "api_calls"]
+
+# Quality Standards
+quality_standards:
+  code_quality:
+    minimum_score: 0.7
+    factors:
+      - syntax_correctness
+      - logical_consistency
+      - error_handling_presence
+      - documentation_adequacy
+      - test_coverage
+      
+  security_compliance:
+    minimum_score: 0.8
+    checks:
+      - input_validation
+      - output_sanitization
+      - authentication_checks
+      - authorization_verification
+      - secure_communication
+      
+  performance_standards:
+    response_time_threshold_ms: 2000
+    resource_efficiency_min: 0.6
+    optimization_indicators:
+      - algorithm_efficiency
+      - memory_usage
+      - processing_speed
+      
+  maintainability:
+    minimum_score: 0.6
+    factors:
+      - code_clarity
+      - documentation_quality
+      - modular_design
+      - consistent_style
+
+# Validation Workflow
+validation_workflow:
+  pre_validation:
+    enabled: true
+    quick_checks:
+      - syntax_validation
+      - basic_security_scan
+      - rule_compliance_check
+      
+  post_validation:
+    enabled: true
+    comprehensive_checks:
+      - quality_assessment
+      - principle_alignment
+      - effectiveness_measurement
+      - learning_opportunity_detection
+      
+  continuous_validation:
+    enabled: true
+    real_time_monitoring:
+      - pattern_violation_detection
+      - quality_degradation_alerts
+      - performance_regression_detection
+
+# Error Classification and Handling
+error_classification:
+  critical_errors:
+    severity_level: "critical"
+    block_execution: true
+    examples:
+      - security_vulnerabilities
+      - data_corruption_risk
+      - system_instability
+      
+  standard_errors:
+    severity_level: "error"
+    block_execution: false
+    require_acknowledgment: true
+    examples:
+      - rule_violations
+      - quality_failures
+      - incomplete_implementation
+      
+  warnings:
+    severity_level: "warning"
+    block_execution: false
+    examples:
+      - principle_deviations
+      - optimization_opportunities
+      - best_practice_suggestions
+      
+  suggestions:
+    severity_level: "suggestion"
+    informational: true
+    examples:
+      - code_improvements
+      - efficiency_enhancements
+      - learning_recommendations
+
+# Effectiveness Measurement
+effectiveness_measurement:
+  success_indicators:
+    task_completion: "weight: 0.4"
+    quality_achievement: "weight: 0.3"
+    user_satisfaction: "weight: 0.2"
+    learning_value: "weight: 0.1"
+    
+  performance_metrics:
+    execution_time: "target: <2000ms"
+    resource_efficiency: "target: >0.6"
+    error_rate: "target: <0.1"
+    validation_accuracy: "target: >0.9"
+    
+  quality_metrics:
+    code_quality_score: "target: >0.7"
+    security_compliance: "target: >0.8"
+    principle_alignment: "target: >0.7"
+    rule_compliance: "target: >0.9"
+
+# Learning Integration
+learning_integration:
+  pattern_detection:
+    success_patterns: true
+    failure_patterns: true
+    optimization_patterns: true
+    user_preference_patterns: true
+    
+  effectiveness_feedback:
+    real_time_collection: true
+    user_satisfaction_tracking: true
+    quality_trend_analysis: true
+    adaptation_triggers: true
+    
+  continuous_improvement:
+    threshold_adjustment: true
+    rule_refinement: true
+    principle_enhancement: true
+    validation_optimization: true
+
+# Context-Aware Validation
+context_awareness:
+  project_type_adaptations:
+    frontend_projects:
+      additional_checks: ["accessibility", "responsive_design", "browser_compatibility"]
+      
+    backend_projects:
+      additional_checks: ["api_security", "data_validation", "performance_optimization"]
+      
+    full_stack_projects:
+      additional_checks: ["integration_testing", "end_to_end_validation", "deployment_safety"]
+      
+  user_expertise_adjustments:
+    beginner:
+      validation_verbosity: "high"
+      educational_suggestions: true
+      step_by_step_guidance: true
+      
+    intermediate:
+      validation_verbosity: "medium"
+      best_practice_suggestions: true
+      optimization_recommendations: true
+      
+    expert:
+      validation_verbosity: "low"
+      advanced_optimization_suggestions: true
+      architectural_guidance: true
+
+# Performance Configuration
+performance_configuration:
+  validation_targets:
+    processing_time_ms: 100
+    memory_usage_mb: 50
+    cpu_utilization_percent: 30
+    
+  optimization_strategies:
+    parallel_validation: true
+    cached_results: true
+    incremental_validation: true
+    smart_rule_selection: true
+    
+  resource_management:
+    max_validation_time_ms: 500
+    memory_limit_mb: 100
+    cpu_limit_percent: 50
+    fallback_on_resource_limit: true
+
+# Integration Points
+integration_points:
+  mcp_servers:
+    serena: "semantic_validation_support"
+    morphllm: "edit_validation_coordination"
+    sequential: "complex_validation_analysis"
+    
+  learning_engine:
+    effectiveness_tracking: true
+    pattern_learning: true
+    adaptation_feedback: true
+    
+  compression_engine:
+    validation_result_compression: true
+    quality_preservation_verification: true
+    
+  other_hooks:
+    pre_tool_use: "validation_preparation"
+    session_start: "validation_configuration"
+    stop: "validation_summary_generation"

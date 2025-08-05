@@ -1,0 +1,70 @@
+# SuperClaude-Lite Logging Configuration
+# Simple logging configuration for hook execution monitoring
+
+# Core Logging Settings
+logging:
+  enabled: true
+  level: "INFO"  # ERROR, WARNING, INFO, DEBUG
+  
+  # File Settings
+  file_settings:
+    log_directory: "cache/logs"
+    retention_days: 30
+    rotation_strategy: "daily"
+    
+  # Hook Logging Settings
+  hook_logging:
+    log_lifecycle: true  # Log hook start/end events
+    log_decisions: true  # Log decision points
+    log_errors: true     # Log error events
+    log_timing: true     # Include timing information
+    
+  # Performance Settings
+  performance:
+    max_overhead_ms: 1  # Maximum acceptable logging overhead
+    async_logging: false  # Keep simple for now
+    
+  # Privacy Settings
+  privacy:
+    sanitize_user_content: true
+    exclude_sensitive_data: true
+    anonymize_session_ids: false  # Keep for correlation
+
+# Hook-Specific Configuration
+hook_configuration:
+  pre_tool_use:
+    enabled: true
+    log_tool_selection: true
+    log_input_validation: true
+    
+  post_tool_use:
+    enabled: true
+    log_output_processing: true
+    log_integration_success: true
+    
+  session_start:
+    enabled: true
+    log_initialization: true
+    log_configuration_loading: true
+    
+  pre_compact:
+    enabled: true
+    log_compression_decisions: true
+    
+  notification:
+    enabled: true
+    log_notification_handling: true
+    
+  stop:
+    enabled: true
+    log_cleanup_operations: true
+    
+  subagent_stop:
+    enabled: true
+    log_subagent_cleanup: true
+
+# Development Settings
+development:
+  verbose_errors: true
+  include_stack_traces: false  # Keep logs clean
+  debug_mode: false

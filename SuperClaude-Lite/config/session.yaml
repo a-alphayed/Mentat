@@ -1,0 +1,351 @@
+# SuperClaude-Lite Session Configuration
+# SessionStart/Stop lifecycle management and analytics
+
+# Session Lifecycle Configuration
+session_lifecycle:
+  initialization:
+    performance_target_ms: 50
+    auto_project_detection: true
+    context_loading_strategy: "selective"
+    framework_exclusion_enabled: true
+    
+    default_modes:
+      - "adaptive_intelligence"
+      - "performance_monitoring"
+      
+    intelligence_activation:
+      pattern_detection: true
+      mcp_routing: true
+      learning_integration: true
+      compression_optimization: true
+      
+  termination:
+    performance_target_ms: 200
+    analytics_generation: true
+    learning_consolidation: true
+    session_persistence: true
+    cleanup_optimization: true
+
+# Project Type Detection
+project_detection:
+  file_indicators:
+    nodejs:
+      - "package.json"
+      - "node_modules/"
+      - "yarn.lock"
+      - "pnpm-lock.yaml"
+      
+    python:
+      - "pyproject.toml"
+      - "setup.py"
+      - "requirements.txt"
+      - "__pycache__/"
+      - ".py"
+      
+    rust:
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "src/main.rs"
+      - "src/lib.rs"
+      
+    go:
+      - "go.mod"
+      - "go.sum"
+      - "main.go"
+      
+    web_frontend:
+      - "index.html"
+      - "public/"
+      - "dist/"
+      - "build/"
+      - "src/components/"
+      
+  framework_detection:
+    react:
+      - "react"
+      - "next.js"
+      - "@types/react"
+      
+    vue:
+      - "vue"
+      - "nuxt"
+      - "@vue/cli"
+      
+    angular:
+      - "@angular/core"
+      - "angular.json"
+      
+    express:
+      - "express"
+      - "app.js"
+      - "server.js"
+
+# Intelligence Activation Rules
+intelligence_activation:
+  mode_detection:
+    brainstorming:
+      triggers:
+        - "new project"
+        - "not sure"
+        - "thinking about"
+        - "explore"
+        - "brainstorm"
+      confidence_threshold: 0.7
+      auto_activate: true
+      
+    task_management:
+      triggers:
+        - "multiple files"
+        - "complex operation"
+        - "system-wide"
+        - "comprehensive"
+      file_count_threshold: 3
+      complexity_threshold: 0.4
+      auto_activate: true
+      
+    token_efficiency:
+      triggers:
+        - "resource constraint"
+        - "brevity"
+        - "compressed"
+        - "efficient"
+      resource_threshold_percent: 75
+      conversation_length_threshold: 100
+      auto_activate: true
+      
+  mcp_server_activation:
+    context7:
+      triggers:
+        - "library"
+        - "documentation"
+        - "framework"
+        - "api reference"
+      project_indicators:
+        - "external_dependencies"
+        - "framework_detected"
+      auto_activate: true
+      
+    sequential:
+      triggers:
+        - "analyze"
+        - "debug"
+        - "complex"
+        - "systematic"
+      complexity_threshold: 0.6
+      auto_activate: true
+      
+    magic:
+      triggers:
+        - "component"
+        - "ui"
+        - "frontend"
+        - "design"
+      project_type_match: ["web_frontend", "react", "vue", "angular"]
+      auto_activate: true
+      
+    playwright:
+      triggers:
+        - "test"
+        - "automation"
+        - "browser"
+        - "e2e"
+      project_indicators:
+        - "has_tests"
+        - "test_framework_detected"
+      auto_activate: false # Manual activation preferred
+      
+    morphllm:
+      triggers:
+        - "edit"
+        - "modify"
+        - "quick change"
+      file_count_max: 10
+      complexity_max: 0.6
+      auto_activate: true
+      
+    serena:
+      triggers:
+        - "navigate"
+        - "find"
+        - "search"
+        - "analyze"
+      file_count_min: 5
+      complexity_min: 0.4
+      auto_activate: true
+
+# Session Analytics Configuration
+session_analytics:
+  performance_tracking:
+    enabled: true
+    metrics:
+      - "operation_count"
+      - "tool_usage_patterns"
+      - "mcp_server_effectiveness"
+      - "error_rates"
+      - "completion_times"
+      - "resource_utilization"
+      
+  effectiveness_measurement:
+    enabled: true
+    factors:
+      productivity: "weight: 0.4"
+      quality: "weight: 0.3"
+      user_satisfaction: "weight: 0.2"
+      learning_value: "weight: 0.1"
+      
+  learning_consolidation:
+    enabled: true
+    pattern_detection: true
+    adaptation_creation: true
+    effectiveness_feedback: true
+    insight_generation: true
+
+# Session Persistence
+session_persistence:
+  enabled: true
+  storage_strategy: "intelligent_compression"
+  retention_policy:
+    session_data_days: 90
+    analytics_data_days: 365
+    learning_data_persistent: true
+    
+  compression_settings:
+    session_metadata: "efficient" # 40-70% compression
+    analytics_data: "compressed" # 70-85% compression
+    learning_data: "minimal" # Preserve learning quality
+    
+  cleanup_automation:
+    enabled: true
+    old_session_cleanup: true
+    max_sessions_retained: 50
+    storage_optimization: true
+
+# Notification Processing
+notifications:
+  enabled: true
+  just_in_time_loading: true
+  pattern_updates: true
+  intelligence_updates: true
+  
+  priority_handling:
+    critical: "immediate_processing"
+    high: "fast_track_processing"
+    medium: "standard_processing"
+    low: "background_processing"
+    
+  caching_strategy:
+    documentation_cache_minutes: 30
+    pattern_cache_minutes: 60
+    intelligence_cache_minutes: 15
+
+# Task Management Integration
+task_management:
+  enabled: true
+  delegation_strategies:
+    files: "file_based_delegation"
+    folders: "directory_based_delegation"
+    auto: "intelligent_auto_detection"
+    
+  wave_orchestration:
+    enabled: true
+    complexity_threshold: 0.4
+    file_count_threshold: 3
+    operation_types_threshold: 2
+    
+  performance_optimization:
+    parallel_execution: true
+    resource_management: true
+    coordination_efficiency: true
+
+# User Experience Configuration
+user_experience:
+  session_feedback:
+    enabled: true
+    satisfaction_tracking: true
+    improvement_suggestions: true
+    
+  personalization:
+    enabled: true
+    preference_learning: true
+    adaptation_application: true
+    context_awareness: true
+    
+  progressive_enhancement:
+    enabled: true
+    capability_discovery: true
+    feature_introduction: true
+    learning_curve_optimization: true
+
+# Performance Targets
+performance_targets:
+  session_start_ms: 50
+  session_stop_ms: 200
+  context_loading_ms: 500
+  analytics_generation_ms: 1000
+  
+  efficiency_targets:
+    productivity_score: 0.7
+    quality_score: 0.8
+    satisfaction_score: 0.7
+    learning_value: 0.6
+    
+  resource_utilization:
+    memory_efficient: true
+    cpu_optimization: true
+    token_management: true
+    storage_optimization: true
+
+# Error Handling and Recovery
+error_handling:
+  graceful_degradation: true
+  fallback_strategies: true
+  error_learning: true
+  recovery_optimization: true
+  
+  session_recovery:
+    auto_recovery: true
+    state_preservation: true
+    context_restoration: true
+    learning_retention: true
+    
+  error_patterns:
+    detection: true
+    prevention: true
+    learning_integration: true
+    adaptation_triggers: true
+
+# Integration Configuration
+integration:
+  mcp_servers:
+    coordination: "seamless"
+    fallback_handling: "automatic"
+    performance_monitoring: "continuous"
+    
+  learning_engine:
+    session_learning: true
+    pattern_recognition: true
+    effectiveness_tracking: true
+    adaptation_application: true
+    
+  compression_engine:
+    session_data_compression: true
+    quality_preservation: true
+    selective_application: true
+    
+  quality_gates:
+    session_validation: true
+    analytics_verification: true
+    learning_quality_assurance: true
+
+# Development and Debugging
+development_support:
+  session_debugging: true
+  performance_profiling: true
+  analytics_validation: true
+  learning_verification: true
+  
+  metrics_collection:
+    detailed_timing: true
+    resource_tracking: true
+    effectiveness_measurement: true
+    quality_assessment: true

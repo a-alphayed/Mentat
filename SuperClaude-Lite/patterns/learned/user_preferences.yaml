@@ -1,0 +1,119 @@
+# Learned User Preferences Pattern
+# Adaptive patterns that evolve based on user behavior
+
+user_profile:
+  id: "example_user"
+  created: "2025-01-31"
+  last_updated: "2025-01-31"
+  sessions_analyzed: 0
+  
+learned_preferences:
+  communication_style:
+    verbosity_preference: "balanced"  # minimal, balanced, detailed
+    technical_depth: "high"  # low, medium, high
+    symbol_usage_comfort: "high"  # low, medium, high
+    abbreviation_tolerance: "medium"  # low, medium, high
+    
+  workflow_patterns:
+    preferred_thinking_mode: "--think-hard"
+    mcp_server_preferences:
+      - "serena"  # Most frequently beneficial
+      - "sequential"  # High success rate
+      - "context7"  # Frequently requested
+    mode_activation_frequency:
+      task_management: 0.8  # High usage
+      token_efficiency: 0.6  # Medium usage
+      brainstorming: 0.3  # Low usage
+      introspection: 0.4  # Medium usage
+      
+  project_type_expertise:
+    python: 0.9  # High proficiency
+    react: 0.7  # Good proficiency
+    javascript: 0.8  # High proficiency
+    documentation: 0.6  # Medium proficiency
+    
+  performance_preferences:
+    speed_vs_quality: "quality_focused"  # speed_focused, balanced, quality_focused
+    compression_tolerance: 0.7  # How much compression user accepts
+    context_size_preference: "medium"  # small, medium, large
+    
+learning_insights:
+  effective_patterns:
+    - pattern: "serena + morphllm hybrid"
+      success_rate: 0.92
+      context: "large refactoring tasks"
+      
+    - pattern: "sequential + context7"
+      success_rate: 0.88
+      context: "complex debugging"
+      
+    - pattern: "magic + context7"
+      success_rate: 0.85
+      context: "UI component creation"
+      
+  ineffective_patterns:
+    - pattern: "playwright without setup"
+      success_rate: 0.3
+      context: "testing without proper configuration"
+      improvement: "always check test environment first"
+      
+  optimization_opportunities:
+    - area: "context compression"
+      current_efficiency: 0.6
+      target_efficiency: 0.8
+      strategy: "increase abbreviation usage"
+      
+    - area: "mcp coordination"
+      current_efficiency: 0.7
+      target_efficiency: 0.85
+      strategy: "better server selection logic"
+
+adaptive_thresholds:
+  mode_activation:
+    brainstorming: 0.6  # Lowered from 0.7 due to user preference
+    task_management: 0.9  # Raised from 0.8 due to frequent use
+    token_efficiency: 0.65  # Adjusted based on tolerance
+    introspection: 0.5  # Lowered due to user comfort with meta-analysis
+    
+  mcp_server_confidence:
+    serena: 0.65  # Lowered due to high success rate
+    sequential: 0.75  # Standard
+    context7: 0.7  # Slightly lowered due to frequent success
+    magic: 0.85  # Standard
+    morphllm: 0.7  # Lowered due to hybrid usage success
+    playwright: 0.9  # Raised due to setup issues
+
+personalization_rules:
+  communication:
+    - "Use technical terminology freely"
+    - "Provide implementation details"
+    - "Include performance considerations"
+    - "Balance symbol usage with clarity"
+    
+  workflow:
+    - "Prefer serena for analysis tasks"
+    - "Use sequential for complex problems"
+    - "Always validate with quality gates"
+    - "Optimize for long-term maintainability"
+    
+  error_handling:
+    - "Provide detailed error context"
+    - "Suggest multiple solutions"
+    - "Include learning opportunities"
+    - "Track error patterns for prevention"
+
+continuous_learning:
+  feedback_integration:
+    explicit_feedback: true
+    implicit_feedback: true  # Based on user actions
+    outcome_tracking: true
+    
+  pattern_evolution:
+    refinement_frequency: "weekly"
+    adaptation_rate: 0.1
+    stability_threshold: 0.95
+    
+  quality_metrics:
+    user_satisfaction_score: 0.0  # To be measured
+    task_completion_rate: 0.0  # To be measured
+    efficiency_improvement: 0.0  # To be measured

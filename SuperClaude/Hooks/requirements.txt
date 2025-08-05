@@ -1,0 +1,7 @@
+# SuperClaude Hooks Dependencies
+# 
+# Required for production use:
+PyYAML>=6.0.1,<7.0  # For loading performance_targets.yaml configuration
+
+# Optional but recommended for full functionality:
+psutil>=5.9.0       # For resource monitoring (CPU, memory usage tracking)
