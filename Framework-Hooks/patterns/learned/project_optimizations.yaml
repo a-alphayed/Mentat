@@ -11,16 +11,19 @@ project_profile:
 learned_optimizations:
   file_patterns:
     high_frequency_files:
-      - "/SuperClaude/Commands/*.md"
-      - "/SuperClaude/Core/*.md"
-      - "/SuperClaude/Modes/*.md"
+      patterns:
+        - "commands/*.md" 
+        - "Core/*.md"
+        - "Modes/*.md"
+        - "MCP/*.md"
       frequency_weight: 0.9
       cache_priority: "high"
       
     structural_patterns:
-      - "markdown documentation with YAML frontmatter"
-      - "python scripts with comprehensive docstrings"
-      - "modular architecture with clear separation"
+      patterns:
+        - "markdown documentation with YAML frontmatter"
+        - "python scripts with comprehensive docstrings"
+        - "modular architecture with clear separation"
       optimization: "maintain full context for these patterns"
       
   workflow_optimizations:

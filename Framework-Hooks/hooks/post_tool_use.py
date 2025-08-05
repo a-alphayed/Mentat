@@ -54,8 +54,10 @@ class PostToolUseHook:
         self.mcp_intelligence = MCPIntelligence()
         self.compression_engine = CompressionEngine()
         
-        # Initialize learning engine
-        cache_dir = Path("cache")
+        # Initialize learning engine with installation directory cache
+        import os
+        cache_dir = Path(os.path.expanduser("~/.claude/cache"))
+        cache_dir.mkdir(parents=True, exist_ok=True)
         self.learning_engine = LearningEngine(cache_dir)
         
         # Load hook-specific configuration from SuperClaude config

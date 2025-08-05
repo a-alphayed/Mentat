@@ -46,7 +46,6 @@ selective_compression:
   content_classification:
     framework_exclusions:
       patterns:
-        - "/SuperClaude/SuperClaude/"
         - "~/.claude/"
         - ".claude/"
         - "SuperClaude/*"

@@ -79,7 +79,6 @@ def classify_content(self, content: str, metadata: Dict[str, Any]) -> ContentTyp
     
     # Framework content - complete exclusion
     framework_patterns = [
-        '/SuperClaude/SuperClaude/',
         '~/.claude/',
         '.claude/',
         'SuperClaude/',
@@ -642,7 +641,6 @@ compression:
 ```yaml
 content_classification:
   framework_exclusions:
-    - "/SuperClaude/"
     - "~/.claude/"
     - "CLAUDE.md"
     - "FLAGS.md"
@@ -664,9 +662,9 @@ content_classification:
 ### Framework Content Protection
 ```python
 result = compression_engine.compress_content(
-    content="Content from /SuperClaude/Core/CLAUDE.md with framework patterns",
+    content="Content from ~/.claude/CLAUDE.md with framework patterns",
     context={'resource_usage_percent': 90},
-    metadata={'file_path': '/SuperClaude/Core/CLAUDE.md'}
+    metadata={'file_path': '~/.claude/CLAUDE.md'}
 )
 
 print(f"Compression ratio: {result.compression_ratio}")        # 0.0 (no compression)

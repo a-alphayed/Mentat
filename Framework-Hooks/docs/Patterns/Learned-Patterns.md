@@ -117,9 +117,10 @@ project_profile:
 learned_optimizations:
   file_patterns:
     high_frequency_files:
-      - "/SuperClaude/Commands/*.md"
-      - "/SuperClaude/Core/*.md" 
-      - "/SuperClaude/Modes/*.md"
+      - "commands/*.md"
+      - "Core/*.md" 
+      - "Modes/*.md"
+      - "MCP/*.md"
       frequency_weight: 0.9
       cache_priority: "high"
       access_pattern: "frequent_reference"

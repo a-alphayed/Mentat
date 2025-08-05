@@ -56,8 +56,10 @@ class PreCompactHook:
         self.mcp_intelligence = MCPIntelligence()
         self.compression_engine = CompressionEngine()
         
-        # Initialize learning engine
-        cache_dir = Path("cache")
+        # Initialize learning engine with installation directory cache
+        import os
+        cache_dir = Path(os.path.expanduser("~/.claude/cache"))
+        cache_dir.mkdir(parents=True, exist_ok=True)
         self.learning_engine = LearningEngine(cache_dir)
         
         # Load hook-specific configuration from SuperClaude config
@@ -318,7 +320,7 @@ class PreCompactHook:
         content_type = metadata.get('content_type', '')
         file_path = metadata.get('file_path', '')
         
-        if any(pattern in file_path for pattern in ['/SuperClaude/', '/.claude/', 'framework']):
+        if any(pattern in file_path for pattern in ['/.claude/', 'framework']):
             framework_score += 3
         
         if any(pattern in content_type for pattern in user_indicators):

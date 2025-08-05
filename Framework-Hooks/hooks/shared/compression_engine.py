@@ -239,7 +239,6 @@ class CompressionEngine:
         
         # Framework content - complete exclusion
         framework_patterns = [
-            '/SuperClaude/SuperClaude/',
             '~/.claude/',
             '.claude/',
             'SuperClaude/',

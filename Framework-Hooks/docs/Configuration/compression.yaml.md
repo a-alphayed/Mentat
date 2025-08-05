@@ -99,7 +99,6 @@ emergency:
 ```yaml
 framework_exclusions:
   patterns:
-    - "/SuperClaude/SuperClaude/"
     - "~/.claude/"
     - ".claude/"
     - "SuperClaude/*"

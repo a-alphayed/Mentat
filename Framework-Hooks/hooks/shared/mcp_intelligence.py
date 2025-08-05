@@ -476,3 +476,85 @@ class MCPIntelligence:
             efficiency_scores.append(min(efficiency_ratio, 2.0))  # Cap at 200% efficiency
         
         return sum(efficiency_scores) / len(efficiency_scores) if efficiency_scores else 1.0
+    
+    def select_optimal_server(self, tool_name: str, context: Dict[str, Any]) -> str:
+        """
+        Select the most appropriate MCP server for a given tool and context.
+        
+        Args:
+            tool_name: Name of the tool to be executed
+            context: Context information for intelligent selection
+            
+        Returns:
+            Name of the optimal server for the tool
+        """
+        # Map common tools to server capabilities
+        tool_server_mapping = {
+            'read_file': 'morphllm',
+            'write_file': 'morphllm', 
+            'edit_file': 'morphllm',
+            'analyze_architecture': 'sequential',
+            'complex_reasoning': 'sequential',
+            'debug_analysis': 'sequential',
+            'create_component': 'magic',
+            'ui_component': 'magic',
+            'design_system': 'magic',
+            'browser_test': 'playwright',
+            'e2e_test': 'playwright',
+            'performance_test': 'playwright',
+            'get_documentation': 'context7',
+            'library_docs': 'context7',
+            'framework_patterns': 'context7',
+            'semantic_analysis': 'serena',
+            'project_context': 'serena',
+            'memory_management': 'serena'
+        }
+        
+        # Primary server selection based on tool
+        primary_server = tool_server_mapping.get(tool_name)
+        
+        if primary_server:
+            return primary_server
+            
+        # Context-based selection for unknown tools
+        if context.get('complexity', 'low') == 'high':
+            return 'sequential'
+        elif context.get('type') == 'ui':
+            return 'magic' 
+        elif context.get('type') == 'browser':
+            return 'playwright'
+        elif context.get('file_count', 1) > 10:
+            return 'serena'
+        else:
+            return 'morphllm'  # Default fallback
+    
+    def get_fallback_server(self, tool_name: str, context: Dict[str, Any]) -> str:
+        """
+        Get fallback server when primary server fails.
+        
+        Args:
+            tool_name: Name of the tool
+            context: Context information
+            
+        Returns:
+            Name of the fallback server
+        """
+        primary_server = self.select_optimal_server(tool_name, context)
+        
+        # Define fallback chains
+        fallback_chains = {
+            'sequential': 'serena',
+            'serena': 'morphllm',
+            'morphllm': 'context7',
+            'magic': 'morphllm',
+            'playwright': 'sequential',
+            'context7': 'morphllm'
+        }
+        
+        fallback = fallback_chains.get(primary_server, 'morphllm')
+        
+        # Avoid circular fallback
+        if fallback == primary_server:
+            return 'morphllm'
+            
+        return fallback

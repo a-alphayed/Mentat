@@ -292,4 +292,6 @@ class UnifiedConfigLoader:
 
 
 # Global instance for shared use across hooks
-config_loader = UnifiedConfigLoader(".")
+# Use Claude installation directory instead of current working directory
+import os
+config_loader = UnifiedConfigLoader(os.path.expanduser("~/.claude"))

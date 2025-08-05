@@ -46,15 +46,20 @@ class SessionStartHook:
     def __init__(self):
         start_time = time.time()
         
-        # Initialize core components
+        # Initialize only essential components immediately
         self.framework_logic = FrameworkLogic()
-        self.pattern_detector = PatternDetector()
-        self.mcp_intelligence = MCPIntelligence()
-        self.compression_engine = CompressionEngine()
         
-        # Initialize learning engine with cache directory
-        cache_dir = Path("cache")
-        self.learning_engine = LearningEngine(cache_dir)
+        # Lazy-load other components to improve performance
+        self._pattern_detector = None
+        self._mcp_intelligence = None
+        self._compression_engine = None
+        self._learning_engine = None
+        
+        # Use installation directory for cache
+        import os
+        cache_dir = Path(os.path.expanduser("~/.claude/cache"))
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        self._cache_dir = cache_dir
         
         # Load hook-specific configuration from SuperClaude config
         self.hook_config = config_loader.get_hook_config('session_start')
@@ -69,6 +74,34 @@ class SessionStartHook:
         # Performance tracking using configuration
         self.initialization_time = (time.time() - start_time) * 1000
         self.performance_target_ms = config_loader.get_hook_config('session_start', 'performance_target_ms', 50)
+    
+    @property
+    def pattern_detector(self):
+        """Lazy-load pattern detector to improve initialization performance."""
+        if self._pattern_detector is None:
+            self._pattern_detector = PatternDetector()
+        return self._pattern_detector
+    
+    @property
+    def mcp_intelligence(self):
+        """Lazy-load MCP intelligence to improve initialization performance."""
+        if self._mcp_intelligence is None:
+            self._mcp_intelligence = MCPIntelligence()
+        return self._mcp_intelligence
+    
+    @property
+    def compression_engine(self):
+        """Lazy-load compression engine to improve initialization performance."""
+        if self._compression_engine is None:
+            self._compression_engine = CompressionEngine()
+        return self._compression_engine
+    
+    @property 
+    def learning_engine(self):
+        """Lazy-load learning engine to improve initialization performance."""
+        if self._learning_engine is None:
+            self._learning_engine = LearningEngine(self._cache_dir)
+        return self._learning_engine
         
     def initialize_session(self, session_context: dict) -> dict:
         """
