@@ -1,352 +1,227 @@
 # SuperClaude Pattern System Overview
 
-## Executive Summary
+## Overview
 
-The SuperClaude Pattern System is a revolutionary approach to AI context management that achieves **90% context reduction** (from 50KB+ to 5KB) and **10x faster bootstrap times** (from 500ms+ to 50ms) through intelligent pattern recognition and just-in-time loading strategies.
+The SuperClaude Pattern System provides a three-tier architecture for project detection, mode activation, and adaptive learning within the Framework-Hooks system. The system uses YAML-based patterns to configure automatic behavior, MCP server activation, and performance optimization.
 
 ## System Architecture
 
-### Core Philosophy
+### Core Structure
 
-The Pattern System transforms traditional monolithic context loading into a three-tier intelligent system:
+The pattern system consists of three directories with distinct purposes:
 
 ```
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│   MINIMAL   │───▶│   DYNAMIC   │───▶│   LEARNED   │
-│  Patterns   │    │  Patterns   │    │  Patterns   │
-│             │    │             │    │             │
-│ Bootstrap   │    │ Just-in-    │    │ Adaptive    │
-│ 40-50ms     │    │ Time Load   │    │ Learning    │
-│ 3-5KB       │    │ 100-200ms   │    │ Continuous  │
-└─────────────┘    └─────────────┘    └─────────────┘
+patterns/
+├── minimal/     # Project detection and bootstrap configuration
+├── dynamic/     # Mode detection and MCP server activation 
+└── learned/     # Project-specific adaptations and user preferences
 ```
 
-### Performance Breakthrough
+### Pattern Types
 
-| Metric | Traditional | Pattern System | Improvement |
-|--------|-------------|----------------|-------------|
-| **Bootstrap Time** | 500-2000ms | 40-50ms | **10-40x faster** |
-| **Context Size** | 50-200KB | 3-5KB | **90%+ reduction** |
-| **Memory Usage** | High | Minimal | **85%+ reduction** |
-| **Cache Hit Rate** | N/A | 95%+ | **Near-perfect** |
+**Minimal Patterns**: Project type detection and initial MCP server selection
+- File detection patterns for project types (Python, React, etc.)
+- Auto-flag configuration for immediate MCP server activation
+- Basic project structure recognition
 
-## Pattern Classification System
+**Dynamic Patterns**: Runtime activation based on context analysis
+- Mode detection patterns (brainstorming, task management, etc.)
+- MCP server activation based on user requests
+- Cross-mode coordination rules
 
-### 1. Minimal Patterns (Bootstrap Layer)
-**Purpose**: Ultra-fast project detection and initial setup
-- **Size**: 3-5KB each
-- **Load Time**: 40-50ms
-- **Cache Duration**: 45-60 minutes
-- **Triggers**: Project file detection, framework identification
+**Learned Patterns**: Adaptation based on usage patterns
+- Project-specific optimizations that evolve over time
+- User preference learning and adaptation
+- Performance metrics and effectiveness tracking
 
-### 2. Dynamic Patterns (Just-in-Time Layer)
-**Purpose**: Context-aware feature activation and mode detection
-- **Size**: Variable (5-15KB)
-- **Load Time**: 100-200ms
-- **Activation**: Real-time based on user interaction patterns
-- **Intelligence**: Confidence thresholds and pattern matching
+## Pattern Structure
 
-### 3. Learned Patterns (Adaptive Layer)
-**Purpose**: Project-specific optimizations that improve over time
-- **Size**: Grows with learning (10-50KB)
-- **Learning Rate**: 0.1 (configurable)
-- **Adaptation**: Per-session optimization cycles
-- **Memory**: Persistent cross-session improvements
+### 1. Minimal Patterns
+**Purpose**: Project detection and bootstrap configuration
+- **Location**: `/patterns/minimal/`
+- **Files**: `python_project.yaml`, `react_project.yaml`
+- **Content**: Detection patterns, auto-flags, MCP server configuration
 
-## Technical Implementation
+### 2. Dynamic Patterns  
+**Purpose**: Runtime mode detection and MCP server activation
+- **Location**: `/patterns/dynamic/`
+- **Files**: `mcp_activation.yaml`, `mode_detection.yaml`  
+- **Content**: Activation patterns, confidence thresholds, coordination rules
 
-### Pattern Loading Strategy
+### 3. Learned Patterns
+**Purpose**: Adaptive behavior based on usage patterns
+- **Location**: `/patterns/learned/`
+- **Files**: `project_optimizations.yaml`, `user_preferences.yaml`
+- **Content**: Performance metrics, user preferences, optimization tracking
+
+## Pattern Schema
+
+### Minimal Pattern Structure
+
+Based on actual files like `python_project.yaml`:
 
 ```yaml
-loading_sequence:
-  phase_1_minimal:
-    - project_detection: "instant"
-    - mcp_server_selection: "rule-based"
-    - auto_flags: "immediate"
-    - performance_target: "<50ms"
-    
-  phase_2_dynamic:
-    - mode_detection: "confidence-based"
-    - feature_activation: "just-in-time"
-    - coordination_setup: "as-needed"
-    - performance_target: "<200ms"
-    
-  phase_3_learned:
-    - optimization_application: "continuous"
-    - pattern_refinement: "per-session"
-    - performance_learning: "adaptive"
-    - performance_target: "improving"
+project_type: "python"
+detection_patterns:
+  - "*.py files present"
+  - "requirements.txt or pyproject.toml"
+  - "__pycache__/ directories"
+
+auto_flags:
+  - "--serena"    # Semantic analysis
+  - "--context7"  # Python documentation
+
+mcp_servers:
+  primary: "serena"
+  secondary: ["context7", "sequential", "morphllm"]
+
+patterns:
+  file_structure:
+    - "src/ or lib/"
+    - "tests/"
+    - "docs/"
+    - "requirements.txt"
+  common_tasks:
+    - "function refactoring"
+    - "class extraction"
+    - "import optimization"
+    - "testing setup"
+
+intelligence:
+  mode_triggers:
+    - "token_efficiency: context >75%"
+    - "task_management: refactor|test|analyze"
+  validation_focus:
+    - "python_syntax"
+    - "pep8_compliance"
+    - "type_hints"
+    - "testing_coverage"
+
+performance_targets:
+  bootstrap_ms: 40
+  context_size: "4KB"
+  cache_duration: "45min"
 ```
 
-### Context Reduction Mechanisms
+### Dynamic Pattern Structure
 
-#### 1. Selective Loading
-- **Framework Content**: Only load what's immediately needed
-- **Project Context**: Pattern-based detection and caching
-- **User History**: Smart summarization and compression
-
-#### 2. Intelligent Caching
-- **Content-Aware Keys**: Based on file modification timestamps
-- **Hierarchical Storage**: Frequently accessed patterns cached longer
-- **Adaptive Expiration**: Cache duration based on access patterns
-
-#### 3. Pattern Compression
-- **Symbol Systems**: Technical concepts expressed in compact notation
-- **Rule Abstractions**: Complex behaviors encoded as simple rules
-- **Context Inheritance**: Patterns build upon each other efficiently
-
-## Hook Integration Architecture
-
-### Session Lifecycle Integration
+Based on `mcp_activation.yaml`:
 
 ```yaml
-hook_coordination:
-  session_start:
-    - minimal_pattern_loading: "immediate"
-    - project_type_detection: "first_priority"
-    - mcp_server_activation: "rule_based"
-    
-  pre_tool_use:
-    - dynamic_pattern_activation: "confidence_based"
-    - mode_detection: "real_time"
-    - feature_coordination: "just_in_time"
-    
-  post_tool_use:
-    - learning_pattern_updates: "continuous"
-    - effectiveness_tracking: "automatic"
-    - optimization_refinement: "adaptive"
-    
-  notification:
-    - pattern_performance_alerts: "threshold_based"
-    - learning_effectiveness: "metrics_driven"
-    - optimization_opportunities: "proactive"
-    
-  stop:
-    - learned_pattern_persistence: "automatic"
-    - session_optimization_summary: "comprehensive"
-    - cross_session_improvements: "documented"
+activation_patterns:
+  context7:
+    triggers:
+      - "import statements from external libraries"
+      - "framework-specific questions"
+      - "documentation requests"
+    context_keywords:
+      - "documentation"
+      - "examples"
+      - "patterns"
+    activation_confidence: 0.8
+
+coordination_patterns:
+  hybrid_intelligence:
+    serena_morphllm:
+      condition: "complex editing with semantic understanding"
+      strategy: "serena analyzes, morphllm executes"
+      confidence_threshold: 0.8
+
+performance_optimization:
+  cache_activation_decisions: true
+  cache_duration_minutes: 15
+  batch_similar_requests: true
+  lazy_loading: true
 ```
 
-### Quality Gates Integration
+## Hook Integration
 
-The Pattern System integrates with SuperClaude's 8-step quality validation:
+### Hook Points
 
-- **Step 1**: Pattern syntax validation and schema compliance
-- **Step 2**: Pattern effectiveness metrics and performance tracking
-- **Step 3**: Cross-pattern consistency and rule validation
-- **Step 7**: Pattern documentation completeness and accuracy
-- **Step 8**: Integration testing and hook coordination validation
+The pattern system integrates with Framework-Hooks at these points:
 
-## Pattern Types Deep Dive
+**session_start**: Load minimal patterns for project detection
+**pre_tool_use**: Apply dynamic patterns for mode detection
+**post_tool_use**: Update learned patterns with usage data
+**stop**: Persist learned optimizations and preferences
 
-### Project Detection Patterns
+### MCP Server Activation
 
-**Python Project Pattern**:
-```yaml
-detection_time: 40ms
-context_size: 4KB
-accuracy: 99.2%
-auto_flags: ["--serena", "--context7"]
-mcp_coordination: ["serena→primary", "context7→docs"]
-```
+Patterns control MCP server activation through:
 
-**React Project Pattern**:
-```yaml
-detection_time: 30ms
-context_size: 3KB
-accuracy: 98.8%
-auto_flags: ["--magic", "--context7"]
-mcp_coordination: ["magic→ui", "context7→react_docs"]
-```
+1. **Auto-flags**: Immediate activation based on project type
+2. **Dynamic activation**: Context-based activation during operation
+3. **Coordination patterns**: Rules for multi-server interactions
 
-### Mode Detection Patterns
+### Mode Detection
 
-**Brainstorming Mode**:
-- **Confidence Threshold**: 0.7
-- **Trigger Patterns**: 17 detection patterns
-- **Activation Hooks**: session_start, pre_tool_use
-- **Coordination**: /sc:brainstorm command integration
+Mode activation is controlled by patterns in `mode_detection.yaml`:
 
-**Task Management Mode**:
-- **Confidence Threshold**: 0.8
-- **Trigger Patterns**: Multi-step operations, system scope
-- **Wave Orchestration**: Automatic delegation patterns
-- **Performance**: 40-70% time savings through parallelization
+- **Brainstorming**: Triggered by vague project requests, exploration keywords
+- **Task Management**: Multi-step operations, system-wide scope
+- **Token Efficiency**: Context usage >75%, resource constraints
+- **Introspection**: Self-analysis requests, framework discussions
 
-### Learning Pattern Categories
+## Current Pattern Files
 
-#### 1. Workflow Optimizations
-**Effective Sequences**:
-- Read→Edit→Validate: 95% success rate
-- Glob→Read→MultiEdit: 88% success rate
-- Serena analyze→Morphllm execute: 92% success rate
+### Minimal Patterns
 
-#### 2. MCP Server Effectiveness
-**Server Performance Tracking**:
-- Serena: 90% effectiveness (framework analysis)
-- Sequential: 85% effectiveness (complex reasoning)
-- Morphllm: 80% effectiveness (pattern editing)
+**python_project.yaml** (45 lines):
+- Detects Python projects by `.py` files, `requirements.txt`, `pyproject.toml`
+- Auto-activates `--serena` and `--context7` flags
+- Targets 40ms bootstrap, 4KB context size
+- Primary server: serena, with context7/sequential/morphllm fallback
 
-#### 3. Compression Learning
-**Strategy Effectiveness**:
-- Framework content: Complete preservation (95% effectiveness)
-- Session metadata: 70% compression ratio (88% effectiveness)
-- Symbol system adoption: 80-90% across all categories
+**react_project.yaml**:
+- Detects React projects by `package.json` with react dependency
+- Auto-activates `--magic` and `--context7` flags  
+- Targets 30ms bootstrap, 3KB context size
+- Primary server: magic, with context7/morphllm fallback
 
-## Performance Monitoring
+### Dynamic Patterns
 
-### Real-Time Metrics
+**mcp_activation.yaml** (114 lines):
+- Defines activation patterns for all 6 MCP servers
+- Includes context keywords and confidence thresholds
+- Hybrid intelligence coordination (serena + morphllm)
+- Performance optimization settings (caching, lazy loading)
 
-```yaml
-performance_tracking:
-  bootstrap_metrics:
-    - pattern_load_time: "tracked_per_pattern"
-    - context_size_reduction: "measured_continuously"
-    - cache_hit_rate: "monitored_real_time"
-    
-  learning_metrics:
-    - pattern_effectiveness: "scored_per_use"
-    - optimization_impact: "measured_per_session"
-    - user_satisfaction: "feedback_integrated"
-    
-  system_metrics:
-    - memory_usage: "monitored_continuously"
-    - processing_time: "tracked_per_operation"
-    - error_rates: "pattern_specific_tracking"
-```
+**mode_detection.yaml**:
+- Mode detection for brainstorming, task management, token efficiency, introspection
+- Confidence thresholds from 0.6-0.8 depending on mode
+- Cross-mode coordination and transition rules
+- Adaptive learning configuration
 
-### Effectiveness Validation
+### Learned Patterns
 
-**Success Criteria**:
-- **Bootstrap Speed**: <50ms for minimal patterns
-- **Context Reduction**: >90% size reduction maintained
-- **Quality Preservation**: >95% information retention
-- **Learning Velocity**: Measurable improvement per session
-- **Cache Efficiency**: >95% hit rate for repeated operations
+**project_optimizations.yaml**:
+- Project-specific learning for SuperClaude framework
+- File pattern analysis and workflow optimization tracking
+- MCP server effectiveness measurements
+- Performance bottleneck identification and solutions
 
-## Adaptive Learning System
+**user_preferences.yaml**:
+- User behavior adaptation patterns
+- Communication style preferences
+- Workflow pattern effectiveness tracking
+- Personalized thresholds and server preferences
 
-### Learning Mechanisms
+## Usage
 
-#### 1. Pattern Refinement
-- **Learning Rate**: 0.1 (configurable per pattern type)
-- **Feedback Integration**: User interaction success rates
-- **Threshold Adaptation**: Dynamic confidence adjustment
-- **Effectiveness Tracking**: Multi-dimensional scoring
+### Creating New Patterns
 
-#### 2. User Adaptation
-- **Preference Tracking**: Individual user optimization patterns
-- **Threshold Personalization**: Custom confidence levels
-- **Workflow Learning**: Successful sequence recognition
-- **Error Pattern Learning**: Automatic prevention strategies
+1. **Minimal Patterns**: Create project detection patterns in `/patterns/minimal/`
+2. **Dynamic Patterns**: Define activation rules in `/patterns/dynamic/`
+3. **Learned Patterns**: Configure adaptation tracking in `/patterns/learned/`
 
-#### 3. Cross-Session Intelligence
-- **Pattern Evolution**: Continuous improvement across sessions
-- **Project-Specific Optimization**: Tailored patterns per codebase
-- **Performance Benchmarking**: Historical comparison and improvement
-- **Quality Validation**: Effectiveness measurement and adjustment
+### Pattern Development
 
-### Learning Validation Framework
+Patterns are YAML files that follow specific schema formats. They control:
 
-```yaml
-learning_validation:
-  pattern_effectiveness:
-    measurement_frequency: "per_use"
-    success_criteria: ">90% user_satisfaction"
-    failure_threshold: "<70% effectiveness"
-    
-  optimization_cycles:
-    frequency: "per_session"
-    improvement_target: ">5% per_cycle"
-    stability_requirement: "3_sessions_consistent"
-    
-  quality_preservation:
-    information_retention: ">95% minimum"
-    performance_improvement: ">10% target"
-    user_experience: "seamless_operation"
-```
+- Project type detection based on file patterns
+- Automatic MCP server activation
+- Mode detection and activation thresholds
+- Performance optimization preferences
+- User behavior adaptation
 
-## Integration Ecosystem
-
-### SuperClaude Framework Compliance
-
-The Pattern System maintains full compliance with SuperClaude framework standards:
-
-- **Quality Gates**: All 8 validation steps applied to patterns
-- **MCP Coordination**: Seamless integration with all MCP servers
-- **Mode Orchestration**: Pattern-driven mode activation and coordination
-- **Session Lifecycle**: Complete integration with session management
-- **Performance Standards**: Meets or exceeds all framework targets
-
-### Cross-System Coordination
-
-```yaml
-integration_points:
-  hook_system:
-    - pattern_loading: "session_start_hook"
-    - activation_detection: "pre_tool_use_hook"
-    - learning_updates: "post_tool_use_hook"
-    - persistence: "stop_hook"
-    
-  mcp_servers:
-    - pattern_storage: "serena_memory_system"
-    - analysis_coordination: "sequential_thinking"
-    - ui_pattern_integration: "magic_component_system"
-    - testing_validation: "playwright_pattern_testing"
-    
-  quality_system:
-    - pattern_validation: "schema_compliance"
-    - effectiveness_tracking: "metrics_monitoring"
-    - performance_validation: "benchmark_testing"
-    - integration_testing: "hook_coordination_testing"
-```
-
-## Future Evolution
-
-### Planned Enhancements
-
-#### 1. Advanced Learning
-- **Machine Learning Integration**: Pattern recognition through ML models
-- **Predictive Loading**: Anticipatory pattern activation
-- **Cross-Project Learning**: Pattern sharing across similar projects
-- **Community Patterns**: Shared pattern repositories
-
-#### 2. Performance Optimization
-- **Sub-50ms Bootstrap**: Target <25ms for minimal patterns
-- **Real-Time Adaptation**: Instantaneous pattern adjustment
-- **Predictive Caching**: ML-driven cache warming
-- **Resource Optimization**: Dynamic resource allocation
-
-#### 3. Intelligence Enhancement
-- **Context Understanding**: Deeper semantic pattern recognition
-- **User Intent Prediction**: Anticipatory mode activation
-- **Workflow Intelligence**: Advanced sequence optimization
-- **Error Prevention**: Proactive issue avoidance patterns
-
-### Scalability Roadmap
-
-**Phase 1: Current (v1.0)**
-- Three-tier pattern system operational
-- 90% context reduction achieved
-- 10x bootstrap performance improvement
-
-**Phase 2: Enhanced (v2.0)**
-- ML-driven pattern optimization
-- Cross-project learning capabilities
-- Sub-25ms bootstrap targets
-
-**Phase 3: Intelligence (v3.0)**
-- Predictive pattern activation
-- Semantic understanding integration
-- Community-driven pattern evolution
-
-## Conclusion
-
-The SuperClaude Pattern System represents a paradigm shift in AI context management, achieving unprecedented performance improvements while maintaining superior quality and functionality. Through intelligent pattern recognition, just-in-time loading, and continuous learning, the system delivers:
-
-- **Revolutionary Performance**: 90% context reduction, 10x faster bootstrap
-- **Adaptive Intelligence**: Continuous learning and optimization
-- **Seamless Integration**: Complete SuperClaude framework compliance
-- **Quality Preservation**: >95% information retention with massive efficiency gains
-
-This system forms the foundation for scalable, intelligent AI operations that improve continuously while maintaining the highest standards of quality and performance.
+The pattern system provides a declarative way to configure Framework-Hooks behavior without modifying code, enabling customization and optimization based on project types and usage patterns.

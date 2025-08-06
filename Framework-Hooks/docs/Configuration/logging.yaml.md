@@ -20,13 +20,13 @@ The logging configuration serves as:
 #### Basic Configuration
 ```yaml
 logging:
-  enabled: true
-  level: "INFO"  # ERROR, WARNING, INFO, DEBUG
+  enabled: false
+  level: "ERROR"  # ERROR, WARNING, INFO, DEBUG
 ```
 
 **Purpose**: Controls overall logging enablement and verbosity level
 **Levels**: ERROR (critical only) → WARNING (issues) → INFO (operations) → DEBUG (detailed)
-**Default**: INFO provides optimal balance of information and performance
+**Default**: Disabled by default with ERROR level when enabled to minimize overhead
 
 #### File Settings
 ```yaml
@@ -43,16 +43,16 @@ file_settings:
 #### Hook Logging Settings
 ```yaml
 hook_logging:
-  log_lifecycle: true      # Log hook start/end events
-  log_decisions: true      # Log decision points
-  log_errors: true         # Log error events
-  log_timing: true         # Include timing information
+  log_lifecycle: false     # Log hook start/end events
+  log_decisions: false     # Log decision points
+  log_errors: false        # Log error events
+  log_timing: false        # Include timing information
 ```
 
-**Lifecycle Logging**: Tracks hook execution start/end for performance analysis
-**Decision Logging**: Records key decision points for debugging and learning
-**Error Logging**: Comprehensive error capture with context preservation
-**Timing Logging**: Performance metrics for optimization and monitoring
+**Lifecycle Logging**: Disabled by default for performance
+**Decision Logging**: Disabled by default to reduce overhead
+**Error Logging**: Disabled by default (can be enabled for debugging)
+**Timing Logging**: Disabled by default to minimize performance impact
 
 #### Performance Settings
 ```yaml
@@ -158,12 +158,12 @@ subagent_stop:
 
 ```yaml
 development:
-  verbose_errors: true
+  verbose_errors: false
   include_stack_traces: false  # Keep logs clean
   debug_mode: false
 ```
 
-**Verbose Errors**: Provides detailed error messages for troubleshooting
+**Verbose Errors**: Disabled by default for minimal output
 **Stack Traces**: Disabled by default to keep logs clean and readable
 **Debug Mode**: Disabled for production performance, can be enabled for deep debugging
 

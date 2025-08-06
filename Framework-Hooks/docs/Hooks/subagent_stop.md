@@ -2,31 +2,26 @@
 
 ## Purpose
 
-The `subagent_stop` hook implements **MODE_Task_Management delegation coordination and analytics** by analyzing subagent task completion performance and providing comprehensive delegation effectiveness measurement. This hook specializes in **task delegation analytics and coordination**, measuring multi-agent collaboration effectiveness and optimizing wave orchestration strategies.
+The `subagent_stop` hook analyzes subagent task completion and provides delegation effectiveness measurement after subagent operations. It implements MODE_Task_Management delegation coordination analytics for multi-agent collaboration optimization.
 
-**Core Responsibilities:**
-- Analyze subagent task completion and performance metrics
-- Measure delegation effectiveness and coordination success
-- Learn from parallel execution patterns and cross-agent coordination
-- Optimize wave orchestration strategies for multi-agent operations
-- Coordinate cross-agent knowledge sharing and learning
-- Track task management framework effectiveness across delegated operations
+**Core Implementation**: Measures delegation effectiveness, analyzes cross-agent coordination patterns, and optimizes wave orchestration strategies with a target execution time of <150ms.
 
 ## Execution Context
 
-The `subagent_stop` hook executes **after subagent operations complete** in Claude Code, specifically when:
+The subagent_stop hook runs after subagent operations complete in Claude Code. According to `settings.json`, it has a 15-second timeout and executes via: `python3 ~/.claude/hooks/subagent_stop.py`
 
-- **Subagent Task Completion**: When individual subagents finish their delegated tasks
-- **Multi-Agent Coordination End**: After parallel task execution completes
-- **Wave Orchestration Completion**: When wave-based task coordination finishes
-- **Delegation Strategy Assessment**: For analyzing effectiveness of different delegation approaches
-- **Cross-Agent Learning**: When coordination patterns need to be captured for future optimization
+**Execution Triggers:**
+- Individual subagent task completion
+- Multi-agent coordination end
+- Wave orchestration completion  
+- Delegation strategy assessment
 
-**Integration Points:**
-- Integrates with Claude Code's subagent delegation system
-- Coordinates with MODE_Task_Management for delegation analytics
-- Synchronizes with wave orchestration for multi-agent coordination
-- Links with learning engine for continuous delegation improvement
+**Actual Processing:**
+1. Receives subagent completion data via stdin (JSON)
+2. Analyzes delegation effectiveness and coordination patterns
+3. Measures multi-agent collaboration success
+4. Records learning events for delegation optimization
+5. Outputs coordination analytics via stdout (JSON)
 
 ## Performance Target
 

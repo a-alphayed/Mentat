@@ -2,13 +2,13 @@
 
 ## Overview
 
-The Framework-Hooks system provides a sophisticated intelligence layer that seamlessly integrates with SuperClaude through lifecycle hooks, enabling pattern-driven AI assistance with sub-50ms performance targets. This integration transforms Claude Code from a reactive tool into an intelligent, adaptive development partner.
+The Framework-Hooks system implements SuperClaude framework patterns through Claude Code lifecycle hooks. The system executes 7 Python hooks during session lifecycle events to provide mode detection, MCP server routing, and configuration management.
 
-## 1. SuperClaude Framework Integration
+## 1. Hook Implementation Architecture
 
-### Core Integration Architecture
+### Lifecycle Hook Integration
 
-The Framework-Hooks system enhances Claude Code through seven strategic lifecycle hooks that implement SuperClaude's core principles:
+The Framework-Hooks system implements SuperClaude patterns through 7 Python hooks:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -16,506 +16,282 @@ The Framework-Hooks system enhances Claude Code through seven strategic lifecycl
 ├─────────────────────────────────────────────────────────────┤
 │  SessionStart → PreTool → PostTool → PreCompact → Notify   │
 │       ↓            ↓         ↓           ↓          ↓       │
-│   Intelligence  Routing   Validation  Compression  Updates  │
-│       ↓            ↓         ↓           ↓          ↓       │
-│   FLAGS.md    ORCHESTRATOR  RULES.md   TOKEN_EFF   MCP     │
-│   PRINCIPLES     routing    validation  compression Updates │
+│   Mode/MCP     Server      Learning    Token        Pattern │
+│   Detection    Selection   Tracking    Compression  Updates │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### SuperClaude Principle Implementation
+### SuperClaude Framework Implementation
 
-- **FLAGS.md Integration**: Session Start hook implements intelligent flag detection and auto-activation
-- **PRINCIPLES.md Enforcement**: Post Tool Use hook validates evidence-based decisions and code quality
-- **RULES.md Compliance**: Systematic validation of file operations, security protocols, and framework patterns
-- **ORCHESTRATOR.md Routing**: Pre Tool Use hook implements intelligent MCP server selection and coordination
+Each hook implements specific SuperClaude framework aspects:
 
-### Performance Integration
+- **session_start.py**: MODE detection patterns from MODE_*.md files
+- **pre_tool_use.py**: MCP server routing from ORCHESTRATOR.md patterns  
+- **post_tool_use.py**: Learning and effectiveness tracking
+- **pre_compact.py**: Token efficiency patterns from MODE_Token_Efficiency.md
+- **stop.py/subagent_stop.py**: Session analytics and coordination tracking
 
-The hooks system achieves SuperClaude's performance targets through:
+### Configuration Integration
 
-- **<50ms Bootstrap**: Session Start loads only essential patterns, not full documentation
-- **90% Context Reduction**: Pattern-driven intelligence replaces 50KB+ documentation with 5KB patterns
-- **Evidence-Based Decisions**: All routing and activation decisions backed by measurable pattern confidence
-- **Adaptive Learning**: Continuous improvement through user preference learning and effectiveness tracking
+Hook behavior is configured through:
+
+- **settings.json**: Hook timeouts and execution commands
+- **performance.yaml**: Performance targets (50ms session_start, 200ms pre_tool_use, etc.)
+- **modes.yaml**: Mode detection patterns and triggers
+- **pattern files**: Project-specific behavior in minimal/, dynamic/, learned/ directories
 
 ## 2. Hook Lifecycle Integration
 
-### Complete Lifecycle Flow
+### Hook Execution Flow
+
+The hooks execute during specific Claude Code lifecycle events:
 
 ```yaml
-Session Lifecycle:
-  1. SessionStart (target: <50ms)
-     - Project context detection
-     - Mode activation (Brainstorming, Task Management, etc.)
-     - MCP server intelligence routing
-     - User preference application
+Hook Execution Sequence:
+  1. SessionStart (10s timeout)
+     - Detects project type (Python, React, etc.)
+     - Loads appropriate pattern files
+     - Activates SuperClaude modes based on user input
+     - Routes to MCP servers
 
-  2. PreToolUse (target: <200ms)
-     - Intelligent tool selection based on operation patterns
-     - MCP server coordination planning
-     - Performance optimization strategies
-     - Fallback strategy preparation
+  2. PreToolUse (15s timeout)
+     - Analyzes operation type and complexity
+     - Selects optimal MCP servers
+     - Applies performance optimizations
 
-  3. PostToolUse (target: <100ms)
-     - Quality validation (8-step cycle)
-     - Learning opportunity identification
-     - Effectiveness measurement
-     - Error pattern detection
+  3. PostToolUse (10s timeout)
+     - Validates operation results
+     - Records learning data and effectiveness metrics
+     - Updates user preferences
 
-  4. PreCompact (target: <150ms)
-     - Token efficiency through selective compression
-     - Framework content protection (0% compression)
-     - Quality-gated compression (>95% preservation)
-     - Symbol systems application
+  4. PreCompact (15s timeout)
+     - Applies token compression strategies
+     - Preserves framework content (0% compression)
+     - Uses symbols and abbreviations for efficiency
 
-  5. Notification (target: <100ms)
-     - Just-in-time pattern updates
-     - Framework intelligence caching
-     - Learning consolidation
-     - Performance optimization
+  5. Notification (10s timeout)
+     - Updates pattern caches
+     - Refreshes configurations
+     - Handles runtime notifications
 
-  6. Stop (target: <200ms)
-     - Session analytics generation
-     - Learning consolidation
-     - Performance metrics collection
-     - /sc:save integration
+  6. Stop (15s timeout)
+     - Generates session analytics
+     - Saves learning data to files
+     - Creates performance metrics
 
-  7. SubagentStop (target: <150ms)
-     - Task management coordination
-     - Delegation effectiveness analysis
-     - Wave orchestration optimization
-     - Multi-agent performance tracking
+  7. SubagentStop (15s timeout)
+     - Tracks delegation performance
+     - Records coordination effectiveness
 ```
 
-### Integration with Claude Code Session Management
+### Integration Points
 
-- **Session Initialization**: Hooks coordinate with `/sc:load` for intelligent project bootstrapping
-- **Context Preservation**: Session data maintained across checkpoints with selective compression
-- **Session Persistence**: Integration with `/sc:save` for learning consolidation and analytics
-- **Error Recovery**: Graceful degradation with context preservation and learning retention
+- **Pattern Loading**: Minimal patterns loaded during session_start for project-specific behavior
+- **Learning Persistence**: User preferences and effectiveness data saved to learned/ directory
+- **Performance Monitoring**: Hook execution times tracked against targets in performance.yaml
+- **Configuration Updates**: YAML configuration changes applied during runtime
 
 ## 3. MCP Server Coordination
 
-### Intelligent Server Selection
+### Server Routing Logic
 
-The PreToolUse hook implements sophisticated MCP server routing based on pattern detection:
+The pre_tool_use hook routes operations to MCP servers based on detected patterns:
 
 ```yaml
-Routing Decision Matrix:
-  UI Components: Magic server (confidence: 0.8)
-    - Triggers: component, button, form, modal, ui
-    - Capabilities: ui_generation, design_systems
-    - Performance: standard profile
+MCP Server Selection:
+  Magic: 
+    - Triggers: UI keywords (component, button, form, modal)
+    - Use case: UI component generation and design
 
-  Deep Analysis: Sequential server (confidence: 0.75) 
-    - Triggers: analyze, complex, system-wide, debug
-    - Capabilities: complex_reasoning, hypothesis_testing
-    - Performance: intensive profile, --think-hard mode
+  Sequential:
+    - Triggers: Analysis keywords (analyze, debug, complex)
+    - Use case: Multi-step reasoning and systematic analysis
 
-  Library Documentation: Context7 server (confidence: 0.85)
-    - Triggers: library, framework, documentation, api
-    - Capabilities: documentation_access, best_practices
-    - Performance: standard profile
+  Context7:
+    - Triggers: Documentation keywords (library, framework, api)
+    - Use case: Library documentation and best practices
 
-  Testing Automation: Playwright server (confidence: 0.8)
-    - Triggers: test, e2e, browser, automation
-    - Capabilities: browser_automation, performance_testing
-    - Performance: intensive profile
+  Playwright:
+    - Triggers: Testing keywords (test, e2e, browser)
+    - Use case: Browser automation and testing
 
-  Intelligent Editing: Morphllm vs Serena selection
-    - Morphllm: <10 files, <0.6 complexity, token optimization
-    - Serena: >5 files, >0.4 complexity, semantic understanding
-    - Hybrid: Complex operations with both servers
+  Morphllm vs Serena:
+    - Morphllm: Simple edits (<10 files, token optimization)
+    - Serena: Complex operations (>5 files, semantic analysis)
 
-  Semantic Analysis: Serena server (confidence: 0.8)
-    - Triggers: semantic, symbol, reference, find, navigate
-    - Capabilities: semantic_understanding, memory_management
-    - Performance: standard profile
+  Auto-activation:
+    - Project patterns trigger appropriate server combinations
+    - User preferences influence server selection
+    - Fallback strategies for unavailable servers
 ```
 
-### Multi-Server Coordination
+### Server Configuration
 
-- **Parallel Execution**: Multiple servers activated simultaneously for complex operations
-- **Fallback Strategies**: Automatic failover when primary servers unavailable
-- **Performance Optimization**: Caching and intelligent resource allocation
-- **Learning Integration**: Server effectiveness tracking and adaptation
+Server routing is configured through:
 
-### Server Integration Patterns
+- **mcp_intelligence.py** (31KB) - Core routing logic and server capability matching
+- **mcp_activation.yaml** - Dynamic patterns for server activation
+- **Project patterns** - Server preferences by project type (e.g., python_project.yaml specifies Serena + Context7)
+- **Learning data** - User preferences for server selection stored in learned/ directory
 
-1. **Context7 + Sequential**: Documentation-informed analysis for complex problems
-2. **Magic + Playwright**: UI component generation with automated testing
-3. **Morphllm + Serena**: Hybrid editing with semantic understanding
-4. **Sequential + Context7**: Framework-compliant architectural analysis
-5. **All Servers**: Enterprise-scale operations with full coordination
+## 4. SuperClaude Mode Integration
 
-## 4. Behavioral Mode Integration
+### Mode Detection
 
-### Mode Detection and Activation
-
-The Session Start hook implements intelligent mode detection with automatic activation:
+The session_start hook detects user intent and activates SuperClaude modes:
 
 ```yaml
-Mode Integration Architecture:
+Mode Detection Patterns:
   Brainstorming Mode:
-    - Trigger Detection: "not sure", "thinking about", "explore"
-    - Hook Integration: SessionStart (activation), Notification (updates)
-    - MCP Coordination: Sequential (analysis), Context7 (patterns)
-    - Command Integration: /sc:brainstorm automatic execution
-    - Performance Target: <50ms detection, collaborative dialogue
+    - Triggers: "not sure", "thinking about", "explore", ambiguous requests
+    - Implementation: Activates interactive requirements discovery
 
   Task Management Mode:
-    - Trigger Detection: Multi-file ops, complexity >0.4, "build/implement"
-    - Hook Integration: SessionStart, PreTool, SubagentStop, Stop
-    - MCP Coordination: Serena (context), Morphllm (execution)
-    - Delegation Strategies: Files, folders, auto-detection
-    - Performance Target: 40-70% time savings through coordination
+    - Triggers: Multi-file operations, "build", "implement", complexity >0.4
+    - Implementation: Enables delegation and wave orchestration
 
   Token Efficiency Mode:
-    - Trigger Detection: Resource constraints >75%, "brief/compressed"
-    - Hook Integration: PreCompact (compression), SessionStart (activation)
-    - MCP Coordination: Morphllm (optimization)
-    - Compression Levels: 30-50% reduction, >95% quality preservation
-    - Performance Target: <150ms compression processing
+    - Triggers: Resource constraints >75%, "--uc", "brief"
+    - Implementation: Activates compression in pre_compact hook
 
   Introspection Mode:
-    - Trigger Detection: "analyze reasoning", meta-cognitive requests
-    - Hook Integration: PostTool (validation), Stop (analysis)
-    - MCP Coordination: Sequential (deep analysis)
-    - Analysis Depth: Meta-cognitive framework compliance
-    - Performance Target: Transparent reasoning with minimal overhead
+    - Triggers: "analyze reasoning", meta-cognitive requests
+    - Implementation: Enables framework compliance analysis
 ```
 
-### Cross-Mode Coordination
-
-- **Concurrent Modes**: Token Efficiency can run alongside any other mode
-- **Mode Transitions**: Automatic handoff based on context changes
-- **Performance Coordination**: Resource allocation and optimization across modes
-- **Learning Integration**: Cross-mode effectiveness tracking and adaptation
-
-## 5. Quality Gates Integration
-
-### 8-Step Validation Cycle Implementation
-
-The hooks system implements SuperClaude's comprehensive quality validation:
-
-```yaml
-Quality Gate Distribution:
-  PreToolUse Hook:
-    - Step 1: Syntax Validation (language-specific correctness)
-    - Step 2: Type Analysis (compatibility and inference)
-    - Target: <200ms validation processing
-
-  PostToolUse Hook:
-    - Step 3: Code Quality (linting rules and standards)
-    - Step 4: Security Assessment (vulnerability analysis)
-    - Step 5: Testing Validation (coverage and quality)
-    - Target: <100ms comprehensive validation
-
-  Stop Hook:
-    - Step 6: Performance Analysis (optimization opportunities)
-    - Step 7: Documentation (completeness and accuracy)
-    - Step 8: Integration Testing (end-to-end validation)
-    - Target: <200ms final validation and reporting
-
-  Continuous Validation:
-    - Real-time quality monitoring throughout session
-    - Adaptive validation depth based on risk assessment
-    - Learning-driven quality improvement suggestions
-```
-
-### Quality Enforcement Mechanisms
-
-- **Rules Validation**: RULES.md compliance checking with automated corrections
-- **Principles Alignment**: PRINCIPLES.md verification with evidence tracking
-- **Framework Standards**: SuperClaude pattern compliance with learning integration
-- **Performance Standards**: Sub-target execution with degradation detection
-
-### Validation Levels
-
-```yaml
-Validation Complexity:
-  Basic: syntax_validation (lightweight operations)
-  Standard: syntax + type + quality (normal operations)
-  Comprehensive: standard + security + performance (complex operations)
-  Production: comprehensive + integration + deployment (critical operations)
-```
-
-## 6. Session Lifecycle Integration
-
-### /sc:load Command Integration
-
-The Session Start hook seamlessly integrates with SuperClaude's session initialization:
-
-```yaml
-/sc:load Integration Flow:
-  1. Command Invocation: /sc:load triggers SessionStart hook
-  2. Project Detection: Automatic project type identification
-  3. Context Loading: Selective loading with framework exclusion
-  4. Mode Activation: Intelligent mode detection and activation
-  5. MCP Routing: Server selection based on project patterns
-  6. User Preferences: Learning-driven preference application
-  7. Performance Optimization: <50ms bootstrap with caching
-  8. Ready State: Full context available for work session
-```
-
-### /sc:save Command Integration
-
-The Stop hook provides comprehensive session persistence:
-
-```yaml
-/sc:save Integration Flow:
-  1. Session Analytics: Performance metrics and effectiveness measurement
-  2. Learning Consolidation: Pattern recognition and adaptation creation
-  3. Quality Assessment: Final validation and improvement suggestions
-  4. Data Compression: Selective compression with quality preservation
-  5. Memory Management: Intelligent storage and cleanup
-  6. Performance Recording: Benchmark tracking and optimization
-  7. Context Preservation: Session state maintenance for resumption
-  8. Completion Analytics: Success metrics and learning insights
-```
-
-### Session State Management
-
-- **Context Preservation**: Intelligent context compression with framework protection
-- **Learning Continuity**: Cross-session learning retention and application
-- **Performance Tracking**: Continuous monitoring with adaptive optimization
-- **Error Recovery**: Graceful degradation with state restoration capabilities
-
-### Checkpoint Integration
-
-- **Automatic Checkpoints**: Risk-based and time-based checkpoint creation
-- **Manual Checkpoints**: User-triggered comprehensive state saving
-- **Recovery Mechanisms**: Intelligent session restoration with context rebuilding
-- **Performance Optimization**: Checkpoint creation <200ms target
-
-## 7. Pattern System Integration
-
-### Three-Tier Pattern Architecture
-
-The Framework-Hooks system implements a sophisticated pattern loading strategy:
-
-```yaml
-Pattern Loading Hierarchy:
-  Tier 1 - Minimal Patterns:
-    - Project-specific optimizations
-    - Essential framework patterns only
-    - <5KB typical pattern data
-    - <50ms loading time
-    - Used for: Session bootstrap, common operations
-
-  Tier 2 - Dynamic Patterns:
-    - Runtime pattern detection and loading
-    - Context-aware pattern selection
-    - MCP server activation patterns
-    - Mode detection logic
-    - Used for: Intelligent routing, adaptation
-
-  Tier 3 - Learned Patterns:
-    - User preference patterns
-    - Project optimization patterns
-    - Effectiveness-based adaptations
-    - Cross-session learning insights
-    - Used for: Personalization, performance optimization
-```
-
-### Pattern Detection Engine
-
-The system implements sophisticated pattern recognition:
-
-- **Operation Intent Detection**: Analyzing user input for operation patterns
-- **Complexity Assessment**: Multi-factor complexity scoring (0.0-1.0 scale)
-- **Context Sensitivity**: Project type and framework pattern matching
-- **Learning Integration**: User-specific pattern recognition and adaptation
-
-### Pattern Application Strategy
-
-```yaml
-Pattern Application Flow:
-  1. Pattern Detection: Real-time analysis of user requests
-  2. Confidence Scoring: Multi-factor confidence assessment
-  3. Pattern Selection: Optimal pattern choosing based on context
-  4. Cache Management: Intelligent caching with invalidation
-  5. Learning Feedback: Effectiveness tracking and adaptation
-  6. Pattern Evolution: Continuous improvement through usage
-```
-
-## 8. Learning System Integration
-
-### Adaptive Learning Architecture
-
-The Framework-Hooks system implements comprehensive learning across all hooks:
-
-```yaml
-Learning Integration Points:
-  SessionStart Hook:
-    - User preference detection and application
-    - Project pattern learning and optimization
-    - Mode activation effectiveness tracking
-    - Bootstrap performance optimization
-
-  PreToolUse Hook:
-    - MCP server effectiveness measurement
-    - Routing decision quality assessment
-    - Performance optimization learning
-    - Fallback strategy effectiveness
-
-  PostToolUse Hook:
-    - Quality gate effectiveness tracking
-    - Error pattern recognition and prevention
-    - Validation efficiency optimization
-    - Success pattern identification
-
-  Stop Hook:
-    - Session effectiveness consolidation
-    - Cross-session learning integration
-    - Performance trend analysis
-    - User satisfaction correlation
-```
-
-### Learning Data Management
-
-- **Pattern Recognition**: Continuous identification of successful operation patterns
-- **Effectiveness Tracking**: Multi-dimensional success measurement and correlation
-- **Adaptation Creation**: Automatic generation of optimization recommendations
-- **Cross-Session Learning**: Knowledge persistence and accumulation over time
-
-### Learning Feedback Loop
-
-```yaml
-Continuous Learning Cycle:
-  1. Pattern Detection: Real-time identification of usage patterns
-  2. Effectiveness Measurement: Multi-factor success assessment
-  3. Learning Integration: Pattern correlation and insight generation
-  4. Adaptation Application: Automatic optimization implementation
-  5. Performance Validation: Effectiveness verification and refinement
-  6. Knowledge Persistence: Cross-session learning consolidation
-```
-
-## 9. Configuration Integration
-
-### Unified Configuration Architecture
-
-The Framework-Hooks system uses a sophisticated YAML-driven configuration:
-
-```yaml
-Configuration Hierarchy:
-  Master Configuration (superclaude-config.json):
-    - Hook-specific configurations and performance targets
-    - MCP server integration settings
-    - Mode coordination parameters
-    - Quality gate definitions
-
-  Specialized YAML Files:
-    performance.yaml: Performance targets and thresholds
-    modes.yaml: Mode detection patterns and behaviors
-    orchestrator.yaml: MCP routing and coordination rules
-    session.yaml: Session lifecycle and analytics settings
-    logging.yaml: Logging and debugging configuration
-    validation.yaml: Quality gate definitions
-    compression.yaml: Token efficiency settings
-```
-
-### Hot-Reload Configuration
-
-- **Dynamic Updates**: Configuration changes applied without restart
-- **Performance Monitoring**: Real-time configuration effectiveness tracking
-- **Learning Integration**: Configuration optimization through usage patterns
-- **Fallback Handling**: Graceful degradation with configuration failures
-
-### Configuration Learning
-
-The system learns optimal configurations through usage:
-
-- **Performance Optimization**: Automatic tuning based on measured effectiveness
-- **User Preference Learning**: Configuration adaptation to user patterns
-- **Project-Specific Tuning**: Project type optimization and pattern matching
-- **Cross-Session Configuration**: Persistent configuration improvements
-
-## 10. Performance Integration
-
-### Comprehensive Performance Targets
-
-The Framework-Hooks system meets strict performance requirements:
-
-```yaml
-Performance Target Integration:
-  Session Management:
-    - SessionStart: <50ms (critical: 100ms)
-    - Context Loading: <500ms (critical: 1000ms)
-    - Session Analytics: <200ms (critical: 500ms)
-    - Session Persistence: <200ms (critical: 500ms)
-
-  Tool Coordination:
-    - MCP Routing: <200ms (critical: 500ms)
-    - Tool Selection: <100ms (critical: 250ms)
-    - Parallel Coordination: <300ms (critical: 750ms)
-    - Fallback Activation: <50ms (critical: 150ms)
-
-  Quality Validation:
-    - Basic Validation: <50ms (critical: 150ms)
-    - Comprehensive Validation: <100ms (critical: 250ms)
-    - Quality Assessment: <75ms (critical: 200ms)
-    - Learning Integration: <25ms (critical: 100ms)
-
-  Resource Management:
-    - Memory Usage: <100MB (critical: 200MB)
-    - Token Optimization: 30-50% reduction
-    - Context Compression: >95% quality preservation
-    - Cache Efficiency: >70% hit ratio
-```
-
-### Performance Optimization Strategies
-
-- **Intelligent Caching**: Pattern results cached with smart invalidation strategies
-- **Selective Loading**: Only essential patterns loaded during session bootstrap
-- **Parallel Processing**: Hook execution parallelized where dependencies allow
-- **Resource Management**: Dynamic allocation based on complexity and requirements
+### Mode Implementation
+
+Modes are implemented across multiple hooks:
+
+- **session_start.py**: Detects mode triggers and sets activation flags
+- **pre_compact.py**: Implements token efficiency compression strategies  
+- **post_tool_use.py**: Validates mode-specific behaviors and tracks effectiveness
+- **stop.py**: Records mode usage analytics and learning data
+
+## 5. Configuration and Validation
+
+### Configuration Management
+
+The system uses 19 YAML configuration files to define behavior:
+
+- **performance.yaml** (345 lines): Performance targets and monitoring thresholds
+- **modes.yaml**: Mode detection patterns and activation triggers  
+- **validation.yaml**: Quality gate definitions and validation rules
+- **compression.yaml**: Token efficiency settings and compression levels
+- **session.yaml**: Session lifecycle and analytics configuration
+
+### Validation Implementation
+
+Validation is distributed across hooks:
+
+- **pre_tool_use.py**: Basic validation before tool execution
+- **post_tool_use.py**: Results validation and quality assessment  
+- **validate_system.py** (32KB): System health checks and validation utilities
+- **stop.py**: Final session validation and analytics generation
+
+### Learning and Analytics
+
+The system tracks effectiveness and adapts behavior:
+
+- **learning_engine.py** (40KB): Records user preferences and operation effectiveness
+- **Learned patterns**: Stored in patterns/learned/ directory
+- **Performance tracking**: Hook execution times and success rates
+- **User preferences**: Saved across sessions for personalized behavior
+
+## 6. Session Management
+
+### Session Integration
+
+Framework-Hooks integrates with Claude Code session lifecycle:
+
+- **Session Start**: session_start hook runs when Claude Code sessions begin
+- **Tool Execution**: pre/post_tool_use hooks run for each tool operation
+- **Token Optimization**: pre_compact hook runs during token compression
+- **Session End**: stop hook runs when sessions complete
+
+### Data Persistence
+
+Session data is persisted through:
+
+- **Learning Records**: User preferences saved to patterns/learned/ directory
+- **Performance Metrics**: Hook execution times and success rates logged
+- **Session Analytics**: Summary data generated by stop hook
+- **Pattern Updates**: Dynamic patterns updated based on usage
 
 ### Performance Monitoring
 
+The system tracks performance against configuration targets:
+
+- **Hook Timing**: Each hook execution timed and compared to performance.yaml targets
+- **Resource Usage**: Memory and CPU monitoring during hook execution
+- **Success Rates**: Operation effectiveness tracked by learning_engine.py
+- **User Satisfaction**: Implicit feedback through continued usage patterns
+
+## 7. Pattern System
+
+### Pattern Directory Structure
+
+The system uses a three-tier pattern organization:
+
 ```yaml
-Real-Time Performance Tracking:
-  Hook Execution Times: Individual hook performance measurement
-  Resource Utilization: Memory, CPU, and token usage monitoring
-  Quality Metrics: Validation effectiveness and accuracy tracking
-  User Experience: Response times and satisfaction correlation
-  Learning Effectiveness: Pattern recognition and adaptation success
+patterns/
+  minimal/        # Essential patterns loaded during session start
+    - python_project.yaml: Python project detection and configuration
+    - react_project.yaml: React project patterns and MCP routing
+    
+  dynamic/        # Runtime patterns for adaptive behavior  
+    - mode_detection.yaml: SuperClaude mode triggers and activation
+    - mcp_activation.yaml: MCP server routing patterns
+    
+  learned/        # User preference and effectiveness data
+    - user_preferences.yaml: Personal configuration adaptations
+    - project_optimizations.yaml: Project-specific learned patterns
 ```
 
-### Performance Learning
+### Pattern Processing
 
-The system continuously optimizes performance through:
+Pattern loading and application:
 
-- **Pattern Performance**: Learning optimal patterns for different operation types
-- **Resource Optimization**: Dynamic resource allocation based on measured effectiveness
-- **Cache Optimization**: Intelligent cache management with usage pattern learning
-- **User Experience**: Performance optimization based on user satisfaction feedback
+- **pattern_detection.py** (45KB): Core pattern recognition and matching logic
+- **Session startup**: Minimal patterns loaded based on detected project type
+- **Runtime updates**: Dynamic patterns applied during hook execution
+- **Learning updates**: Successful patterns saved to learned/ directory for future use
 
-## Integration Benefits
+### Pattern Configuration
 
-### Measurable Improvements
+Patterns define:
 
-The Framework-Hooks integration with SuperClaude delivers quantifiable benefits:
+- **Project detection**: File patterns and dependency analysis for project type identification
+- **MCP server routing**: Which servers to activate for different operation types
+- **Mode triggers**: Keywords and contexts that activate SuperClaude modes
+- **Performance targets**: Project-specific timing and resource goals
 
-- **90% Context Reduction**: 50KB+ documentation → 5KB pattern data
-- **<50ms Bootstrap**: Intelligent session initialization vs traditional >500ms
-- **40-70% Time Savings**: Through intelligent delegation and parallel processing
-- **30-50% Token Efficiency**: Smart compression with >95% quality preservation
-- **Adaptive Intelligence**: Continuous learning and improvement over time
+## 8. Implementation Summary
 
-### User Experience Enhancement
+### System Implementation
 
-- **Intelligent Assistance**: Context-aware recommendations and automatic optimization
-- **Reduced Cognitive Load**: Automatic mode detection and MCP server coordination
-- **Consistent Quality**: 8-step validation cycle with learning-driven improvements
-- **Personalized Experience**: User preference learning and cross-session adaptation
+The Framework-Hooks system implements SuperClaude framework patterns through:
 
-### Development Productivity
+**Core Components:**
+- 7 Python lifecycle hooks (17 Python files total)
+- 19 YAML configuration files  
+- 3-tier pattern system (minimal/dynamic/learned)
+- 9 shared modules providing common functionality
 
-- **Pattern-Driven Intelligence**: Efficient operation routing without documentation overhead
-- **Quality Assurance**: Comprehensive validation with automated improvement suggestions
-- **Performance Optimization**: Resource management and efficiency optimization
-- **Learning Integration**: Continuous improvement through usage pattern recognition
+**Key Features:**
+- Project type detection and pattern-based configuration
+- SuperClaude mode activation based on user input patterns  
+- MCP server routing with fallback strategies
+- Token compression with selective framework protection
+- Learning system that adapts to user preferences
+- Performance monitoring against configured targets
 
-The Framework-Hooks system transforms SuperClaude from a reactive framework into an intelligent, adaptive development partner that learns user preferences, optimizes performance, and provides context-aware assistance while maintaining strict quality standards and performance targets.
+**Integration Points:**
+- Claude Code lifecycle hooks via settings.json
+- SuperClaude framework mode implementations
+- MCP server coordination and routing
+- Pattern-based project and operation detection
+- Cross-session learning and preference persistence
+
+The system provides a Python-based implementation of SuperClaude framework concepts, enabling intelligent behavior through configuration-driven lifecycle hooks that execute during Claude Code sessions.
+

@@ -1,53 +1,26 @@
 # Notification Hook Documentation
 
-## Overview
-
-The notification hook implements just-in-time capability loading and pattern updates for the SuperClaude-Lite framework. This hook runs on notification events in Claude Code and provides intelligent, on-demand resource loading instead of upfront documentation loading, enabling a pattern-driven approach that reduces context usage by 90%.
-
 ## Purpose
 
-**Just-in-Time Capability Loading and Pattern Updates**
+The `notification` hook processes notification events from Claude Code and provides just-in-time capability loading and pattern updates. It handles various notification types to trigger appropriate SuperClaude framework responses.
 
-The notification hook transforms the SuperClaude framework from a static documentation loader into a dynamic, intelligent system that loads capabilities precisely when needed. Key purposes include:
-
-- **On-Demand Resource Loading**: Load MCP server documentation and patterns only when specific capabilities are required
-- **Dynamic Pattern Updates**: Update framework patterns in real-time based on operation context and usage effectiveness
-- **Intelligence Caching**: Implement performance-optimized caching strategies to minimize repeated loading overhead
-- **Real-Time Learning**: Adapt framework behavior based on notification patterns and operational effectiveness
-- **Context Optimization**: Reduce framework context overhead by 90% through selective, just-in-time loading
+**Core Implementation**: Responds to Claude Code notifications (errors, performance issues, tool requests, context changes) with intelligent resource loading and pattern updates to minimize context overhead.
 
 ## Execution Context
 
-### When This Hook Runs
+The notification hook runs on notification events from Claude Code. According to `settings.json`, it has a 10-second timeout and executes via: `python3 ~/.claude/hooks/notification.py`
 
-The notification hook executes on **notification events** from Claude Code, specifically:
+**Notification Types Handled:**
+- **High Priority**: error, failure, security_alert, performance_issue, validation_failure
+- **Medium Priority**: tool_request, context_change, resource_constraint  
+- **Low Priority**: info, debug, status_update
 
-#### Primary Triggers
-- **Tool Request Notifications**: When Claude Code requests specific tools or capabilities
-- **Context Change Notifications**: When the operational context shifts (project type, complexity, domain)
-- **Performance Issue Notifications**: When resource constraints or performance issues are detected
-- **Error/Failure Notifications**: When operations fail and recovery intelligence is needed
-- **Operation Start/Complete Notifications**: When major operations begin or conclude
-
-#### Notification Types Processed
-```yaml
-high_priority:
-  - error                    # System errors requiring immediate intelligence loading
-  - failure                  # Operation failures needing recovery patterns
-  - security_alert          # Security issues requiring specialized documentation
-  - performance_issue        # Performance problems needing optimization patterns
-  - validation_failure       # Validation errors requiring compliance patterns
-
-medium_priority:
-  - tool_request            # Tool usage requiring MCP documentation
-  - context_change          # Context shifts requiring pattern updates
-  - resource_constraint     # Resource limitations requiring optimization
-
-low_priority:
-  - info                    # Informational notifications
-  - debug                   # Debug notifications
-  - status_update           # Status change notifications
-```
+**Actual Processing:**
+1. Receives notification event via stdin (JSON)
+2. Determines notification priority and type
+3. Loads appropriate capabilities or patterns on-demand
+4. Updates framework intelligence based on notification context
+5. Outputs response configuration via stdout (JSON)
 
 #### Integration Points
 - **Pre-Tool Use Hook**: Coordinates with tool selection intelligence

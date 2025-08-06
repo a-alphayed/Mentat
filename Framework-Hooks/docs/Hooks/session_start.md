@@ -2,25 +2,22 @@
 
 ## Purpose
 
-The session_start hook is the foundational intelligence layer of the SuperClaude-Lite framework that initializes every Claude Code session with intelligent, context-aware configuration. This hook transforms basic Claude Code sessions into SuperClaude-powered experiences by implementing comprehensive project analysis, intelligent mode detection, and optimized MCP server routing.
+The session_start hook initializes Claude Code sessions with SuperClaude framework intelligence. It analyzes project context, detects patterns, and configures appropriate modes and MCP servers based on the actual session requirements.
 
-The hook serves as the entry point for SuperClaude's session lifecycle pattern, establishing the groundwork for all subsequent intelligent behaviors including adaptive learning, performance optimization, and context preservation across sessions.
+**Core Implementation**: A 704-line Python implementation that performs lazy loading, pattern detection, MCP intelligence routing, compression configuration, and learning adaptations with a target execution time of <50ms.
 
 ## Execution Context
 
-The session_start hook executes at the very beginning of every Claude Code session, before any user interactions or tool executions occur. It sits at the critical initialization phase where session context is established and intelligence systems are activated.
+The session_start hook runs automatically at the beginning of every Claude Code session. According to `settings.json`, it has a 10-second timeout and executes via: `python3 ~/.claude/hooks/session_start.py`
 
-**Execution Flow Position:**
-```
-Claude Code Session Start → session_start Hook → Enhanced Session Configuration → User Interaction
-```
+**Actual Execution Flow:**
+1. Receives session data from Claude Code via stdin (JSON)
+2. Initializes SessionStartHook class with lazy loading of components
+3. Processes session initialization with project analysis and pattern detection
+4. Outputs enhanced session configuration via stdout (JSON)
+5. Falls back gracefully on errors with basic session configuration
 
-**Lifecycle Integration:**
-- **Trigger**: Every new Claude Code session initialization
-- **Duration**: Target <50ms execution time
-- **Dependencies**: Session context data from Claude Code
-- **Output**: Enhanced session configuration with SuperClaude intelligence
-- **Next Phase**: Active session with intelligent routing and optimization
+**Performance**: Target <50ms execution time (configurable via superclaude-config.json)
 
 ## Performance Target
 
@@ -42,105 +39,78 @@ This aggressive performance target is critical for maintaining seamless user exp
 
 ## Core Features
 
-### 1. Smart Project Context Loading with Framework Exclusion
+### 1. Project Structure Analysis
 
-**Implementation**: The hook performs intelligent project structure analysis while implementing selective content loading to optimize performance and focus.
+**Implementation**: The `_analyze_project_structure()` method performs quick project analysis by examining key files and directories.
 
-**Technical Details:**
-- **Rapid Project Scanning**: Limited file enumeration (max 100 files) for performance
-- **Technology Stack Detection**: Identifies Node.js, Python, Rust, Go projects via manifest files
-- **Framework Recognition**: Detects React, Vue, Angular, Express through dependency analysis
-- **Production Environment Detection**: Identifies deployment configurations and CI/CD setup
-- **Test Infrastructure Analysis**: Locates test directories and testing frameworks
-- **Framework Exclusion Strategy**: Completely excludes SuperClaude framework directories from analysis to prevent recursive processing
+**What it actually does:**
+- Enumerates up to 100 files for performance (limits via `files[:100]`)
+- Detects project type by checking for manifest files:
+  - `package.json` → nodejs
+  - `pyproject.toml` or `setup.py` → python  
+  - `Cargo.toml` → rust
+  - `go.mod` → go
+- Identifies frameworks by parsing package.json dependencies (React, Vue, Angular, Express)
+- Checks for test directories and production indicators (Dockerfile, .env.production)
+- Returns analysis dict with project_type, framework_detected, has_tests, is_production, etc.
 
-**Code Implementation:**
-```python
-def _analyze_project_structure(self, project_path: Path) -> dict:
-    # Quick enumeration with performance limit
-    files = list(project_path.rglob('*'))[:100]
-    
-    # Technology detection via manifest files
-    if (project_path / 'package.json').exists():
-        analysis['project_type'] = 'nodejs'
-        # Framework detection through dependency analysis
-        with open(package_json) as f:
-            deps = {**pkg_data.get('dependencies', {}), **pkg_data.get('devDependencies', {})}
-            if 'react' in deps: analysis['framework_detected'] = 'react'
-```
+### 2. User Intent Analysis and Mode Detection
 
-### 2. Automatic Mode Detection and Activation
+**Implementation**: The `_analyze_user_intent()` method examines user input to determine operation type and complexity.
 
-**Implementation**: Uses pattern recognition algorithms to detect user intent and automatically activate appropriate SuperClaude behavioral modes.
+**What it actually does:**
+- Analyzes user input text for operation keywords:
+  - "build", "create", "implement" → BUILD operation (complexity +0.3)
+  - "fix", "debug", "troubleshoot" → ANALYZE operation (complexity +0.2)  
+  - "refactor", "restructure" → REFACTOR operation (complexity +0.4)
+  - "test", "validate" → TEST operation (complexity +0.1)
+- Detects brainstorming needs via keywords: "not sure", "thinking about", "maybe", "brainstorm"
+- Calculates complexity score (0.0-1.0) based on operation type and complexity indicators
+- The `_activate_intelligent_modes()` method activates modes based on detected patterns:
+  - brainstorming mode if `brainstorming_likely` is True
+  - task_management mode if recommended by pattern detection
+  - token_efficiency mode if recommended by pattern detection
 
-**Detection Algorithms:**
-- **Intent Analysis**: Natural language processing of user input for operation type detection
-- **Complexity Scoring**: Multi-factor analysis including file count, operation type, and complexity indicators
-- **Brainstorming Detection**: Identifies uncertainty indicators ("not sure", "maybe", "thinking about")
-- **Task Management Triggers**: Detects multi-step operations and delegation opportunities
-- **Token Efficiency Needs**: Identifies resource constraints and optimization requirements
+### 3. MCP Server Configuration
 
-**Mode Activation Logic:**
-```python
-def _activate_intelligent_modes(self, context: dict, recommendations: dict) -> list:
-    activated_modes = []
-    
-    # Brainstorming mode activation
-    if context.get('brainstorming_likely', False):
-        activated_modes.append({'name': 'brainstorming', 'trigger': 'user input'})
-    
-    # Task management mode activation
-    if 'task_management' in recommendations.get('recommended_modes', []):
-        activated_modes.append({'name': 'task_management', 'trigger': 'pattern detection'})
-```
+**Implementation**: The `_create_mcp_activation_plan()` and `_configure_mcp_servers()` methods determine which MCP servers to activate.
 
-### 3. MCP Server Intelligence Routing
+**What it actually does:**
+- Uses MCPIntelligence class to create activation plans based on:
+  - User intent analysis
+  - Context characteristics (file count, complexity score, operation type)
+  - Project analysis results
+- Returns MCP plan with:
+  - `servers_to_activate`: List of servers to enable
+  - `activation_order`: Sequence for server activation
+  - `coordination_strategy`: How servers should work together
+  - `estimated_cost_ms`: Performance impact estimate
+  - `fallback_strategy`: Backup plan if servers fail
 
-**Implementation**: Intelligent analysis of project context and user intent to determine optimal MCP server activation strategy.
+### 4. Learning Engine Integration
 
-**Routing Intelligence:**
-- **Context-Aware Selection**: Matches MCP server capabilities to detected project needs
-- **Performance Optimization**: Considers server resource profiles and coordination costs
-- **Fallback Strategy Planning**: Establishes backup activation patterns for server failures
-- **Coordination Strategy**: Determines optimal server interaction patterns (parallel vs sequential)
+**Implementation**: The `_apply_learning_adaptations()` method applies learned patterns to improve session configuration.
 
-**Server Selection Matrix:**
-- **Context7**: Activated for external library dependencies and framework integration needs
-- **Sequential**: Enabled for complex analysis requirements and multi-step reasoning
-- **Magic**: Triggered by UI component requests and design system needs
-- **Playwright**: Activated for testing requirements and browser automation
-- **Morphllm**: Enabled for pattern-based editing and token optimization scenarios
-- **Serena**: Activated for semantic analysis and project memory management
+**What it actually does:**
+- Uses LearningEngine (initialized with `~/.claude/cache` directory) to:
+  - Apply previous adaptations to current recommendations
+  - Store user preferences (preferred tools per operation type)
+  - Update project-specific information (project type, framework)
+  - Record learning events for future sessions
+- The `_record_session_learning()` method stores session initialization patterns for continuous improvement
 
-### 4. User Preference Adaptation
+### 5. Lazy Loading Architecture
 
-**Implementation**: Applies machine learning-based adaptations from previous sessions to personalize the session configuration.
+**Implementation**: The hook uses lazy loading via Python properties to minimize initialization time.
 
-**Learning Integration:**
-- **Historical Pattern Analysis**: Analyzes successful configurations from previous sessions
-- **User Expertise Detection**: Infers user skill level from interaction patterns and terminology
-- **Preference Extraction**: Identifies consistent user choices and optimization preferences
-- **Adaptive Configuration**: Applies learned preferences to current session setup
-
-**Learning Engine Integration:**
-```python
-def _apply_learning_adaptations(self, context: dict, detection_result: dict) -> dict:
-    enhanced_recommendations = self.learning_engine.apply_adaptations(
-        context, base_recommendations
-    )
-    return enhanced_recommendations
-```
-
-### 5. Performance-Optimized Initialization
-
-**Implementation**: Comprehensive performance optimization strategy that balances intelligence with speed.
-
-**Optimization Techniques:**
-- **Lazy Loading**: Defers non-critical analysis until actual usage
-- **Intelligent Caching**: Reuses previous analysis results when project context unchanged
-- **Parallel Processing**: Concurrent execution of independent analysis components
-- **Resource-Aware Configuration**: Adapts initialization depth based on available resources
-- **Progressive Enhancement**: Enables additional features as resource budget allows
+**What it actually does:**
+- Core components are loaded immediately: `FrameworkLogic()`
+- Other components use lazy loading properties:
+  - `pattern_detector` property loads `PatternDetector()` only when first accessed
+  - `mcp_intelligence` property loads `MCPIntelligence()` only when needed
+  - `compression_engine` property loads `CompressionEngine()` only when used
+  - `learning_engine` property loads `LearningEngine()` only when required
+- This reduces initialization overhead and improves the <50ms performance target
 
 ## Implementation Details
 
@@ -304,122 +274,93 @@ def _detect_session_patterns(self, context: dict) -> dict:
 
 ### framework_logic.py
 
-**Purpose**: Implements core SuperClaude decision-making algorithms from RULES.md, PRINCIPLES.md, and ORCHESTRATOR.md.
+**Purpose**: Provides SuperClaude framework decision-making capabilities.
 
-**Key Components Used:**
-- `OperationType` enum for operation classification
-- `OperationContext` dataclass for structured context management
-- `RiskLevel` assessment for quality gate determination
-- Quality gate configuration based on operation context
-
-**Usage in session_start:**
-```python
-from framework_logic import FrameworkLogic, OperationContext, OperationType, RiskLevel
-
-# Quality gate configuration
-operation_context = OperationContext(
-    operation_type=context.get('operation_type', OperationType.READ),
-    file_count=context.get('file_count_estimate', 1),
-    complexity_score=context.get('complexity_score', 0.0),
-    risk_level=RiskLevel.LOW
-)
-return self.framework_logic.get_quality_gates(operation_context)
-```
+**Used in session_start.py:**
+- `FrameworkLogic` class for quality gate configuration
+- `OperationContext` dataclass for structured context management  
+- `OperationType` enum for operation classification (READ, WRITE, BUILD, etc.)
+- `RiskLevel` enum for risk assessment
+- Used in `_configure_quality_gates()` method to determine appropriate quality gates based on operation context
 
 ### pattern_detection.py
 
-**Purpose**: Provides intelligent pattern recognition for session configuration.
+**Purpose**: Analyzes patterns in user input and context for intelligent routing.
 
-**Key Components Used:**
-- Pattern matching algorithms for user intent detection
-- Mode recommendation logic based on detected patterns
-- MCP server selection recommendations
-- Confidence scoring for pattern matches
+**Used in session_start.py:**
+- `PatternDetector` class (lazy loaded)
+- `detect_patterns()` method for analyzing user intent, context, and operation data
+- Returns pattern matches, recommended modes, recommended MCP servers, and confidence scores
 
 ### mcp_intelligence.py
 
-**Purpose**: Implements intelligent MCP server selection and coordination.
+**Purpose**: Provides MCP server activation planning and coordination strategies.
 
-**Key Components Used:**
-- MCP activation plan generation
-- Server coordination strategy determination
-- Performance cost estimation
-- Fallback strategy planning
+**Used in session_start.py:**
+- `MCPIntelligence` class (lazy loaded)
+- `create_activation_plan()` method for determining optimal MCP server coordination
+- Returns activation plans with servers, order, cost estimates, and coordination strategies
 
 ### compression_engine.py
 
-**Purpose**: Provides intelligent compression strategy selection for token efficiency.
+**Purpose**: Handles compression strategy selection for token efficiency.
 
-**Key Components Used:**
-- Compression level determination based on context
-- Quality impact estimation
-- Compression savings calculation
-- Selective compression configuration
+**Used in session_start.py:**
+- `CompressionEngine` class (lazy loaded)
+- `determine_compression_level()` method for context-based compression decisions
+- Used in `_configure_compression()` to set session compression strategy
 
 ### learning_engine.py
 
-**Purpose**: Enables adaptive learning and preference application.
+**Purpose**: Provides learning and adaptation capabilities for continuous improvement.
 
-**Key Components Used:**
-- Learning event recording for session patterns
-- Adaptation application from previous sessions
-- Effectiveness measurement and feedback loops
-- Pattern recognition and improvement suggestions
+**Used in session_start.py:**
+- `LearningEngine` class (lazy loaded, initialized with `~/.claude/cache` directory)
+- `apply_adaptations()` method for applying learned patterns
+- `record_learning_event()` method for storing session initialization data
+- `update_project_info()` and preference tracking methods
 
 ### yaml_loader.py
 
-**Purpose**: Provides configuration loading and management capabilities.
+**Purpose**: Configuration loading with fallback strategies.
 
-**Key Components Used:**
-- Hook-specific configuration loading
-- YAML configuration file management
-- Fallback configuration strategies
-- Hot-reload configuration support
+**Used in session_start.py:**
+- `config_loader.get_hook_config()` for hook-specific configuration
+- `config_loader.load_config()` for YAML configuration files with FileNotFoundError handling
+- Fallback to hook configuration when YAML files are missing
 
 ### logger.py
 
-**Purpose**: Provides comprehensive logging and metrics collection.
+**Purpose**: Structured logging for hook execution tracking.
 
-**Key Components Used:**
-- Hook execution logging with timing
-- Decision logging for audit trails
-- Error logging with context preservation
-- Performance metrics collection
+**Used in session_start.py:**
+- `log_hook_start()` and `log_hook_end()` for execution timing
+- `log_decision()` for mode activation and MCP server selection decisions
+- `log_error()` for error context preservation
 
 ## Error Handling
 
-### Comprehensive Error Recovery Strategy
+**Implementation**: The main `initialize_session()` method includes comprehensive error handling with graceful fallback.
 
-**Error Categories and Responses:**
+**What actually happens on errors:**
 
-**1. Project Analysis Failures**
-```python
-def _analyze_project_structure(self, project_path: Path) -> dict:
-    try:
-        # Full project analysis
-        return comprehensive_analysis
-    except Exception:
-        # Return partial analysis with safe defaults
-        return basic_analysis_with_defaults
-```
-
-**2. Pattern Detection Failures**
-- Fallback to basic mode configuration
-- Use cached patterns from previous sessions
-- Apply conservative intelligence settings
-- Maintain core functionality without advanced features
-
-**3. MCP Server Planning Failures**
-- Disable problematic servers
-- Use fallback server combinations
-- Apply conservative coordination strategies
-- Maintain basic tool functionality
-
-**4. Learning System Failures**
-- Disable adaptive features temporarily
-- Use static configuration defaults
-- Log errors for future analysis
-- Preserve session functionality
+1. **Exception Handling**: All errors are caught in the main try-except block
+2. **Error Logging**: Errors are logged via `log_error()` with context
+3. **Fallback Configuration**: `_create_fallback_session_config()` returns:
+   ```python
+   {
+       'session_id': session_context.get('session_id', 'unknown'),
+       'superclaude_enabled': False,
+       'fallback_mode': True,
+       'error': error,
+       'basic_config': {
+           'compression_level': 'minimal',
+           'mcp_servers_enabled': False,
+           'learning_disabled': True
+       }
+   }
+   ```
+4. **Session Continuity**: Basic Claude Code functionality is preserved even when SuperClaude features fail
 
 ### Error Learning Integration
 

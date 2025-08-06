@@ -2,7 +2,7 @@
 
 ## Architecture Summary
 
-The SuperClaude Framework Hooks shared modules provide the intelligent foundation for all 7 Claude Code hooks. These modules implement the core SuperClaude framework patterns from RULES.md, PRINCIPLES.md, and ORCHESTRATOR.md, delivering executable intelligence that transforms static configuration into dynamic, adaptive behavior.
+The SuperClaude Framework Hooks shared modules provide the intelligent foundation for all 7 Claude Code hooks. These 10 shared modules implement the core SuperClaude framework patterns from RULES.md, PRINCIPLES.md, and ORCHESTRATOR.md, delivering executable intelligence that transforms static configuration into dynamic, adaptive behavior.
 
 ## Module Architecture
 
@@ -14,8 +14,11 @@ hooks/shared/
 ├── mcp_intelligence.py            # MCP server routing and coordination
 ├── compression_engine.py          # Token efficiency and optimization
 ├── learning_engine.py             # Adaptive learning and feedback
+├── intelligence_engine.py         # Generic YAML pattern interpreter
+├── validate_system.py             # YAML-driven system validation
 ├── yaml_loader.py                 # Configuration loading and management
-└── logger.py                      # Structured logging utilities
+├── logger.py                      # Structured logging utilities
+└── tests/                         # Test suite for shared modules
 ```
 
 ## Core Design Principles
@@ -41,6 +44,7 @@ Every operation includes validation, error handling, fallback strategies, and co
 - **framework_logic.py**: Core SuperClaude decision algorithms and validation
 - **pattern_detection.py**: Intelligent pattern matching for automatic activation
 - **mcp_intelligence.py**: Smart MCP server selection and coordination
+- **intelligence_engine.py**: Generic YAML pattern interpreter for hot-reloadable intelligence
 
 ### Optimization Layer  
 - **compression_engine.py**: Token efficiency with quality preservation
@@ -49,6 +53,7 @@ Every operation includes validation, error handling, fallback strategies, and co
 ### Infrastructure Layer
 - **yaml_loader.py**: High-performance configuration management
 - **logger.py**: Structured event logging and analysis
+- **validate_system.py**: YAML-driven system health validation and diagnostics
 
 ## Key Features
 
@@ -94,8 +99,12 @@ from shared import (
     CompressionEngine,        # Token optimization
     LearningEngine,           # Adaptive learning
     UnifiedConfigLoader,      # Configuration
-    get_logger               # Logging
 )
+
+# Additional modules available for direct import:
+from shared.intelligence_engine import IntelligenceEngine  # YAML pattern interpreter
+from shared.validate_system import YAMLValidationEngine    # System health validation
+from shared.logger import get_logger                       # Logging utilities
 ```
 
 ### SuperClaude Framework Compliance

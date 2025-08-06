@@ -1,33 +1,22 @@
 # Stop Hook Documentation
 
-## Overview
-
-The Stop Hook is a comprehensive session analytics and persistence engine that runs at the end of each Claude Code session. It implements the `/sc:save` logic with advanced performance tracking, providing detailed analytics about session effectiveness, learning consolidation, and intelligent session data storage.
-
 ## Purpose
 
-The Stop Hook serves as the primary session analytics and persistence system for SuperClaude Framework, delivering:
+The `stop` hook provides session analytics and persistence when Claude Code sessions end. It implements session summarization, learning consolidation, and data storage for continuous framework improvement.
 
-- **Session Analytics**: Comprehensive performance and effectiveness metrics
-- **Learning Consolidation**: Consolidation of learning events from the entire session  
-- **Session Persistence**: Intelligent session data storage with compression
-- **Performance Optimization**: Recommendations for future sessions based on analytics
-- **Quality Assessment**: Session success evaluation and improvement suggestions
-- **Framework Effectiveness**: Measurement of SuperClaude framework impact
+**Core Implementation**: Analyzes complete session history, consolidates learning events, generates performance metrics, and persists session data for future analysis with a target execution time of <200ms.
 
 ## Execution Context
 
-### When This Hook Runs
-- **Trigger**: Session termination in Claude Code
-- **Context**: End of user session, before final cleanup
-- **Data Available**: Complete session history, operations log, error records
-- **Timing**: After all user operations completed, before session cleanup
+The stop hook runs at Claude Code session termination. According to `settings.json`, it has a 15-second timeout and executes via: `python3 ~/.claude/hooks/stop.py`
 
-### Hook Integration Points
-- **Session Lifecycle**: Final stage of session processing
-- **MCP Intelligence**: Coordinates with MCP servers for enhanced analytics
-- **Learning Engine**: Consolidates learning events and adaptations
-- **Framework Logic**: Applies SuperClaude framework patterns for analysis
+**Actual Execution Flow:**
+1. Receives session termination data via stdin (JSON)
+2. Initializes StopHook class with analytics and learning components  
+3. Analyzes complete session history and performance data
+4. Consolidates learning events and generates session insights
+5. Persists session data and analytics for future reference
+6. Outputs session summary and analytics via stdout (JSON)
 
 ## Performance Target
 

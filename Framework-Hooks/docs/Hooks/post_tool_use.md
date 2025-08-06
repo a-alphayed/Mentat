@@ -2,37 +2,32 @@
 
 ## Purpose
 
-The **post_tool_use hook** implements comprehensive validation and learning after every tool execution in Claude Code. It serves as the primary quality assurance and continuous improvement mechanism for the SuperClaude framework, ensuring operations comply with RULES.md and PRINCIPLES.md while learning from each execution to enhance future performance.
+The `post_tool_use` hook analyzes tool execution results and provides validation, quality assessment, and learning feedback after every tool execution in Claude Code. It implements validation against SuperClaude principles and records learning events for continuous improvement.
 
-**Core Functions:**
-- **Quality Validation**: Verifies tool execution against SuperClaude framework standards
-- **Rules Compliance**: Enforces RULES.md operational requirements and safety protocols
-- **Principles Alignment**: Validates adherence to PRINCIPLES.md development philosophy
-- **Effectiveness Measurement**: Quantifies operation success and learning value
-- **Error Pattern Detection**: Identifies and learns from recurring issues and failures
-- **Learning Integration**: Records insights for continuous framework improvement
+**Core Implementation**: A 794-line Python implementation that validates tool results against RULES.md and PRINCIPLES.md, measures effectiveness, detects error patterns, and records learning events with a target execution time of <100ms.
 
 ## Execution Context
 
-The post_tool_use hook **runs after every tool use** in Claude Code, providing universal validation coverage across all operations.
+The post_tool_use hook runs after every tool execution in Claude Code. According to `settings.json`, it has a 10-second timeout and executes via: `python3 ~/.claude/hooks/post_tool_use.py`
 
-**Execution Trigger Points:**
-- **Universal Coverage**: Activated after every tool execution (Read, Write, Edit, Bash, etc.)
-- **Automatic Activation**: No manual intervention required - built into Claude Code's execution pipeline
-- **Real-Time Processing**: Immediate validation and feedback on tool results
-- **Session Integration**: Maintains context across multiple tool executions within a session
+**Actual Execution Flow:**
+1. Receives tool execution result from Claude Code via stdin (JSON)
+2. Initializes PostToolUseHook class with shared module components
+3. Processes tool result through `process_tool_result()` method
+4. Validates results against SuperClaude principles and measures effectiveness
+5. Outputs comprehensive validation report via stdout (JSON)
+6. Falls back gracefully on errors with basic validation report
 
-**Input Processing:**
-- Receives complete tool execution result via stdin as JSON
-- Extracts execution context including parameters, results, errors, and performance data
-- Analyzes operation characteristics and quality indicators
-- Enriches context with framework-specific metadata
+**Input Analysis:**
+- Extracts execution context (tool name, status, timing, parameters, results, errors)
+- Analyzes operation outcome (success, performance, quality indicators)
+- Evaluates quality indicators (code quality, security compliance, performance efficiency)
 
-**Output Generation:**
-- Comprehensive validation report with quality scores and compliance status
-- Actionable recommendations for improvement and optimization
-- Learning insights and pattern detection results
-- Performance metrics and effectiveness measurements
+**Output Reporting:**
+- Validation results (quality score, issues, warnings, suggestions)
+- Effectiveness metrics (overall effectiveness, quality/performance/satisfaction scores)
+- Learning analysis (patterns detected, success/failure factors, optimization opportunities)
+- Compliance assessment (rules compliance, principles alignment, SuperClaude score)
 
 ## Performance Target
 

@@ -1,39 +1,22 @@
 # pre_compact Hook Technical Documentation
 
-## Overview
-
-The `pre_compact` hook implements SuperClaude's intelligent token optimization system, executing before context compaction in Claude Code to achieve 30-50% token reduction while maintaining ≥95% information preservation. This hook serves as the core implementation of `MODE_Token_Efficiency.md` compression algorithms.
-
 ## Purpose
 
-**Token efficiency and compression before context compaction** - The pre_compact hook provides intelligent context optimization through adaptive compression strategies, symbol systems, and evidence-based validation. It operates as a preprocessing layer that optimizes content for efficient token usage while preserving semantic accuracy and technical correctness.
+The `pre_compact` hook implements token optimization before context compaction in Claude Code. It analyzes content for compression opportunities, applies selective compression strategies, and maintains quality preservation targets while reducing token usage.
 
-### Core Objectives
-- **Resource Management**: Optimize token usage during large-scale operations and high resource utilization
-- **Quality Preservation**: Maintain ≥95% information retention through selective compression strategies
-- **Framework Protection**: Complete exclusion of SuperClaude framework content from compression
-- **Adaptive Intelligence**: Context-aware compression based on content type, user expertise, and resource constraints
-- **Performance Optimization**: Sub-150ms execution time for real-time compression decisions
+**Core Implementation**: Implements MODE_Token_Efficiency.md compression algorithms with selective content classification, symbol systems, and quality-gated compression with a target execution time of <150ms.
 
 ## Execution Context
 
-The pre_compact hook executes **before context compaction** in the Claude Code session lifecycle, triggered by:
+The pre_compact hook runs before context compaction in Claude Code. According to `settings.json`, it has a 15-second timeout and executes via: `python3 ~/.claude/hooks/pre_compact.py`
 
-### Automatic Activation Triggers
-- **Resource Constraints**: Context usage >75%, memory pressure, conversation length thresholds
-- **Performance Optimization**: Multi-MCP server coordination, extended sessions, complex analysis workflows
-- **Content Characteristics**: Large content blocks, repetitive patterns, technical documentation
-- **Framework Integration**: Wave coordination, task management operations, quality gate validation
-
-### Execution Sequence
-```
-Claude Code Session → Context Analysis → pre_compact Hook → Compression Applied → Context Compaction → Response Generation
-```
-
-### Integration Points
-- **Before**: Context analysis and resource state evaluation
-- **During**: Selective compression with real-time quality validation
-- **After**: Optimized content delivery to Claude Code context system
+**Actual Execution Flow:**
+1. Receives compaction request from Claude Code via stdin (JSON)
+2. Initializes PreCompactHook class with compression engine and shared modules
+3. Processes request through `process_pre_compact()` method
+4. Analyzes content characteristics and determines compression strategy
+5. Outputs compression configuration via stdout (JSON)
+6. Falls back gracefully on errors with no compression applied
 
 ## Performance Target
 

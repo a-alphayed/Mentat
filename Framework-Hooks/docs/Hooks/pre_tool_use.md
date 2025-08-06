@@ -1,67 +1,35 @@
 # Pre-Tool-Use Hook Technical Documentation
 
-**Intelligent Tool Routing and MCP Server Selection Hook**
-
----
-
 ## Purpose
 
-The `pre_tool_use` hook implements intelligent tool routing and MCP server selection for the SuperClaude framework. It runs before every tool execution in Claude Code, providing optimal tool configuration, MCP server coordination, and performance optimization within a strict 200ms execution target.
+The `pre_tool_use` hook analyzes tool requests and provides intelligent routing decisions before tool execution in Claude Code. It determines optimal MCP server coordination, performance optimizations, and execution strategies based on tool characteristics and context.
 
-**Core Value Proposition**:
-- **Intelligent Routing**: Matches tool requests to optimal execution strategies using pattern detection
-- **MCP Server Orchestration**: Coordinates multiple specialized servers (Context7, Sequential, Magic, Playwright, Morphllm, Serena)
-- **Performance Optimization**: Parallel execution planning, caching strategies, and resource management
-- **Adaptive Intelligence**: Learning-based routing improvements over time
-- **Fallback Resilience**: Graceful degradation when preferred tools are unavailable
+**Core Implementation**: A 648-line Python implementation that processes tool requests, analyzes operation characteristics, routes to appropriate MCP servers, and provides enhanced tool configurations with a target execution time of <200ms.
 
 ---
 
 ## Execution Context
 
-### Trigger Event
-The hook executes **before every tool use** in Claude Code, intercepting tool requests to enhance them with SuperClaude intelligence.
+The pre_tool_use hook runs before every tool execution in Claude Code. According to `settings.json`, it has a 15-second timeout and executes via: `python3 ~/.claude/hooks/pre_tool_use.py`
 
-### Execution Flow
-```
-Tool Request → pre_tool_use Hook → Enhanced Tool Configuration → Tool Execution
-```
+**Actual Execution Flow:**
+1. Receives tool request from Claude Code via stdin (JSON)
+2. Initializes PreToolUseHook class with shared module components
+3. Processes tool request through `process_tool_use()` method
+4. Analyzes operation characteristics and routing patterns
+5. Outputs enhanced tool configuration via stdout (JSON)
+6. Falls back gracefully on errors with basic tool configuration
 
-### Input Context
-```json
-{
-  "tool_name": "Read|Write|Edit|Analyze|Build|Test|...",
-  "parameters": {...},
-  "user_intent": "natural language description",
-  "session_context": {...},
-  "previous_tools": [...],
-  "operation_sequence": [...],
-  "resource_state": {...}
-}
-```
+**Input Processing:**
+- Extracts tool context including tool name, parameters, user intent
+- Analyzes operation characteristics (file count, complexity, parallelizability)  
+- Identifies tool chain patterns (read-edit, multi-file, analysis chains)
 
-### Output Enhancement
-```json
-{
-  "tool_name": "original_tool",
-  "enhanced_mode": true,
-  "mcp_integration": {
-    "enabled": true,
-    "servers": ["serena", "sequential"],
-    "coordination_strategy": "collaborative"
-  },
-  "performance_optimization": {
-    "parallel_execution": true,
-    "caching_enabled": true,
-    "optimizations": ["parallel_file_processing"]
-  },
-  "execution_metadata": {
-    "estimated_time_ms": 1200,
-    "complexity_score": 0.65,
-    "intelligence_level": "medium"
-  }
-}
-```
+**Output Configuration:**
+- Enhanced mode flag and MCP server coordination
+- Performance optimization settings (parallel execution, caching)
+- Quality enhancement settings (validation, error recovery)
+- Execution metadata (estimated time, complexity score, intelligence level)
 
 ---
 

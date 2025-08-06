@@ -2,15 +2,14 @@
 
 ## System Architecture
 
-The Framework-Hooks system is a pattern-driven intelligence layer that enhances Claude Code's capabilities through lifecycle hooks and shared components. The system operates on a modular architecture consisting of:
+The Framework-Hooks system provides lifecycle hooks for Claude Code that implement SuperClaude framework patterns. The system consists of:
 
 ### Core Components
 
-1. **Lifecycle Hooks** - 7 Python modules that run at specific points in Claude Code execution
-2. **Shared Intelligence Modules** - Common functionality providing pattern detection, learning, and framework logic
-3. **YAML Configuration System** - Dynamic, hot-reloadable configuration files
-4. **Performance Monitoring** - Real-time tracking with sub-50ms bootstrap targets
-5. **Adaptive Learning Engine** - Continuous improvement through pattern recognition and user adaptation
+1. **Lifecycle Hooks** - 7 Python modules (session_start.py, pre_tool_use.py, post_tool_use.py, pre_compact.py, notification.py, stop.py, subagent_stop.py)
+2. **Shared Modules** - 9 Python modules providing shared functionality (framework_logic.py, pattern_detection.py, mcp_intelligence.py, learning_engine.py, compression_engine.py, intelligence_engine.py, validate_system.py, yaml_loader.py, logger.py)
+3. **Configuration System** - 19 YAML files defining behavior and settings
+4. **Pattern System** - YAML pattern files in minimal/, dynamic/, and learned/ directories
 
 ### Architecture Layers
 
@@ -40,304 +39,208 @@ The Framework-Hooks system is a pattern-driven intelligence layer that enhances 
 
 ## Purpose
 
-The Framework-Hooks system solves critical performance and intelligence challenges in AI-assisted development:
+The Framework-Hooks system implements the SuperClaude framework through lifecycle hooks that run during Claude Code execution.
 
-### Primary Problems Solved
+### Implementation Features
 
-1. **Context Bloat** - Reduces context usage through pattern-driven intelligence instead of loading complete documentation
-2. **Bootstrap Performance** - Achieves <50ms session initialization through intelligent caching and selective loading
-3. **Decision Intelligence** - Provides context-aware routing and MCP server selection based on operation patterns
-4. **Adaptive Learning** - Continuously improves performance through user preference learning and pattern recognition
-5. **Resource Optimization** - Manages memory, CPU, and token usage through real-time monitoring and adaptive compression
+1. **Session Management** - Implements session lifecycle patterns from SESSION_LIFECYCLE.md
+2. **Mode Detection** - Activates SuperClaude modes (brainstorming, task management, token efficiency, introspection) based on user input patterns
+3. **MCP Server Routing** - Routes operations to appropriate MCP servers (Context7, Sequential, Magic, Playwright, Morphllm, Serena)
+4. **Configuration Management** - Loads settings from YAML files to customize behavior
+5. **Pattern Recognition** - Detects project types and operation patterns to apply appropriate configurations
 
-### System Benefits
+### Design Goals
 
-- **Performance**: Sub-50ms bootstrap times with intelligent caching
-- **Intelligence**: Pattern-driven decision making without documentation overhead
-- **Adaptability**: Learns user preferences and project patterns over time
-- **Scalability**: Handles complex multi-domain operations through coordination
-- **Reliability**: Graceful degradation with fallback strategies
+- **Framework Compliance**: Implement SuperClaude patterns and principles
+- **Configuration Flexibility**: YAML-driven behavior customization
+- **Performance Targets**: 50ms session_start, 200ms pre_tool_use, etc. (as defined in performance.yaml)
+- **Pattern-Based Operation**: Use project type and operation detection for intelligent behavior
 
-## Pattern-Driven Intelligence
+## Pattern-Based Operation
 
-The system differs fundamentally from traditional documentation-driven approaches:
+The system uses pattern files to configure behavior based on detected project characteristics:
 
-### Traditional Approach
+### Pattern Detection
 ```
-Session Start → Load 50KB+ Documentation → Parse → Apply Rules → Execute
+User Request → Project Type Detection → Load Pattern Files → Apply Configuration → Execute
 ```
-**Problems**: High latency, memory usage, context bloat
 
-### Pattern-Driven Approach
-```
-User Request → Pattern Detection → Cached Intelligence → Smart Routing → Execute
-```
-**Benefits**: Context reduction, <50ms response, adaptive learning
+### Pattern System Components
 
-### Intelligence Components
+1. **Minimal Patterns** - Essential patterns loaded during session initialization (e.g., python_project.yaml, react_project.yaml)
+2. **Dynamic Patterns** - Runtime patterns for mode detection and MCP activation
+3. **Learned Patterns** - User preference and project-specific optimizations (stored in learned/ directory)
 
-1. **Pattern Detection Engine**
-   - Analyzes user input for operation intent
-   - Detects complexity indicators and scope
-   - Identifies framework patterns and project types
-   - Determines optimal routing strategies
+### Core Modules
 
-2. **Learning Engine** 
-   - Records user preferences and successful patterns
-   - Adapts recommendations based on effectiveness
-   - Maintains project-specific optimizations
-   - Provides cross-session learning continuity
+1. **Pattern Detection (pattern_detection.py)**
+   - 45KB module detecting project types and operation patterns
+   - Analyzes file structures, dependencies, and user input
 
-3. **MCP Intelligence Router**
-   - Selects optimal MCP servers based on context
-   - Coordinates multi-server operations
-   - Implements fallback strategies
-   - Optimizes activation order and resource usage
+2. **Learning Engine (learning_engine.py)** 
+   - 40KB module for user preference tracking
+   - Records effectiveness of different configurations
 
-4. **Framework Logic Engine**
-   - Applies SuperClaude principles (RULES.md, PRINCIPLES.md)
-   - Determines quality gates and validation levels
-   - Calculates complexity scores and risk assessments
-   - Provides evidence-based decision making
+3. **MCP Intelligence (mcp_intelligence.py)**
+   - 31KB module for MCP server routing decisions
+   - Maps operations to appropriate servers based on capabilities
 
-## Performance Optimization
+4. **Framework Logic (framework_logic.py)**
+   - 12KB module implementing SuperClaude principles
+   - Handles complexity scoring and risk assessment
 
-The system achieves exceptional performance through multiple optimization strategies:
+## Configuration System
 
-### Bootstrap Optimization (<50ms target)
+The system is configured through YAML files and settings:
 
-1. **Selective Loading**
-   - Only loads patterns relevant to current operation
-   - Caches frequently used intelligence
-   - Defers non-critical initialization
+### Configuration Files (19 total)
 
-2. **Intelligent Caching**
-   - Pattern results cached with smart invalidation
-   - Learning data compressed and indexed
-   - MCP server configurations pre-computed
+Configuration is defined in /config/ directory:
+- **performance.yaml** (345 lines) - Performance targets and thresholds
+- **modes.yaml** - Mode detection patterns and settings
+- **session.yaml** - Session lifecycle configuration
+- **logging.yaml** - Logging configuration and levels
+- **compression.yaml** - Token efficiency settings
+- Other specialized configuration files
 
-3. **Parallel Processing**
-   - Hook execution parallelized where possible
-   - Background learning processing
-   - Asynchronous pattern updates
+### Settings Integration
 
-### Runtime Performance Targets
+Claude Code hooks are configured through settings.json:
+- **Hook Timeouts**: session_start (10s), pre_tool_use (15s), etc.
+- **Hook Commands**: Python execution paths for each lifecycle hook
+- **Hook Matching**: All hooks configured with "*" matcher (apply to all sessions)
 
-| Component     | Target | Critical Threshold |
-|---------------|--------|--------------------|
-| Session Start | <50ms  | 100ms              |
-| Tool Routing  | <200ms | 500ms              |
-| Validation    | <100ms | 250ms              |
-| Compression   | <150ms | 300ms              |
-| Notification  | <100ms | 200ms              |
+### Performance Targets (from performance.yaml)
 
-### Memory Optimization
-
-- **Pattern Data**: 5KB typical (vs 50KB+ documentation)
-- **Learning Cache**: Compressed storage with 30% efficiency
-- **Session Data**: Smart cleanup with 70% hit ratio
-- **Total Footprint**: <100MB target, 200MB critical
+| Component     | Target | Warning | Critical |
+|---------------|--------|---------|----------|
+| session_start | 50ms   | 75ms    | 100ms    |
+| pre_tool_use  | 200ms  | 300ms   | 500ms    |
+| post_tool_use | 100ms  | 150ms   | 250ms    |
+| pre_compact   | 150ms  | 200ms   | 300ms    |
+| notification  | 100ms  | 150ms   | 200ms    |
+| stop          | 200ms  | 300ms   | 500ms    |
+| subagent_stop | 150ms  | 200ms   | 300ms    |
 
 ## Directory Structure
 
 ```
 Framework-Hooks/
-├── hooks/                         # Lifecycle hook implementations
-│   ├── session_start.py           # Session initialization & intelligence routing
-│   ├── pre_tool_use.py            # MCP server selection & optimization
-│   ├── post_tool_use.py           # Validation & learning integration
-│   ├── pre_compact.py             # Token efficiency & compression
-│   ├── notification.py            # Just-in-time pattern updates
-│   ├── stop.py                    # Session analytics & persistence
+├── hooks/                         # Lifecycle hook implementations (7 Python files)
+│   ├── session_start.py           # 703 lines - Session initialization
+│   ├── pre_tool_use.py            # MCP server selection and optimization
+│   ├── post_tool_use.py           # Validation and learning integration
+│   ├── pre_compact.py             # Token efficiency and compression
+│   ├── notification.py            # Pattern updates and notifications
+│   ├── stop.py                    # Session analytics and persistence
 │   ├── subagent_stop.py           # Task management coordination
-│   └── shared/                    # Shared intelligence modules
-│       ├── framework_logic.py     # SuperClaude principles implementation
-│       ├── pattern_detection.py   # Pattern recognition engine
-│       ├── mcp_intelligence.py    # MCP server routing logic
-│       ├── learning_engine.py     # Adaptive learning system
-│       ├── compression_engine.py  # Token optimization algorithms
-│       ├── yaml_loader.py         # Configuration management
-│       └── logger.py              # Performance & debug logging
-├── config/                        # YAML configuration files
-│   ├── performance.yaml           # Performance targets & thresholds
-│   ├── modes.yaml                 # Mode activation patterns
-│   ├── orchestrator.yaml          # Routing & coordination rules
+│   └── shared/                    # Shared modules (9 Python files)
+│       ├── framework_logic.py     # 12KB - SuperClaude principles
+│       ├── pattern_detection.py   # 45KB - Pattern recognition
+│       ├── mcp_intelligence.py    # 31KB - MCP server routing
+│       ├── learning_engine.py     # 40KB - User preference learning
+│       ├── compression_engine.py  # 27KB - Token optimization
+│       ├── intelligence_engine.py # 18KB - Core intelligence
+│       ├── validate_system.py     # 32KB - System validation
+│       ├── yaml_loader.py         # 16KB - Configuration loading
+│       └── logger.py              # 11KB - Logging utilities
+├── config/                        # Configuration files (19 YAML files)
+│   ├── performance.yaml           # 345 lines - Performance targets
+│   ├── modes.yaml                 # Mode detection patterns
 │   ├── session.yaml               # Session management settings
 │   ├── logging.yaml               # Logging configuration
-│   ├── validation.yaml            # Quality gate definitions
-│   └── compression.yaml           # Token efficiency settings
-├── patterns/                      # Learning & pattern storage
-│   ├── dynamic/                   # Runtime pattern detection
-│   ├── learned/                   # User preference patterns
-│   └── minimal/                   # Project-specific optimizations
-├── cache/                         # Performance caching
-│   └── learning_records.json      # Adaptive learning data
-├── docs/                          # System documentation
-└── superclaude-config.json        # Master configuration
+│   ├── compression.yaml           # Token efficiency settings
+│   └── ...                        # Additional configuration files
+├── patterns/                      # Pattern storage
+│   ├── dynamic/                   # Runtime pattern detection (mode_detection.yaml, mcp_activation.yaml)
+│   ├── learned/                   # User preferences (user_preferences.yaml, project_optimizations.yaml)
+│   └── minimal/                   # Project patterns (python_project.yaml, react_project.yaml)
+├── docs/                          # Documentation
+└── settings.json                  # Claude Code hook configuration
 ```
 
 ## Key Components
 
-### 1. Session Start Hook (`session_start.py`)
-**Purpose**: Intelligent session bootstrap with <50ms performance target
+### Lifecycle Hooks
 
-**Responsibilities**:
-- Project context detection and loading
-- Automatic mode activation based on user input patterns
-- MCP server intelligence routing
-- User preference application from learning engine
-- Performance-optimized initialization
+1. **session_start.py** (703 lines)
+   - Runs at session start with 10-second timeout
+   - Detects project type and loads appropriate patterns
+   - Activates modes based on user input (brainstorming, task management, etc.)
+   - Routes to appropriate MCP servers
 
-**Key Features**:
-- Pattern-based project type detection (Node.js, Python, Rust, Go)
-- Brainstorming mode auto-activation for ambiguous requests
-- Framework exclusion to prevent context bloat
-- Learning-driven user preference adaptation
+2. **pre_tool_use.py**
+   - Runs before each tool use with 15-second timeout
+   - Selects MCP servers based on operation type
+   - Applies performance optimizations
 
-### 2. Pre-Tool Use Hook (`pre_tool_use.py`)
-**Purpose**: Intelligent tool routing and MCP server selection
+3. **post_tool_use.py** 
+   - Runs after tool execution with 10-second timeout
+   - Validates results and logs learning data
+   - Updates effectiveness tracking
 
-**Responsibilities**:
-- MCP server activation planning based on operation type
-- Performance optimization through parallel coordination
-- Context-aware tool selection
-- Fallback strategy implementation
+4. **pre_compact.py**
+   - Runs before token compression with 15-second timeout
+   - Applies compression strategies based on content type
+   - Preserves important content while optimizing tokens
 
-**Key Features**:
-- Pattern-based MCP server selection
-- Real-time performance monitoring
-- Intelligent caching of routing decisions
-- Cross-server coordination strategies
+5. **notification.py**
+   - Handles notifications with 10-second timeout
+   - Updates pattern caches and configurations
 
-### 3. Post-Tool Use Hook (`post_tool_use.py`)
-**Purpose**: Quality validation and learning integration
+6. **stop.py**
+   - Runs at session end with 15-second timeout
+   - Generates session analytics and saves learning data
 
-**Responsibilities**:
-- RULES.md and PRINCIPLES.md compliance validation
-- Effectiveness measurement and learning
-- Error pattern detection
-- Quality score calculation
+7. **subagent_stop.py**
+   - Handles subagent coordination with 15-second timeout
+   - Tracks delegation performance
 
-**Key Features**:
-- 8-step quality gate validation
-- Learning opportunity identification
-- Performance effectiveness tracking
-- Adaptive improvement suggestions
+### Shared Modules
 
-### 4. Pre-Compact Hook (`pre_compact.py`)
-**Purpose**: Token efficiency through intelligent compression
+Core functionality shared across hooks:
 
-**Responsibilities**:
-- Selective content compression (framework exclusion)
-- Symbol systems and abbreviation application
-- Quality-gated compression with >95% preservation
-- Adaptive compression level selection
-
-**Key Features**:
-- 5-level compression strategy (minimal to emergency)
-- Framework content protection (0% compression)
-- Real-time quality preservation monitoring
-- Context-aware compression selection
-
-### 5. Notification Hook (`notification.py`)
-**Purpose**: Just-in-time pattern updates and intelligence caching
-
-**Responsibilities**:
-- Dynamic pattern loading based on operation context
-- Framework intelligence updates
-- Performance optimization through selective caching
-- Real-time learning integration
-
-**Key Features**:
-- Context-sensitive documentation loading
-- Intelligent cache management with 30-60 minute TTL
-- Pattern update coordination
-- Learning-driven optimization
-
-### 6. Stop Hook (`stop.py`)
-**Purpose**: Session analytics and learning consolidation
-
-**Responsibilities**:
-- Comprehensive session performance analytics
-- Learning consolidation and persistence
-- Session quality assessment
-- Optimization recommendations generation
-
-**Key Features**:
-- End-to-end performance measurement
-- Learning effectiveness tracking
-- Session summary generation
-- Quality improvement suggestions
-
-### 7. Sub-Agent Stop Hook (`subagent_stop.py`)
-**Purpose**: Task management delegation coordination
-
-**Responsibilities**:
-- Sub-agent performance analytics
-- Delegation effectiveness measurement
-- Wave orchestration optimization
-- Parallel execution performance tracking
-
-**Key Features**:
-- Multi-agent coordination analytics
-- Delegation strategy optimization
-- Performance gain measurement
-- Resource utilization tracking
+- **pattern_detection.py** (45KB) - Project and operation pattern recognition
+- **learning_engine.py** (40KB) - User preference and effectiveness tracking  
+- **validate_system.py** (32KB) - System validation and health checks
+- **mcp_intelligence.py** (31KB) - MCP server routing logic
+- **compression_engine.py** (27KB) - Token optimization algorithms
+- **intelligence_engine.py** (18KB) - Core intelligence coordination
+- **yaml_loader.py** (16KB) - Configuration file loading
+- **framework_logic.py** (12KB) - SuperClaude framework implementation
+- **logger.py** (11KB) - Logging and debugging utilities
 
 ## Integration with SuperClaude
 
-The Framework-Hooks system enhances Claude Code capabilities through deep integration with SuperClaude framework components:
+The Framework-Hooks system implements SuperClaude framework patterns through lifecycle hooks:
 
-### Mode Integration
+### Mode Detection and Activation
 
-1. **Brainstorming Mode**
-   - Auto-activation through session_start pattern detection
-   - Interactive requirements discovery
-   - Brief generation and PRD handoff
+The session_start hook detects user intent and activates appropriate SuperClaude modes:
 
-2. **Task Management Mode**
-   - Wave orchestration through delegation patterns
-   - Multi-layer task coordination (TodoWrite → /task → /spawn → /loop)
-   - Performance analytics and optimization
+1. **Brainstorming Mode** - Activated for ambiguous requests ("not sure", "thinking about")
+2. **Task Management Mode** - Activated for multi-step operations and complex builds
+3. **Token Efficiency Mode** - Activated during resource constraints or when brevity requested
+4. **Introspection Mode** - Activated for meta-analysis requests
 
-3. **Token Efficiency Mode**
-   - Selective compression with framework protection
-   - Symbol systems and abbreviation optimization
-   - Quality-gated compression with preservation targets
+### MCP Server Routing
 
-4. **Introspection Mode**
-   - Meta-cognitive analysis integration
-   - Framework compliance validation
-   - Pattern recognition and learning
+The hooks route operations to appropriate MCP servers based on detected patterns:
 
-### MCP Server Coordination
+- **Context7** - Library documentation and framework patterns
+- **Sequential** - Multi-step reasoning and complex analysis  
+- **Magic** - UI component generation and design systems
+- **Playwright** - Browser automation and testing
+- **Morphllm** - File editing with pattern optimization
+- **Serena** - Semantic analysis and memory management
 
-- **Context7**: Library documentation and framework patterns
-- **Sequential**: Multi-step reasoning and complex analysis
-- **Magic**: UI component generation and design systems
-- **Playwright**: Browser automation and testing
-- **Morphllm**: Intelligent editing with pattern application
-- **Serena**: Semantic analysis and memory management
+### Framework Implementation
 
-### Quality Gates Integration
+The hooks implement core SuperClaude concepts:
 
-The system implements the SuperClaude 8-step quality validation:
+- **Rules Compliance** - File operation validation and security protocols
+- **Principles Enforcement** - Evidence-based decisions and code quality standards
+- **Performance Targets** - Sub-200ms operation targets with monitoring
+- **Configuration Management** - YAML-driven behavior customization
 
-1. **Syntax Validation** - Language-specific correctness
-2. **Type Analysis** - Type compatibility and inference
-3. **Code Quality** - Linting rules and standards
-4. **Security Assessment** - Vulnerability and threat analysis
-5. **Testing Validation** - Test coverage and quality
-6. **Performance Analysis** - Optimization and benchmarking
-7. **Documentation** - Completeness and accuracy
-8. **Integration Testing** - End-to-end validation
-
-### Performance Benefits
-
-- **90% Context Reduction**: 50KB+ → 5KB through pattern-driven intelligence
-- **<50ms Bootstrap**: Intelligent caching and selective loading
-- **40-70% Time Savings**: Through delegation and parallel processing
-- **30-50% Token Efficiency**: Smart compression with quality preservation
-- **Adaptive Learning**: Continuous improvement through usage patterns
-
-The Framework-Hooks system transforms Claude Code from a reactive tool into an intelligent, adaptive development partner that learns user preferences, optimizes performance, and provides context-aware assistance while maintaining the reliability and quality standards of the SuperClaude framework.
+The system provides SuperClaude framework functionality through Python hooks that run during Claude Code execution, enabling intelligent behavior based on project patterns and user preferences while maintaining performance targets defined in the configuration files.

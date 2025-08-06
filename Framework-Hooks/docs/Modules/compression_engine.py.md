@@ -303,9 +303,9 @@ def _apply_structural_optimization(self, content: str, level: CompressionLevel) 
 def _create_compression_strategy(self, level: CompressionLevel, content_type: ContentType) -> CompressionStrategy:
     level_configs = {
         CompressionLevel.MINIMAL: {
-            'symbol_systems': False,
+            'symbol_systems': True,       # Changed: Enable basic optimizations even for minimal
             'abbreviations': False,
-            'structural': False,
+            'structural': True,           # Changed: Enable basic structural optimization
             'quality_threshold': 0.98
         },
         CompressionLevel.EFFICIENT: {
