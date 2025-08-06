@@ -1,0 +1,44 @@
+{
+  "session_summary": {
+    "session_id": "929ff2f3-0fb7-4b6d-ad44-e68da1177b78",
+    "duration_minutes": 0.0,
+    "operations_completed": 0,
+    "tools_utilized": 0,
+    "mcp_servers_used": 0,
+    "superclaude_enabled": false
+  },
+  "performance_metrics": {
+    "overall_score": 0.2,
+    "productivity_score": 0.0,
+    "quality_score": 1.0,
+    "efficiency_score": 0.8,
+    "satisfaction_estimate": 0.5
+  },
+  "superclaude_effectiveness": {
+    "framework_enabled": false,
+    "effectiveness_score": 0.0,
+    "intelligence_utilization": 0.0,
+    "learning_events_generated": 1,
+    "adaptations_created": 0
+  },
+  "quality_analysis": {
+    "error_rate": 0.0,
+    "operation_success_rate": 1.0,
+    "bottlenecks": [
+      "low_productivity"
+    ],
+    "optimization_opportunities": []
+  },
+  "learning_summary": {
+    "insights_generated": 0,
+    "key_insights": [],
+    "learning_effectiveness": 0.0
+  },
+  "resource_utilization": {},
+  "session_metadata": {
+    "start_time": 0,
+    "end_time": 1754474098.4738903,
+    "framework_version": "1.0.0",
+    "analytics_version": "stop_1.0"
+  }
+}

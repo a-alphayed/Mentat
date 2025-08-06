@@ -182,6 +182,16 @@ class SessionStartHook:
                 'efficiency_score': self._calculate_initialization_efficiency(execution_time)
             }
             
+            # Persist session context to cache for other hooks
+            session_id = context['session_id']
+            session_file_path = self._cache_dir / f"session_{session_id}.json"
+            try:
+                with open(session_file_path, 'w') as f:
+                    json.dump(session_config, f, indent=2)
+            except Exception as e:
+                # Log error but don't fail session initialization
+                log_error("session_start", f"Failed to persist session context: {str(e)}", {"session_id": session_id})
+            
             # Log successful completion
             log_hook_end(
                 "session_start",
@@ -362,6 +372,17 @@ class SessionStartHook:
     
     def _detect_session_patterns(self, context: dict) -> dict:
         """Detect patterns for intelligent session configuration."""
+        
+        # Skip pattern detection if no user input provided
+        if not context.get('user_input', '').strip():
+            return {
+                'pattern_matches': [],
+                'recommended_modes': [],
+                'recommended_mcp_servers': [],
+                'suggested_flags': [],
+                'confidence_score': 0.0
+            }
+        
         # Create operation context for pattern detection
         operation_data = {
             'operation_type': context.get('operation_type', OperationType.READ).value,
@@ -400,7 +421,45 @@ class SessionStartHook:
             context, base_recommendations
         )
         
+        # Apply user preferences if available
+        self._apply_user_preferences(enhanced_recommendations, context)
+        
         return enhanced_recommendations
+    
+    def _apply_user_preferences(self, recommendations: dict, context: dict):
+        """Apply stored user preferences to recommendations."""
+        # Check for preferred tools for different operations
+        operation_types = ['read', 'write', 'edit', 'analyze', 'mcp']
+        
+        for op_type in operation_types:
+            pref_key = f"tool_{op_type}"
+            preferred_tool = self.learning_engine.get_last_preference(pref_key)
+            
+            if preferred_tool:
+                # Add a hint to the recommendations
+                if 'preference_hints' not in recommendations:
+                    recommendations['preference_hints'] = {}
+                recommendations['preference_hints'][op_type] = preferred_tool
+        
+        # Store project-specific information if we have a project path
+        if context.get('project_path'):
+            project_path = context['project_path']
+            
+            # Store project type if detected
+            if context.get('project_type') and context['project_type'] != 'unknown':
+                self.learning_engine.update_project_info(
+                    project_path,
+                    'project_type',
+                    context['project_type']
+                )
+            
+            # Store framework if detected
+            if context.get('framework_detected'):
+                self.learning_engine.update_project_info(
+                    project_path,
+                    'framework',
+                    context['framework_detected']
+                )
     
     def _create_mcp_activation_plan(self, context: dict, recommendations: dict) -> dict:
         """Create MCP server activation plan."""

@@ -481,6 +481,13 @@ class MCPIntelligence:
         """
         Select the most appropriate MCP server for a given tool and context.
         
+        Enhanced with intelligent analysis of:
+        - User intent keywords and patterns
+        - Operation type classification
+        - Test type specific routing
+        - Multi-factor context analysis
+        - Smart fallback logic
+        
         Args:
             tool_name: Name of the tool to be executed
             context: Context information for intelligent selection
@@ -488,45 +495,240 @@ class MCPIntelligence:
         Returns:
             Name of the optimal server for the tool
         """
-        # Map common tools to server capabilities
+        # Extract context information
+        user_intent = context.get('user_intent', '').lower()
+        operation_type = context.get('operation_type', '').lower()
+        test_type = context.get('test_type', '').lower()
+        file_count = context.get('file_count', 1)
+        complexity_score = context.get('complexity_score', 0.0)
+        has_external_deps = context.get('has_external_dependencies', False)
+        
+        # 1. KEYWORD-BASED INTENT ANALYSIS
+        # UI/Frontend keywords → Magic
+        ui_keywords = [
+            'component', 'ui', 'frontend', 'react', 'vue', 'angular', 'button', 'form', 
+            'modal', 'layout', 'design', 'responsive', 'css', 'styling', 'theme',
+            'navigation', 'menu', 'sidebar', 'dashboard', 'card', 'table', 'chart'
+        ]
+        
+        # Testing keywords → Playwright
+        test_keywords = [
+            'test', 'testing', 'e2e', 'end-to-end', 'browser', 'automation', 
+            'selenium', 'cypress', 'performance', 'load test', 'visual test',
+            'regression', 'cross-browser', 'integration test'
+        ]
+        
+        # Documentation keywords → Context7
+        doc_keywords = [
+            'documentation', 'docs', 'library', 'framework', 'api', 'reference',
+            'best practice', 'pattern', 'tutorial', 'guide', 'example', 'usage',
+            'install', 'setup', 'configuration', 'migration'
+        ]
+        
+        # Analysis/Debug keywords → Sequential
+        analysis_keywords = [
+            'analyze', 'debug', 'troubleshoot', 'investigate', 'complex', 'architecture',
+            'system', 'performance', 'bottleneck', 'optimization', 'refactor',
+            'review', 'audit', 'security', 'vulnerability'
+        ]
+        
+        # Memory/Context keywords → Serena
+        context_keywords = [
+            'memory', 'context', 'semantic', 'symbol', 'reference', 'definition',
+            'search', 'find', 'locate', 'navigate', 'project', 'codebase', 'workspace'
+        ]
+        
+        # Editing keywords → Morphllm
+        edit_keywords = [
+            'edit', 'modify', 'change', 'update', 'fix', 'replace', 'rewrite',
+            'format', 'style', 'cleanup', 'transform', 'apply', 'batch'
+        ]
+        
+        # Check user intent against keyword categories
+        intent_scores = {}
+        
+        for keyword in ui_keywords:
+            if keyword in user_intent:
+                intent_scores['magic'] = intent_scores.get('magic', 0) + 1
+                
+        for keyword in test_keywords:
+            if keyword in user_intent:
+                intent_scores['playwright'] = intent_scores.get('playwright', 0) + 1
+                
+        for keyword in doc_keywords:
+            if keyword in user_intent:
+                intent_scores['context7'] = intent_scores.get('context7', 0) + 1
+                
+        for keyword in analysis_keywords:
+            if keyword in user_intent:
+                intent_scores['sequential'] = intent_scores.get('sequential', 0) + 1
+                
+        for keyword in context_keywords:
+            if keyword in user_intent:
+                intent_scores['serena'] = intent_scores.get('serena', 0) + 1
+                
+        for keyword in edit_keywords:
+            if keyword in user_intent:
+                intent_scores['morphllm'] = intent_scores.get('morphllm', 0) + 1
+        
+        # 2. OPERATION TYPE ANALYSIS
+        operation_server_map = {
+            'create': 'magic',      # UI creation
+            'build': 'magic',       # Component building
+            'implement': 'magic',   # Feature implementation
+            'test': 'playwright',   # Testing operations
+            'validate': 'playwright', # Validation testing
+            'analyze': 'sequential', # Analysis operations
+            'debug': 'sequential',   # Debugging
+            'troubleshoot': 'sequential', # Problem solving
+            'document': 'context7',  # Documentation
+            'research': 'context7',  # Research operations
+            'edit': 'morphllm',     # File editing
+            'modify': 'morphllm',   # Content modification
+            'search': 'serena',     # Code search
+            'find': 'serena',       # Finding operations
+            'navigate': 'serena'    # Navigation
+        }
+        
+        if operation_type in operation_server_map:
+            server = operation_server_map[operation_type]
+            intent_scores[server] = intent_scores.get(server, 0) + 2  # Higher weight
+        
+        # 3. TEST TYPE SPECIFIC ROUTING
+        test_type_map = {
+            'e2e': 'playwright',
+            'end-to-end': 'playwright',
+            'integration': 'playwright',
+            'browser': 'playwright',
+            'visual': 'playwright',
+            'performance': 'playwright',
+            'load': 'playwright',
+            'ui': 'playwright',
+            'functional': 'playwright',
+            'regression': 'playwright',
+            'cross-browser': 'playwright',
+            'unit': 'sequential',     # Complex unit test analysis
+            'security': 'sequential', # Security test analysis
+            'api': 'sequential'       # API test analysis
+        }
+        
+        if test_type and test_type in test_type_map:
+            server = test_type_map[test_type]
+            intent_scores[server] = intent_scores.get(server, 0) + 3  # Highest weight
+        
+        # 4. TOOL-BASED MAPPING (Original logic enhanced)
         tool_server_mapping = {
-            'read_file': 'morphllm',
-            'write_file': 'morphllm', 
-            'edit_file': 'morphllm',
+            # File operations - context dependent
+            'read_file': None,  # Will be determined by context
+            'write_file': None, # Will be determined by context
+            'edit_file': None,  # Will be determined by context
+            
+            # Analysis operations
             'analyze_architecture': 'sequential',
             'complex_reasoning': 'sequential',
             'debug_analysis': 'sequential',
+            'system_analysis': 'sequential',
+            'performance_analysis': 'sequential',
+            
+            # UI operations
             'create_component': 'magic',
             'ui_component': 'magic',
             'design_system': 'magic',
+            'build_ui': 'magic',
+            'frontend_generation': 'magic',
+            
+            # Testing operations
             'browser_test': 'playwright',
             'e2e_test': 'playwright',
             'performance_test': 'playwright',
+            'visual_test': 'playwright',
+            'cross_browser_test': 'playwright',
+            
+            # Documentation operations
             'get_documentation': 'context7',
             'library_docs': 'context7',
             'framework_patterns': 'context7',
+            'api_reference': 'context7',
+            'best_practices': 'context7',
+            
+            # Semantic operations
             'semantic_analysis': 'serena',
             'project_context': 'serena',
-            'memory_management': 'serena'
+            'memory_management': 'serena',
+            'symbol_search': 'serena',
+            'code_navigation': 'serena',
+            
+            # Fast editing operations
+            'fast_edit': 'morphllm',
+            'pattern_application': 'morphllm',
+            'batch_edit': 'morphllm',
+            'text_transformation': 'morphllm'
         }
         
         # Primary server selection based on tool
         primary_server = tool_server_mapping.get(tool_name)
-        
         if primary_server:
-            return primary_server
+            intent_scores[primary_server] = intent_scores.get(primary_server, 0) + 2
+        
+        # 5. COMPLEXITY AND SCALE ANALYSIS
+        
+        # High complexity → Sequential for analysis
+        if complexity_score > 0.6:
+            intent_scores['sequential'] = intent_scores.get('sequential', 0) + 2
+        
+        # Large file count → Serena for project context
+        if file_count > 10:
+            intent_scores['serena'] = intent_scores.get('serena', 0) + 2
+        elif file_count > 5:
+            intent_scores['serena'] = intent_scores.get('serena', 0) + 1
+        
+        # Small operations → Morphllm for efficiency
+        if file_count <= 3 and complexity_score <= 0.4:
+            intent_scores['morphllm'] = intent_scores.get('morphllm', 0) + 1
+        
+        # External dependencies → Context7 for documentation
+        if has_external_deps:
+            intent_scores['context7'] = intent_scores.get('context7', 0) + 1
+        
+        # 6. CONTEXTUAL FALLBACK LOGIC
+        
+        # Check for file operation context-dependent routing
+        if tool_name in ['read_file', 'write_file', 'edit_file']:
+            # Route based on context
+            if any(keyword in user_intent for keyword in ui_keywords):
+                intent_scores['magic'] = intent_scores.get('magic', 0) + 2
+            elif any(keyword in user_intent for keyword in test_keywords):
+                intent_scores['playwright'] = intent_scores.get('playwright', 0) + 2
+            elif complexity_score > 0.5 or file_count > 5:
+                intent_scores['serena'] = intent_scores.get('serena', 0) + 2
+            else:
+                intent_scores['morphllm'] = intent_scores.get('morphllm', 0) + 2
+        
+        # 7. SERVER SELECTION DECISION
+        
+        # Return server with highest score
+        if intent_scores:
+            best_server = max(intent_scores.items(), key=lambda x: x[1])[0]
             
-        # Context-based selection for unknown tools
-        if context.get('complexity', 'low') == 'high':
+            # Validate server availability
+            if self.server_states.get(best_server) == MCPServerState.AVAILABLE:
+                return best_server
+        
+        # 8. INTELLIGENT FALLBACK CHAIN
+        
+        # Fallback based on context characteristics
+        if complexity_score > 0.7 or 'complex' in user_intent or 'analyze' in user_intent:
             return 'sequential'
-        elif context.get('type') == 'ui':
-            return 'magic' 
-        elif context.get('type') == 'browser':
+        elif any(keyword in user_intent for keyword in ui_keywords) or operation_type in ['create', 'build']:
+            return 'magic'
+        elif any(keyword in user_intent for keyword in test_keywords) or 'test' in operation_type:
             return 'playwright'
-        elif context.get('file_count', 1) > 10:
+        elif has_external_deps or any(keyword in user_intent for keyword in doc_keywords):
+            return 'context7'
+        elif file_count > 10 or any(keyword in user_intent for keyword in context_keywords):
             return 'serena'
         else:
-            return 'morphllm'  # Default fallback
+            return 'morphllm'  # Efficient default for simple operations
     
     def get_fallback_server(self, tool_name: str, context: Dict[str, Any]) -> str:
         """

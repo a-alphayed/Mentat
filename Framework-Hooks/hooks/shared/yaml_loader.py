@@ -289,6 +289,131 @@ class UnifiedConfigLoader:
                         config = included_config
         
         return config
+    
+    def get_intelligence_config(self, intelligence_type: str, section_path: str = None, default: Any = None) -> Any:
+        """
+        Get intelligence configuration from YAML patterns.
+        
+        Args:
+            intelligence_type: Type of intelligence config (e.g., 'intelligence_patterns', 'mcp_orchestration')
+            section_path: Optional dot-separated path within intelligence config
+            default: Default value if not found
+            
+        Returns:
+            Intelligence configuration or specific section
+        """
+        try:
+            config = self.load_config(intelligence_type)
+            
+            if section_path:
+                result = config
+                for key in section_path.split('.'):
+                    result = result[key]
+                return result
+            else:
+                return config
+                
+        except (FileNotFoundError, KeyError, TypeError):
+            return default
+    
+    def get_pattern_dimensions(self) -> Dict[str, Any]:
+        """Get pattern recognition dimensions from intelligence patterns."""
+        return self.get_intelligence_config(
+            'intelligence_patterns', 
+            'learning_intelligence.pattern_recognition.dimensions', 
+            {'primary': ['context_type', 'complexity_score', 'operation_type'], 'secondary': []}
+        )
+    
+    def get_mcp_orchestration_rules(self) -> Dict[str, Any]:
+        """Get MCP server orchestration rules."""
+        return self.get_intelligence_config(
+            'mcp_orchestration', 
+            'server_selection.decision_tree', 
+            []
+        )
+    
+    def get_hook_coordination_patterns(self) -> Dict[str, Any]:
+        """Get hook coordination execution patterns."""
+        return self.get_intelligence_config(
+            'hook_coordination', 
+            'execution_patterns', 
+            {}
+        )
+    
+    def get_performance_zones(self) -> Dict[str, Any]:
+        """Get performance management resource zones."""
+        return self.get_intelligence_config(
+            'performance_intelligence',
+            'resource_management.resource_zones',
+            {}
+        )
+    
+    def get_validation_health_config(self) -> Dict[str, Any]:
+        """Get validation and health scoring configuration."""
+        return self.get_intelligence_config(
+            'validation_intelligence',
+            'health_scoring',
+            {}
+        )
+    
+    def get_ux_project_patterns(self) -> Dict[str, Any]:
+        """Get user experience project detection patterns."""
+        return self.get_intelligence_config(
+            'user_experience',
+            'project_detection.detection_patterns',
+            {}
+        )
+    
+    def get_intelligence_summary(self) -> Dict[str, Any]:
+        """Get summary of all available intelligence configurations."""
+        intelligence_types = [
+            'intelligence_patterns',
+            'mcp_orchestration', 
+            'hook_coordination',
+            'performance_intelligence',
+            'validation_intelligence',
+            'user_experience'
+        ]
+        
+        summary = {}
+        for intelligence_type in intelligence_types:
+            try:
+                config = self.load_config(intelligence_type)
+                summary[intelligence_type] = {
+                    'loaded': True,
+                    'version': config.get('version', 'unknown'),
+                    'last_updated': config.get('last_updated', 'unknown'),
+                    'sections': list(config.keys()) if isinstance(config, dict) else []
+                }
+            except Exception:
+                summary[intelligence_type] = {
+                    'loaded': False,
+                    'error': 'Failed to load configuration'
+                }
+        
+        return summary
+    
+    def reload_intelligence_configs(self) -> Dict[str, bool]:
+        """Force reload all intelligence configurations and return status."""
+        intelligence_types = [
+            'intelligence_patterns',
+            'mcp_orchestration', 
+            'hook_coordination',
+            'performance_intelligence',
+            'validation_intelligence',
+            'user_experience'
+        ]
+        
+        reload_status = {}
+        for intelligence_type in intelligence_types:
+            try:
+                self.load_config(intelligence_type, force_reload=True)
+                reload_status[intelligence_type] = True
+            except Exception as e:
+                reload_status[intelligence_type] = False
+                print(f"Warning: Could not reload {intelligence_type}: {e}")
+        
+        return reload_status
 
 
 # Global instance for shared use across hooks

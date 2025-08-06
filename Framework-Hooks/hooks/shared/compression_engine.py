@@ -69,7 +69,12 @@ class CompressionEngine:
     """
     
     def __init__(self):
-        self.config = config_loader.load_config('compression')
+        try:
+            self.config = config_loader.load_config('compression')
+        except Exception as e:
+            # Fallback to default configuration if config loading fails
+            self.config = {'compression_levels': {}, 'selective_compression': {}}
+            
         self.symbol_mappings = self._load_symbol_mappings()
         self.abbreviation_mappings = self._load_abbreviation_mappings()
         self.compression_cache = {}
@@ -371,9 +376,9 @@ class CompressionEngine:
         """Create compression strategy based on level and content type."""
         level_configs = {
             CompressionLevel.MINIMAL: {
-                'symbol_systems': False,
+                'symbol_systems': True,  # Changed: Enable basic optimizations even for minimal
                 'abbreviations': False,
-                'structural': False,
+                'structural': True,  # Changed: Enable basic structural optimization
                 'quality_threshold': 0.98
             },
             CompressionLevel.EFFICIENT: {
@@ -420,63 +425,92 @@ class CompressionEngine:
     
     def _apply_symbol_systems(self, content: str) -> Tuple[str, List[str]]:
         """Apply symbol system replacements."""
+        if not content or not isinstance(content, str):
+            return content or "", []
+            
         compressed = content
         techniques = []
         
-        # Apply symbol mappings with word boundary protection
-        for phrase, symbol in self.symbol_mappings.items():
-            pattern = r'\b' + re.escape(phrase) + r'\b'
-            if re.search(pattern, compressed, re.IGNORECASE):
-                compressed = re.sub(pattern, symbol, compressed, flags=re.IGNORECASE)
-                techniques.append(f"symbol_{phrase.replace(' ', '_')}")
+        try:
+            # Apply symbol mappings with word boundary protection
+            for phrase, symbol in self.symbol_mappings.items():
+                if not phrase or not symbol:
+                    continue
+                    
+                pattern = r'\b' + re.escape(phrase) + r'\b'
+                if re.search(pattern, compressed, re.IGNORECASE):
+                    compressed = re.sub(pattern, symbol, compressed, flags=re.IGNORECASE)
+                    techniques.append(f"symbol_{phrase.replace(' ', '_')}")
+        except Exception as e:
+            # If regex fails, return original content
+            return content, []
         
         return compressed, techniques
     
     def _apply_abbreviation_systems(self, content: str) -> Tuple[str, List[str]]:
         """Apply abbreviation system replacements."""
+        if not content or not isinstance(content, str):
+            return content or "", []
+            
         compressed = content
         techniques = []
         
-        # Apply abbreviation mappings with context awareness
-        for phrase, abbrev in self.abbreviation_mappings.items():
-            pattern = r'\b' + re.escape(phrase) + r'\b'
-            if re.search(pattern, compressed, re.IGNORECASE):
-                compressed = re.sub(pattern, abbrev, compressed, flags=re.IGNORECASE)
-                techniques.append(f"abbrev_{phrase.replace(' ', '_')}")
+        try:
+            # Apply abbreviation mappings with context awareness
+            for phrase, abbrev in self.abbreviation_mappings.items():
+                if not phrase or not abbrev:
+                    continue
+                    
+                pattern = r'\b' + re.escape(phrase) + r'\b'
+                if re.search(pattern, compressed, re.IGNORECASE):
+                    compressed = re.sub(pattern, abbrev, compressed, flags=re.IGNORECASE)
+                    techniques.append(f"abbrev_{phrase.replace(' ', '_')}")
+        except Exception as e:
+            # If regex fails, return original content
+            return content, []
         
         return compressed, techniques
     
     def _apply_structural_optimization(self, content: str, level: CompressionLevel) -> Tuple[str, List[str]]:
         """Apply structural optimizations for token efficiency."""
+        if not content or not isinstance(content, str):
+            return content or "", []
+            
         compressed = content
         techniques = []
         
-        # Remove redundant whitespace
-        compressed = re.sub(r'\s+', ' ', compressed)
-        compressed = re.sub(r'\n\s*\n', '\n', compressed)
-        techniques.append('whitespace_optimization')
+        try:
+            # Always remove redundant whitespace for any level
+            if re.search(r'\s{2,}|\n\s*\n', compressed):
+                compressed = re.sub(r'\s+', ' ', compressed)
+                compressed = re.sub(r'\n\s*\n', '\n', compressed)
+                techniques.append('whitespace_optimization')
         
-        # Aggressive optimizations for higher compression levels
-        if level in [CompressionLevel.COMPRESSED, CompressionLevel.CRITICAL, CompressionLevel.EMERGENCY]:
-            # Remove redundant words
-            compressed = re.sub(r'\b(the|a|an)\s+', '', compressed, flags=re.IGNORECASE)
-            techniques.append('article_removal')
-            
-            # Simplify common phrases
-            phrase_simplifications = {
-                r'in order to': 'to',
-                r'it is important to note that': 'note:',
-                r'please be aware that': 'note:',
-                r'it should be noted that': 'note:',
-                r'for the purpose of': 'for',
-                r'with regard to': 'regarding',
-                r'in relation to': 'regarding'
-            }
-            
-            for pattern, replacement in phrase_simplifications.items():
-                if re.search(pattern, compressed, re.IGNORECASE):
-                    compressed = re.sub(pattern, replacement, compressed, flags=re.IGNORECASE)
-                    techniques.append(f'phrase_simplification_{replacement}')
+            # Phrase simplification for compressed levels and above
+            if level in [CompressionLevel.COMPRESSED, CompressionLevel.CRITICAL, CompressionLevel.EMERGENCY]:
+                # Simplify common phrases FIRST
+                phrase_simplifications = {
+                    r'in order to': 'to',
+                    r'it is important to note that': 'note:',
+                    r'please be aware that': 'note:',
+                    r'it should be noted that': 'note:',
+                    r'for the purpose of': 'for',
+                    r'with regard to': 'regarding',
+                    r'in relation to': 'regarding'
+                }
+                
+                for pattern, replacement in phrase_simplifications.items():
+                    if re.search(pattern, compressed, re.IGNORECASE):
+                        compressed = re.sub(pattern, replacement, compressed, flags=re.IGNORECASE)
+                        techniques.append('phrase_simplification')
+                
+                # Remove redundant words AFTER phrase simplification
+                if re.search(r'\b(the|a|an)\s+', compressed, re.IGNORECASE):
+                    compressed = re.sub(r'\b(the|a|an)\s+', '', compressed, flags=re.IGNORECASE)
+                    techniques.append('article_removal')
+        except Exception as e:
+            # If regex fails, return original content
+            return content, []
         
         return compressed, techniques
     
@@ -504,17 +538,79 @@ class CompressionEngine:
     
     def _calculate_information_preservation(self, original: str, compressed: str) -> float:
         """Calculate information preservation score."""
-        # Simple preservation metric based on key information retention
+        # Enhanced preservation metric based on multiple factors
         
-        # Extract key concepts (capitalized words, technical terms)
-        original_concepts = set(re.findall(r'\b[A-Z][a-z]+\b|\b\w+\.(js|py|md|yaml|json)\b', original))
-        compressed_concepts = set(re.findall(r'\b[A-Z][a-z]+\b|\b\w+\.(js|py|md|yaml|json)\b', compressed))
+        # Extract key concepts (capitalized words, technical terms, file extensions)  
+        original_concepts = set(re.findall(r'\b[A-Z][a-z]+\b|\b\w+\.(js|py|md|yaml|json)\b|\b\w*[A-Z]\w*\b', original))
+        compressed_concepts = set(re.findall(r'\b[A-Z][a-z]+\b|\b\w+\.(js|py|md|yaml|json)\b|\b\w*[A-Z]\w*\b', compressed))
         
-        if not original_concepts:
-            return 1.0
+        # Also check for symbols that represent preserved concepts
+        symbol_mappings = {
+            '→': ['leads', 'implies', 'transforms', 'converts'],
+            '⚡': ['performance', 'optimization', 'speed'],
+            '🛡️': ['security', 'protection', 'safety'],
+            '❌': ['error', 'failed', 'exception'],
+            '⚠️': ['warning', 'caution'],
+            '🔍': ['analysis', 'investigation', 'search'],
+            '🔧': ['configuration', 'setup', 'tools'],
+            '📦': ['deployment', 'package', 'bundle'],
+            '🎨': ['design', 'frontend', 'ui'],
+            '🌐': ['network', 'web', 'connectivity'],
+            '📱': ['mobile', 'responsive'],
+            '🏗️': ['architecture', 'structure'],
+            '🧩': ['components', 'modular']
+        }
         
-        preservation_ratio = len(compressed_concepts & original_concepts) / len(original_concepts)
-        return preservation_ratio
+        # Count preserved concepts through symbols
+        symbol_preserved_concepts = set()
+        for symbol, related_words in symbol_mappings.items():
+            if symbol in compressed:
+                for word in related_words:
+                    if word in original.lower():
+                        symbol_preserved_concepts.add(word)
+        
+        # Extract important words (longer than 4 characters, not common words)
+        common_words = {'this', 'that', 'with', 'have', 'will', 'been', 'from', 'they', 
+                       'know', 'want', 'good', 'much', 'some', 'time', 'very', 'when', 
+                       'come', 'here', 'just', 'like', 'long', 'make', 'many', 'over', 
+                       'such', 'take', 'than', 'them', 'well', 'were', 'through'}
+        original_words = set(word.lower() for word in re.findall(r'\b\w{4,}\b', original) 
+                           if word.lower() not in common_words)
+        compressed_words = set(word.lower() for word in re.findall(r'\b\w{4,}\b', compressed) 
+                             if word.lower() not in common_words)
+        
+        # Add symbol-preserved concepts to compressed words
+        compressed_words.update(symbol_preserved_concepts)
+        
+        # Calculate concept preservation
+        if original_concepts:
+            concept_preservation = len(compressed_concepts & original_concepts) / len(original_concepts)
+        else:
+            concept_preservation = 1.0
+            
+        # Calculate important word preservation  
+        if original_words:
+            word_preservation = len(compressed_words & original_words) / len(original_words)
+        else:
+            word_preservation = 1.0
+            
+        # Weight concept preservation more heavily, but be more generous
+        total_preservation = (concept_preservation * 0.6) + (word_preservation * 0.4)
+        
+        # Bonus for symbol usage that preserves meaning
+        symbol_bonus = min(len(symbol_preserved_concepts) * 0.05, 0.15)
+        total_preservation += symbol_bonus
+        
+        # Apply length penalty for over-compression
+        length_ratio = len(compressed) / len(original) if len(original) > 0 else 1.0
+        if length_ratio < 0.2:  # Heavily penalize extreme over-compression
+            total_preservation *= 0.6
+        elif length_ratio < 0.4:  # Penalize significant over-compression
+            total_preservation *= 0.8
+        elif length_ratio < 0.5:  # Moderate penalty for over-compression
+            total_preservation *= 0.9
+            
+        return min(total_preservation, 1.0)
     
     def get_compression_recommendations(self, context: Dict[str, Any]) -> Dict[str, Any]:
         """Get recommendations for optimizing compression."""

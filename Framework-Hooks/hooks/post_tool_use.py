@@ -545,6 +545,15 @@ class PostToolUseHook:
             {'hook': 'post_tool_use', 'effectiveness': overall_effectiveness}
         )
         
+        # Track tool preference if execution was successful
+        if context.get('success') and overall_effectiveness > 0.7:
+            operation_type = self._categorize_operation(context['tool_name'])
+            if operation_type:
+                self.learning_engine.update_last_preference(
+                    f"tool_{operation_type}",
+                    context['tool_name']
+                )
+        
         # Record MCP server effectiveness
         for server in context.get('mcp_servers_used', []):
             self.learning_engine.record_learning_event(
@@ -621,6 +630,9 @@ class PostToolUseHook:
         execution_time = context.get('execution_time_ms', 0)
         time_ratio = execution_time / max(self.performance_target_ms, 1)
         time_penalty = min(time_ratio, 1.0)
+        
+        # Initialize error penalty (no penalty when no error occurs)
+        error_penalty = 1.0
         
         # Adjust for error occurrence
         if context.get('error_occurred'):
@@ -736,6 +748,22 @@ class PostToolUseHook:
                 pattern_analysis['description'] = f"Error pattern detected: {error_type}"
         
         return pattern_analysis
+    
+    def _categorize_operation(self, tool_name: str) -> Optional[str]:
+        """Categorize tool into operation type for preference tracking."""
+        operation_map = {
+            'read': ['Read', 'Get', 'List', 'Search', 'Find'],
+            'write': ['Write', 'Create', 'Generate'],
+            'edit': ['Edit', 'Update', 'Modify', 'Replace'],
+            'analyze': ['Analyze', 'Validate', 'Check', 'Test'],
+            'mcp': ['Context7', 'Sequential', 'Magic', 'Playwright', 'Morphllm', 'Serena']
+        }
+        
+        for operation_type, tools in operation_map.items():
+            if any(tool in tool_name for tool in tools):
+                return operation_type
+        
+        return None
 
 
 def main():

@@ -3,8 +3,8 @@
 
 # Core Logging Settings
 logging:
-  enabled: true
-  level: "INFO"  # ERROR, WARNING, INFO, DEBUG
+  enabled: false
+  level: "ERROR"  # ERROR, WARNING, INFO, DEBUG
   
   # File Settings
   file_settings:
@@ -14,10 +14,10 @@ logging:
     
   # Hook Logging Settings
   hook_logging:
-    log_lifecycle: true  # Log hook start/end events
-    log_decisions: true  # Log decision points
-    log_errors: true     # Log error events
-    log_timing: true     # Include timing information
+    log_lifecycle: false  # Log hook start/end events
+    log_decisions: false  # Log decision points
+    log_errors: false     # Log error events
+    log_timing: false     # Include timing information
     
   # Performance Settings
   performance:
@@ -65,6 +65,6 @@ hook_configuration:
 
 # Development Settings
 development:
-  verbose_errors: true
+  verbose_errors: false
   include_stack_traces: false  # Keep logs clean
   debug_mode: false

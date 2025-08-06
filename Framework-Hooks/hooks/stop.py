@@ -75,6 +75,9 @@ class StopHook:
         self.initialization_time = (time.time() - start_time) * 1000
         self.performance_target_ms = config_loader.get_hook_config('stop', 'performance_target_ms', 200)
         
+        # Store cache directory reference
+        self._cache_dir = cache_dir
+        
     def process_session_stop(self, session_data: dict) -> dict:
         """
         Process session stop with analytics and persistence.
@@ -188,21 +191,108 @@ class StopHook:
             # Graceful fallback on error
             return self._create_fallback_report(session_data, str(e))
     
+    def _get_current_session_id(self) -> str:
+        """Get current session ID from cache."""
+        try:
+            session_id_file = self._cache_dir / "session_id"
+            if session_id_file.exists():
+                return session_id_file.read_text().strip()
+        except Exception:
+            pass
+        return ""
+    
+    def _parse_session_activity(self, session_id: str) -> dict:
+        """Parse session activity from log files."""
+        tools_used = set()
+        operations_count = 0
+        mcp_tools_used = set()
+        
+        if not session_id:
+            return {
+                "operations_completed": 0,
+                "tools_utilized": [],
+                "unique_tools_count": 0,
+                "mcp_tools_used": []
+            }
+        
+        # Parse current log file
+        log_file_path = self._cache_dir / "logs" / f"superclaude-lite-{time.strftime('%Y-%m-%d')}.log"
+        
+        try:
+            if log_file_path.exists():
+                with open(log_file_path, 'r') as f:
+                    for line in f:
+                        try:
+                            log_entry = json.loads(line.strip())
+                            
+                            # Only process entries for current session
+                            if log_entry.get('session') != session_id:
+                                continue
+                            
+                            # Count operations from pre_tool_use hook
+                            if (log_entry.get('hook') == 'pre_tool_use' and 
+                                log_entry.get('event') == 'start'):
+                                operations_count += 1
+                                tool_name = log_entry.get('data', {}).get('tool_name', '')
+                                if tool_name:
+                                    tools_used.add(tool_name)
+                                    # Track MCP tools separately
+                                    if tool_name.startswith('mcp__'):
+                                        mcp_tools_used.add(tool_name)
+                        
+                        except (json.JSONDecodeError, KeyError):
+                            # Skip malformed log entries
+                            continue
+        
+        except Exception as e:
+            # Log error but don't fail
+            log_error("stop", f"Failed to parse session activity: {str(e)}", {"session_id": session_id})
+        
+        return {
+            "operations_completed": operations_count,
+            "tools_utilized": list(tools_used),
+            "unique_tools_count": len(tools_used),
+            "mcp_tools_used": list(mcp_tools_used)
+        }
+    
     def _extract_session_context(self, session_data: dict) -> dict:
         """Extract and enrich session context."""
+        # Get current session ID
+        current_session_id = self._get_current_session_id()
+        
+        # Try to load session context from current session file
+        session_context = {}
+        if current_session_id:
+            session_file_path = self._cache_dir / f"session_{current_session_id}.json"
+            try:
+                if session_file_path.exists():
+                    with open(session_file_path, 'r') as f:
+                        session_context = json.load(f)
+            except Exception as e:
+                # Log error but continue with fallback
+                log_error("stop", f"Failed to load session context: {str(e)}", {"session_id": current_session_id})
+        
+        # Parse session activity from logs
+        activity_data = self._parse_session_activity(current_session_id)
+        
+        # Create context with session file data (if available) or fallback to session_data
         context = {
-            'session_id': session_data.get('session_id', ''),
-            'session_duration_ms': session_data.get('duration_ms', 0),
-            'session_start_time': session_data.get('start_time', 0),
+            'session_id': session_context.get('session_id', current_session_id or session_data.get('session_id', '')),
+            'session_duration_ms': session_data.get('duration_ms', 0),  # This comes from hook system
+            'session_start_time': session_context.get('initialization_timestamp', session_data.get('start_time', 0)),
             'session_end_time': time.time(),
-            'operations_performed': session_data.get('operations', []),
-            'tools_used': session_data.get('tools_used', []),
-            'mcp_servers_activated': session_data.get('mcp_servers', []),
+            'operations_performed': activity_data.get('tools_utilized', []),  # Actual tools used from logs
+            'tools_used': activity_data.get('tools_utilized', []),  # Actual tools used from logs
+            'mcp_servers_activated': session_context.get('mcp_servers', {}).get('enabled_servers', []),
             'errors_encountered': session_data.get('errors', []),
             'user_interactions': session_data.get('user_interactions', []),
             'resource_usage': session_data.get('resource_usage', {}),
             'quality_metrics': session_data.get('quality_metrics', {}),
-            'superclaude_enabled': session_data.get('superclaude_enabled', False)
+            'superclaude_enabled': session_context.get('superclaude_enabled', False),
+            # Add parsed activity metrics
+            'operation_count': activity_data.get('operations_completed', 0),
+            'unique_tools_count': activity_data.get('unique_tools_count', 0),
+            'mcp_tools_used': activity_data.get('mcp_tools_used', [])
         }
         
         # Calculate derived metrics

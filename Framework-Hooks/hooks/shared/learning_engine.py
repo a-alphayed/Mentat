@@ -14,6 +14,7 @@ from enum import Enum
 from pathlib import Path
 
 from yaml_loader import config_loader
+from intelligence_engine import IntelligenceEngine
 
 
 class LearningType(Enum):
@@ -92,43 +93,91 @@ class LearningEngine:
         self.user_preferences: Dict[str, Any] = {}
         self.project_patterns: Dict[str, Dict[str, Any]] = {}
         
+        # Initialize intelligence engine for YAML pattern integration
+        self.intelligence_engine = IntelligenceEngine()
+        
         self._load_learning_data()
         
     def _load_learning_data(self):
-        """Load existing learning data from cache."""
+        """Load existing learning data from cache with robust error handling."""
+        # Initialize empty data structures first
+        self.learning_records = []
+        self.adaptations = {}
+        self.user_preferences = {}
+        self.project_patterns = {}
+        
         try:
-            # Load learning records
+            # Load learning records with corruption detection
             records_file = self.cache_dir / "learning_records.json"
             if records_file.exists():
-                with open(records_file, 'r') as f:
-                    data = json.load(f)
-                    self.learning_records = [
-                        LearningRecord(**record) for record in data
-                    ]
+                try:
+                    with open(records_file, 'r') as f:
+                        content = f.read().strip()
+                        if not content:
+                            # Empty file, initialize with empty array
+                            self._initialize_empty_records_file(records_file)
+                        elif content == '[]':
+                            # Valid empty array
+                            self.learning_records = []
+                        else:
+                            # Try to parse JSON
+                            data = json.loads(content)
+                            if isinstance(data, list):
+                                self.learning_records = [
+                                    LearningRecord(**record) for record in data
+                                    if self._validate_learning_record(record)
+                                ]
+                            else:
+                                # Invalid format, reinitialize
+                                self._initialize_empty_records_file(records_file)
+                except (json.JSONDecodeError, TypeError, ValueError) as e:
+                    # JSON corruption detected, reinitialize
+                    print(f"Learning records corrupted, reinitializing: {e}")
+                    self._initialize_empty_records_file(records_file)
+            else:
+                # File doesn't exist, create it
+                self._initialize_empty_records_file(records_file)
             
-            # Load adaptations
+            # Load adaptations with error handling
             adaptations_file = self.cache_dir / "adaptations.json"
             if adaptations_file.exists():
-                with open(adaptations_file, 'r') as f:
-                    data = json.load(f)
-                    self.adaptations = {
-                        k: Adaptation(**v) for k, v in data.items()
-                    }
+                try:
+                    with open(adaptations_file, 'r') as f:
+                        data = json.load(f)
+                        if isinstance(data, dict):
+                            self.adaptations = {
+                                k: Adaptation(**v) for k, v in data.items()
+                                if self._validate_adaptation_data(v)
+                            }
+                except (json.JSONDecodeError, TypeError, ValueError):
+                    # Corrupted adaptations file, start fresh
+                    self.adaptations = {}
             
-            # Load user preferences
+            # Load user preferences with error handling
             preferences_file = self.cache_dir / "user_preferences.json"
             if preferences_file.exists():
-                with open(preferences_file, 'r') as f:
-                    self.user_preferences = json.load(f)
+                try:
+                    with open(preferences_file, 'r') as f:
+                        data = json.load(f)
+                        if isinstance(data, dict):
+                            self.user_preferences = data
+                except (json.JSONDecodeError, TypeError, ValueError):
+                    self.user_preferences = {}
             
-            # Load project patterns
+            # Load project patterns with error handling
             patterns_file = self.cache_dir / "project_patterns.json"
             if patterns_file.exists():
-                with open(patterns_file, 'r') as f:
-                    self.project_patterns = json.load(f)
+                try:
+                    with open(patterns_file, 'r') as f:
+                        data = json.load(f)
+                        if isinstance(data, dict):
+                            self.project_patterns = data
+                except (json.JSONDecodeError, TypeError, ValueError):
+                    self.project_patterns = {}
                     
         except Exception as e:
-            # Initialize empty data on error
+            # Final fallback - ensure all data structures are initialized
+            print(f"Error loading learning data, using defaults: {e}")
             self.learning_records = []
             self.adaptations = {}
             self.user_preferences = {}
@@ -159,6 +208,18 @@ class LearningEngine:
         """
         if metadata is None:
             metadata = {}
+        
+        # Validate effectiveness score bounds
+        if not (0.0 <= effectiveness_score <= 1.0):
+            raise ValueError(f"Effectiveness score must be between 0.0 and 1.0, got: {effectiveness_score}")
+        
+        # Validate confidence bounds  
+        if not (0.0 <= confidence <= 1.0):
+            raise ValueError(f"Confidence must be between 0.0 and 1.0, got: {confidence}")
+        
+        # Flag suspicious perfect score sequences (potential overfitting)
+        if effectiveness_score == 1.0:
+            metadata['perfect_score_flag'] = True
         
         record = LearningRecord(
             timestamp=time.time(),
@@ -215,32 +276,40 @@ class LearningEngine:
             self.adaptations[pattern_signature] = adaptation
     
     def _generate_pattern_signature(self, pattern: Dict[str, Any], context: Dict[str, Any]) -> str:
-        """Generate a unique signature for a pattern."""
-        # Create a simplified signature based on key pattern elements
+        """Generate a unique signature for a pattern using YAML intelligence patterns."""
+        # Get pattern dimensions from YAML intelligence patterns
+        intelligence_patterns = self.intelligence_engine.evaluate_context(context, 'intelligence_patterns')
+        pattern_dimensions = intelligence_patterns.get('recommendations', {}).get('pattern_dimensions', [])
+        
+        # If no YAML dimensions available, use fallback dimensions
+        if not pattern_dimensions:
+            pattern_dimensions = ['context_type', 'complexity_score', 'operation_type', 'performance_score']
+        
         key_elements = []
         
-        # Pattern type
-        if 'type' in pattern:
-            key_elements.append(f"type:{pattern['type']}")
+        # Use YAML-defined dimensions for signature generation
+        for dimension in pattern_dimensions:
+            if dimension in context:
+                value = context[dimension]
+                # Bucket numeric values for better grouping
+                if isinstance(value, (int, float)) and dimension in ['complexity_score', 'performance_score']:
+                    bucketed_value = int(value * 10) / 10  # Round to 0.1
+                    key_elements.append(f"{dimension}:{bucketed_value}")
+                elif isinstance(value, (int, float)) and dimension in ['file_count', 'directory_count']:
+                    bucketed_value = min(int(value), 10)  # Cap at 10 for grouping
+                    key_elements.append(f"{dimension}:{bucketed_value}")
+                else:
+                    key_elements.append(f"{dimension}:{value}")
+            elif dimension in pattern:
+                key_elements.append(f"{dimension}:{pattern[dimension]}")
         
-        # Context elements
-        if 'operation_type' in context:
-            key_elements.append(f"op:{context['operation_type']}")
-        
-        if 'complexity_score' in context:
-            complexity_bucket = int(context['complexity_score'] * 10) / 10  # Round to 0.1
-            key_elements.append(f"complexity:{complexity_bucket}")
-        
-        if 'file_count' in context:
-            file_bucket = min(context['file_count'], 10)  # Cap at 10 for grouping
-            key_elements.append(f"files:{file_bucket}")
-        
-        # Pattern-specific elements
+        # Add pattern-specific elements
         for key in ['mcp_server', 'mode', 'compression_level', 'delegation_strategy']:
-            if key in pattern:
+            if key in pattern and key not in [d.split(':')[0] for d in key_elements]:
                 key_elements.append(f"{key}:{pattern[key]}")
         
-        return "_".join(sorted(key_elements))
+        signature = "_".join(sorted(key_elements))
+        return signature if signature else "unknown_pattern"
     
     def _extract_trigger_conditions(self, context: Dict[str, Any]) -> Dict[str, Any]:
         """Extract trigger conditions from context."""
@@ -330,17 +399,54 @@ class LearningEngine:
                          context: Dict[str, Any], 
                          base_recommendations: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Apply learned adaptations to enhance recommendations.
+        Apply learned adaptations enhanced with YAML intelligence patterns.
         
         Args:
             context: Current operation context
             base_recommendations: Base recommendations before adaptation
             
         Returns:
-            Enhanced recommendations with learned adaptations applied
+            Enhanced recommendations with learned adaptations and YAML intelligence applied
         """
-        relevant_adaptations = self.get_adaptations_for_context(context)
+        # Get YAML intelligence recommendations first
+        mcp_intelligence = self.intelligence_engine.evaluate_context(context, 'mcp_orchestration')
+        ux_intelligence = self.intelligence_engine.evaluate_context(context, 'user_experience')
+        performance_intelligence = self.intelligence_engine.evaluate_context(context, 'performance_intelligence')
+        
+        # Start with base recommendations and add YAML intelligence
         enhanced_recommendations = base_recommendations.copy()
+        
+        # Integrate YAML-based MCP recommendations
+        mcp_recs = mcp_intelligence.get('recommendations', {})
+        if mcp_recs.get('primary_server'):
+            if 'recommended_mcp_servers' not in enhanced_recommendations:
+                enhanced_recommendations['recommended_mcp_servers'] = []
+            servers = enhanced_recommendations['recommended_mcp_servers']
+            if mcp_recs['primary_server'] not in servers:
+                servers.insert(0, mcp_recs['primary_server'])
+            
+            # Add support servers
+            for support_server in mcp_recs.get('support_servers', []):
+                if support_server not in servers:
+                    servers.append(support_server)
+        
+        # Integrate UX intelligence (project detection, smart defaults)
+        ux_recs = ux_intelligence.get('recommendations', {})
+        if ux_recs.get('suggested_servers'):
+            if 'recommended_mcp_servers' not in enhanced_recommendations:
+                enhanced_recommendations['recommended_mcp_servers'] = []
+            for server in ux_recs['suggested_servers']:
+                if server not in enhanced_recommendations['recommended_mcp_servers']:
+                    enhanced_recommendations['recommended_mcp_servers'].append(server)
+        
+        # Integrate performance optimizations
+        perf_recs = performance_intelligence.get('recommendations', {})
+        if perf_recs.get('optimizations'):
+            enhanced_recommendations['performance_optimizations'] = perf_recs['optimizations']
+            enhanced_recommendations['resource_zone'] = perf_recs.get('resource_zone', 'green')
+        
+        # Apply learned adaptations on top of YAML intelligence
+        relevant_adaptations = self.get_adaptations_for_context(context)
         
         for adaptation in relevant_adaptations:
             # Apply modifications from adaptation
@@ -571,34 +677,177 @@ class LearningEngine:
         return insights
     
     def _save_learning_data(self):
-        """Save learning data to cache files."""
+        """Save learning data to cache files with validation and atomic writes."""
         try:
-            # Save learning records
+            # Save learning records with validation
             records_file = self.cache_dir / "learning_records.json"
-            with open(records_file, 'w') as f:
-                json.dump([asdict(record) for record in self.learning_records], f, indent=2)
+            records_data = []
+            for record in self.learning_records:
+                try:
+                    # Convert record to dict and handle enums
+                    record_dict = asdict(record)
+                    
+                    # Convert enum values to strings for JSON serialization
+                    if isinstance(record_dict.get('learning_type'), LearningType):
+                        record_dict['learning_type'] = record_dict['learning_type'].value
+                    if isinstance(record_dict.get('scope'), AdaptationScope):
+                        record_dict['scope'] = record_dict['scope'].value
+                    
+                    # Validate the record
+                    if self._validate_learning_record_dict(record_dict):
+                        records_data.append(record_dict)
+                    else:
+                        print(f"Warning: Invalid record skipped: {record_dict}")
+                except Exception as e:
+                    print(f"Warning: Error processing record: {e}")
+                    continue  # Skip invalid records
             
-            # Save adaptations
+            # Atomic write to prevent corruption during write
+            temp_file = records_file.with_suffix('.tmp')
+            with open(temp_file, 'w') as f:
+                json.dump(records_data, f, indent=2)
+            temp_file.replace(records_file)
+            
+            # Save adaptations with validation
             adaptations_file = self.cache_dir / "adaptations.json"
-            with open(adaptations_file, 'w') as f:
-                json.dump({k: asdict(v) for k, v in self.adaptations.items()}, f, indent=2)
+            adaptations_data = {}
+            for k, v in self.adaptations.items():
+                try:
+                    adapt_dict = asdict(v)
+                    if self._validate_adaptation_data(adapt_dict):
+                        adaptations_data[k] = adapt_dict
+                except Exception:
+                    continue
+            
+            temp_file = adaptations_file.with_suffix('.tmp')
+            with open(temp_file, 'w') as f:
+                json.dump(adaptations_data, f, indent=2)
+            temp_file.replace(adaptations_file)
             
             # Save user preferences
             preferences_file = self.cache_dir / "user_preferences.json"
-            with open(preferences_file, 'w') as f:
-                json.dump(self.user_preferences, f, indent=2)
+            if isinstance(self.user_preferences, dict):
+                temp_file = preferences_file.with_suffix('.tmp')
+                with open(temp_file, 'w') as f:
+                    json.dump(self.user_preferences, f, indent=2)
+                temp_file.replace(preferences_file)
             
             # Save project patterns
             patterns_file = self.cache_dir / "project_patterns.json"
-            with open(patterns_file, 'w') as f:
-                json.dump(self.project_patterns, f, indent=2)
+            if isinstance(self.project_patterns, dict):
+                temp_file = patterns_file.with_suffix('.tmp')
+                with open(temp_file, 'w') as f:
+                    json.dump(self.project_patterns, f, indent=2)
+                temp_file.replace(patterns_file)
                 
         except Exception as e:
-            pass  # Silent fail for cache operations
+            print(f"Error saving learning data: {e}")
     
-    def cleanup_old_data(self, max_age_days: int = 30):
+    def _initialize_empty_records_file(self, records_file: Path):
+        """Initialize learning records file with empty array."""
+        try:
+            with open(records_file, 'w') as f:
+                json.dump([], f)
+        except Exception as e:
+            print(f"Error initializing records file: {e}")
+    
+    def _validate_learning_record(self, record_data: dict) -> bool:
+        """Validate learning record data structure."""
+        required_fields = ['timestamp', 'learning_type', 'scope', 'context', 'pattern', 'effectiveness_score', 'confidence', 'metadata']
+        try:
+            return all(field in record_data for field in required_fields)
+        except (TypeError, AttributeError):
+            return False
+    
+    def _validate_learning_record_dict(self, record_dict: dict) -> bool:
+        """Validate learning record dictionary before saving."""
+        try:
+            # Check required fields exist and have valid types
+            if not isinstance(record_dict.get('timestamp'), (int, float)):
+                return False
+            
+            # Handle both enum objects and string values for learning_type
+            learning_type = record_dict.get('learning_type')
+            if not (isinstance(learning_type, str) or isinstance(learning_type, LearningType)):
+                return False
+            
+            # Handle both enum objects and string values for scope
+            scope = record_dict.get('scope')
+            if not (isinstance(scope, str) or isinstance(scope, AdaptationScope)):
+                return False
+                
+            if not isinstance(record_dict.get('context'), dict):
+                return False
+            if not isinstance(record_dict.get('pattern'), dict):
+                return False
+            if not isinstance(record_dict.get('effectiveness_score'), (int, float)):
+                return False
+            if not isinstance(record_dict.get('confidence'), (int, float)):
+                return False
+            if not isinstance(record_dict.get('metadata'), dict):
+                return False
+            return True
+        except (TypeError, AttributeError):
+            return False
+    
+    def _validate_adaptation_data(self, adapt_data: dict) -> bool:
+        """Validate adaptation data structure."""
+        required_fields = ['adaptation_id', 'pattern_signature', 'trigger_conditions', 'modifications', 'effectiveness_history', 'usage_count', 'last_used', 'confidence_score']
+        try:
+            return all(field in adapt_data for field in required_fields)
+        except (TypeError, AttributeError):
+            return False
+    
+    def get_intelligent_recommendations(self, context: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Get comprehensive intelligent recommendations combining YAML patterns and learned adaptations.
+        
+        Args:
+            context: Current operation context
+            
+        Returns:
+            Comprehensive recommendations with intelligence from multiple sources
+        """
+        # Get base recommendations from all YAML intelligence patterns
+        base_recommendations = {}
+        
+        # Collect recommendations from all intelligence pattern types
+        pattern_types = ['mcp_orchestration', 'hook_coordination', 'performance_intelligence', 
+                        'validation_intelligence', 'user_experience', 'intelligence_patterns']
+        
+        intelligence_results = {}
+        for pattern_type in pattern_types:
+            try:
+                result = self.intelligence_engine.evaluate_context(context, pattern_type)
+                intelligence_results[pattern_type] = result
+                
+                # Merge recommendations
+                recommendations = result.get('recommendations', {})
+                for key, value in recommendations.items():
+                    if key not in base_recommendations:
+                        base_recommendations[key] = value
+                    elif isinstance(base_recommendations[key], list) and isinstance(value, list):
+                        # Merge lists without duplicates
+                        base_recommendations[key] = list(set(base_recommendations[key] + value))
+            except Exception as e:
+                print(f"Warning: Could not evaluate {pattern_type} patterns: {e}")
+        
+        # Apply learned adaptations on top of YAML intelligence
+        enhanced_recommendations = self.apply_adaptations(context, base_recommendations)
+        
+        # Add intelligence metadata
+        enhanced_recommendations['intelligence_metadata'] = {
+            'yaml_patterns_used': list(intelligence_results.keys()),
+            'adaptations_applied': len(self.get_adaptations_for_context(context)),
+            'confidence_scores': {k: v.get('confidence', 0.0) for k, v in intelligence_results.items()},
+            'recommendations_source': 'yaml_intelligence_plus_learned_adaptations'
+        }
+        
+        return enhanced_recommendations
+    
+    def cleanup_old_data(self, days_to_keep: int = 30):
         """Clean up old learning data to prevent cache bloat."""
-        cutoff_time = time.time() - (max_age_days * 24 * 60 * 60)
+        cutoff_time = time.time() - (days_to_keep * 24 * 60 * 60)
         
         # Remove old learning records
         self.learning_records = [
@@ -612,4 +861,31 @@ class LearningEngine:
             if v.last_used > cutoff_time or v.usage_count > 5
         }
         
+        self._save_learning_data()
+    
+    def update_last_preference(self, preference_key: str, value: Any):
+        """Simply store the last successful choice - no complex learning."""
+        if not self.user_preferences:
+            self.user_preferences = {}
+        self.user_preferences[preference_key] = {
+            "value": value,
+            "timestamp": time.time()
+        }
+        self._save_learning_data()
+    
+    def get_last_preference(self, preference_key: str, default=None):
+        """Get the last successful choice if available."""
+        if not self.user_preferences:
+            return default
+        pref = self.user_preferences.get(preference_key, {})
+        return pref.get("value", default)
+    
+    def update_project_info(self, project_path: str, info_type: str, value: Any):
+        """Store basic project information."""
+        if not self.project_patterns:
+            self.project_patterns = {}
+        if project_path not in self.project_patterns:
+            self.project_patterns[project_path] = {}
+        self.project_patterns[project_path][info_type] = value
+        self.project_patterns[project_path]["last_updated"] = time.time()
         self._save_learning_data()

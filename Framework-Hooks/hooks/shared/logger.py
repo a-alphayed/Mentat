@@ -60,8 +60,8 @@ class HookLogger:
             retention_days = self.config.get('logging', {}).get('file_settings', {}).get('retention_days', 30)
         self.retention_days = retention_days
         
-        # Session ID for correlating events
-        self.session_id = str(uuid.uuid4())[:8]
+        # Session ID for correlating events - shared across all hooks in the same Claude Code session
+        self.session_id = self._get_or_create_session_id()
         
         # Set up Python logger
         self._setup_logger()
@@ -104,6 +104,50 @@ class HookLogger:
                     }
                 }
             }
+    
+    def _get_or_create_session_id(self) -> str:
+        """
+        Get or create a shared session ID for correlation across all hooks.
+        
+        Checks in order:
+        1. Environment variable CLAUDE_SESSION_ID
+        2. Session file in cache directory
+        3. Generate new UUID and save to session file
+        
+        Returns:
+            8-character session ID string
+        """
+        # Check environment variable first
+        env_session_id = os.environ.get('CLAUDE_SESSION_ID')
+        if env_session_id:
+            return env_session_id[:8]  # Truncate to 8 characters for consistency
+        
+        # Check for session file in cache directory
+        cache_dir = self.log_dir.parent  # logs are in cache/logs, so parent is cache/
+        session_file = cache_dir / "session_id"
+        
+        try:
+            if session_file.exists():
+                session_id = session_file.read_text(encoding='utf-8').strip()
+                # Validate it's a reasonable session ID (8 chars, alphanumeric)
+                if len(session_id) == 8 and session_id.replace('-', '').isalnum():
+                    return session_id
+        except (IOError, OSError):
+            # If we can't read the file, generate a new one
+            pass
+        
+        # Generate new session ID and save it
+        new_session_id = str(uuid.uuid4())[:8]
+        try:
+            # Ensure cache directory exists
+            cache_dir.mkdir(parents=True, exist_ok=True)
+            session_file.write_text(new_session_id, encoding='utf-8')
+        except (IOError, OSError):
+            # If we can't write the file, just return the ID
+            # The session won't be shared, but at least this instance will work
+            pass
+        
+        return new_session_id
     
     def _setup_logger(self):
         """Set up the Python logger with JSON formatting."""
