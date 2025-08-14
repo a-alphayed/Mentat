@@ -36,6 +36,15 @@
       "enabled": true,
       "required_tools": ["uvx", "python3", "claude_cli"]
     },
+    "agents": {
+      "name": "agents",
+      "version": "4.0.0",
+      "description": "13 specialized AI agents with domain expertise and intelligent routing",
+      "category": "agents",
+      "dependencies": ["core"],
+      "enabled": true,
+      "required_tools": []
+    },
     "hooks": {
       "name": "hooks",
       "version": "2.0.0",

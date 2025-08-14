@@ -4,6 +4,7 @@
   "components": [
     "core",
     "commands",
+    "agents",
     "mcp"
   ],
   "features": {
