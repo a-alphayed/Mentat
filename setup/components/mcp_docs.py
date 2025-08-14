@@ -14,7 +14,9 @@ class MCPDocsComponent(Component):
     
     def __init__(self, install_dir: Optional[Path] = None):
         """Initialize MCP docs component"""
-        super().__init__(install_dir, Path(""))
+        # Initialize attributes before calling parent constructor
+        # because parent calls _discover_component_files() which needs these
+        self.selected_servers: List[str] = []
         
         # Map server names to documentation files
         self.server_docs_map = {
@@ -26,8 +28,7 @@ class MCPDocsComponent(Component):
             "morphllm": "MCP_Morphllm.md"
         }
         
-        # This will be set during installation - initialize as empty list
-        self.selected_servers: List[str] = []
+        super().__init__(install_dir, Path(""))
     
     def get_metadata(self) -> Dict[str, str]:
         """Get component metadata"""
