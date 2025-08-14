@@ -52,7 +52,7 @@ class MCPDocsComponent(Component):
         source_dir = self._get_source_dir()
         files = []
 
-        if source_dir and self.selected_servers:
+        if source_dir and hasattr(self, 'selected_servers') and self.selected_servers:
             for server_name in self.selected_servers:
                 if server_name in self.server_docs_map:
                     doc_file = self.server_docs_map[server_name]
@@ -71,7 +71,8 @@ class MCPDocsComponent(Component):
         Override parent method to dynamically discover files based on selected servers
         """
         files = []
-        if self.selected_servers:
+        # Check if selected_servers attribute exists and is not empty
+        if hasattr(self, 'selected_servers') and self.selected_servers:
             for server_name in self.selected_servers:
                 if server_name in self.server_docs_map:
                     files.append(self.server_docs_map[server_name])
@@ -211,7 +212,7 @@ class MCPDocsComponent(Component):
         source_dir = self._get_source_dir()
         total_size = 0
         
-        if source_dir and source_dir.exists() and self.selected_servers:
+        if source_dir and source_dir.exists() and hasattr(self, 'selected_servers') and self.selected_servers:
             for server_name in self.selected_servers:
                 if server_name in self.server_docs_map:
                     doc_file = self.server_docs_map[server_name]
