@@ -5,8 +5,8 @@ Modes component for SuperClaude behavioral modes
 from typing import Dict, List, Tuple, Optional, Any
 from pathlib import Path
 
-from ..base.component import Component
-from ..managers.claude_md_manager import CLAUDEMdManager
+from ..core.base import Component
+from ..services.claude_md import CLAUDEMdService
 
 
 class ModesComponent(Component):
@@ -80,7 +80,7 @@ class ModesComponent(Component):
             
             # Update CLAUDE.md with mode imports
             try:
-                manager = CLAUDEMdManager(self.install_dir)
+                manager = CLAUDEMdService(self.install_dir)
                 manager.add_imports(self.component_files, category="Behavioral Modes")
                 self.logger.info("Updated CLAUDE.md with mode imports")
             except Exception as e:

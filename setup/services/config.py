@@ -36,7 +36,7 @@ except ImportError:
         # Skip detailed validation if jsonschema not available
 
 
-class ConfigManager:
+class ConfigService:
     """Manages configuration files and validation"""
     
     def __init__(self, config_dir: Path):
@@ -181,7 +181,7 @@ class ConfigManager:
         except json.JSONDecodeError as e:
             raise ValidationError(f"Invalid JSON in {self.features_file}: {e}")
         except ValidationError as e:
-            raise ValidationError(f"Invalid features schema: {e.message}")
+            raise ValidationError(f"Invalid features schema: {str(e)}")
     
     def load_requirements(self) -> Dict[str, Any]:
         """
@@ -213,7 +213,7 @@ class ConfigManager:
         except json.JSONDecodeError as e:
             raise ValidationError(f"Invalid JSON in {self.requirements_file}: {e}")
         except ValidationError as e:
-            raise ValidationError(f"Invalid requirements schema: {e.message}")
+            raise ValidationError(f"Invalid requirements schema: {str(e)}")
     
     def get_component_info(self, component_name: str) -> Optional[Dict[str, Any]]:
         """

@@ -9,16 +9,16 @@ from pathlib import Path
 from typing import List, Optional, Dict, Any
 import argparse
 
-from ..base.installer import Installer
-from ..core.registry import ComponentRegistry
-from ..managers.config_manager import ConfigManager
-from ..core.validator import Validator
-from ..utils.ui import (
+from ...core.installer import Installer
+from ...core.registry import ComponentRegistry
+from ...services.config import ConfigService
+from ...core.validator import Validator
+from ...utils.ui import (
     display_header, display_info, display_success, display_error, 
     display_warning, Menu, confirm, ProgressBar, Colors, format_size
 )
-from ..utils.logger import get_logger
-from .. import DEFAULT_INSTALL_DIR, PROJECT_ROOT, CONFIG_DIR
+from ...utils.logger import get_logger
+from ... import DEFAULT_INSTALL_DIR, PROJECT_ROOT, DATA_DIR
 from . import OperationBase
 
 
@@ -87,7 +87,7 @@ def validate_system_requirements(validator: Validator, component_names: List[str
     
     try:
         # Load requirements configuration
-        config_manager = ConfigManager(CONFIG_DIR)
+        config_manager = ConfigService(DATA_DIR)
         requirements = config_manager.get_requirements_for_components(component_names)
         
         # Validate requirements
@@ -113,7 +113,7 @@ def validate_system_requirements(validator: Validator, component_names: List[str
         return False
 
 
-def get_components_to_install(args: argparse.Namespace, registry: ComponentRegistry, config_manager: ConfigManager) -> Optional[List[str]]:
+def get_components_to_install(args: argparse.Namespace, registry: ComponentRegistry, config_manager: ConfigService) -> Optional[List[str]]:
     """Determine which components to install"""
     logger = get_logger()
     
@@ -183,7 +183,7 @@ def select_mcp_servers(registry: ComponentRegistry) -> List[str]:
         return []
 
 
-def select_framework_components(registry: ComponentRegistry, config_manager: ConfigManager, selected_mcp_servers: List[str]) -> List[str]:
+def select_framework_components(registry: ComponentRegistry, config_manager: ConfigService, selected_mcp_servers: List[str]) -> List[str]:
     """Stage 2: Framework Component Selection"""
     logger = get_logger()
     
@@ -252,7 +252,7 @@ def select_framework_components(registry: ComponentRegistry, config_manager: Con
         return ["core"]  # Fallback to core
 
 
-def interactive_component_selection(registry: ComponentRegistry, config_manager: ConfigManager) -> Optional[List[str]]:
+def interactive_component_selection(registry: ComponentRegistry, config_manager: ConfigService) -> Optional[List[str]]:
     """Two-stage interactive component selection"""
     logger = get_logger()
     
@@ -373,7 +373,7 @@ def run_system_diagnostics(validator: Validator) -> None:
         print("  3. Run 'SuperClaude install --diagnose' again to verify")
 
 
-def perform_installation(components: List[str], args: argparse.Namespace, config_manager: ConfigManager = None) -> bool:
+def perform_installation(components: List[str], args: argparse.Namespace, config_manager: ConfigService = None) -> bool:
     """Perform the actual installation"""
     logger = get_logger()
     start_time = time.time()
@@ -461,14 +461,42 @@ def run(args: argparse.Namespace) -> int:
     operation = InstallOperation()
     operation.setup_operation_logging(args)
     logger = get_logger()
-    # ✅ Inserted validation code
+    # ✅ Enhanced security validation with symlink protection
     expected_home = Path.home().resolve()
-    actual_dir = args.install_dir.resolve()
+    install_dir_original = args.install_dir
+    install_dir_resolved = args.install_dir.resolve()
 
-    if not str(actual_dir).startswith(str(expected_home)):
+    # Check for symlink attacks - compare original vs resolved paths
+    try:
+        # Verify the resolved path is still within user home
+        install_dir_resolved.relative_to(expected_home)
+        
+        # Additional check: if there's a symlink in the path, verify it doesn't escape user home
+        if install_dir_original != install_dir_resolved:
+            # Path contains symlinks - verify each component stays within user home
+            current_path = expected_home
+            parts = install_dir_original.parts
+            home_parts = expected_home.parts
+            
+            # Skip home directory parts
+            if len(parts) >= len(home_parts) and parts[:len(home_parts)] == home_parts:
+                relative_parts = parts[len(home_parts):]
+                
+                for part in relative_parts:
+                    current_path = current_path / part
+                    if current_path.is_symlink():
+                        symlink_target = current_path.resolve()
+                        # Ensure symlink target is also within user home
+                        symlink_target.relative_to(expected_home)
+    except ValueError:
         print(f"\n[✗] Installation must be inside your user profile directory.")
         print(f"    Expected prefix: {expected_home}")
-        print(f"    Provided path:   {actual_dir}")
+        print(f"    Provided path:   {install_dir_resolved}")
+        print(f"    Security: Symlinks outside user directory are not allowed.")
+        sys.exit(1)
+    except Exception as e:
+        print(f"\n[✗] Security validation failed: {e}")
+        print(f"    Please use a standard directory path within your user profile.")
         sys.exit(1)
     
     try:
@@ -518,7 +546,7 @@ def run(args: argparse.Namespace) -> int:
         registry = ComponentRegistry(PROJECT_ROOT / "setup" / "components")
         registry.discover_components()
         
-        config_manager = ConfigManager(CONFIG_DIR)
+        config_manager = ConfigService(DATA_DIR)
         validator = Validator()
         
         # Validate configuration

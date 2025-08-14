@@ -1,46 +1,34 @@
 """
-SuperClaude Operations Module
+SuperClaude CLI Base Module
 
-This module contains all SuperClaude management operations that can be
-executed through the unified CLI hub (SuperClaude).
-
-Each operation module should implement:
-- register_parser(subparsers): Register CLI arguments for the operation
-- run(args): Execute the operation with parsed arguments
-
-Available operations:
-- install: Install SuperClaude framework components
-- update: Update existing SuperClaude installation
-- uninstall: Remove SuperClaude framework installation  
-- backup: Backup and restore SuperClaude installations
+Base class for all CLI operations providing common functionality
 """
 
 __version__ = "3.0.0"
-__all__ = ["install", "update", "uninstall", "backup"]
 
 
-def get_operation_info():
-    """Get information about available operations"""
+def get_command_info():
+    """Get information about available commands"""
     return {
         "install": {
             "name": "install",
             "description": "Install SuperClaude framework components",
-            "module": "setup.operations.install"
+            "module": "setup.cli.commands.install"
         },
         "update": {
             "name": "update", 
             "description": "Update existing SuperClaude installation",
-            "module": "setup.operations.update"
+            "module": "setup.cli.commands.update"
         },
         "uninstall": {
             "name": "uninstall",
             "description": "Remove SuperClaude framework installation", 
-            "module": "setup.operations.uninstall"
+            "module": "setup.cli.commands.uninstall"
         },
         "backup": {
             "name": "backup",
             "description": "Backup and restore SuperClaude installations",
-            "module": "setup.operations.backup"
+            "module": "setup.cli.commands.backup"
         }
     }
 

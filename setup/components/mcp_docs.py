@@ -5,8 +5,8 @@ MCP Documentation component for SuperClaude MCP server documentation
 from typing import Dict, List, Tuple, Optional, Any
 from pathlib import Path
 
-from ..base.component import Component
-from ..managers.claude_md_manager import CLAUDEMdManager
+from ..core.base import Component
+from ..services.claude_md import CLAUDEMdService
 
 
 class MCPDocsComponent(Component):
@@ -26,8 +26,8 @@ class MCPDocsComponent(Component):
             "morphllm": "MCP_Morphllm.md"
         }
         
-        # This will be set during installation
-        self.selected_servers = []
+        # This will be set during installation - initialize as empty list
+        self.selected_servers: List[str] = []
     
     def get_metadata(self) -> Dict[str, str]:
         """Get component metadata"""
@@ -53,7 +53,7 @@ class MCPDocsComponent(Component):
         source_dir = self._get_source_dir()
         files = []
 
-        if source_dir and hasattr(self, 'selected_servers') and self.selected_servers:
+        if source_dir and self.selected_servers:
             for server_name in self.selected_servers:
                 if server_name in self.server_docs_map:
                     doc_file = self.server_docs_map[server_name]
@@ -72,8 +72,8 @@ class MCPDocsComponent(Component):
         Override parent method to dynamically discover files based on selected servers
         """
         files = []
-        # Check if selected_servers attribute exists and is not empty
-        if hasattr(self, 'selected_servers') and self.selected_servers:
+        # Check if selected_servers is not empty
+        if self.selected_servers:
             for server_name in self.selected_servers:
                 if server_name in self.server_docs_map:
                     files.append(self.server_docs_map[server_name])
@@ -146,7 +146,7 @@ class MCPDocsComponent(Component):
             
             # Update CLAUDE.md with MCP documentation imports
             try:
-                manager = CLAUDEMdManager(self.install_dir)
+                manager = CLAUDEMdService(self.install_dir)
                 manager.add_imports(self.component_files, category="MCP Documentation")
                 self.logger.info("Updated CLAUDE.md with MCP documentation imports")
             except Exception as e:
@@ -222,7 +222,7 @@ class MCPDocsComponent(Component):
         source_dir = self._get_source_dir()
         total_size = 0
         
-        if source_dir and source_dir.exists() and hasattr(self, 'selected_servers') and self.selected_servers:
+        if source_dir and source_dir.exists() and self.selected_servers:
             for server_name in self.selected_servers:
                 if server_name in self.server_docs_map:
                     doc_file = self.server_docs_map[server_name]

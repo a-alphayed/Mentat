@@ -9,15 +9,15 @@ from pathlib import Path
 from typing import List, Optional, Dict, Any
 import argparse
 
-from ..core.registry import ComponentRegistry
-from ..managers.settings_manager import SettingsManager
-from ..managers.file_manager import FileManager
-from ..utils.ui import (
+from ...core.registry import ComponentRegistry
+from ...services.settings import SettingsService
+from ...services.files import FileService
+from ...utils.ui import (
     display_header, display_info, display_success, display_error, 
     display_warning, Menu, confirm, ProgressBar, Colors
 )
-from ..utils.logger import get_logger
-from .. import DEFAULT_INSTALL_DIR, PROJECT_ROOT
+from ...utils.logger import get_logger
+from ... import DEFAULT_INSTALL_DIR, PROJECT_ROOT
 from . import OperationBase
 
 
@@ -92,7 +92,7 @@ Examples:
 def get_installed_components(install_dir: Path) -> Dict[str, Dict[str, Any]]:
     """Get currently installed components and their versions"""
     try:
-        settings_manager = SettingsManager(install_dir)
+        settings_manager = SettingsService(install_dir)
         return settings_manager.get_installed_components()
     except Exception:
         return {}
@@ -149,7 +149,7 @@ def display_uninstall_info(info: Dict[str, Any]) -> None:
     print(f"{Colors.BLUE}Directories:{Colors.RESET} {len(info['directories'])}")
     
     if info["total_size"] > 0:
-        from ..utils.ui import format_size
+        from ...utils.ui import format_size
         print(f"{Colors.BLUE}Total Size:{Colors.RESET} {format_size(info['total_size'])}")
     
     print()
@@ -267,7 +267,7 @@ def create_uninstall_backup(install_dir: Path, components: List[str]) -> Optiona
         with tarfile.open(backup_path, "w:gz") as tar:
             for component in components:
                 # Add component files to backup
-                settings_manager = SettingsManager(install_dir)
+                settings_manager = SettingsService(install_dir)
                 # This would need component-specific backup logic
                 pass
         
@@ -355,7 +355,7 @@ def perform_uninstall(components: List[str], args: argparse.Namespace, info: Dic
 def cleanup_installation_directory(install_dir: Path, args: argparse.Namespace) -> None:
     """Clean up installation directory for complete uninstall"""
     logger = get_logger()
-    file_manager = FileManager()
+    file_manager = FileService()
     
     try:
         # Preserve specific directories/files if requested

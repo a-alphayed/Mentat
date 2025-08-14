@@ -8,12 +8,12 @@ from typing import List, Set, Dict, Optional
 from ..utils.logger import get_logger
 
 
-class CLAUDEMdManager:
+class CLAUDEMdService:
     """Manages CLAUDE.md file updates while preserving user customizations"""
     
     def __init__(self, install_dir: Path):
         """
-        Initialize CLAUDEMdManager
+        Initialize CLAUDEMdService
         
         Args:
             install_dir: Installation directory (typically ~/.claude)

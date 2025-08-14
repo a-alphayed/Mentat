@@ -6,8 +6,8 @@ from abc import ABC, abstractmethod
 from typing import List, Dict, Tuple, Optional, Any
 from pathlib import Path
 import json
-from ..managers.file_manager import FileManager
-from ..managers.settings_manager import SettingsManager
+from ..services.files import FileService
+from ..services.settings import SettingsService
 from ..utils.logger import get_logger
 from ..utils.security import SecurityValidator
 
@@ -23,11 +23,13 @@ class Component(ABC):
             install_dir: Target installation directory (defaults to ~/.claude)
         """
         from .. import DEFAULT_INSTALL_DIR
-        self.install_dir = install_dir or DEFAULT_INSTALL_DIR
-        self.settings_manager = SettingsManager(self.install_dir)
+        # Initialize logger first
         self.logger = get_logger()
+        # Resolve path safely
+        self.install_dir = self._resolve_path_safely(install_dir or DEFAULT_INSTALL_DIR)
+        self.settings_manager = SettingsService(self.install_dir)
         self.component_files = self._discover_component_files()
-        self.file_manager = FileManager()
+        self.file_manager = FileService()
         self.install_component_subdir = self.install_dir / component_subdir
     
     @abstractmethod
@@ -225,18 +227,21 @@ class Component(ABC):
         Returns:
             Version string if installed, None otherwise
         """
-        print("GETTING INSTALLED VERSION")
+        self.logger.debug("Checking installed version")
         settings_file = self.install_dir / "settings.json"
         if settings_file.exists():
-            print("SETTINGS.JSON EXISTS")
+            self.logger.debug("Settings file exists, reading version")
             try:
                 with open(settings_file, 'r') as f:
                     settings = json.load(f)
                 component_name = self.get_metadata()['name']
-                return settings.get('components', {}).get(component_name, {}).get('version')
-            except Exception:
-                pass
-        print("SETTINGS.JSON DOESNT EXIST RETURNING NONE")
+                version = settings.get('components', {}).get(component_name, {}).get('version')
+                self.logger.debug(f"Found version: {version}")
+                return version
+            except Exception as e:
+                self.logger.warning(f"Failed to read version from settings: {e}")
+        else:
+            self.logger.debug("Settings file does not exist")
         return None
     
     def is_installed(self) -> bool:
@@ -359,3 +364,61 @@ class Component(ABC):
     def __repr__(self) -> str:
         """Developer representation of component"""
         return f"<{self.__class__.__name__}({self.get_metadata()['name']})>"
+    
+    def _resolve_path_safely(self, path: Path) -> Path:
+        """
+        Safely resolve path with proper error handling and security validation
+        
+        Args:
+            path: Path to resolve
+            
+        Returns:
+            Resolved path
+            
+        Raises:
+            ValueError: If path resolution fails or path is unsafe
+        """
+        try:
+            # Expand user directory (~) and resolve path
+            resolved_path = path.expanduser().resolve()
+            
+            # Basic security validation - only enforce for production directories
+            path_str = str(resolved_path).lower()
+            
+            # Check for most dangerous system patterns (but allow /tmp for testing)
+            dangerous_patterns = [
+                '/etc/', '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/',
+                '/var/log/', '/var/lib/', '/dev/', '/proc/', '/sys/',
+                'c:\\windows\\', 'c:\\program files\\'
+            ]
+            
+            # Allow temporary directories for testing
+            if path_str.startswith('/tmp/') or 'temp' in path_str:
+                self.logger.debug(f"Allowing temporary directory: {resolved_path}")
+                return resolved_path
+            
+            for pattern in dangerous_patterns:
+                if path_str.startswith(pattern):
+                    raise ValueError(f"Cannot use system directory: {resolved_path}")
+            
+            return resolved_path
+            
+        except Exception as e:
+            self.logger.error(f"Failed to resolve path {path}: {e}")
+            raise ValueError(f"Invalid path: {path}")
+    
+    def _resolve_source_path_safely(self, path: Path) -> Optional[Path]:
+        """
+        Safely resolve source path with existence check
+        
+        Args:
+            path: Source path to resolve
+            
+        Returns:
+            Resolved path if valid and exists, None otherwise
+        """
+        try:
+            resolved_path = self._resolve_path_safely(path)
+            return resolved_path if resolved_path.exists() else None
+        except ValueError:
+            return None

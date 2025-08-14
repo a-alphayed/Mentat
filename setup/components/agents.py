@@ -5,7 +5,7 @@ Agents component for SuperClaude specialized AI agents installation
 from typing import Dict, List, Tuple, Optional, Any
 from pathlib import Path
 
-from ..base.component import Component
+from ..core.base import Component
 
 
 class AgentsComponent(Component):

@@ -7,7 +7,7 @@ from pathlib import Path
 import shutil
 import tempfile
 from datetime import datetime
-from .component import Component
+from .base import Component
 
 
 class Installer:
@@ -70,7 +70,7 @@ class Installer:
         resolved = []
         resolving = set()
 
-        def resolve(name: str):
+        def resolve(name: str) -> None:
             if name in resolved:
                 return
 

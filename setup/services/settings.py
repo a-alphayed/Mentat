@@ -12,7 +12,7 @@ from datetime import datetime
 import copy
 
 
-class SettingsManager:
+class SettingsService:
     """Manages settings.json file operations"""
     
     def __init__(self, install_dir: Path):

@@ -9,16 +9,16 @@ from pathlib import Path
 from typing import List, Optional, Dict, Any
 import argparse
 
-from ..base.installer import Installer
-from ..core.registry import ComponentRegistry
-from ..managers.settings_manager import SettingsManager
-from ..core.validator import Validator
-from ..utils.ui import (
+from ...core.installer import Installer
+from ...core.registry import ComponentRegistry
+from ...services.settings import SettingsService
+from ...core.validator import Validator
+from ...utils.ui import (
     display_header, display_info, display_success, display_error, 
     display_warning, Menu, confirm, ProgressBar, Colors, format_size
 )
-from ..utils.logger import get_logger
-from .. import DEFAULT_INSTALL_DIR, PROJECT_ROOT
+from ...utils.logger import get_logger
+from ... import DEFAULT_INSTALL_DIR, PROJECT_ROOT
 from . import OperationBase
 
 
@@ -86,14 +86,14 @@ Examples:
 
 def check_installation_exists(install_dir: Path) -> bool:
     """Check if SuperClaude installation exists"""
-    settings_manager = SettingsManager(install_dir)
+    settings_manager = SettingsService(install_dir)
 
     return settings_manager.check_installation_exists()
 
 def get_installed_components(install_dir: Path) -> Dict[str, Dict[str, Any]]:
     """Get currently installed components and their versions"""
     try:
-        settings_manager = SettingsManager(install_dir)
+        settings_manager = SettingsService(install_dir)
         return settings_manager.get_installed_components()
     except Exception:
         return {}

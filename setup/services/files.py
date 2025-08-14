@@ -10,7 +10,7 @@ import fnmatch
 import hashlib
 
 
-class FileManager:
+class FileService:
     """Cross-platform file operations manager"""
     
     def __init__(self, dry_run: bool = False):

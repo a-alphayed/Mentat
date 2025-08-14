@@ -6,8 +6,8 @@ from typing import Dict, List, Tuple, Optional, Any
 from pathlib import Path
 import shutil
 
-from ..base.component import Component
-from ..managers.claude_md_manager import CLAUDEMdManager
+from ..core.base import Component
+from ..services.claude_md import CLAUDEMdService
 
 class CoreComponent(Component):
     """Core SuperClaude framework files component"""
@@ -49,7 +49,7 @@ class CoreComponent(Component):
 
         return super()._install(config);
 
-    def _post_install(self):
+    def _post_install(self) -> bool:
         # Create or update metadata
         try:
             metadata_mods = self.get_metadata_modifications()
@@ -81,7 +81,7 @@ class CoreComponent(Component):
         
         # Update CLAUDE.md with core framework imports
         try:
-            manager = CLAUDEMdManager(self.install_dir)
+            manager = CLAUDEMdService(self.install_dir)
             manager.add_imports(self.component_files, category="Core Framework")
             self.logger.info("Updated CLAUDE.md with core framework imports")
         except Exception as e:

@@ -4,10 +4,23 @@ MCP component for MCP server configuration via .claude.json
 
 import json
 import shutil
+import time
+import sys
 from typing import Dict, List, Tuple, Optional, Any
 from pathlib import Path
 
-from ..base.component import Component
+# Platform-specific file locking imports
+try:
+    if sys.platform == "win32":
+        import msvcrt
+        LOCKING_AVAILABLE = "windows"
+    else:
+        import fcntl
+        LOCKING_AVAILABLE = "unix"
+except ImportError:
+    LOCKING_AVAILABLE = None
+
+from ..core.base import Component
 from ..utils.ui import display_info, display_warning
 
 
@@ -60,8 +73,27 @@ class MCPComponent(Component):
             }
         }
         
-        # This will be set during installation
-        self.selected_servers = []
+        # This will be set during installation - initialize as empty list
+        self.selected_servers: List[str] = []
+    
+    def _lock_file(self, file_handle, exclusive: bool = False):
+        """Cross-platform file locking"""
+        if LOCKING_AVAILABLE == "unix":
+            lock_type = fcntl.LOCK_EX if exclusive else fcntl.LOCK_SH
+            fcntl.flock(file_handle.fileno(), lock_type)
+        elif LOCKING_AVAILABLE == "windows":
+            # Windows locking using msvcrt
+            if exclusive:
+                msvcrt.locking(file_handle.fileno(), msvcrt.LK_LOCK, 1)
+        # If no locking available, continue without locking
+    
+    def _unlock_file(self, file_handle):
+        """Cross-platform file unlocking"""
+        if LOCKING_AVAILABLE == "unix":
+            fcntl.flock(file_handle.fileno(), fcntl.LOCK_UN)
+        elif LOCKING_AVAILABLE == "windows":
+            msvcrt.locking(file_handle.fileno(), msvcrt.LK_UNLCK, 1)
+        # If no locking available, continue without unlocking
     
     def get_metadata(self) -> Dict[str, str]:
         """Get component metadata"""
@@ -116,34 +148,61 @@ class MCPComponent(Component):
         return self._get_config_source_dir()
     
     def _load_claude_config(self) -> Tuple[Optional[Dict], Path]:
-        """Load user's Claude configuration"""
+        """Load user's Claude configuration with file locking"""
         claude_config_path = Path.home() / ".claude.json"
         
         try:
             with open(claude_config_path, 'r') as f:
-                config = json.load(f)
-                return config, claude_config_path
+                # Apply shared lock for reading
+                self._lock_file(f, exclusive=False)
+                try:
+                    config = json.load(f)
+                    return config, claude_config_path
+                finally:
+                    self._unlock_file(f)
         except Exception as e:
             self.logger.error(f"Failed to load Claude config: {e}")
             return None, claude_config_path
     
     def _save_claude_config(self, config: Dict, config_path: Path) -> bool:
-        """Save user's Claude configuration with backup"""
-        try:
-            # Create backup
-            backup_path = config_path.with_suffix('.json.backup')
-            shutil.copy2(config_path, backup_path)
-            self.logger.debug(f"Created backup: {backup_path}")
-            
-            # Save updated config
-            with open(config_path, 'w') as f:
-                json.dump(config, f, indent=2)
-            
-            self.logger.debug("Updated Claude configuration")
-            return True
-        except Exception as e:
-            self.logger.error(f"Failed to save Claude config: {e}")
-            return False
+        """Save user's Claude configuration with backup and file locking"""
+        max_retries = 3
+        retry_delay = 0.1
+        
+        for attempt in range(max_retries):
+            try:
+                # Create backup first
+                if config_path.exists():
+                    backup_path = config_path.with_suffix('.json.backup')
+                    shutil.copy2(config_path, backup_path)
+                    self.logger.debug(f"Created backup: {backup_path}")
+                
+                # Save updated config with exclusive lock
+                with open(config_path, 'w') as f:
+                    # Apply exclusive lock for writing
+                    self._lock_file(f, exclusive=True)
+                    try:
+                        json.dump(config, f, indent=2)
+                        f.flush()  # Ensure data is written
+                    finally:
+                        self._unlock_file(f)
+                
+                self.logger.debug("Updated Claude configuration")
+                return True
+                
+            except (OSError, IOError) as e:
+                if attempt < max_retries - 1:
+                    self.logger.warning(f"File lock attempt {attempt + 1} failed, retrying: {e}")
+                    time.sleep(retry_delay * (2 ** attempt))  # Exponential backoff
+                    continue
+                else:
+                    self.logger.error(f"Failed to save Claude config after {max_retries} attempts: {e}")
+                    return False
+            except Exception as e:
+                self.logger.error(f"Failed to save Claude config: {e}")
+                return False
+        
+        return False
     
     def _load_mcp_server_config(self, server_key: str) -> Optional[Dict]:
         """Load MCP server configuration snippet"""

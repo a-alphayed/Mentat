@@ -12,13 +12,13 @@ from datetime import datetime
 from typing import List, Optional, Dict, Any, Tuple
 import argparse
 
-from ..managers.settings_manager import SettingsManager
-from ..utils.ui import (
+from ...services.settings import SettingsService
+from ...utils.ui import (
     display_header, display_info, display_success, display_error, 
     display_warning, Menu, confirm, ProgressBar, Colors, format_size
 )
-from ..utils.logger import get_logger
-from .. import DEFAULT_INSTALL_DIR
+from ...utils.logger import get_logger
+from ... import DEFAULT_INSTALL_DIR
 from . import OperationBase
 
 
@@ -138,7 +138,7 @@ def get_backup_directory(args: argparse.Namespace) -> Path:
 
 def check_installation_exists(install_dir: Path) -> bool:
     """Check if SuperClaude installation (v2 included) exists"""
-    settings_manager = SettingsManager(install_dir)
+    settings_manager = SettingsService(install_dir)
 
     return settings_manager.check_installation_exists() or settings_manager.check_v2_installation_exists()
 
@@ -243,7 +243,7 @@ def create_backup_metadata(install_dir: Path) -> Dict[str, Any]:
     
     try:
         # Get installed components from metadata
-        settings_manager = SettingsManager(install_dir)
+        settings_manager = SettingsService(install_dir)
         framework_config = settings_manager.get_metadata_setting("framework")
         
         if framework_config:
