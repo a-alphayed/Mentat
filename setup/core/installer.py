@@ -170,8 +170,9 @@ class Installer:
 
             # Create archive only if there are files to backup
             if any(temp_backup.iterdir()):
-                shutil.make_archive(backup_path.with_suffix(''), 'gztar',
-                                    temp_dir, backup_name)
+                # Remove both .tar.gz extensions to prevent double extension
+                base_path = backup_path.with_suffix('').with_suffix('')
+                shutil.make_archive(str(base_path), 'gztar', temp_backup)
             else:
                 # Create empty backup file to indicate backup was attempted
                 backup_path.touch()

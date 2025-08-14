@@ -73,7 +73,7 @@ class CoreComponent(Component):
             return False
 
         # Create additional directories for other components
-        additional_dirs = ["commands", "hooks", "backups", "logs"]
+        additional_dirs = ["commands", "backups", "logs"]
         for dirname in additional_dirs:
             dir_path = self.install_dir / dirname
             if not self.file_manager.ensure_directory(dir_path):
