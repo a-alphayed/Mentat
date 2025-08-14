@@ -18,7 +18,7 @@ from ..utils.ui import (
     display_warning, Menu, confirm, ProgressBar, Colors, format_size
 )
 from ..utils.logger import get_logger
-from .. import DEFAULT_INSTALL_DIR, PROJECT_ROOT
+from .. import DEFAULT_INSTALL_DIR, PROJECT_ROOT, CONFIG_DIR
 from . import OperationBase
 
 
@@ -87,7 +87,7 @@ def validate_system_requirements(validator: Validator, component_names: List[str
     
     try:
         # Load requirements configuration
-        config_manager = ConfigManager(PROJECT_ROOT / "config")
+        config_manager = ConfigManager(CONFIG_DIR)
         requirements = config_manager.get_requirements_for_components(component_names)
         
         # Validate requirements
@@ -518,7 +518,7 @@ def run(args: argparse.Namespace) -> int:
         registry = ComponentRegistry(PROJECT_ROOT / "setup" / "components")
         registry.discover_components()
         
-        config_manager = ConfigManager(PROJECT_ROOT / "config")
+        config_manager = ConfigManager(CONFIG_DIR)
         validator = Validator()
         
         # Validate configuration

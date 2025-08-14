@@ -534,9 +534,9 @@ class Validator:
         """
         try:
             from ..managers.config_manager import ConfigManager
-            from .. import PROJECT_ROOT
+            from .. import CONFIG_DIR
             
-            config_manager = ConfigManager(PROJECT_ROOT / "config")
+            config_manager = ConfigManager(CONFIG_DIR)
             requirements = config_manager.load_requirements()
             return requirements.get("installation_commands", {})
         except Exception:
