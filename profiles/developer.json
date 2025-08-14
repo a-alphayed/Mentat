@@ -5,7 +5,9 @@
     "core",
     "commands",
     "agents",
-    "mcp"
+    "modes",
+    "mcp",
+    "mcp_docs"
   ],
   "features": {
     "auto_update": false,

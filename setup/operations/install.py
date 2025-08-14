@@ -138,7 +138,7 @@ def get_components_to_install(args: argparse.Namespace, registry: ComponentRegis
     # Explicit components specified
     if args.components:
         if 'all' in args.components:
-            return ["core", "commands", "agents", "mcp"]  # hooks removed - not yet implemented
+            return ["core", "commands", "agents", "modes", "mcp", "mcp_docs"]
         return args.components
     
     # Profile-based selection
@@ -169,38 +169,141 @@ def get_components_to_install(args: argparse.Namespace, registry: ComponentRegis
     return interactive_component_selection(registry, config_manager)
 
 
-def interactive_component_selection(registry: ComponentRegistry, config_manager: ConfigManager) -> Optional[List[str]]:
-    """Interactive component selection"""
+def select_mcp_servers(registry: ComponentRegistry) -> List[str]:
+    """Stage 1: MCP Server Selection"""
     logger = get_logger()
     
     try:
-        # Get available components
-        available_components = registry.list_components()
+        # Get MCP component to access server list
+        mcp_instance = registry.get_component_instance("mcp", Path.home() / ".claude")
+        if not mcp_instance or not hasattr(mcp_instance, 'mcp_servers'):
+            logger.error("Could not access MCP server information")
+            return []
         
-        if not available_components:
-            logger.error("No components available for installation")
-            return None
+        # Create MCP server menu
+        mcp_servers = mcp_instance.mcp_servers
+        server_options = []
         
-        # Create component menu with descriptions
-        menu_options = []
+        for server_key, server_info in mcp_servers.items():
+            description = server_info["description"]
+            api_key_note = " (requires API key)" if server_info.get("requires_api_key", False) else ""
+            server_options.append(f"{server_key} - {description}{api_key_note}")
+        
+        print(f"\n{Colors.CYAN}{Colors.BRIGHT}═══════════════════════════════════════════════════{Colors.RESET}")
+        print(f"{Colors.CYAN}{Colors.BRIGHT}Stage 1: MCP Server Selection (Optional){Colors.RESET}")
+        print(f"{Colors.CYAN}{Colors.BRIGHT}═══════════════════════════════════════════════════{Colors.RESET}")
+        print(f"\n{Colors.BLUE}MCP servers extend Claude Code with specialized capabilities.{Colors.RESET}")
+        print(f"{Colors.BLUE}Select servers to configure (you can always add more later):{Colors.RESET}")
+        
+        # Add option to skip MCP
+        server_options.append("Skip MCP Server installation")
+        
+        menu = Menu("Select MCP servers to configure:", server_options, multi_select=True)
+        selections = menu.display()
+        
+        if not selections:
+            logger.info("No MCP servers selected")
+            return []
+        
+        # Filter out the "skip" option and return server keys
+        server_keys = list(mcp_servers.keys())
+        selected_servers = []
+        
+        for i in selections:
+            if i < len(server_keys):  # Not the "skip" option
+                selected_servers.append(server_keys[i])
+        
+        if selected_servers:
+            logger.info(f"Selected MCP servers: {', '.join(selected_servers)}")
+        else:
+            logger.info("No MCP servers selected")
+        
+        return selected_servers
+        
+    except Exception as e:
+        logger.error(f"Error in MCP server selection: {e}")
+        return []
+
+
+def select_framework_components(registry: ComponentRegistry, config_manager: ConfigManager, selected_mcp_servers: List[str]) -> List[str]:
+    """Stage 2: Framework Component Selection"""
+    logger = get_logger()
+    
+    try:
+        # Framework components (excluding MCP-related ones)
+        framework_components = ["core", "modes", "commands", "agents"]
+        
+        # Create component menu
+        component_options = []
         component_info = {}
         
-        for component_name in available_components:
+        for component_name in framework_components:
             metadata = registry.get_component_metadata(component_name)
             if metadata:
                 description = metadata.get("description", "No description")
-                category = metadata.get("category", "unknown")
-                menu_options.append(f"{component_name} ({category}) - {description}")
+                component_options.append(f"{component_name} - {description}")
                 component_info[component_name] = metadata
-            else:
-                menu_options.append(f"{component_name} - Component description unavailable")
-                component_info[component_name] = {"description": "Unknown"}
         
-        # Add preset options
+        # Add MCP documentation option
+        if selected_mcp_servers:
+            mcp_docs_desc = f"MCP documentation for {', '.join(selected_mcp_servers)} (auto-selected)"
+            component_options.append(f"mcp_docs - {mcp_docs_desc}")
+            auto_selected_mcp_docs = True
+        else:
+            component_options.append("mcp_docs - MCP server documentation (none selected)")
+            auto_selected_mcp_docs = False
+        
+        print(f"\n{Colors.CYAN}{Colors.BRIGHT}═══════════════════════════════════════════════════{Colors.RESET}")
+        print(f"{Colors.CYAN}{Colors.BRIGHT}Stage 2: Framework Component Selection{Colors.RESET}")
+        print(f"{Colors.CYAN}{Colors.BRIGHT}═══════════════════════════════════════════════════{Colors.RESET}")
+        print(f"\n{Colors.BLUE}Select SuperClaude framework components to install:{Colors.RESET}")
+        
+        menu = Menu("Select components (Core is recommended):", component_options, multi_select=True)
+        selections = menu.display()
+        
+        if not selections:
+            # Default to core if nothing selected
+            logger.info("No components selected, defaulting to core")
+            selected_components = ["core"]
+        else:
+            selected_components = []
+            all_components = framework_components + ["mcp_docs"]
+            
+            for i in selections:
+                if i < len(all_components):
+                    selected_components.append(all_components[i])
+        
+        # Auto-select MCP docs if not explicitly deselected and we have MCP servers
+        if auto_selected_mcp_docs and "mcp_docs" not in selected_components:
+            # Check if user explicitly deselected it
+            mcp_docs_index = len(framework_components)  # Index of mcp_docs in the menu
+            if mcp_docs_index not in selections:
+                # User didn't select it, but we auto-select it
+                selected_components.append("mcp_docs")
+                logger.info("Auto-selected MCP documentation for configured servers")
+        
+        # Always include MCP component if servers were selected
+        if selected_mcp_servers and "mcp" not in selected_components:
+            selected_components.append("mcp")
+        
+        logger.info(f"Selected framework components: {', '.join(selected_components)}")
+        return selected_components
+        
+    except Exception as e:
+        logger.error(f"Error in framework component selection: {e}")
+        return ["core"]  # Fallback to core
+
+
+def interactive_component_selection(registry: ComponentRegistry, config_manager: ConfigManager) -> Optional[List[str]]:
+    """Two-stage interactive component selection"""
+    logger = get_logger()
+    
+    try:
+        # Add preset options first
         preset_options = [
             "Quick Installation (recommended components)",
             "Minimal Installation (core only)",
-            "Custom Selection"
+            "Custom Two-Stage Selection"
         ]
         
         print(f"\n{Colors.CYAN}SuperClaude Installation Options:{Colors.RESET}")
@@ -218,16 +321,19 @@ def interactive_component_selection(registry: ComponentRegistry, config_manager:
                 return ["core"]
         elif choice == 1:  # Minimal
             return ["core"]
-        elif choice == 2:  # Custom
-            print(f"\n{Colors.CYAN}Available Components:{Colors.RESET}")
-            component_menu = Menu("Select components to install:", menu_options, multi_select=True)
-            selections = component_menu.display()
+        elif choice == 2:  # Custom Two-Stage
+            # Stage 1: MCP Server Selection
+            selected_mcp_servers = select_mcp_servers(registry)
             
-            if not selections:
-                logger.warning("No components selected")
-                return None
+            # Stage 2: Framework Component Selection
+            selected_components = select_framework_components(registry, config_manager, selected_mcp_servers)
             
-            return [available_components[i] for i in selections]
+            # Store selected MCP servers for components to use
+            if not hasattr(config_manager, '_installation_context'):
+                config_manager._installation_context = {}
+            config_manager._installation_context["selected_mcp_servers"] = selected_mcp_servers
+            
+            return selected_components
         
         return None
         
@@ -331,7 +437,7 @@ def run_system_diagnostics(validator: Validator) -> None:
         print("  3. Run 'SuperClaude install --diagnose' again to verify")
 
 
-def perform_installation(components: List[str], args: argparse.Namespace) -> bool:
+def perform_installation(components: List[str], args: argparse.Namespace, config_manager: ConfigManager = None) -> bool:
     """Perform the actual installation"""
     logger = get_logger()
     start_time = time.time()
@@ -370,7 +476,8 @@ def perform_installation(components: List[str], args: argparse.Namespace) -> boo
         config = {
             "force": args.force,
             "backup": not args.no_backup,
-            "dry_run": args.dry_run
+            "dry_run": args.dry_run,
+            "selected_mcp_servers": getattr(config_manager, '_installation_context', {}).get("selected_mcp_servers", [])
         }
         
         success = installer.install_components(ordered_components, config)
@@ -518,7 +625,7 @@ def run(args: argparse.Namespace) -> int:
                     return 0
         
         # Perform installation
-        success = perform_installation(components, args)
+        success = perform_installation(components, args, config_manager)
         
         if success:
             if not args.quiet:

@@ -20,21 +20,30 @@
     },
     "mcp": {
       "name": "mcp",
-      "version": "3.0.0",
-      "description": "MCP server integration (Context7, Sequential, Magic, Playwright, Morphllm, Serena)",
+      "version": "4.0.0",
+      "description": "MCP server configuration management via .claude.json",
       "category": "integration",
       "dependencies": ["core"],
       "enabled": true,
-      "required_tools": ["node", "claude_cli"]
+      "required_tools": []
     },
-    "serena": {
-      "name": "serena",
-      "version": "3.0.0",
-      "description": "Semantic code analysis and intelligent editing with project-aware context management",
-      "category": "integration",
-      "dependencies": ["core", "mcp"],
+    "modes": {
+      "name": "modes",
+      "version": "4.0.0",
+      "description": "SuperClaude behavioral modes (Brainstorming, Introspection, Task Management, Token Efficiency)",
+      "category": "modes",
+      "dependencies": ["core"],
       "enabled": true,
-      "required_tools": ["uvx", "python3", "claude_cli"]
+      "required_tools": []
+    },
+    "mcp_docs": {
+      "name": "mcp_docs",
+      "version": "4.0.0",
+      "description": "MCP server documentation and usage guides",
+      "category": "documentation",
+      "dependencies": ["core"],
+      "enabled": true,
+      "required_tools": []
     },
     "agents": {
       "name": "agents",
@@ -44,15 +53,6 @@
       "dependencies": ["core"],
       "enabled": true,
       "required_tools": []
-    },
-    "hooks": {
-      "name": "hooks",
-      "version": "2.0.0",
-      "description": "Enhanced Task Management System - Hook Infrastructure (NOT YET IMPLEMENTED)",
-      "category": "integration", 
-      "dependencies": ["core"],
-      "enabled": false,
-      "required_tools": ["python3"]
     }
   }
 }
