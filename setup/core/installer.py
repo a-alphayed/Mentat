@@ -156,9 +156,9 @@ class Installer:
             # Ensure temp backup directory exists
             temp_backup.mkdir(parents=True, exist_ok=True)
 
-            # Copy all files except backups directory
+            # Copy all files except backups and local directories
             for item in self.install_dir.iterdir():
-                if item.name != "backups":
+                if item.name not in ["backups", "local"]:
                     try:
                         if item.is_file():
                             shutil.copy2(item, temp_backup / item.name)

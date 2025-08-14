@@ -309,13 +309,18 @@ def create_backup(args: argparse.Namespace) -> bool:
                 tar.add(temp_file.name, arcname="backup_metadata.json")
                 Path(temp_file.name).unlink()  # Clean up temp file
             
-            # Add installation directory contents
+            # Add installation directory contents (excluding backups and local dirs)
             files_added = 0
             for item in args.install_dir.rglob("*"):
                 if item.is_file() and item != backup_file:
                     try:
                         # Create relative path for archive
                         rel_path = item.relative_to(args.install_dir)
+                        
+                        # Skip files in excluded directories
+                        if rel_path.parts and rel_path.parts[0] in ["backups", "local"]:
+                            continue
+                            
                         tar.add(item, arcname=str(rel_path))
                         files_added += 1
                         
