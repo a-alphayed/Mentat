@@ -7,6 +7,7 @@ from pathlib import Path
 import shutil
 
 from ..base.component import Component
+from ..managers.claude_md_manager import CLAUDEMdManager
 
 class CoreComponent(Component):
     """Core SuperClaude framework files component"""
@@ -77,6 +78,15 @@ class CoreComponent(Component):
             dir_path = self.install_dir / dirname
             if not self.file_manager.ensure_directory(dir_path):
                 self.logger.warning(f"Could not create directory: {dir_path}")
+        
+        # Update CLAUDE.md with core framework imports
+        try:
+            manager = CLAUDEMdManager(self.install_dir)
+            manager.add_imports(self.component_files, category="Core Framework")
+            self.logger.info("Updated CLAUDE.md with core framework imports")
+        except Exception as e:
+            self.logger.warning(f"Failed to update CLAUDE.md with core framework imports: {e}")
+            # Don't fail the whole installation for this
 
         return True
 

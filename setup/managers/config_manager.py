@@ -278,47 +278,6 @@ class ConfigManager:
             return component_info.get("dependencies", [])
         return []
     
-    def load_profile(self, profile_path: Path) -> Dict[str, Any]:
-        """
-        Load installation profile
-        
-        Args:
-            profile_path: Path to profile JSON file
-            
-        Returns:
-            Profile configuration dict
-            
-        Raises:
-            FileNotFoundError: If profile not found
-            ValidationError: If profile is invalid
-        """
-        if not profile_path.exists():
-            raise FileNotFoundError(f"Profile not found: {profile_path}")
-        
-        try:
-            with open(profile_path, 'r') as f:
-                profile = json.load(f)
-                
-            # Basic validation
-            if "components" not in profile:
-                raise ValidationError("Profile must contain 'components' field")
-                
-            if not isinstance(profile["components"], list):
-                raise ValidationError("Profile 'components' must be a list")
-            
-            # Validate that all components exist
-            features = self.load_features()
-            available_components = set(features.get("components", {}).keys())
-            
-            for component in profile["components"]:
-                if component not in available_components:
-                    raise ValidationError(f"Unknown component in profile: {component}")
-            
-            return profile
-            
-        except json.JSONDecodeError as e:
-            raise ValidationError(f"Invalid JSON in {profile_path}: {e}")
-    
     def get_system_requirements(self) -> Dict[str, Any]:
         """
         Get system requirements

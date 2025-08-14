@@ -40,8 +40,7 @@ def register_parser(subparsers, global_parser=None) -> argparse.ArgumentParser:
         epilog="""
 Examples:
   SuperClaude install                          # Interactive installation
-  SuperClaude install --quick --dry-run        # Quick installation (dry-run)
-  SuperClaude install --profile developer      # Developer profile  
+  SuperClaude install --dry-run                # Dry-run mode  
   SuperClaude install --components core mcp    # Specific components
   SuperClaude install --verbose --force        # Verbose with force mode
         """,
@@ -50,23 +49,6 @@ Examples:
     )
     
     # Installation mode options
-    parser.add_argument(
-        "--quick", 
-        action="store_true",
-        help="Quick installation with pre-selected components"
-    )
-    
-    parser.add_argument(
-        "--minimal",
-        action="store_true", 
-        help="Minimal installation (core only)"
-    )
-    
-    parser.add_argument(
-        "--profile",
-        type=str,
-        help="Installation profile (quick, minimal, developer, etc.)"
-    )
     
     parser.add_argument(
         "--components",
@@ -141,31 +123,7 @@ def get_components_to_install(args: argparse.Namespace, registry: ComponentRegis
             return ["core", "commands", "agents", "modes", "mcp", "mcp_docs"]
         return args.components
     
-    # Profile-based selection
-    if args.profile:
-        try:
-            profile_path = PROJECT_ROOT / "profiles" / f"{args.profile}.json"
-            profile = config_manager.load_profile(profile_path)
-            return profile["components"]
-        except Exception as e:
-            logger.error(f"Could not load profile '{args.profile}': {e}")
-            return None
-    
-    # Quick installation
-    if args.quick:
-        try:
-            profile_path = PROJECT_ROOT / "profiles" / "quick.json"
-            profile = config_manager.load_profile(profile_path)
-            return profile["components"]
-        except Exception as e:
-            logger.warning(f"Could not load quick profile: {e}")
-            return ["core"]  # Fallback to core only
-    
-    # Minimal installation
-    if args.minimal:
-        return ["core"]
-    
-    # Interactive selection
+    # Interactive two-stage selection
     return interactive_component_selection(registry, config_manager)
 
 
@@ -299,43 +257,21 @@ def interactive_component_selection(registry: ComponentRegistry, config_manager:
     logger = get_logger()
     
     try:
-        # Add preset options first
-        preset_options = [
-            "Quick Installation (recommended components)",
-            "Minimal Installation (core only)",
-            "Custom Two-Stage Selection"
-        ]
+        print(f"\n{Colors.CYAN}SuperClaude Interactive Installation{Colors.RESET}")
+        print(f"{Colors.BLUE}Select components to install using the two-stage process:{Colors.RESET}")
         
-        print(f"\n{Colors.CYAN}SuperClaude Installation Options:{Colors.RESET}")
-        menu = Menu("Select installation type:", preset_options)
-        choice = menu.display()
+        # Stage 1: MCP Server Selection
+        selected_mcp_servers = select_mcp_servers(registry)
         
-        if choice == -1:  # Cancelled
-            return None
-        elif choice == 0:  # Quick
-            try:
-                profile_path = PROJECT_ROOT / "profiles" / "quick.json"
-                profile = config_manager.load_profile(profile_path)
-                return profile["components"]
-            except Exception:
-                return ["core"]
-        elif choice == 1:  # Minimal
-            return ["core"]
-        elif choice == 2:  # Custom Two-Stage
-            # Stage 1: MCP Server Selection
-            selected_mcp_servers = select_mcp_servers(registry)
-            
-            # Stage 2: Framework Component Selection
-            selected_components = select_framework_components(registry, config_manager, selected_mcp_servers)
-            
-            # Store selected MCP servers for components to use
-            if not hasattr(config_manager, '_installation_context'):
-                config_manager._installation_context = {}
-            config_manager._installation_context["selected_mcp_servers"] = selected_mcp_servers
-            
-            return selected_components
+        # Stage 2: Framework Component Selection
+        selected_components = select_framework_components(registry, config_manager, selected_mcp_servers)
         
-        return None
+        # Store selected MCP servers for components to use
+        if not hasattr(config_manager, '_installation_context'):
+            config_manager._installation_context = {}
+        config_manager._installation_context["selected_mcp_servers"] = selected_mcp_servers
+        
+        return selected_components
         
     except Exception as e:
         logger.error(f"Error in component selection: {e}")

@@ -6,6 +6,7 @@ from typing import Dict, List, Tuple, Optional, Any
 from pathlib import Path
 
 from ..base.component import Component
+from ..managers.claude_md_manager import CLAUDEMdManager
 
 
 class MCPDocsComponent(Component):
@@ -13,7 +14,7 @@ class MCPDocsComponent(Component):
     
     def __init__(self, install_dir: Optional[Path] = None):
         """Initialize MCP docs component"""
-        super().__init__(install_dir, Path("mcp"))
+        super().__init__(install_dir, Path(""))
         
         # Map server names to documentation files
         self.server_docs_map = {
@@ -57,7 +58,7 @@ class MCPDocsComponent(Component):
                 if server_name in self.server_docs_map:
                     doc_file = self.server_docs_map[server_name]
                     source = source_dir / doc_file
-                    target = self.install_component_subdir / doc_file
+                    target = self.install_dir / doc_file
                     if source.exists():
                         files.append((source, target))
                         self.logger.debug(f"Will install documentation for {server_name}: {doc_file}")
@@ -142,6 +143,15 @@ class MCPDocsComponent(Component):
             }
             self.settings_manager.update_metadata(metadata_mods)
             self.logger.info("Updated metadata with MCP docs component registration")
+            
+            # Update CLAUDE.md with MCP documentation imports
+            try:
+                manager = CLAUDEMdManager(self.install_dir)
+                manager.add_imports(self.component_files, category="MCP Documentation")
+                self.logger.info("Updated CLAUDE.md with MCP documentation imports")
+            except Exception as e:
+                self.logger.warning(f"Failed to update CLAUDE.md with MCP documentation imports: {e}")
+                # Don't fail the whole installation for this
             
             return True
         except Exception as e:
