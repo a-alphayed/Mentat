@@ -11,6 +11,9 @@ recursive-include SuperClaude *
 recursive-include SuperClaude-Lite *
 recursive-include Templates *
 recursive-include Docs *.md
+recursive-include Setup *
+recursive-include profiles *
+recursive-include config *
 global-exclude __pycache__
 global-exclude *.py[co]
 global-exclude .DS_Store
