@@ -39,10 +39,10 @@
     "hooks": {
       "name": "hooks",
       "version": "2.0.0",
-      "description": "Enhanced Task Management System - Hook Infrastructure",
+      "description": "Enhanced Task Management System - Hook Infrastructure (NOT YET IMPLEMENTED)",
       "category": "integration", 
       "dependencies": ["core"],
-      "enabled": true,
+      "enabled": false,
       "required_tools": ["python3"]
     }
   }

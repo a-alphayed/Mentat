@@ -29,7 +29,7 @@ class HooksComponent(Component):
         return {
             "name": "hooks",
             "version": "3.0.0",
-            "description": "Claude Code hooks integration (future-ready)",
+            "description": "Claude Code hooks integration (NOT YET IMPLEMENTED - future-ready)",
             "category": "integration"
         }
     def get_metadata_modifications(self) -> Dict[str, Any]:
