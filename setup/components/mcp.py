@@ -204,6 +204,33 @@ class MCPComponent(Component):
         
         return False
     
+    def _merge_mcp_server_config(self, existing_config: Dict, new_config: Dict, server_key: str) -> None:
+        """Precisely merge MCP server config, preserving user customizations
+        
+        Args:
+            existing_config: User's current mcpServers configuration
+            new_config: New MCP server configuration to merge
+            server_key: Server key for logging purposes
+        """
+        for server_name, server_def in new_config.items():
+            if server_name in existing_config:
+                # Server already exists - preserve user customizations
+                existing_server = existing_config[server_name]
+                
+                # Only add missing keys, never overwrite existing ones
+                for key, value in server_def.items():
+                    if key not in existing_server:
+                        existing_server[key] = value
+                        self.logger.debug(f"Added missing key '{key}' to existing server '{server_name}'")
+                    else:
+                        self.logger.debug(f"Preserved user customization for '{server_name}.{key}'")
+                
+                self.logger.info(f"Updated existing MCP server '{server_name}' (preserved user customizations)")
+            else:
+                # New server - add complete configuration
+                existing_config[server_name] = server_def
+                self.logger.info(f"Added new MCP server '{server_name}' from {server_key}")
+    
     def _load_mcp_server_config(self, server_key: str) -> Optional[Dict]:
         """Load MCP server configuration snippet"""
         if server_key not in self.mcp_servers:
@@ -274,8 +301,8 @@ class MCPComponent(Component):
                     display_info(f"Server '{server_key}' requires API key: {api_key_env}")
                     display_info("You can set this environment variable later")
             
-            # Merge server config into Claude config
-            claude_config["mcpServers"].update(server_config)
+            # Precisely merge server config, preserving user customizations
+            self._merge_mcp_server_config(claude_config["mcpServers"], server_config, server_key)
             configured_count += 1
             
             self.logger.info(f"Configured MCP server: {server_info['name']}")
@@ -330,14 +357,19 @@ class MCPComponent(Component):
                 self.logger.info("No MCP servers configured")
                 return True
             
-            # Remove all servers we know about
+            # Only remove servers that were installed by SuperClaude
             removed_count = 0
-            for server_info in self.mcp_servers.values():
-                server_name = server_info["name"]
+            installed_servers = self._get_installed_servers()
+            
+            for server_name in installed_servers:
                 if server_name in claude_config["mcpServers"]:
-                    del claude_config["mcpServers"][server_name]
-                    removed_count += 1
-                    self.logger.debug(f"Removed MCP server: {server_name}")
+                    # Check if this server was installed by SuperClaude by comparing with our configs
+                    if self._is_superclaude_managed_server(claude_config["mcpServers"][server_name], server_name):
+                        del claude_config["mcpServers"][server_name]
+                        removed_count += 1
+                        self.logger.debug(f"Removed SuperClaude-managed MCP server: {server_name}")
+                    else:
+                        self.logger.info(f"Preserved user-customized MCP server: {server_name}")
             
             # Save updated configuration
             if removed_count > 0:
@@ -353,12 +385,62 @@ class MCPComponent(Component):
             except Exception as e:
                 self.logger.warning(f"Could not update settings.json: {e}")
             
-            self.logger.success(f"MCP component uninstalled ({removed_count} servers removed)")
+            if removed_count > 0:
+                self.logger.success(f"MCP component uninstalled ({removed_count} SuperClaude-managed servers removed)")
+            else:
+                self.logger.info("MCP component uninstalled (no SuperClaude-managed servers to remove)")
             return True
             
         except Exception as e:
             self.logger.exception(f"Unexpected error during MCP uninstallation: {e}")
             return False
+    
+    def _get_installed_servers(self) -> List[str]:
+        """Get list of servers that were installed by SuperClaude"""
+        try:
+            metadata = self.settings_manager.get_metadata_setting("components")
+            if metadata and "mcp" in metadata:
+                return metadata["mcp"].get("configured_servers", [])
+        except Exception:
+            pass
+        return []
+    
+    def _is_superclaude_managed_server(self, server_config: Dict, server_name: str) -> bool:
+        """Check if a server configuration matches SuperClaude's templates
+        
+        This helps determine if a server was installed by SuperClaude or manually
+        configured by the user, allowing us to preserve user customizations.
+        """
+        # Find the server key that maps to this server name
+        server_key = None
+        for key, info in self.mcp_servers.items():
+            if info["name"] == server_name:
+                server_key = key
+                break
+        
+        if not server_key:
+            return False  # Unknown server, don't remove
+        
+        # Load our template config for comparison
+        template_config = self._load_mcp_server_config(server_key)
+        if not template_config or server_name not in template_config:
+            return False
+        
+        template_server = template_config[server_name]
+        
+        # Check if the current config has the same structure as our template
+        # If user has customized it, the structure might be different
+        required_keys = {"command", "args"}
+        
+        # Check if all required keys exist and match our template
+        for key in required_keys:
+            if key not in server_config or key not in template_server:
+                return False
+            # For command and basic structure, they should match our template
+            if key == "command" and server_config[key] != template_server[key]:
+                return False
+        
+        return True
     
     def get_dependencies(self) -> List[str]:
         """Get dependencies"""
