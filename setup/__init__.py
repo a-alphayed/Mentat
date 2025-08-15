@@ -3,7 +3,7 @@ SuperClaude Installation Suite
 Pure Python installation system for SuperClaude framework
 """
 
-__version__ = "3.0.0"
+__version__ = "4.0.0b1"
 __author__ = "SuperClaude Team"
 
 from pathlib import Path

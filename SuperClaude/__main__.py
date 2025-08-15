@@ -97,7 +97,7 @@ Examples:
         parents=[global_parser]
     )
 
-    parser.add_argument("--version", action="version", version="SuperClaude 4.0.0-beta")
+    parser.add_argument("--version", action="version", version="SuperClaude 4.0.0b1")
 
     subparsers = parser.add_subparsers(
         dest="operation",
