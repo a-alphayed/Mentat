@@ -75,6 +75,9 @@ class MCPComponent(Component):
         
         # This will be set during installation - initialize as empty list
         self.selected_servers: List[str] = []
+        
+        # Store collected API keys for configuration
+        self.collected_api_keys: Dict[str, str] = {}
     
     def _lock_file(self, file_handle, exclusive: bool = False):
         """Cross-platform file locking"""
@@ -225,9 +228,23 @@ class MCPComponent(Component):
                     else:
                         self.logger.debug(f"Preserved user customization for '{server_name}.{key}'")
                 
+                # NEW: Apply environment variable references for API keys
+                if "env" in existing_server and self.collected_api_keys:
+                    for env_key, env_value in existing_server["env"].items():
+                        if env_key in self.collected_api_keys and env_value == "":
+                            # Update to use environment variable reference
+                            existing_server["env"][env_key] = f"${{{env_key}}}"
+                            self.logger.info(f"Configured {env_key} to use environment variable")
+                
                 self.logger.info(f"Updated existing MCP server '{server_name}' (preserved user customizations)")
             else:
                 # New server - add complete configuration
+                # Apply environment variable references if we have collected keys
+                if "env" in server_def and self.collected_api_keys:
+                    for env_key in server_def["env"]:
+                        if env_key in self.collected_api_keys and server_def["env"][env_key] == "":
+                            server_def["env"][env_key] = f"${{{env_key}}}"
+                
                 existing_config[server_name] = server_def
                 self.logger.info(f"Added new MCP server '{server_name}' from {server_key}")
     
@@ -263,6 +280,10 @@ class MCPComponent(Component):
             return True
         
         self.set_selected_servers(selected_servers)
+        
+        # NEW: Log collected API keys information
+        if hasattr(self, 'collected_api_keys') and self.collected_api_keys:
+            self.logger.info(f"Using {len(self.collected_api_keys)} collected API keys for configuration")
         
         # Validate prerequisites
         success, errors = self.validate_prerequisites()

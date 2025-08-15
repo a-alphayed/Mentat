@@ -15,8 +15,9 @@ from ...services.config import ConfigService
 from ...core.validator import Validator
 from ...utils.ui import (
     display_header, display_info, display_success, display_error, 
-    display_warning, Menu, confirm, ProgressBar, Colors, format_size
+    display_warning, Menu, confirm, ProgressBar, Colors, format_size, prompt_api_key
 )
+from ...utils.environment import setup_environment_variables
 from ...utils.logger import get_logger
 from ... import DEFAULT_INSTALL_DIR, PROJECT_ROOT, DATA_DIR
 from . import OperationBase
@@ -127,8 +128,47 @@ def get_components_to_install(args: argparse.Namespace, registry: ComponentRegis
     return interactive_component_selection(registry, config_manager)
 
 
+def collect_api_keys_for_servers(selected_servers: List[str], mcp_instance) -> Dict[str, str]:
+    """
+    Collect API keys for servers that require them
+    
+    Args:
+        selected_servers: List of selected server keys
+        mcp_instance: MCP component instance
+        
+    Returns:
+        Dictionary of environment variable names to API key values
+    """
+    # Filter servers needing keys
+    servers_needing_keys = [
+        (server_key, mcp_instance.mcp_servers[server_key])
+        for server_key in selected_servers
+        if server_key in mcp_instance.mcp_servers and
+           mcp_instance.mcp_servers[server_key].get("requires_api_key", False)
+    ]
+    
+    if not servers_needing_keys:
+        return {}
+    
+    # Display API key configuration header
+    print(f"\n{Colors.CYAN}{Colors.BRIGHT}═══ API Key Configuration ═══{Colors.RESET}")
+    print(f"{Colors.YELLOW}The following servers require API keys for full functionality:{Colors.RESET}\n")
+    
+    collected_keys = {}
+    for server_key, server_info in servers_needing_keys:
+        api_key_env = server_info.get("api_key_env")
+        service_name = server_info["name"]
+        
+        if api_key_env:
+            key = prompt_api_key(service_name, api_key_env)
+            if key:
+                collected_keys[api_key_env] = key
+    
+    return collected_keys
+
+
 def select_mcp_servers(registry: ComponentRegistry) -> List[str]:
-    """Stage 1: MCP Server Selection"""
+    """Stage 1: MCP Server Selection with API Key Collection"""
     logger = get_logger()
     
     try:
@@ -173,6 +213,16 @@ def select_mcp_servers(registry: ComponentRegistry) -> List[str]:
         
         if selected_servers:
             logger.info(f"Selected MCP servers: {', '.join(selected_servers)}")
+            
+            # NEW: Collect API keys for selected servers
+            collected_keys = collect_api_keys_for_servers(selected_servers, mcp_instance)
+            
+            # Set up environment variables
+            if collected_keys:
+                setup_environment_variables(collected_keys)
+                
+                # Store keys for MCP component to use during installation
+                mcp_instance.collected_api_keys = collected_keys
         else:
             logger.info("No MCP servers selected")
         
