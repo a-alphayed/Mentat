@@ -25,7 +25,7 @@ The SuperClaude Framework features 13 specialized domain expert agents that auto
 /brainstorm "task manager app"  # → Requirements analyst guides discovery
 ```
 
-**See the pattern?** You focus on what you want to do, SuperClaude figures out who should help.
+**See the pattern?** You focus on what you want to do, SuperClaude figures out who should help. See [Examples Cookbook](examples-cookbook.md) for many more examples like these.
 
 ---
 
@@ -515,6 +515,32 @@ Agents seamlessly integrate with SuperClaude's command system:
 - Let the right experts automatically show up
 - Agent coordination is available when you want it, not because you need it
 - Focus on building great software - we'll handle the expertise coordination
+
+---
+
+## Related Guides
+
+**🚀 Getting Started (Essential)**
+- [SuperClaude User Guide](superclaude-user-guide.md) - Framework overview and philosophy
+- [Examples Cookbook](examples-cookbook.md) - See agents in action with real examples
+
+**🛠️ Working with Agents (Recommended)**
+- [Commands Guide](commands-guide.md) - Commands that activate specific agents
+- [Behavioral Modes Guide](behavioral-modes-guide.md) - How agents work within different modes
+- [Session Management Guide](session-management.md) - Agent coordination across sessions
+
+**⚙️ Control and Optimization (Advanced)**
+- [Flags Guide](flags-guide.md) - Manual agent control with --agent flags
+- [Best Practices Guide](best-practices.md) - Proven patterns for agent coordination
+- [Technical Architecture Guide](technical-architecture.md) - Agent system implementation
+
+**🔧 When Things Go Wrong**
+- [Troubleshooting Guide](troubleshooting-guide.md) - Agent activation and coordination issues
+
+**📖 Recommended Learning Path:**
+1. [Examples Cookbook](examples-cookbook.md) - See auto-activation in action
+2. [Commands Guide](commands-guide.md) - Understand agent triggers
+3. [Best Practices Guide](best-practices.md) - Master agent coordination patterns
 
 ---
 

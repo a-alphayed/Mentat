@@ -30,7 +30,7 @@
 /sc:brainstorm "my app idea"       # Auto-activates requirements-analyst agent for discovery
 ```
 
-**See? No flags needed.** Everything below is for when you get curious about what's happening behind the scenes.
+**See? No flags needed.** Everything below is for when you get curious about what's happening behind the scenes. For many more working examples, see [Examples Cookbook](examples-cookbook.md).
 
 ---
 
@@ -587,6 +587,32 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 - Let auto-activation handle the complexity
 - Add manual flags only when you want to experiment
 - Trust that SuperClaude knows what it's doing
+
+---
+
+## Related Guides
+
+**🚀 Getting Started (Essential)**
+- [SuperClaude User Guide](superclaude-user-guide.md) - Framework overview and philosophy
+- [Examples Cookbook](examples-cookbook.md) - See flags in action with working examples
+- [Commands Guide](commands-guide.md) - Commands that work with flags
+
+**🤝 Understanding the System (Recommended)**
+- [Agents Guide](agents-guide.md) - How flags activate different agents
+- [Behavioral Modes Guide](behavioral-modes-guide.md) - Flags that control modes
+- [Session Management Guide](session-management.md) - Session-related flags
+
+**⚙️ Optimization and Control (Advanced)**
+- [Best Practices Guide](best-practices.md) - Proven flag combinations and patterns
+- [Technical Architecture Guide](technical-architecture.md) - How flag processing works
+
+**🔧 When Flags Don't Work**
+- [Troubleshooting Guide](troubleshooting-guide.md) - Flag conflicts and issues
+
+**📖 Recommended Learning Path:**
+1. [Examples Cookbook](examples-cookbook.md) - See auto-activation without flags
+2. [Commands Guide](commands-guide.md) - Learn which commands benefit from manual flags
+3. [Best Practices Guide](best-practices.md) - Master advanced flag patterns
 
 ---
 

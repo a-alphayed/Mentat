@@ -8,23 +8,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- **BREAKING**: Agent system restructured to 13 specialized agents
 - **BREAKING**: Commands now use `/sc:` namespace to avoid conflicts with user custom commands
 - Commands are now installed in `~/.claude/commands/sc/` subdirectory
-- All 16 commands updated: `/analyze` � `/sc:analyze`, `/build` � `/sc:build`, etc.
+- All 21 commands updated: `/analyze` → `/sc:analyze`, `/build` → `/sc:build`, etc.
 - Automatic migration from old command locations to new `sc/` subdirectory
+- **BREAKING**: Documentation reorganization - Docs/ directory renamed to Guides/
 
 ### Added
+- **NEW AGENTS**: 13 specialized domain agents with enhanced capabilities
+  - backend-architect.md, devops-architect.md, frontend-architect.md
+  - learning-guide.md, performance-engineer.md, python-expert.md
+  - quality-engineer.md, refactoring-expert.md, requirements-analyst.md
+  - root-cause-analyst.md, security-engineer.md
+- **NEW MODE**: MODE_Orchestration.md for intelligent tool selection mindset (5 total behavioral modes)
 - **NEW COMMAND**: `/sc:implement` for feature and code implementation (addresses v2 user feedback)
+- **NEW FILE**: CLAUDE.md for project-specific Claude Code instructions
 - Migration logic to move existing commands to new namespace automatically
 - Enhanced uninstaller to handle both old and new command locations
 - Improved command conflict prevention
 - Better command organization and discoverability
+- Comprehensive PyPI publishing infrastructure
+- API key management during SuperClaude MCP setup
+
+### Removed
+- **BREAKING**: Removed Templates/ directory (legacy templates no longer needed)
+- **BREAKING**: Removed legacy agents and replaced with enhanced 13-agent system
+
+### Improved
+- Refactored Modes and MCP documentation for concise behavioral guidance
+- Enhanced project cleanup and gitignore for PyPI publishing
+- Implemented uninstall and update safety enhancements
+- Better agent specialization and domain expertise focus
 
 ### Technical Details
 - Commands now accessible as `/sc:analyze`, `/sc:build`, `/sc:improve`, etc.
 - Migration preserves existing functionality while preventing naming conflicts
 - Installation process detects and migrates existing commands automatically
 - Tab completion support for `/sc:` prefix to discover all SuperClaude commands
+- Guides/ directory replaces Docs/ for improved organization
 
 ## [4.0.0-beta.1] - 2025-02-05
 
@@ -35,8 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **New Commands**: /sc:brainstorm, /sc:reflect, /sc:save, /sc:select-tool (21 total commands)
 - **Serena MCP**: Semantic code analysis and memory management
 - **Morphllm MCP**: Intelligent file editing with Fast Apply capability
-- **Hooks System**: Python-based framework integration (completely redesigned and implemented)
-- **SuperClaude-Lite**: Minimal implementation with YAML configuration
+- **Core Components**: Python-based framework integration (completely redesigned and implemented)
 - **Templates**: Comprehensive templates for creating new components
 - **Python-Ultimate-Expert Agent**: Master Python architect for production-ready code
 

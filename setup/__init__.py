@@ -4,7 +4,7 @@ Pure Python installation system for SuperClaude framework
 """
 
 __version__ = "4.0.0b1"
-__author__ = "SuperClaude Team"
+__author__ = "NomenAK"
 
 from pathlib import Path
 

@@ -38,7 +38,7 @@
 /sc:improve --uc legacy-code/            # → Uses symbols, abbreviations, stays clear
 ```
 
-**See the pattern?** You just say what you want to do. SuperClaude figures out the best way to help. The modes are the "how" - you focus on the "what". 🎯
+**See the pattern?** You just say what you want to do. SuperClaude figures out the best way to help. The modes are the "how" - you focus on the "what". See [Examples Cookbook](examples-cookbook.md) for more working examples. 🎯
 
 ---
 
@@ -688,8 +688,26 @@ Modes determine the behavioral approach, agents provide domain expertise. A secu
 
 ---
 
-**Related Guides:**
-- 🤖 [Agent System Guide](agents-guide.md) - Understanding the 13 specialized agents
-- 🛠️ [Commands Guide](commands-guide.md) - All 21 commands with mode integration
-- 🏳️ [Flags Guide](flags-guide.md) - Manual mode control and behavioral flags
-- 📖 [SuperClaude User Guide](superclaude-user-guide.md) - Complete framework overview
+## Related Guides
+
+**🚀 Getting Started (Essential)**
+- [SuperClaude User Guide](superclaude-user-guide.md) - Framework overview and philosophy
+- [Examples Cookbook](examples-cookbook.md) - See modes in action with real examples
+
+**🛠️ Working with Modes (Recommended)**
+- [Commands Guide](commands-guide.md) - Commands that trigger different modes
+- [Agents Guide](agents-guide.md) - How agents work within different modes
+- [Session Management Guide](session-management.md) - Mode persistence across sessions
+
+**⚙️ Control and Optimization (Advanced)**
+- [Flags Guide](flags-guide.md) - Manual mode control with flags like --brainstorm, --uc
+- [Best Practices Guide](best-practices.md) - Proven patterns for mode utilization
+- [Technical Architecture Guide](technical-architecture.md) - Mode detection and activation system
+
+**🔧 When Modes Don't Work as Expected**
+- [Troubleshooting Guide](troubleshooting-guide.md) - Mode activation and behavioral issues
+
+**📖 Recommended Learning Path:**
+1. [Examples Cookbook](examples-cookbook.md) - See auto-activation in practice
+2. [Commands Guide](commands-guide.md) - Understand mode triggers
+3. [Best Practices Guide](best-practices.md) - Master mode coordination patterns

@@ -6,8 +6,8 @@ build-backend = "setuptools.build_meta"
 name = "SuperClaude"
 version = "4.0.0b1"
 authors = [
-    {name = "Mithun Gowda B", email = "contact@superclaude.dev"},
-    {name = "NomenAK"}
+    {name = "NomenAK", email = "anton.knoery@gmail.com"},
+    {name = "Mithun Gowda B"}
 ]
 description = "SuperClaude Framework Management Hub - AI-enhanced development framework for Claude Code"
 readme = "README.md"

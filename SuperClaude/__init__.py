@@ -12,6 +12,6 @@ Usage:
 """
 
 __version__ = "4.0.0b1"
-__author__ = "Mithun Gowda B, NomenAK"
-__email__ = "contact@superclaude.dev"
+__author__ = "NomenAK, Mithun Gowda B"
+__email__ = "anton.knoery@gmail.com"
 __license__ = "MIT"

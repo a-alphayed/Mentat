@@ -423,13 +423,18 @@ SuperClaude install --components all
 1. **Just start using it** - Try `/sc:analyze some-file.js` or `/sc:build` and see what happens ✨
 2. **Don't stress about learning** - SuperClaude usually figures out what you need
 3. **Experiment freely** - Commands like `/sc:improve` and `/sc:troubleshoot` are pretty forgiving
-4. **Use session management** - Try `/sc:load` and `/sc:save` for persistent context
-5. **Explore behavioral modes** - Let SuperClaude adapt to your workflow automatically
+4. **Use session management** - Try `/sc:load` and `/sc:save` for persistent context ([Session Management Guide](session-management.md))
+5. **Explore behavioral modes** - Let SuperClaude adapt to your workflow automatically ([Behavioral Modes Guide](behavioral-modes-guide.md))
 6. **Give feedback** - Let us know what works and what doesn't
 
 **The real secret**: SuperClaude is designed to enhance your existing workflow without you having to learn a bunch of new stuff. Just use it like you'd use regular Claude Code, but notice how much smarter it gets! 🎯
 
 **Still feeling uncertain?** Start with just `/sc:help` and `/sc:analyze README.md` - you'll see how approachable it actually is.
+
+**Next Steps:**
+- [Examples Cookbook](examples-cookbook.md) - Copy-paste commands for common tasks
+- [SuperClaude User Guide](superclaude-user-guide.md) - Complete framework overview
+- [Commands Guide](commands-guide.md) - All 21 commands with examples
 
 ---
 
@@ -443,6 +448,34 @@ SuperClaude install --components all
 - **Available commands**: Use `SuperClaude [command]`, `python3 -m SuperClaude [command]`, or `/sc:[command]` in Claude Code
 
 Thanks for trying SuperClaude! We hope it makes your development workflow smoother and more intelligent. 🙂
+
+---
+
+## Related Guides
+
+**🚀 What to Do Next (Essential)**
+- [Examples Cookbook](examples-cookbook.md) - Copy-paste commands to get started immediately
+- [SuperClaude User Guide](superclaude-user-guide.md) - Complete framework overview and philosophy
+
+**📚 Learning the System (Recommended)**
+- [Commands Guide](commands-guide.md) - All 21 commands with practical examples
+- [Session Management Guide](session-management.md) - Persistent context and project memory
+- [Behavioral Modes Guide](behavioral-modes-guide.md) - How SuperClaude adapts automatically
+
+**🔧 When You Need Help**
+- [Troubleshooting Guide](troubleshooting-guide.md) - Solutions for installation and usage issues
+- [Best Practices Guide](best-practices.md) - Proven patterns for effective usage
+
+**🎯 Advanced Usage (Optional)**
+- [Agents Guide](agents-guide.md) - Understanding the 13 specialized AI experts
+- [Flags Guide](flags-guide.md) - Manual control and optimization options
+- [Technical Architecture Guide](technical-architecture.md) - Internal system design
+
+**📖 Recommended Reading Path After Installation:**
+1. [Examples Cookbook](examples-cookbook.md) - Try commands immediately
+2. [Commands Guide](commands-guide.md) - Learn your toolkit
+3. [Session Management Guide](session-management.md) - Enable persistent context
+4. [Best Practices Guide](best-practices.md) - Optimize your workflow
 
 ---
 

@@ -37,7 +37,7 @@ SuperClaude commands work by:
 /sc:save --checkpoint       # Save your work and progress
 ```
 
-**That's honestly enough to get started.** Everything else below is here when you get curious about what other tools are available. 🛠️
+**That's honestly enough to get started.** Everything else below is here when you get curious about what other tools are available. For step-by-step examples, see [Examples Cookbook](examples-cookbook.md). 🛠️
 
 ---
 
@@ -53,14 +53,14 @@ A practical guide to all 21 SuperClaude v4.0.0 slash commands. We'll be honest a
 | `/sc:build` | Intelligent building | Frontend/backend specialists | Compilation, bundling, deployment prep |
 | `/sc:implement` | Feature implementation | Domain-specific experts | Creating features, components, APIs, services |
 | `/sc:improve` | Automatic code cleanup | Quality experts | Refactoring, optimization, quality fixes |
-| `/sc:troubleshoot` | Problem investigation | Debug specialists | Debugging, issue investigation |
+| `/sc:troubleshoot` | Problem investigation | Debug specialists | Debugging, issue investigation ([Troubleshooting Guide](troubleshooting-guide.md)) |
 | `/sc:test` | Smart testing | QA experts | Running tests, coverage analysis |
 | `/sc:document` | Auto documentation | Writing specialists | README files, code comments, guides |
 | `/sc:git` | Enhanced git workflows | DevOps specialists | Smart commits, branch management |
 | `/sc:design` | System design help | Architecture experts | Architecture planning, API design |
 | `/sc:explain` | Learning assistant | Teaching specialists | Learning concepts, understanding code |
 | `/sc:cleanup` | Debt reduction | Refactoring experts | Removing dead code, organizing files |
-| `/sc:load` | Context understanding | Analysis experts | Project analysis, codebase understanding |
+| `/sc:load` | Context understanding | Analysis experts | Project analysis, session initialization ([Session Management Guide](session-management.md)) |
 | `/sc:estimate` | Smart estimation | Planning experts | Time/effort planning, complexity analysis |
 | `/sc:spawn` | Complex workflows | Orchestration system | Multi-step operations, workflow automation |
 | `/sc:task` | Project management | Planning system | Long-term feature planning, task tracking |
@@ -948,7 +948,34 @@ A practical guide to all 21 SuperClaude v4.0.0 slash commands. We'll be honest a
 - Commands suggest what they can do when you use `--help`
 - The intelligent routing handles most of the complexity
 
-**Need help?** Check the GitHub issues or create a new one if you're stuck! 🚀
+**Need help?** Check the [Troubleshooting Guide](troubleshooting-guide.md) or GitHub issues if you're stuck! 🚀
+
+## Related Guides
+
+**🚀 Getting Started (Essential)**
+- [Installation Guide](installation-guide.md) - Get SuperClaude set up first
+- [Examples Cookbook](examples-cookbook.md) - Copy-paste working examples for all commands
+- [SuperClaude User Guide](superclaude-user-guide.md) - Complete framework overview
+
+**🤝 Understanding the Team (Recommended)**
+- [Agents Guide](agents-guide.md) - The 13 specialists that work with commands
+- [Behavioral Modes Guide](behavioral-modes-guide.md) - How commands adapt automatically
+- [Session Management Guide](session-management.md) - Persistent context with /sc:load and /sc:save
+
+**⚙️ Control and Optimization (Advanced)**
+- [Flags Guide](flags-guide.md) - All the --flags that modify command behavior
+- [Best Practices Guide](best-practices.md) - Proven command combinations and workflows
+
+**🔧 When Commands Don't Work**
+- [Troubleshooting Guide](troubleshooting-guide.md) - Common command issues and solutions
+
+**🏗️ Technical Deep Dive (Optional)**
+- [Technical Architecture Guide](technical-architecture.md) - How the command system works internally
+
+**📖 Recommended Learning Path:**
+1. [Examples Cookbook](examples-cookbook.md) - Try commands with working examples
+2. [Session Management Guide](session-management.md) - Learn /sc:load and /sc:save workflow
+3. [Best Practices Guide](best-practices.md) - Master effective command patterns
 
 ## Command Flags & Options
 
