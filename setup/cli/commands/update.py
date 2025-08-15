@@ -15,8 +15,9 @@ from ...services.settings import SettingsService
 from ...core.validator import Validator
 from ...utils.ui import (
     display_header, display_info, display_success, display_error, 
-    display_warning, Menu, confirm, ProgressBar, Colors, format_size
+    display_warning, Menu, confirm, ProgressBar, Colors, format_size, prompt_api_key
 )
+from ...utils.environment import setup_environment_variables
 from ...utils.logger import get_logger
 from ... import DEFAULT_INSTALL_DIR, PROJECT_ROOT
 from . import OperationBase
@@ -173,6 +174,45 @@ def get_components_to_update(args: argparse.Namespace, installed_components: Dic
     return []
 
 
+def collect_api_keys_for_servers(selected_servers: List[str], mcp_instance) -> Dict[str, str]:
+    """
+    Collect API keys for servers that require them during update
+    
+    Args:
+        selected_servers: List of selected server keys
+        mcp_instance: MCP component instance
+        
+    Returns:
+        Dictionary of environment variable names to API key values
+    """
+    # Filter servers needing keys
+    servers_needing_keys = [
+        (server_key, mcp_instance.mcp_servers[server_key])
+        for server_key in selected_servers
+        if server_key in mcp_instance.mcp_servers and
+           mcp_instance.mcp_servers[server_key].get("requires_api_key", False)
+    ]
+    
+    if not servers_needing_keys:
+        return {}
+    
+    # Display API key configuration header
+    print(f"\n{Colors.CYAN}{Colors.BRIGHT}═══ API Key Configuration ═══{Colors.RESET}")
+    print(f"{Colors.YELLOW}New MCP servers require API keys for full functionality:{Colors.RESET}\n")
+    
+    collected_keys = {}
+    for server_key, server_info in servers_needing_keys:
+        api_key_env = server_info.get("api_key_env")
+        service_name = server_info["name"]
+        
+        if api_key_env:
+            key = prompt_api_key(service_name, api_key_env)
+            if key:
+                collected_keys[api_key_env] = key
+    
+    return collected_keys
+
+
 def interactive_update_selection(available_updates: Dict[str, Dict[str, str]], 
                                 installed_components: Dict[str, str]) -> Optional[List[str]]:
     """Interactive update selection"""
@@ -255,6 +295,26 @@ def perform_update(components: List[str], args: argparse.Namespace) -> bool:
             logger.error("No valid component instances created")
             return False
         
+        # Handle MCP component specially - collect API keys for new servers
+        collected_api_keys = {}
+        if "mcp" in components and "mcp" in component_instances:
+            mcp_instance = component_instances["mcp"]
+            if hasattr(mcp_instance, 'mcp_servers'):
+                # Get all available MCP servers
+                all_server_keys = list(mcp_instance.mcp_servers.keys())
+                
+                # Collect API keys for any servers that require them
+                collected_api_keys = collect_api_keys_for_servers(all_server_keys, mcp_instance)
+                
+                # Set up environment variables if any keys were collected
+                if collected_api_keys:
+                    setup_environment_variables(collected_api_keys)
+                    
+                    # Store keys for MCP component to use during update
+                    mcp_instance.collected_api_keys = collected_api_keys
+                    
+                    logger.info(f"Collected {len(collected_api_keys)} API keys for MCP server update")
+        
         # Register components with installer
         installer.register_components(list(component_instances.values()))
         
@@ -275,7 +335,8 @@ def perform_update(components: List[str], args: argparse.Namespace) -> bool:
             "force": args.force,
             "backup": backup,
             "dry_run": args.dry_run,
-            "update_mode": True
+            "update_mode": True,
+            "selected_mcp_servers": list(mcp_instance.mcp_servers.keys()) if "mcp" in component_instances else []
         }
         
         success = installer.update_components(components, config)

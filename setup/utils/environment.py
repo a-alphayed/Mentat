@@ -6,10 +6,81 @@ Cross-platform utilities for setting up persistent environment variables
 import os
 import sys
 import subprocess
+import json
 from pathlib import Path
 from typing import Dict, Optional
+from datetime import datetime
 from .ui import display_info, display_success, display_warning, Colors
 from .logger import get_logger
+
+
+def _get_env_tracking_file() -> Path:
+    """Get path to environment variable tracking file"""
+    from .. import DEFAULT_INSTALL_DIR
+    install_dir = Path.home() / ".claude"
+    install_dir.mkdir(exist_ok=True)
+    return install_dir / "superclaude_env_vars.json"
+
+
+def _load_env_tracking() -> Dict[str, Dict[str, str]]:
+    """Load environment variable tracking data"""
+    tracking_file = _get_env_tracking_file()
+    
+    try:
+        if tracking_file.exists():
+            with open(tracking_file, 'r') as f:
+                return json.load(f)
+    except Exception as e:
+        get_logger().warning(f"Could not load environment tracking: {e}")
+    
+    return {}
+
+
+def _save_env_tracking(tracking_data: Dict[str, Dict[str, str]]) -> bool:
+    """Save environment variable tracking data"""
+    tracking_file = _get_env_tracking_file()
+    
+    try:
+        with open(tracking_file, 'w') as f:
+            json.dump(tracking_data, f, indent=2)
+        return True
+    except Exception as e:
+        get_logger().error(f"Could not save environment tracking: {e}")
+        return False
+
+
+def _add_env_tracking(env_vars: Dict[str, str]) -> None:
+    """Add environment variables to tracking"""
+    if not env_vars:
+        return
+    
+    tracking_data = _load_env_tracking()
+    timestamp = datetime.now().isoformat()
+    
+    for env_var, value in env_vars.items():
+        tracking_data[env_var] = {
+            "set_by": "superclaude",
+            "timestamp": timestamp,
+            "value_hash": str(hash(value))  # Store hash, not actual value for security
+        }
+    
+    _save_env_tracking(tracking_data)
+    get_logger().info(f"Added {len(env_vars)} environment variables to tracking")
+
+
+def _remove_env_tracking(env_vars: list) -> None:
+    """Remove environment variables from tracking"""
+    if not env_vars:
+        return
+    
+    tracking_data = _load_env_tracking()
+    
+    for env_var in env_vars:
+        if env_var in tracking_data:
+            del tracking_data[env_var]
+    
+    _save_env_tracking(tracking_data)
+    get_logger().info(f"Removed {len(env_vars)} environment variables from tracking")
 
 
 def detect_shell_config() -> Optional[Path]:
@@ -106,6 +177,9 @@ def setup_environment_variables(api_keys: Dict[str, str]) -> bool:
             success = False
     
     if success:
+        # Add to tracking
+        _add_env_tracking(api_keys)
+        
         display_success("Environment variables configured successfully")
         if os.name != 'nt':
             display_info("Restart your terminal or run 'source ~/.bashrc' to apply changes")
@@ -157,6 +231,184 @@ def get_shell_name() -> str:
     if shell_path:
         return Path(shell_path).name
     return 'unknown'
+
+
+def get_superclaude_environment_variables() -> Dict[str, str]:
+    """
+    Get environment variables that were set by SuperClaude
+    
+    Returns:
+        Dictionary of environment variable names to their current values
+    """
+    # Load tracking data to get SuperClaude-managed variables
+    tracking_data = _load_env_tracking()
+    
+    found_vars = {}
+    for env_var, metadata in tracking_data.items():
+        if metadata.get("set_by") == "superclaude":
+            value = os.environ.get(env_var)
+            if value:
+                found_vars[env_var] = value
+    
+    # Fallback: check known SuperClaude API key environment variables
+    # (for backwards compatibility with existing installations)
+    known_superclaude_env_vars = [
+        "TWENTYFIRST_API_KEY",  # Magic server
+        "MORPH_API_KEY"         # Morphllm server
+    ]
+    
+    for env_var in known_superclaude_env_vars:
+        if env_var not in found_vars:
+            value = os.environ.get(env_var)
+            if value:
+                found_vars[env_var] = value
+    
+    return found_vars
+
+
+def cleanup_environment_variables(env_vars_to_remove: Dict[str, str], create_restore_script: bool = True) -> bool:
+    """
+    Safely remove environment variables with backup and restore options
+    
+    Args:
+        env_vars_to_remove: Dictionary of environment variable names to remove
+        create_restore_script: Whether to create a script to restore the variables
+        
+    Returns:
+        True if cleanup was successful, False otherwise
+    """
+    logger = get_logger()
+    success = True
+    
+    if not env_vars_to_remove:
+        return True
+    
+    # Create restore script if requested
+    if create_restore_script:
+        restore_script_path = _create_restore_script(env_vars_to_remove)
+        if restore_script_path:
+            display_info(f"Created restore script: {restore_script_path}")
+        else:
+            display_warning("Could not create restore script")
+    
+    print(f"\n{Colors.BLUE}[INFO] Removing environment variables...{Colors.RESET}")
+    
+    for env_var, value in env_vars_to_remove.items():
+        try:
+            # Remove from current session
+            if env_var in os.environ:
+                del os.environ[env_var]
+                logger.info(f"Removed {env_var} from current session")
+            
+            if os.name == 'nt':  # Windows
+                # Remove persistent user variable using reg command
+                result = subprocess.run(
+                    ['reg', 'delete', 'HKCU\\Environment', '/v', env_var, '/f'],
+                    capture_output=True,
+                    text=True
+                )
+                if result.returncode != 0:
+                    # Variable might not exist in registry, which is fine
+                    logger.debug(f"Registry deletion for {env_var}: {result.stderr.strip()}")
+                else:
+                    logger.info(f"Removed {env_var} from Windows registry")
+            else:  # Unix-like systems
+                shell_config = detect_shell_config()
+                if shell_config and shell_config.exists():
+                    _remove_env_var_from_shell_config(shell_config, env_var)
+                    
+        except Exception as e:
+            logger.error(f"Failed to remove {env_var}: {e}")
+            display_warning(f"Could not remove {env_var}: {e}")
+            success = False
+    
+    if success:
+        # Remove from tracking
+        _remove_env_tracking(list(env_vars_to_remove.keys()))
+        
+        display_success("Environment variables removed successfully")
+        if os.name != 'nt':
+            display_info("Restart your terminal or source your shell config to apply changes")
+        else:
+            display_info("Changes will take effect in new terminal sessions")
+    else:
+        display_warning("Some environment variables could not be removed")
+    
+    return success
+
+
+def _create_restore_script(env_vars: Dict[str, str]) -> Optional[Path]:
+    """Create a script to restore environment variables"""
+    try:
+        home = Path.home()
+        if os.name == 'nt':  # Windows
+            script_path = home / "restore_superclaude_env.bat"
+            with open(script_path, 'w') as f:
+                f.write("@echo off\n")
+                f.write("REM SuperClaude Environment Variable Restore Script\n")
+                f.write("REM Generated during uninstall\n\n")
+                for env_var, value in env_vars.items():
+                    f.write(f'setx {env_var} "{value}"\n')
+                f.write("\necho Environment variables restored\n")
+                f.write("pause\n")
+        else:  # Unix-like
+            script_path = home / "restore_superclaude_env.sh"
+            with open(script_path, 'w') as f:
+                f.write("#!/bin/bash\n")
+                f.write("# SuperClaude Environment Variable Restore Script\n")
+                f.write("# Generated during uninstall\n\n")
+                shell_config = detect_shell_config()
+                for env_var, value in env_vars.items():
+                    f.write(f'export {env_var}="{value}"\n')
+                    if shell_config:
+                        f.write(f'echo \'export {env_var}="{value}"\' >> {shell_config}\n')
+                f.write("\necho 'Environment variables restored'\n")
+            
+            # Make script executable
+            script_path.chmod(0o755)
+        
+        return script_path
+        
+    except Exception as e:
+        get_logger().error(f"Failed to create restore script: {e}")
+        return None
+
+
+def _remove_env_var_from_shell_config(shell_config: Path, env_var: str) -> bool:
+    """Remove environment variable export from shell configuration file"""
+    try:
+        # Read current content
+        with open(shell_config, 'r') as f:
+            lines = f.readlines()
+        
+        # Filter out lines that export this variable
+        filtered_lines = []
+        skip_next_blank = False
+        
+        for line in lines:
+            # Check if this line exports our variable
+            if f'export {env_var}=' in line or line.strip() == f'# SuperClaude API Key':
+                skip_next_blank = True
+                continue
+            
+            # Skip blank line after removed export
+            if skip_next_blank and line.strip() == '':
+                skip_next_blank = False
+                continue
+            
+            skip_next_blank = False
+            filtered_lines.append(line)
+        
+        # Write back the filtered content
+        with open(shell_config, 'w') as f:
+            f.writelines(filtered_lines)
+        
+        get_logger().info(f"Removed {env_var} export from {shell_config.name}")
+        return True
+        
+    except Exception as e:
+        get_logger().error(f"Failed to remove {env_var} from {shell_config}: {e}")
+        return False
 
 
 def create_env_file(api_keys: Dict[str, str], env_file_path: Optional[Path] = None) -> bool:
