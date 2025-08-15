@@ -1,4 +1,4 @@
-# SuperClaude V4 Beta Flags User Guide 🏁
+# SuperClaude Framework Flags User Guide 🏁
 
 ## 🤖 Most Flags Activate Automatically - Don't Stress About It!
 
@@ -7,7 +7,7 @@
 **Here's what actually happens:**
 - You type `/analyze auth.js` 
 - SuperClaude detects it's security-related code
-- **Usually activates** security-auditor agent, `--focus security`, `--validate`
+- **Usually activates** security-engineer agent, `--focus security`, `--validate`
 - You often get expert security analysis without managing any flags
 
 **When might you manually use flags?**
@@ -26,8 +26,8 @@
 /sc:analyze src/                    # Auto-activates appropriate expert agents
 /sc:build                          # Auto-optimizes based on your project  
 /sc:improve messy-code.js          # Auto-activates quality agents and safety flags
-/sc:troubleshoot "weird error"     # Auto-activates root-cause-analyzer and debugging flags
-/sc:brainstorm "my app idea"       # Auto-activates brainstorm-PRD agent for requirements
+/sc:troubleshoot "weird error"     # Auto-activates root-cause-analyst and debugging flags
+/sc:brainstorm "my app idea"       # Auto-activates requirements-analyst agent for discovery
 ```
 
 **See? No flags needed.** Everything below is for when you get curious about what's happening behind the scenes.
@@ -148,7 +148,7 @@ Enable specialized capabilities through MCP servers.
 #### `--magic`
 **What it does**: Enables Magic for UI component generation  
 **When to use**: Creating UI components, design systems  
-**Auto-activates**: UI component requests, frontend persona  
+**Auto-activates**: UI component requests, frontend architect agent  
 **Example**: `/build dashboard --magic` - Get modern UI components
 
 #### `--play` / `--playwright`
@@ -157,8 +157,8 @@ Enable specialized capabilities through MCP servers.
 **Auto-activates**: Test workflows, QA specialist agent  
 **Example**: `/test e2e --play`
 
-#### `--morph` / `--fast-apply`
-**What it does**: Enables Morphllm for intelligent file editing with Fast Apply  
+#### `--morph` / `--morphllm`
+**What it does**: Enables Morphllm for intelligent file editing and pattern transformations  
 **When to use**: Multi-file edits, pattern-based transformations  
 **Auto-activates**: Complex refactoring, bulk file updates  
 **Example**: `/refactor --morph pattern-updates/`
@@ -199,12 +199,6 @@ For complex operations and workflows.
 
 **Example**: `/analyze monorepo/ --delegate auto`
 
-#### `--wave-mode [auto|force|off]`
-**What it does**: Multi-stage execution with compound intelligence  
-**When to use**: Complex improvements, systematic analysis  
-**Auto-activates**: Complexity >0.8 AND files >20 AND operation types >2  
-**Example**: `/improve legacy-system/ --wave-mode force`
-
 #### `--loop`
 **What it does**: Iterative improvement mode  
 **When to use**: Quality improvement, refinement operations  
@@ -232,7 +226,7 @@ For complex operations and workflows.
 
 ### Session & Workflow Flags 🔄
 
-These V4 Beta flags control session management and advanced workflows.
+These SuperClaude Framework flags control session management and advanced workflows.
 
 #### `--brainstorm`
 **What it does**: Activates brainstorming mode for requirements discovery  
@@ -251,7 +245,7 @@ These V4 Beta flags control session management and advanced workflows.
 **Auto-activates**: End of successful brainstorming sessions  
 **Example**: `/brainstorm app-idea --prd`
 
-**💡 Tip**: V4 Beta introduces powerful session management - let brainstorming mode guide requirement discovery naturally.
+**💡 Tip**: SuperClaude Framework introduces powerful session management - let brainstorming mode guide requirement discovery naturally.
 
 ---
 
@@ -270,9 +264,9 @@ Direct SuperClaude's attention to specific areas.
 **Example**: `/analyze --focus security --scope project`
 
 #### Agent Flags
-**Available agents**: system-architect, frontend-specialist, backend-engineer, root-cause-analyzer, security-auditor, code-educator, code-refactorer, performance-optimizer, qa-specialist, devops-engineer, technical-writer, python-ultimate-expert, brainstorm-PRD  
-**What they do**: Activates specialized domain expert agents (V4 Beta enhancement)  
-**Example**: `/analyze --agent security-auditor` - Security-focused analysis with expert agent
+**Available agents**: system-architect, backend-architect, frontend-architect, devops-architect, security-engineer, performance-engineer, root-cause-analyst, quality-engineer, refactoring-expert, python-expert, requirements-analyst, technical-writer, learning-guide  
+**What they do**: Activates specialized domain expert agents (SuperClaude Framework enhancement)  
+**Example**: `/analyze --agent security-engineer` - Security-focused analysis with expert agent
 
 **💡 Tip**: `--focus` is great for targeted analysis. Expert agents auto-activate but manual control helps.
 
@@ -295,13 +289,13 @@ Direct SuperClaude's attention to specific areas.
 ### Large Project Work
 ```bash
 /sc:analyze monorepo/ --delegate auto --uc     # Efficient large analysis
-/sc:improve legacy/ --wave-mode auto --safe-mode  # Safe systematic improvement
+/sc:improve legacy/ --loop --safe-mode  # Safe iterative improvement
 ```
 
 ### Learning & Documentation
 ```bash
 /sc:explain React hooks --c7 --verbose    # Detailed explanation with docs
-/sc:document api/ --persona-scribe        # Professional documentation
+/sc:document api/ --agent technical-writer        # Professional documentation
 ```
 
 ### Performance-Focused
@@ -313,7 +307,7 @@ Direct SuperClaude's attention to specific areas.
 ### Security-Focused
 ```bash
 /sc:analyze --focus security --think --validate  # Thorough security analysis
-/sc:scan --persona-security --safe-mode         # Conservative security scan
+/sc:scan --agent security-engineer --safe-mode         # Conservative security scan
 ```
 
 ## Practical Examples 💡
@@ -355,8 +349,8 @@ Direct SuperClaude's attention to specific areas.
 
 **After** (safe):
 ```bash
-/sc:improve legacy-system/ --safe-mode --loop --validate --preview
-# → Safe changes only, iterative approach, validates first, shows preview
+/sc:improve legacy-system/ --safe-mode --loop --validate
+# → Safe changes only, iterative approach, validates first, systematic improvement
 # → Much safer, progressive improvement
 ```
 
@@ -378,11 +372,11 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 ### Domain-Based
 ```bash
 /sc:build react-app/
-# Auto-activates: frontend-specialist agent + --c7
+# Auto-activates: frontend-architect agent + --c7
 # Why: Frontend framework detected
 
 /sc:analyze --focus security
-# Auto-activates: security-auditor agent + --validate
+# Auto-activates: security-engineer agent + --validate
 # Why: Security focus triggers security specialist
 ```
 
@@ -405,20 +399,20 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 
 **Comprehensive Code Review**:
 ```bash
-/sc:review codebase/ --agent qa-specialist --think-hard --focus quality --validate --c7
-# → QA specialist agent + deep thinking + quality focus + validation + docs
+/sc:review codebase/ --agent quality-engineer --think-hard --focus quality --validate --c7
+# → Quality engineer agent + deep thinking + quality focus + validation + docs
 ```
 
 **Legacy System Modernization**:
 ```bash
-/sc:improve legacy/ --wave-mode force --agent system-architect --safe-mode --loop --c7
-# → Wave orchestration + architect agent + safety + iteration + docs
+/sc:improve legacy/ --delegate auto --agent system-architect --safe-mode --loop --c7
+# → Systematic orchestration + architect agent + safety + iteration + docs
 ```
 
 **Security Audit**:
 ```bash
-/sc:scan --agent security-auditor --ultrathink --focus security --validate --seq
-# → Security auditor agent + maximum thinking + security focus + validation + systematic analysis
+/sc:scan --agent security-engineer --ultrathink --focus security --validate --seq
+# → Security engineer agent + maximum thinking + security focus + validation + systematic analysis
 ```
 
 ### Performance Optimization
@@ -440,14 +434,14 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 **Bug Investigation Workflow**:
 ```bash
 /sc:troubleshoot "specific error" --seq --think --validate
-/sc:analyze affected-files/ --focus quality --agent root-cause-analyzer  
+/sc:analyze affected-files/ --focus quality --agent root-cause-analyst  
 /sc:test --play --coverage
 ```
 
 **Feature Development Workflow**:
 ```bash
 /sc:design new-feature --agent system-architect --c7
-/sc:build --magic --agent frontend-specialist --validate
+/sc:build --magic --agent frontend-architect --validate
 /sc:test --play --coverage
 /sc:document --agent technical-writer --c7
 ```
@@ -471,7 +465,7 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 ### Flag Combinations That Work Well
 ```bash
 # Safe improvement
---safe-mode --validate --preview
+--safe-mode --validate
 
 # Deep analysis  
 --think --seq --c7
@@ -480,13 +474,13 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 --delegate auto --uc --focus
 
 # Learning
---verbose --c7 --agent code-educator
+--verbose --c7 --agent learning-guide
 
 # Security work
---agent security-auditor --focus security --validate
+--agent security-engineer --focus security --validate
 
 # Performance work
---agent performance-optimizer --focus performance --play
+--agent performance-engineer --focus performance --play
 
 # Requirements discovery
 --brainstorm --max-rounds 10 --prd
@@ -508,7 +502,7 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 ### Common Problems
 
 **"Flags don't seem to work"**
-- Check spelling (common typos: `--ultracompresed`, `--agent fronted-specialist`)
+- Check spelling (common typos: `--ultracompresed`, `--agent frontend-architect`)
 - Some flags need values: `--scope project`, `--focus security`
 - Flag conflicts: `--no-mcp` overrides `--c7`, `--seq`, `--serena`, etc.
 
@@ -525,19 +519,19 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 **"Not thorough enough"**
 - Add `--think` or `--think-hard`
 - Enable relevant MCP servers: `--seq`, `--c7`
-- Use appropriate agent: `--agent root-cause-analyzer`
+- Use appropriate agent: `--agent root-cause-analyst`
 
 **"Changes too risky"**
 - Always use `--safe-mode` for important code
 - Add `--validate` to check first
-- Use `--preview` to see changes before applying
+- Use `--validate` to check changes before applying
 
 ### Flag Conflicts
 
 **These override others**:
 - `--no-mcp` overrides all MCP flags (`--c7`, `--seq`, `--serena`, etc.)
 - `--safe-mode` overrides optimization flags
-- Last agent flag wins: `--agent frontend-specialist --agent backend-engineer` → backend-engineer
+- Last agent flag wins: `--agent frontend-architect --agent backend-architect` → backend-architect
 
 **Precedence order**:
 1. Safety flags (`--safe-mode`) beat optimization
@@ -554,7 +548,7 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 4. **Trust the automation** - SuperClaude usually picks reasonable defaults
 
 ### Getting Advanced (If You Want To)
-1. **Experiment with overrides** - Try `--agent security-auditor` on non-security code for different perspectives
+1. **Experiment with overrides** - Try `--agent security-engineer` on non-security code for different perspectives
 2. **Learn the useful combos** - `--safe-mode --validate` for important stuff, `--brainstorm --prd` for new projects
 3. **Understand the performance trade-offs** - Fast (`--uc --no-mcp`) vs thorough (`--think-hard --all-mcp`)
 4. **Use flags for learning** - `--verbose` when you want to understand what's happening
@@ -562,8 +556,8 @@ SuperClaude usually adds flags based on context. Here's when it tries:
 ### Performance Tips (For Power Users)
 - **For speed**: `--uc --no-mcp --scope file`
 - **For thoroughness**: `--think-hard --all-mcp --delegate auto`
-- **For safety**: `--safe-mode --validate --preview`
-- **For learning**: `--verbose --c7 --agent code-educator`
+- **For safety**: `--safe-mode --validate`
+- **For learning**: `--verbose --c7 --agent learning-guide`
 - **For project discovery**: `--brainstorm --max-rounds 15 --prd`
 
 ---

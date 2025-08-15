@@ -12,6 +12,14 @@
 
 **Auto-activation is pretty neat** 🪄 - SuperClaude attempts to detect what you're trying to do and activate relevant specialists (security expert, performance optimizer, etc.) without you managing it. Usually works well! 😊
 
+## Core Philosophy
+
+SuperClaude commands work by:
+- **Intelligent activation**: Right experts and tools activated automatically
+- **Context awareness**: Understanding your project and frameworks
+- **Safe operations**: Quality gates and validation throughout
+- **Progressive enhancement**: Building from simple to complex solutions
+
 ---
 
 ## Quick "Just Try These" List 🚀
@@ -33,7 +41,7 @@
 
 ---
 
-A practical guide to all 21 SuperClaude V4 Beta slash commands. We'll be honest about what works well and what's still rough around the edges.
+A practical guide to all 21 SuperClaude v4.0.0 slash commands. We'll be honest about what works well and what's still rough around the edges.
 
 ## Quick Reference 📋
 
@@ -78,12 +86,12 @@ A practical guide to all 21 SuperClaude V4 Beta slash commands. We'll be honest 
 - Want expert guidance on implementation strategy
 - Planning complex features with multiple dependencies
 
-**The magic**: Auto-activates appropriate expert personas (architect, security, frontend, backend) and MCP servers (Context7 for patterns, Sequential for complex analysis) based on your feature requirements.
+**The magic**: Auto-activates appropriate expert agents (architect, security, frontend, backend) and MCP servers (Context7 for patterns, Sequential for complex analysis) based on your feature requirements.
 
 **Examples**:
 ```bash
 /sc:workflow docs/feature-100-prd.md --strategy systematic --c7 --sequential
-/sc:workflow "user authentication system" --persona security --output detailed
+/sc:workflow "user authentication system" --agent security --output detailed
 /sc:workflow payment-api --strategy mvp --risks --dependencies
 ```
 
@@ -132,10 +140,10 @@ A practical guide to all 21 SuperClaude V4 Beta slash commands. We'll be honest 
 ```
 
 **Auto-activation patterns**:
-- **Frontend**: UI components, React/Vue/Angular → frontend persona + Magic MCP
-- **Backend**: APIs, services, databases → backend persona + Context7
-- **Security**: Auth, payments, sensitive data → security persona + validation
-- **Complex features**: Multi-step implementations → Sequential MCP + architect persona
+- **Frontend**: UI components, React/Vue/Angular → frontend agent + Magic MCP
+- **Backend**: APIs, services, databases → backend agent + Context7
+- **Security**: Auth, payments, sensitive data → security agent + validation
+- **Complex features**: Multi-step implementations → Sequential MCP + architect agent
 
 **Gotchas**:
 - Specify `--type` for better results (component vs service vs feature)
@@ -275,14 +283,14 @@ A practical guide to all 21 SuperClaude V4 Beta slash commands. We'll be honest 
 
 **Useful flags**:
 - `--logs <file>` - Include log file analysis
-- `--systematic` - Use structured debugging approach
+- `--seq` - Use structured debugging approach
 - `--focus network|database|frontend` - Focus area
 
 **Real examples**:
 ```bash
 /sc:troubleshoot "API returning 500" --logs server.log
 /sc:troubleshoot --focus database "slow queries"
-/sc:troubleshoot "build failing" --systematic
+/sc:troubleshoot "build failing" --seq
 ```
 
 **Gotchas**:
@@ -842,7 +850,7 @@ A practical guide to all 21 SuperClaude V4 Beta slash commands. We'll be honest 
 
 ### Common Workflows
 
-**New Project Discovery** (V4 Beta):
+**New Project Discovery**:
 ```bash
 /sc:brainstorm "project idea" --prd         # Explore and define requirements
 /sc:load --deep --summary                   # Understand existing codebase
@@ -884,7 +892,7 @@ A practical guide to all 21 SuperClaude V4 Beta slash commands. We'll be honest 
 /sc:save --checkpoint "pre-deployment validation"
 ```
 
-**Complex Task Planning** (V4 Beta):
+**Complex Task Planning**:
 ```bash
 /sc:select-tool "migrate to microservices"  # Get approach recommendations
 /sc:reflect --type task "migration strategy" # Validate approach
@@ -941,6 +949,65 @@ A practical guide to all 21 SuperClaude V4 Beta slash commands. We'll be honest 
 - The intelligent routing handles most of the complexity
 
 **Need help?** Check the GitHub issues or create a new one if you're stuck! 🚀
+
+## Command Flags & Options
+
+### Common Flags
+- `--safe` - Conservative operations with validation
+- `--interactive` - Guided operation with user input
+- `--parallel` - Parallel execution where applicable
+- `--preview` - Show changes without applying
+- `--analyze` - Deep analysis mode
+- `--validate` - Enhanced validation and verification
+- `--depth shallow|normal|deep` - Analysis depth control
+- `--strategy systematic|agile|enterprise` - Execution strategy
+
+### Format Options
+- `--format text|json|yaml|report|diagram` - Output format control
+- `--type` - Operation type specification (varies by command)
+- `--style brief|detailed` - Output verbosity control
+
+## Expert Activation
+
+The framework automatically activates relevant experts:
+
+### Technical Specialists
+- **Backend Architect** - Server architecture, APIs, databases
+- **DevOps Architect** - Infrastructure, deployment, CI/CD  
+- **Frontend Architect** - UI architecture, state management, performance
+- **Learning Guide** - Educational content, knowledge transfer
+- **Performance Engineer** - Optimization, profiling, scalability
+- **Python Expert** - Python-specific development and best practices
+- **Quality Engineer** - Testing, quality assurance, code standards
+- **Refactoring Expert** - Code restructuring and technical debt
+- **Requirements Analyst** - Requirements gathering and analysis
+- **Root Cause Analyst** - Problem diagnosis and systematic debugging
+- **Security Engineer** - Security assessment and hardening
+- **Technical Writer** - Documentation and communication
+
+### MCP Server Integration
+- **Context7** - Official documentation and framework patterns
+- **Magic** - Modern UI component generation
+- **Morphllm** - Pattern-based code editing and transformations
+- **Playwright** - Browser automation and E2E testing
+- **Sequential** - Complex multi-step reasoning and analysis
+- **Serena** - Project memory and session management
+
+## Command Relationships
+
+### Session Flow
+`/sc:load` → Work with commands → `/sc:reflect` (validate) → `/sc:save`
+
+### Development Flow  
+`/sc:analyze` → `/sc:design` → `/sc:implement` → `/sc:test` → `/sc:improve`
+
+### Project Flow
+`/sc:brainstorm` → `/sc:workflow` → `/sc:estimate` → `/sc:spawn` or `/sc:task`
+
+### Maintenance Flow
+`/sc:troubleshoot` → `/sc:cleanup` → `/sc:improve` → `/sc:document`
+
+Remember: SuperClaude adapts to your needs. Start with simple requests and let the framework's intelligence guide you to more sophisticated usage patterns!
 
 ---
 
