@@ -29,6 +29,48 @@ SuperClaude install
 
 # That's it! 🎉
 ```
+### Option C: From npm (Global, after publishing)
+```bash
+npm install -g superclaude
+superclaude --help
+```
+- Requires package to be published on npmjs.org.
+- Installs the npm wrapper and sets up SuperClaude via pip.
+
+### Option D: From npm (Local Project)
+```bash
+npm install superclaude
+npx superclaude --help
+```
+- Installs SuperClaude wrapper inside your project.
+- Use `npx` to run it locally.
+- Also requires publishing to npmjs.org.
+
+### Option E: From GitHub (Works without npm publish)
+```bash
+# Global install directly from GitHub
+yarn global add github:SuperClaude-Org/SuperClaude_Framework
+# or
+npm install -g github:SuperClaude-Org/SuperClaude_Framework
+
+superclaude --help
+```
+```bash
+# Local project install from GitHub
+npm install github:SuperClaude-Org/SuperClaude_Framework
+npx superclaude --help
+```
+- Works immediately without publishing to npm registry.
+
+### Option F: With npx (No Install Needed)
+```bash
+npx superclaude --help
+```
+- Runs SuperClaude instantly.
+- First run may install Python package via pip.
+- Subsequent runs skip reinstallation unless explicitly updated.
+
+---
 
 **What you just got:**
 - ✅ 21 intelligent commands that auto-activate specialized capabilities
