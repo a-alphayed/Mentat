@@ -1,7 +1,7 @@
 {
-  "name": "superclaude",
+  "name": "@superclaude-org/superclaude",
   "version": "4.0.0",
-  "description": "SuperClaude official npm wrapper for the Python package (PyPI: SuperClaude). Run with npx superclaude anywhere!",
+  "description": "SuperClaude Framework NPM wrapper - Official Node.js wrapper for the Python SuperClaude package. Enhances Claude Code with specialized commands and AI development tools.",
   "bin": {
     "superclaude": "./bin/cli.js"
   },
