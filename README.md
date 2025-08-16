@@ -193,11 +193,11 @@ npx superclaude --help
 **Option E: From GitHub (Works now, no publish needed)**
 ```bash
 # Global
-npm install -g github:SuperClaude-Org/SuperClaude_Framework
+npm install -g github:SuperClaude-Org/SuperClaude_Framework#SuperClaude_V4_Beta
 superclaude --help
 
 # Local
-npm install github:SuperClaude-Org/SuperClaude_Framework
+npm install github:SuperClaude-Org/SuperClaude_Framework#SuperClaude_V4_Beta
 npx superclaude --help
 ```
 
