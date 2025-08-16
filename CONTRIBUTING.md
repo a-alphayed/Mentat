@@ -10,7 +10,6 @@ SuperClaude is a community-driven project that enhances Claude Code through inte
 - Python 3.12+ (standard library only)
 - Node.js 18+ (for MCP servers)
 - Claude Code installed and authenticated
-- uv package manager (recommended for development)
 
 ### Development Setup
 
@@ -22,9 +21,6 @@ cd SuperClaude_Framework
 # Install SuperClaude V4 Beta
 python -m pip install -e .
 
-# Run tests
-python Tests/comprehensive_test.py
-python Tests/v4_integration_test.py
 ```
 
 ## 🎯 Ways to Contribute
@@ -68,11 +64,9 @@ SuperClaude_Framework/
 │   ├── Agents/         # 13 specialized domain agents
 │   ├── Commands/       # 21 slash commands (/sc:load, /sc:save, etc.)
 │   ├── Core/          # Framework documentation and rules
-│   ├── Config/        # Configuration management
 │   ├── MCP/           # 6 MCP server integrations
 │   └── Modes/         # 5 behavioral modes
 ├── Guides/           # User guides and documentation
-└── Tests/            # Comprehensive test suite
 ```
 
 ### V4 Beta Architecture
