@@ -62,10 +62,6 @@ npx superclaude --help
 ```
 - Works immediately without publishing to npm registry.
 
-### Option F: With npx (No Install Needed)
-```bash
-npx superclaude --help
-```
 - Runs SuperClaude instantly.
 - First run may install Python package via pip.
 - Subsequent runs skip reinstallation unless explicitly updated.
