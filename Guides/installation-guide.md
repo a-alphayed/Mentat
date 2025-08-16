@@ -29,7 +29,7 @@ SuperClaude install
 
 # That's it! 🎉
 ```
-### Option C: From npm (Global, after publishing)
+### Option C: From npm (Global, after publishing this won't works for now)
 ```bash
 npm install -g superclaude
 superclaude --help
@@ -37,7 +37,7 @@ superclaude --help
 - Requires package to be published on npmjs.org.
 - Installs the npm wrapper and sets up SuperClaude via pip.
 
-### Option D: From npm (Local Project)
+### Option D: From npm (Local Project this won't works for now)
 ```bash
 npm install superclaude
 npx superclaude --help
