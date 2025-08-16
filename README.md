@@ -178,6 +178,28 @@ git clone https://github.com/SuperClaude-Org/SuperClaude_Framework.git
 cd SuperClaude_Framework
 pip install -e .
 ```
+**Option C: From npm (Global, requires publish this method won't works for now)**
+```bash
+npm install -g superclaude
+superclaude --help
+```
+
+**Option D: From npm (Local Project, requires publish this method won't works for now)**
+```bash
+npm install superclaude
+npx superclaude --help
+```
+
+**Option E: From GitHub (Works now, no publish needed)**
+```bash
+# Global
+npm install -g github:SuperClaude-Org/SuperClaude_Framework#SuperClaude_V4_Beta
+superclaude --help
+
+# Local
+npm install github:SuperClaude-Org/SuperClaude_Framework#SuperClaude_V4_Beta
+npx superclaude --help
+```
 
 ---
 **Missing Python?** Install Python 3.8+ first:
