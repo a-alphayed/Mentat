@@ -84,7 +84,7 @@ Task Analysis →
 
 ### Architecture & System Design Agents 🏗️
 
-#### system-architect 🏢
+### system-architect 🏢
 **Expertise**: Large-scale distributed system design with focus on scalability and service architecture
 
 **Auto-Activation**:
@@ -104,7 +104,7 @@ Task Analysis →
 2. **Real-time Analytics**: Architecture for high-throughput data ingestion with stream processing and time-series storage
 3. **Multi-tenant SaaS**: System design with tenant isolation, shared infrastructure, and horizontal scaling strategies
 
-#### Success Criteria
+### Success Criteria
 - [ ] System-level thinking evident in responses
 - [ ] Mentions service boundaries and integration patterns
 - [ ] Includes scalability and reliability considerations
@@ -118,7 +118,7 @@ Task Analysis →
 
 ---
 
-#### backend-architect ⚙️
+### backend-architect ⚙️
 **Expertise**: Robust server-side system design with emphasis on API reliability and data integrity
 
 **Auto-Activation**:
@@ -142,7 +142,7 @@ Task Analysis →
 
 ---
 
-#### frontend-architect 🎨
+### frontend-architect 🎨
 **Expertise**: Modern web application architecture with focus on accessibility and user experience
 
 **Auto-Activation**:
@@ -166,7 +166,7 @@ Task Analysis →
 
 ---
 
-#### devops-architect 🚀
+### devops-architect 🚀
 **Expertise**: Infrastructure automation and deployment pipeline design for reliable software delivery
 
 **Auto-Activation**:
@@ -190,7 +190,7 @@ Task Analysis →
 
 ### Quality & Analysis Agents 🔍
 
-#### security-engineer 🔒
+### security-engineer 🔒
 **Expertise**: Application security architecture with focus on threat modeling and vulnerability prevention
 
 **Auto-Activation**:
@@ -214,7 +214,7 @@ Task Analysis →
 
 ---
 
-#### performance-engineer ⚡
+### performance-engineer ⚡
 **Expertise**: System performance optimization with focus on scalability and resource efficiency
 
 **Auto-Activation**:
@@ -238,7 +238,7 @@ Task Analysis →
 
 ---
 
-#### root-cause-analyst 🔍
+### root-cause-analyst 🔍
 **Expertise**: Systematic problem investigation using evidence-based analysis and hypothesis testing
 
 **Auto-Activation**:
@@ -262,7 +262,7 @@ Task Analysis →
 
 ---
 
-#### quality-engineer ✅
+### quality-engineer ✅
 **Expertise**: Comprehensive testing strategy and quality assurance with focus on automation and coverage
 
 **Auto-Activation**:
@@ -286,7 +286,7 @@ Task Analysis →
 
 ---
 
-#### refactoring-expert 🔧
+### refactoring-expert 🔧
 **Expertise**: Code quality improvement through systematic refactoring and technical debt management
 
 **Auto-Activation**:
@@ -310,7 +310,7 @@ Task Analysis →
 
 ### Specialized Development Agents 🎯
 
-#### python-expert 🐍
+### python-expert 🐍
 **Expertise**: Production-ready Python development with emphasis on modern frameworks and performance
 
 **Auto-Activation**:
@@ -334,7 +334,7 @@ Task Analysis →
 
 ---
 
-#### requirements-analyst 📝
+### requirements-analyst 📝
 **Expertise**: Requirements discovery and specification development through systematic stakeholder analysis
 
 **Auto-Activation**:
@@ -358,7 +358,7 @@ Task Analysis →
 
 ### Communication & Learning Agents 📚
 
-#### technical-writer 📚
+### technical-writer 📚
 **Expertise**: Technical documentation and communication with focus on audience analysis and clarity
 
 **Auto-Activation**:
@@ -382,7 +382,7 @@ Task Analysis →
 
 ---
 
-#### learning-guide 🎓
+### learning-guide 🎓
 **Expertise**: Educational content design and progressive learning with focus on skill development and mentorship
 
 **Auto-Activation**:
