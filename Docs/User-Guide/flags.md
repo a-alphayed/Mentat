@@ -659,7 +659,7 @@ SuperClaude's intelligent flag system automatically detects task complexity and 
 - **Reset flags**: Remove all flags and let auto-detection work
 - **Check compatibility**: Use `/sc:help flags` for valid combinations
 - **Restart session**: Exit and restart Claude Code to reset flag state
-- **Verify setup**: Run `SuperClaude status --flags` to check flag system
+- **Verify setup**: Check `/sc:help flags` for available flag options
 
 ### Flag-Specific Troubleshooting
 
@@ -668,7 +668,7 @@ SuperClaude's intelligent flag system automatically detects task complexity and 
 # Problem: "Unknown flag --invalid-flag"
 # Quick Fix: Check flag spelling and availability
 /sc:help flags                         # List all valid flags
-python3 -m SuperClaude --help flags    # System-level flag help
+python3 -m SuperClaude --help          # System-level help
 # Common typos: --brainstrom → --brainstorm, --seq → --sequential
 ```
 
@@ -676,7 +676,7 @@ python3 -m SuperClaude --help flags    # System-level flag help
 ```bash
 # Problem: --magic, --morph, --c7 not working
 # Quick Fix: Check MCP server status
-SuperClaude status --mcp              # Verify server connections
+ls ~/.claude/.claude.json              # Check MCP config exists
 node --version                        # Ensure Node.js v16+
 npm cache clean --force               # Clear package cache
 /sc:command --no-mcp                  # Bypass MCP temporarily
@@ -765,7 +765,7 @@ SuperClaude install --components mcp --force  # Reinstall MCP
 **Level 2: Detailed Help (5-15 min)**
 ```bash
 # Flag-specific diagnostics
-SuperClaude diagnose --flags
+SuperClaude install --diagnose
 /sc:help flags --verbose
 cat ~/.claude/logs/flag-system.log
 # Test individual flags one at a time
@@ -792,13 +792,13 @@ strace -e trace=execve /sc:command --verbose 2>&1
 After applying flag fixes, test with:
 - [ ] `/sc:help flags` (should list all available flags)
 - [ ] `/sc:command --basic-flag` (should work without errors)
-- [ ] `SuperClaude status --mcp` (MCP flags should work if servers connected)
+- [ ] `ls ~/.claude/.claude.json` (MCP config should exist if installed)
 - [ ] Flag combinations follow priority rules correctly
 - [ ] Auto-detection works for simple commands
 
 ## Quick Troubleshooting (Legacy)
-- **Flag not recognized** → Check spelling: `SuperClaude --help flags`
-- **MCP flag fails** → Check server status: `SuperClaude status --mcp`
+- **Flag not recognized** → Check spelling: `python3 -m SuperClaude --help`
+- **MCP flag fails** → Check MCP config: `ls ~/.claude/.claude.json`
 - **Auto-flags wrong** → Use manual override: `--no-mcp` or specific flags
 - **Performance issues** → Reduce complexity: `--scope file` or `--concurrency 1`
 - **Flag conflicts** → Check priority rules in documentation

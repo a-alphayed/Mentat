@@ -11,9 +11,9 @@
 Before using this guide, verify MCP servers are working:
 
 ```bash
-# Test server connectivity
-SuperClaude status --mcp
-# Expected: Shows connected servers (at minimum context7, sequential-thinking)
+# Test MCP configuration exists
+ls ~/.claude/.claude.json
+# Expected: Shows MCP server configuration file
 
 # Test Context7 server
 /sc:explain "React useEffect"
@@ -744,9 +744,9 @@ ls ~/.claude/.claude.json
 node --version  
 # Should show: v16.x.x or higher
 
-# Test basic MCP connectivity
-SuperClaude status --mcp
-# Should show connected servers (at least context7, sequential-thinking)
+# Test basic MCP configuration
+ls ~/.claude/.claude.json
+# Should show MCP server configuration file exists
 ```
 
 **Step 2: Common Fixes (1-2 minutes)**
@@ -787,9 +787,9 @@ chmod -R 755 ~/.claude/
 # Detailed MCP server logs
 tail -f ~/.claude/logs/mcp-*.log
 
-# Test individual server connections
-SuperClaude test-mcp --server context7
-SuperClaude test-mcp --server sequential-thinking
+# Test individual server functionality
+/sc:explain "test" --c7  # Test Context7 server
+/sc:analyze test/ --seq  # Test Sequential server
 
 # Check for port conflicts
 netstat -tulpn | grep :3000
@@ -891,9 +891,10 @@ SuperClaude restart --mcp                    # Restart MCP system
 **Level 2: Detailed Help (5-15 min)**
 ```bash
 # MCP-specific diagnostics
-SuperClaude diagnose --mcp
+SuperClaude install --diagnose
 tail -f ~/.claude/logs/mcp-*.log
-SuperClaude test-mcp --all-servers
+# Test all MCP servers with commands
+/sc:explain "test" --c7 && /sc:analyze test/ --seq
 ```
 - See [Common Issues Guide](../Reference/common-issues.md) for MCP installation problems
 - See [MCP Server Guide](../Reference/mcp-server-guide.md) for detailed server troubleshooting
@@ -901,7 +902,7 @@ SuperClaude test-mcp --all-servers
 **Level 3: Expert Support (30+ min)**
 ```bash
 # Deep MCP analysis
-SuperClaude diagnose --mcp --full-system
+SuperClaude install --diagnose
 lsof | grep mcp
 netstat -tulpn | grep node
 # Check individual server configurations
@@ -916,7 +917,7 @@ netstat -tulpn | grep node
 ### Success Validation
 
 After applying MCP fixes, test with:
-- [ ] `SuperClaude status --mcp` (should show connected servers)
+- [ ] `ls ~/.claude/.claude.json` (should show MCP configuration exists)
 - [ ] `/sc:explain "test" --c7` (context7 should fetch documentation)
 - [ ] `/sc:analyze test/ --seq` (sequential should show reasoning)
 - [ ] MCP flags work: `--magic`, `--play` (if configured)
@@ -926,15 +927,15 @@ After applying MCP fixes, test with:
 
 **MCP Server Status Check:**
 ```bash
-# Check all server health
-SuperClaude status --mcp
+# Check MCP configuration exists
+ls ~/.claude/.claude.json
 
 # Test individual servers
-SuperClaude test-mcp --server context7
-SuperClaude test-mcp --server sequential
+/sc:explain "test" --c7  # Test Context7
+/sc:analyze test/ --seq  # Test Sequential
 
 # Detailed diagnostics
-SuperClaude diagnose --verbose
+SuperClaude install --diagnose
 ```
 
 **Log Analysis:**

@@ -509,7 +509,7 @@ Task Analysis →
 **Level 3: Expert Support (30+ min)**
 ```bash
 # Deep agent analysis
-SuperClaude diagnose --agents
+SuperClaude install --diagnose
 # Check agent coordination patterns
 # Review multi-domain keyword strategies
 ```

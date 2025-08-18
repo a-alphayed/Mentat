@@ -518,7 +518,7 @@ Standard Approach: Consistent, professional baseline for all tasks
 **Level 3: Expert Support (30+ min)**
 ```bash
 # Deep mode analysis
-SuperClaude diagnose --modes
+SuperClaude install --diagnose
 # Check mode activation patterns
 # Review behavioral triggers and thresholds
 ```

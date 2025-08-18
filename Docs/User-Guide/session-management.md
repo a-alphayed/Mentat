@@ -24,12 +24,12 @@ Before using this guide, verify session commands work:
 # Expected: Shows current session status and progress
 ```
 
-**If tests fail**: Check Serena MCP installation: `SuperClaude status --mcp serena`
+**If tests fail**: Check Serena MCP installation: `SuperClaude install --list-components | grep serena`
 
 ## 🚨 Quick Troubleshooting
 
 ### Common Issues (< 2 minutes)
-- **Session won't load**: Check Serena MCP server connection: `SuperClaude status --mcp serena`
+- **Session won't load**: Check Serena MCP installed: `SuperClaude install --list-components | grep serena`
 - **Save fails**: Verify write permissions to `~/.claude/` directory
 - **Memory issues**: Clear old sessions with `/sc:reflect --type session-cleanup`
 - **Slow loading**: Use `--scope file` for large projects or `--fast` flag
@@ -71,8 +71,8 @@ Test your setup before starting:
 # Verify SuperClaude is working
 SuperClaude --version
 
-# Check Serena MCP connection
-SuperClaude status --mcp serena
+# Check Serena MCP installed
+SuperClaude install --list-components | grep serena
 ```
 
 **Time Investment:**
@@ -189,7 +189,7 @@ cd /path/to/your/project
 **Test:** Session should remember changes when resumed later  
 **Check:** `/sc:reflect` should show accurate progress tracking
 
-**Need Help?**: If any step fails, check your setup by running `SuperClaude status --mcp serena` to verify the Serena MCP server is working correctly.
+**Need Help?**: If any step fails, check your setup by running `SuperClaude install --list-components | grep serena` to verify the Serena MCP component is installed.
 
 
 ## Session Commands
@@ -519,7 +519,7 @@ delete_memory(key)       # Clean up old data
 # Problem: "/sc:load project/ fails with error"
 # Quick Fix: Verify project and dependencies
 ls -la project/                           # Check project exists
-SuperClaude status --mcp serena          # Verify Serena MCP
+SuperClaude install --list-components | grep serena  # Verify Serena MCP
 /sc:load . --refresh                     # Force fresh analysis
 /sc:load . --scope module                # Reduce load scope
 ```
@@ -585,7 +585,7 @@ cat ~/.claude/logs/serena.log | tail -50 # Check Serena logs
 **Level 3: Expert Support (30+ min)**
 ```bash
 # Deep session analysis
-SuperClaude diagnose --sessions
+SuperClaude install --diagnose
 ls -la ~/.claude/serena/                 # Check Serena state
 uv run serena diagnose                   # Serena diagnostics
 # Reset session system completely

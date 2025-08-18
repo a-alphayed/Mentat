@@ -19,8 +19,8 @@ SuperClaude --version
 # Expected: SuperClaude Framework v4.0+
 
 # Check MCP server connectivity
-SuperClaude status --mcp
-# Expected: At least context7 and sequential-thinking connected
+SuperClaude install --list-components | grep mcp
+# Expected: Shows installed MCP components
 ```
 
 ### 💬 Claude Code Testing (Type in Claude Code Chat)
@@ -499,7 +499,7 @@ ps aux | grep SuperClaude  # Check for hung processes
 ```bash
 # Problem: MCP servers not responding
 # Quick Fix: Verify server status and restart
-SuperClaude status --mcp                    # Check all servers
+ls ~/.claude/.claude.json                    # Check MCP config exists
 /sc:command --no-mcp                       # Bypass MCP temporarily
 node --version                             # Verify Node.js v16+
 npm cache clean --force                    # Clear NPM cache
@@ -546,7 +546,7 @@ killall node                         # Reset MCP servers
 **Level 2: Detailed Help (5-15 min)**
 ```bash
 # Comprehensive diagnostics
-SuperClaude diagnose --verbose
+SuperClaude install --diagnose
 /sc:help troubleshoot
 cat ~/.claude/logs/superclaude.log | tail -50
 ```
@@ -555,7 +555,7 @@ cat ~/.claude/logs/superclaude.log | tail -50
 **Level 3: Expert Support (30+ min)**
 ```bash
 # Deep system analysis
-SuperClaude diagnose --full-system
+SuperClaude install --diagnose
 strace -e trace=file /sc:command 2>&1 | grep ENOENT
 lsof | grep SuperClaude
 # Check GitHub Issues for known problems
