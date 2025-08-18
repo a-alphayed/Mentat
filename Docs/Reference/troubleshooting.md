@@ -49,15 +49,29 @@ pipx ensurepath
 ```
 
 **Issue: Partial Component Installation**
-```bash
-# Symptoms: Some components install, others fail silently
 
-# Advanced Diagnosis
+**Symptoms**: Some components install, others fail silently
+
+**Advanced Diagnosis:**
+
+**Linux/macOS**:
+```bash
 python3 -m SuperClaude install --dry-run --verbose
 cat ~/.claude/CLAUDE.md | grep -E "@|import"
 ls -la ~/.claude/
+```
 
-# Component dependency validation
+**Windows**:
+```cmd
+python -m SuperClaude install --dry-run --verbose
+type "%USERPROFILE%\.claude\CLAUDE.md" | findstr /R "@.*import"
+dir "%USERPROFILE%\.claude" /a
+```
+
+**Component dependency validation:**
+
+**Linux/macOS**:
+```bash
 python3 -c "
 import importlib
 components = ['FLAGS', 'RULES', 'PRINCIPLES', 'MODE_Task_Management']
@@ -67,8 +81,17 @@ for comp in components:
     except ImportError:
         print(f'❌ {comp}: Missing')
 "
+```
 
-# Solution: Incremental installation with validation
+**Windows**:
+```cmd
+python -c "import importlib; components = ['FLAGS', 'RULES', 'PRINCIPLES', 'MODE_Task_Management']; [print(f'✅ {comp}: Available') for comp in components]"
+```
+
+**Solution: Incremental installation with validation**
+
+**Linux/macOS**:
+```bash
 for component in core agents modes mcp; do
     echo "Installing $component..."
     python3 -m SuperClaude install --components $component
@@ -78,6 +101,20 @@ for component in core agents modes mcp; do
         break
     fi
 done
+```
+
+**Windows**:
+```cmd
+for %%c in (core agents modes mcp) do (
+    echo Installing %%c...
+    python -m SuperClaude install --components %%c
+    type "%USERPROFILE%\.claude\CLAUDE.md" | findstr "@" >nul || (
+        echo ❌ Component %%c failed
+        goto :end
+    )
+)
+:end
+```
 
 # Prevention
 # Install components one at a time for large projects
@@ -87,20 +124,30 @@ done
 ### Platform-Specific Issues
 
 **Windows Platform Issues:**
+
+**Issue: Path separator problems**
 ```cmd
-# Issue: Path separator problems
 ERROR: Cannot find file 'C:\Users\name\.claude\CLAUDE.md'
+```
 
-# Solution: Use proper Windows paths
-set CLAUDE_CONFIG_DIR=C:\Users\%USERNAME%\.claude
+**Solution: Use proper Windows paths**
+```cmd
+set CLAUDE_CONFIG_DIR=%USERPROFILE%\.claude
 python -m SuperClaude install --install-dir "%CLAUDE_CONFIG_DIR%"
+```
 
-# Issue: Node.js not found for MCP servers
-# Solution: Install Node.js from official source
+**Issue: Node.js not found for MCP servers**
+
+**Solution: Install Node.js from official source**
+```cmd
 winget install OpenJS.NodeJS
-# or download from https://nodejs.org/
+REM or download from https://nodejs.org/
+```
 
-# Issue: PowerShell execution policy
+**Issue: PowerShell execution policy**
+
+**Solution: Update execution policy**
+```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
@@ -671,28 +718,66 @@ grep "@" ~/.claude/CLAUDE.md
 ```
 
 **Issue: Component Configuration Conflicts**
-```bash
-# Symptoms: Components interfering with each other
 
-# Diagnosis
+**Symptoms**: Components interfering with each other
+
+**Diagnosis:**
+
+**Linux/macOS**:
+```bash
 # Check component installation status
 cat ~/.claude/CLAUDE.md
 ls ~/.claude/
+```
 
-# Solution 1: Reinstall in correct order
+**Windows**:
+```cmd
+REM Check component installation status
+type "%USERPROFILE%\.claude\CLAUDE.md"
+dir "%USERPROFILE%\.claude"
+```
+
+**Solution 1: Reinstall in correct order**
+
+**Linux/macOS**:
+```bash
 python3 -m SuperClaude install --components core agents modes mcp --force
+```
 
-# Solution 2: Fresh installation
+**Windows**:
+```cmd
+python -m SuperClaude install --components core agents modes mcp --force
+```
+
+**Solution 2: Fresh installation**
+
+**Linux/macOS**:
+```bash
 rm -rf ~/.claude/
 python3 -m SuperClaude install --fresh
-
-# Solution 3: Verify installation integrity
-cat ~/.claude/CLAUDE.md | grep -E "@|SuperClaude"
-
-# Prevention
-# Install components in dependency order
-# Always backup configuration before major changes
 ```
+
+**Windows**:
+```cmd
+rmdir /s /q "%USERPROFILE%\.claude"
+python -m SuperClaude install --fresh
+```
+
+**Solution 3: Verify installation integrity**
+
+**Linux/macOS**:
+```bash
+cat ~/.claude/CLAUDE.md | grep -E "@|SuperClaude"
+```
+
+**Windows**:
+```cmd
+type "%USERPROFILE%\.claude\CLAUDE.md" | findstr /R "@.*SuperClaude"
+```
+
+**Prevention**:
+- Install components in dependency order
+- Always backup configuration before major changes
 
 **Issue: Custom Configuration Not Loading**
 ```bash
@@ -724,29 +809,68 @@ python3 -m SuperClaude install --components core  # Base installation
 ### Reset and Recovery Procedures
 
 **Issue: Complete Configuration Corruption**
+
+**Symptoms**: SuperClaude completely non-functional after configuration changes
+
+**Emergency Recovery Procedure**
+
+**Step 1: Backup current state**
+
+**Linux/macOS**:
 ```bash
-# Symptoms: SuperClaude completely non-functional after configuration changes
-
-# Emergency Recovery Procedure
-# Step 1: Backup current state
 cp -r ~/.claude ~/.claude.corrupted.$(date +%Y%m%d)
+```
 
-# Step 2: Complete reset
+**Windows**:
+```cmd
+xcopy "%USERPROFILE%\.claude" "%USERPROFILE%\.claude.corrupted.%date:~-4,4%%date:~-10,2%%date:~-7,2%" /e /i
+```
+
+**Step 2: Complete reset**
+
+**Linux/macOS**:
+```bash
 rm -rf ~/.claude/
 python3 -m SuperClaude install --fresh
+```
 
-# Step 3: Selective recovery
+**Windows**:
+```cmd
+rmdir /s /q "%USERPROFILE%\.claude"
+python -m SuperClaude install --fresh
+```
+
+**Step 3: Selective recovery**
+
+**Linux/macOS**:
+```bash
 # Restore specific custom files from backup if needed
 cp ~/.claude.corrupted.*/custom-file.md ~/.claude/
+```
 
-# Step 4: Gradual reconfiguration
+**Windows**:
+```cmd
+REM Restore specific custom files from backup if needed
+copy "%USERPROFILE%\.claude.corrupted.*\custom-file.md" "%USERPROFILE%\.claude\"
+```
+
+**Step 4: Gradual reconfiguration**
+
+**Linux/macOS**:
+```bash
 python3 -m SuperClaude install --components core agents modes
 # Test after each component
-
-# Prevention
-# Regular configuration backups
-# Test configuration changes in non-production environment
 ```
+
+**Windows**:
+```cmd
+python -m SuperClaude install --components core agents modes
+REM Test after each component
+```
+
+**Prevention**:
+- Regular configuration backups
+- Test configuration changes in non-production environment
 
 ## Performance Issues
 

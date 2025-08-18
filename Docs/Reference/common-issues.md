@@ -82,7 +82,7 @@ python3 -m SuperClaude --version
 
 **Quick Fix**:
 ```cmd
-set CLAUDE_CONFIG_DIR=C:\Users\%USERNAME%\.claude
+set CLAUDE_CONFIG_DIR=%USERPROFILE%\.claude
 python -m SuperClaude install --install-dir "%CLAUDE_CONFIG_DIR%"
 ```
 
@@ -106,10 +106,14 @@ python -m SuperClaude install --install-dir "%CLAUDE_CONFIG_DIR%"
 **Error**: `Node.js not found` during MCP installation
 
 **Quick Fix**:
+
+**Linux/macOS**:
 ```bash
-# Linux/macOS:
 curl -fsSL https://nodejs.org/dist/v18.17.0/node-v18.17.0-linux-x64.tar.xz | tar -xJ
-# Windows:
+```
+
+**Windows**:
+```cmd
 winget install OpenJS.NodeJS
 ```
 
@@ -121,11 +125,21 @@ winget install OpenJS.NodeJS
 **Error**: Insufficient memory or resources
 
 **Quick Fix**:
+
+**Linux/macOS**:
 ```bash
 # Clear temporary data:
 rm -rf ~/.claude/tmp/ ~/.claude/cache/
 # Work with smaller projects
 # Close other applications
+```
+
+**Windows**:
+```cmd
+# Clear temporary data:
+rmdir /s /q "%USERPROFILE%\.claude\tmp" "%USERPROFILE%\.claude\cache" 2>nul
+REM Work with smaller projects
+REM Close other applications
 ```
 
 [Detailed Help →](troubleshooting.md#performance-problems-and-optimization)
@@ -136,11 +150,21 @@ rm -rf ~/.claude/tmp/ ~/.claude/cache/
 **Error**: Multiple issues, corrupted installation
 
 **Quick Fix**:
+
+**Linux/macOS**:
 ```bash
 rm -rf ~/.claude/
 pip uninstall SuperClaude
 pip install SuperClaude
 python3 -m SuperClaude install --fresh
+```
+
+**Windows**:
+```cmd
+rmdir /s /q "%USERPROFILE%\.claude"
+pip uninstall SuperClaude
+pip install SuperClaude
+python -m SuperClaude install --fresh
 ```
 
 [Detailed Help →](troubleshooting.md#reset-and-recovery-procedures)
@@ -150,13 +174,27 @@ python3 -m SuperClaude install --fresh
 ## Emergency Recovery
 
 **Complete Reset** (when everything is broken):
+
+**Linux/macOS**:
 ```bash
 rm -rf ~/.claude/ && pip uninstall SuperClaude && pip install SuperClaude && python3 -m SuperClaude install --fresh
 ```
 
+**Windows**:
+```cmd
+rmdir /s /q "%USERPROFILE%\.claude" && pip uninstall SuperClaude && pip install SuperClaude && python -m SuperClaude install --fresh
+```
+
 **Test Installation**:
+
+**Linux/macOS**:
 ```bash
 python3 -m SuperClaude --version && echo "✅ Installation OK"
+```
+
+**Windows**:
+```cmd
+python -m SuperClaude --version && echo ✅ Installation OK
 ```
 
 **Test Claude Code Integration**:
