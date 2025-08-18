@@ -1,85 +1,87 @@
 # SuperClaude Troubleshooting Guide
 
+> **Need a Quick Fix?** For the top 10 most common issues with rapid 2-minute solutions, see the [Common Issues Quick Reference](common-issues.md) first.
+
 > **Command Context**: This guide covers both **Terminal Commands** (for installation issues) and **Claude Code Commands** (`/sc:` for development issues). Look for section headers to know which type to use.
 
-**Comprehensive Problem Resolution**: Step-by-step solutions for common SuperClaude issues, from installation problems to advanced configuration challenges. Each solution includes diagnosis steps, resolution procedures, and prevention strategies.
+**Comprehensive Problem Resolution**: Step-by-step solutions for complex SuperClaude issues, from installation problems to advanced configuration challenges. Each solution includes diagnosis steps, resolution procedures, and prevention strategies.
 
-**Quick Resolution Focus**: Most issues can be resolved in under 5 minutes with the right diagnostic approach. This guide provides systematic troubleshooting methods to get you back to productive development quickly.
+**When to Use This Guide**: Use this comprehensive guide when the [quick fixes](common-issues.md) don't resolve your issue, or when you need detailed diagnosis and prevention strategies.
 
 ## Installation Issues
 
-### Common Installation Problems
+> **🚀 Quick Fix**: For common installation problems like permission denied, Python version issues, or component failures, try the [Common Issues Quick Reference](common-issues.md#top-10-quick-fixes) first.
 
-**Issue: Permission Denied During Installation**
+### Advanced Installation Diagnosis
+
+**Issue: Complex Dependency Conflicts**
 ```bash
-# Error message
-ERROR: Permission denied: '/home/user/.claude/CLAUDE.md'
+# Error message variations
+ERROR: Package has conflicting dependencies
+ERROR: Cannot resolve version requirements
+ERROR: Installation failed due to environment conflicts
 
-# Diagnosis
+# Advanced Diagnosis
+pip list --outdated
+pip check
+python3 -m pip debug --verbose
+
+# Solution 1: Virtual environment isolation
+python3 -m venv fresh-superclaude-env
+source fresh-superclaude-env/bin/activate
+pip install --upgrade pip setuptools wheel
+pip install SuperClaude
+
+# Solution 2: Dependency conflict resolution
+pip install pip-tools
+pip-compile requirements.in  # If you have requirements.in
+pip-sync requirements.txt
+
+# Solution 3: System package manager conflicts (Linux)
+# Use pipx for isolated installation
+python3 -m pip install --user pipx
+pipx install SuperClaude
+pipx ensurepath
+
+# Prevention
+# Use virtual environments for all Python development
+# Regular dependency audits and updates
+```
+
+**Issue: Partial Component Installation**
+```bash
+# Symptoms: Some components install, others fail silently
+
+# Advanced Diagnosis
+python3 -m SuperClaude install --dry-run --verbose
+cat ~/.claude/CLAUDE.md | grep -E "@|import"
 ls -la ~/.claude/
-# Check file ownership and permissions
 
-# Solution 1: Fix permissions
-sudo chown -R $USER ~/.claude
-chmod 755 ~/.claude
+# Component dependency validation
+python3 -c "
+import importlib
+components = ['FLAGS', 'RULES', 'PRINCIPLES', 'MODE_Task_Management']
+for comp in components:
+    try:
+        print(f'✅ {comp}: Available')
+    except ImportError:
+        print(f'❌ {comp}: Missing')
+"
 
-# Solution 2: Use --user installation
-pip install --user SuperClaude
-python3 -m SuperClaude install --install-dir ~/superclaude
-
-# Prevention
-# Always install SuperClaude in user space, avoid sudo for installation
-```
-
-**Issue: Python Version Compatibility**
-```bash
-# Error message
-ERROR: SuperClaude requires Python 3.8+ but found Python 3.7
-
-# Diagnosis
-python3 --version
-which python3
-
-# Solution 1: Update Python (Linux/Ubuntu)
-sudo apt update
-sudo apt install python3.8 python3.8-pip
-python3.8 -m pip install SuperClaude
-
-# Solution 2: Use pyenv for version management
-curl https://pyenv.run | bash
-pyenv install 3.9.0
-pyenv global 3.9.0
-pip install SuperClaude
-
-# Solution 3: Virtual environment with specific Python
-python3.9 -m venv superclaude-env
-source superclaude-env/bin/activate
-pip install SuperClaude
-```
-
-**Issue: Component Installation Failures**
-```bash
-# Error message
-ERROR: Component 'mcp' installation failed - dependency not met
-
-# Diagnosis
-python3 -m SuperClaude --version
-ls ~/.claude/
-# Check component installation status
-
-# Solution 1: Install dependencies first
-python3 -m SuperClaude install --components core  # Install core first
-python3 -m SuperClaude install --components mcp   # Then install MCP
-
-# Solution 2: Force reinstallation
-python3 -m SuperClaude install --components mcp --force
-
-# Solution 3: Clean installation
-rm -rf ~/.claude/
-python3 -m SuperClaude install --fresh
+# Solution: Incremental installation with validation
+for component in core agents modes mcp; do
+    echo "Installing $component..."
+    python3 -m SuperClaude install --components $component
+    # Validate after each component
+    if ! cat ~/.claude/CLAUDE.md | grep -q "@"; then
+        echo "❌ Component $component failed"
+        break
+    fi
+done
 
 # Prevention
-# Always install components in dependency order: core → agents → modes → mcp
+# Install components one at a time for large projects
+# Validate installation after each component
 ```
 
 ### Platform-Specific Issues
@@ -138,35 +140,9 @@ pip install --user SuperClaude
 
 ## Command Issues
 
-### Command Execution Problems
+> **🚀 Quick Fix**: For command recognition problems, timeouts, or basic execution issues, try the [Common Issues Quick Reference](common-issues.md#4--commands-not-working-in-claude-code) first.
 
-**Issue: Command Not Found**
-```bash
-# Error message
-ERROR: Command '/sc:analyze' not recognized
-
-# Diagnosis
-# Check if SuperClaude is properly installed
-python3 -m SuperClaude --version
-ls ~/.claude/
-
-# Check Claude Code session
-claude --version
-
-# Solution 1: Restart Claude Code session
-# Exit and restart Claude Code completely
-
-# Solution 2: Verify installation
-cat ~/.claude/CLAUDE.md
-python3 -m SuperClaude install --components core --force
-
-# Solution 3: Manual verification
-cat ~/.claude/CLAUDE.md
-# Should contain SuperClaude instructions and imports
-
-# Prevention
-# Always restart Claude Code after SuperClaude installation
-```
+### Advanced Command Diagnosis
 
 **Issue: Command Timeout or Hanging**
 ```bash
@@ -282,7 +258,9 @@ grep "SuperClaude" ~/.claude/CLAUDE.md
 
 ## Agent & Mode Issues
 
-### Agent Activation Problems
+> **🚀 Quick Fix**: For basic agent and mode issues, most problems can be resolved by restarting Claude Code and checking component installation with `python3 -m SuperClaude install --components agents modes --force`.
+
+### Advanced Agent Diagnosis
 
 **Issue: Expected Agent Not Activating**
 ```bash
@@ -408,7 +386,9 @@ echo "Requirements: vague project, needs discovery"
 
 ## MCP Server Issues
 
-### MCP Server Connection Problems
+> **🚀 Quick Fix**: For Node.js missing or MCP connection problems, see [Common Issues Quick Reference](common-issues.md#8--nodejs-missing-for-mcp-servers) for rapid solutions.
+
+### Advanced MCP Diagnosis
 
 **Issue: Context7 Server Not Connecting**
 ```bash
@@ -770,7 +750,9 @@ python3 -m SuperClaude install --components core agents modes
 
 ## Performance Issues
 
-### Performance Problems and Optimization
+> **🚀 Quick Fix**: For memory errors or resource issues, see [Common Issues Quick Reference](common-issues.md#9--memoryresource-errors) for immediate solutions.
+
+### Advanced Performance Optimization
 
 **Issue: Slow Command Execution**
 ```bash
