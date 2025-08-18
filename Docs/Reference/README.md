@@ -21,17 +21,17 @@ This documentation is organized for **progressive learning** with multiple entry
 
 | Document | Purpose | Target Audience | Complexity | Time Investment |
 |----------|---------|-----------------|------------|-----------------|
-| **[quick-start-practices.md](quick-start-practices.md)** | Essential foundations and first steps | New users, onboarding | **Basic** | 30-60 minutes |
-| **[basic-examples.md](basic-examples.md)** | Copy-paste ready commands and patterns | All users, quick reference | **Basic** | 15-30 minutes |
-| **[examples-cookbook.md](examples-cookbook.md)** | Recipe collection hub and organization | All users, navigation | **Reference** | 5 minutes |
-| **[common-issues.md](common-issues.md)** | Essential troubleshooting and solutions | All users, problem-solving | **Basic** | As needed |
-| **[mcp-server-guide.md](mcp-server-guide.md)** | MCP server configuration and usage | Technical users, integration | **Intermediate** | 45-90 minutes |
-| **[optimization-guide.md](optimization-guide.md)** | Performance tuning and efficiency | All levels, improvement | **Variable** | 60-120 minutes |
-| **[advanced-patterns.md](advanced-patterns.md)** | Expert coordination and orchestration | Experienced users | **Advanced** | 90-150 minutes |
-| **[advanced-workflows.md](advanced-workflows.md)** | Complex multi-agent orchestration | Expert users | **Advanced** | 120-180 minutes |
-| **[integration-patterns.md](integration-patterns.md)** | Framework and system integration | Architects, experts | **Advanced** | 90-150 minutes |
-| **[troubleshooting.md](troubleshooting.md)** | Comprehensive diagnostic guide | All levels, deep debugging | **Variable** | As needed |
-| **[diagnostic-reference.md](diagnostic-reference.md)** | Advanced debugging and analysis | Expert users, complex issues | **Advanced** | 60-120 minutes |
+| **[quick-start-practices.md](./quick-start-practices.md)** | Essential foundations and first steps | New users, onboarding | **Basic** | 30-60 minutes |
+| **[basic-examples.md](./basic-examples.md)** | Copy-paste ready commands and patterns | All users, quick reference | **Basic** | 15-30 minutes |
+| **[examples-cookbook.md](./examples-cookbook.md)** | Recipe collection hub and organization | All users, navigation | **Reference** | 5 minutes |
+| **[common-issues.md](./common-issues.md)** | Essential troubleshooting and solutions | All users, problem-solving | **Basic** | As needed |
+| **[mcp-server-guide.md](./mcp-server-guide.md)** | MCP server configuration and usage | Technical users, integration | **Intermediate** | 45-90 minutes |
+| **[optimization-guide.md](./optimization-guide.md)** | Performance tuning and efficiency | All levels, improvement | **Variable** | 60-120 minutes |
+| **[advanced-patterns.md](./advanced-patterns.md)** | Expert coordination and orchestration | Experienced users | **Advanced** | 90-150 minutes |
+| **[advanced-workflows.md](./advanced-workflows.md)** | Complex multi-agent orchestration | Expert users | **Advanced** | 120-180 minutes |
+| **[integration-patterns.md](./integration-patterns.md)** | Framework and system integration | Architects, experts | **Advanced** | 90-150 minutes |
+| **[troubleshooting.md](./troubleshooting.md)** | Comprehensive diagnostic guide | All levels, deep debugging | **Variable** | As needed |
+| **[diagnostic-reference.md](./diagnostic-reference.md)** | Advanced debugging and analysis | Expert users, complex issues | **Advanced** | 60-120 minutes |
 
 ---
 
@@ -159,19 +159,19 @@ Advanced Analysis: diagnostic-reference.md
 ## Problem-Solving Quick Reference
 
 ### Immediate Issues (< 5 minutes)
-- **Command not working**: Check [common-issues.md](common-issues.md) → Common SuperClaude Problems
-- **Session lost**: Use `/sc:load` → See [quick-start-practices.md](quick-start-practices.md) → Session Management
-- **Flag confusion**: Check [basic-examples.md](basic-examples.md) → Flag Usage Examples
+- **Command not working**: Check [common-issues.md](./common-issues.md) → Common SuperClaude Problems
+- **Session lost**: Use `/sc:load` → See [quick-start-practices.md](./quick-start-practices.md) → Session Management
+- **Flag confusion**: Check [basic-examples.md](./basic-examples.md) → Flag Usage Examples
 
 ### Development Blockers (15-30 minutes)
-- **Performance slow**: See [optimization-guide.md](optimization-guide.md) → Performance Patterns
-- **Complex debugging**: Use [troubleshooting.md](troubleshooting.md) → Systematic Debugging
-- **Integration issues**: Check [integration-patterns.md](integration-patterns.md) → Framework Patterns
+- **Performance slow**: See [optimization-guide.md](./optimization-guide.md) → Performance Patterns
+- **Complex debugging**: Use [troubleshooting.md](./troubleshooting.md) → Systematic Debugging
+- **Integration issues**: Check [integration-patterns.md](./integration-patterns.md) → Framework Patterns
 
 ### System-Level Issues (45+ minutes)
-- **Architecture problems**: Use [advanced-workflows.md](advanced-workflows.md) → System Design
-- **Expert debugging**: Apply [diagnostic-reference.md](diagnostic-reference.md) → Advanced Analysis
-- **Custom workflow needs**: Study [advanced-patterns.md](advanced-patterns.md) → Custom Orchestration
+- **Architecture problems**: Use [advanced-workflows.md](./advanced-workflows.md) → System Design
+- **Expert debugging**: Apply [diagnostic-reference.md](./diagnostic-reference.md) → Advanced Analysis
+- **Custom workflow needs**: Study [advanced-patterns.md](./advanced-patterns.md) → Custom Orchestration
 
 ---
 
@@ -192,7 +192,7 @@ Advanced Analysis: diagnostic-reference.md
 ### Reporting Issues
 Found outdated information or broken examples?
 
-1. **Quick Fixes**: Check [common-issues.md](common-issues.md) first
+1. **Quick Fixes**: Check [common-issues.md](./common-issues.md) first
 2. **Documentation Bugs**: Report via project issues with specific file and line
 3. **Missing Patterns**: Suggest additions with use case description
 4. **Verification Requests**: Request re-testing of specific examples
@@ -214,7 +214,7 @@ Found outdated information or broken examples?
 4. **Community Learning**: Share discoveries and learn from others' approaches
 
 ### Troubleshooting Mastery
-1. **Systematic Approach**: Always start with [common-issues.md](common-issues.md)
+1. **Systematic Approach**: Always start with [common-issues.md](./common-issues.md)
 2. **Evidence Gathering**: Use `--think` for complex problem analysis
 3. **Root Cause Focus**: Address underlying issues, not just symptoms
 4. **Documentation First**: Check official docs before experimental solutions
@@ -224,16 +224,16 @@ Found outdated information or broken examples?
 ## Advanced Resources & Integration
 
 ### Framework-Specific Guides
-- **React/Next.js**: See [integration-patterns.md](integration-patterns.md) → React Integration
-- **Vue/Nuxt**: See [integration-patterns.md](integration-patterns.md) → Vue Ecosystem  
-- **Node.js/Express**: See [integration-patterns.md](integration-patterns.md) → Backend Patterns
-- **Python/Django**: See [integration-patterns.md](integration-patterns.md) → Python Workflows
+- **React/Next.js**: See [integration-patterns.md](./integration-patterns.md) → React Integration
+- **Vue/Nuxt**: See [integration-patterns.md](./integration-patterns.md) → Vue Ecosystem  
+- **Node.js/Express**: See [integration-patterns.md](./integration-patterns.md) → Backend Patterns
+- **Python/Django**: See [integration-patterns.md](./integration-patterns.md) → Python Workflows
 
 ### Specialized Workflows
-- **DevOps Integration**: [advanced-workflows.md](advanced-workflows.md) → CI/CD Patterns
-- **Testing Strategies**: [advanced-patterns.md](advanced-patterns.md) → Testing Orchestration
-- **Performance Engineering**: [optimization-guide.md](optimization-guide.md) → Advanced Optimization
-- **Security Implementation**: [integration-patterns.md](integration-patterns.md) → Security Patterns
+- **DevOps Integration**: [advanced-workflows.md](./advanced-workflows.md) → CI/CD Patterns
+- **Testing Strategies**: [advanced-patterns.md](./advanced-patterns.md) → Testing Orchestration
+- **Performance Engineering**: [optimization-guide.md](./optimization-guide.md) → Advanced Optimization
+- **Security Implementation**: [integration-patterns.md](./integration-patterns.md) → Security Patterns
 
 ### Community & Support
 - **Best Practices**: Continuously updated based on community feedback
@@ -243,8 +243,8 @@ Found outdated information or broken examples?
 
 ---
 
-**Start Your Journey**: New to SuperClaude? Begin with [quick-start-practices.md](quick-start-practices.md) for immediate productivity gains.
+**Start Your Journey**: New to SuperClaude? Begin with [quick-start-practices.md](./quick-start-practices.md) for immediate productivity gains.
 
-**Need Answers Now**: Jump to [basic-examples.md](basic-examples.md) for copy-paste solutions.
+**Need Answers Now**: Jump to [basic-examples.md](./basic-examples.md) for copy-paste solutions.
 
-**Ready for Advanced**: Explore [advanced-patterns.md](advanced-patterns.md) for expert-level orchestration.
+**Ready for Advanced**: Explore [advanced-patterns.md](./advanced-patterns.md) for expert-level orchestration.

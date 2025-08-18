@@ -997,8 +997,8 @@ EOF
 - **Log Analysis**: `journalctl`, `tail`, `grep`, `awk`
 
 ### SuperClaude-Specific Resources
-- **Common Issues**: [common-issues.md](common-issues.md) - Basic troubleshooting procedures
-- **MCP Server Guide**: [mcp-server-guide.md](mcp-server-guide.md) - MCP-specific diagnostics
+- **Common Issues**: [common-issues.md](./common-issues.md) - Basic troubleshooting procedures
+- **MCP Server Guide**: [mcp-server-guide.md](./mcp-server-guide.md) - MCP-specific diagnostics
 - **Installation Guide**: [../Getting-Started/installation.md](../Getting-Started/installation.md) - Setup procedures
 - **User Guide**: [../User-Guide/](../User-Guide/) - Operational documentation
 

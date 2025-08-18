@@ -22,8 +22,8 @@
 - [Adaptive Learning Patterns](#adaptive-learning-patterns) - Continuous improvement strategies
 
 ### See Also
-- [Quick Start Practices](quick-start-practices.md) - Foundation skills and basic workflows
-- [Optimization Guide](optimization-guide.md) - Performance and efficiency strategies
+- [Quick Start Practices](./quick-start-practices.md) - Foundation skills and basic workflows
+- [Optimization Guide](./optimization-guide.md) - Performance and efficiency strategies
 
 ## Agent Coordination Excellence
 
@@ -699,7 +699,7 @@ Master these advanced patterns to become a SuperClaude expert:
 - Apply complex orchestration patterns to enterprise scenarios
 
 **Skill Development:**
-- [Optimization Guide](optimization-guide.md) - Performance and efficiency mastery
+- [Optimization Guide](./optimization-guide.md) - Performance and efficiency mastery
 - [Technical Architecture](../Developer-Guide/technical-architecture.md) - Deep system understanding
 
 **Leadership and Mentoring:**
@@ -711,7 +711,7 @@ Master these advanced patterns to become a SuperClaude expert:
 
 **Share Your Patterns:**
 - Document successful coordination strategies
-- Contribute to [Examples Cookbook](examples-cookbook.md)
+- Contribute to [Examples Cookbook](./examples-cookbook.md)
 - Share insights in [GitHub Discussions](https://github.com/SuperClaude-Org/SuperClaude_Framework/discussions)
 
 **Advanced Learning:**

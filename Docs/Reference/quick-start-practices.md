@@ -18,8 +18,8 @@
 - [Common Quick Fixes](#common-quick-fixes) - Immediate problem resolution
 
 ### See Also
-- [Advanced Patterns](advanced-patterns.md) - Multi-agent coordination and expert techniques
-- [Optimization Guide](optimization-guide.md) - Performance and efficiency strategies
+- [Advanced Patterns](./advanced-patterns.md) - Multi-agent coordination and expert techniques
+- [Optimization Guide](./optimization-guide.md) - Performance and efficiency strategies
 
 ## Getting Started Right
 
@@ -617,11 +617,11 @@ For detailed flag documentation, see [Flags Guide](../User-Guide/flags.md).
 Once you've mastered these quick start practices, explore more advanced capabilities:
 
 **Intermediate Level:**
-- [Advanced Patterns](advanced-patterns.md) - Multi-agent coordination and complex workflows
-- [Examples Cookbook](examples-cookbook.md) - Real-world scenario practice
+- [Advanced Patterns](./advanced-patterns.md) - Multi-agent coordination and complex workflows
+- [Examples Cookbook](./examples-cookbook.md) - Real-world scenario practice
 
 **Advanced Level:**
-- [Optimization Guide](optimization-guide.md) - Performance and efficiency mastery
+- [Optimization Guide](./optimization-guide.md) - Performance and efficiency mastery
 - [MCP Servers Guide](../User-Guide/mcp-servers.md) - Enhanced tool integration
 
 **Expert Level:**
@@ -632,10 +632,10 @@ Once you've mastered these quick start practices, explore more advanced capabili
 
 **Learning Support:**
 - [GitHub Discussions](https://github.com/SuperClaude-Org/SuperClaude_Framework/discussions) - Community help and tips
-- [Troubleshooting Guide](troubleshooting.md) - Common issue resolution
+- [Troubleshooting Guide](./troubleshooting.md) - Common issue resolution
 
 **Practice Materials:**
-- [Examples Cookbook](examples-cookbook.md) - Copy-paste solutions for common scenarios
+- [Examples Cookbook](./examples-cookbook.md) - Copy-paste solutions for common scenarios
 - [User Guide](../User-Guide/) - Comprehensive feature documentation
 
 ---

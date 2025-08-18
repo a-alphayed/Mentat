@@ -22,8 +22,8 @@
 - [Recovery Strategies](#recovery-strategies) - Issue resolution and optimization
 
 ### See Also
-- [Quick Start Practices](quick-start-practices.md) - Foundation skills and basic workflows
-- [Advanced Patterns](advanced-patterns.md) - Multi-agent coordination and expert techniques
+- [Quick Start Practices](./quick-start-practices.md) - Foundation skills and basic workflows
+- [Advanced Patterns](./advanced-patterns.md) - Multi-agent coordination and expert techniques
 
 ## Speed and Efficiency Strategies
 
@@ -745,7 +745,7 @@ Optimize your SuperClaude usage with these advanced strategies:
 
 **Learn from Others:**
 - [GitHub Discussions](https://github.com/SuperClaude-Org/SuperClaude_Framework/discussions) - Community optimization sharing
-- [Examples Cookbook](examples-cookbook.md) - Optimization examples and patterns
+- [Examples Cookbook](./examples-cookbook.md) - Optimization examples and patterns
 
 ---
 

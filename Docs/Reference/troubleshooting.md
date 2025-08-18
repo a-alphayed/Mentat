@@ -1,16 +1,16 @@
 # SuperClaude Troubleshooting Guide
 
-> **Need a Quick Fix?** For the top 10 most common issues with rapid 2-minute solutions, see the [Common Issues Quick Reference](common-issues.md) first.
+> **Need a Quick Fix?** For the top 10 most common issues with rapid 2-minute solutions, see the [Common Issues Quick Reference](./common-issues.md) first.
 
 > **Command Context**: This guide covers both **Terminal Commands** (for installation issues) and **Claude Code Commands** (`/sc:` for development issues). Look for section headers to know which type to use.
 
 **Comprehensive Problem Resolution**: Step-by-step solutions for complex SuperClaude issues, from installation problems to advanced configuration challenges. Each solution includes diagnosis steps, resolution procedures, and prevention strategies.
 
-**When to Use This Guide**: Use this comprehensive guide when the [quick fixes](common-issues.md) don't resolve your issue, or when you need detailed diagnosis and prevention strategies.
+**When to Use This Guide**: Use this comprehensive guide when the [quick fixes](./common-issues.md) don't resolve your issue, or when you need detailed diagnosis and prevention strategies.
 
 ## Installation Issues
 
-> **🚀 Quick Fix**: For common installation problems like permission denied, Python version issues, or component failures, try the [Common Issues Quick Reference](common-issues.md#top-10-quick-fixes) first.
+> **🚀 Quick Fix**: For common installation problems like permission denied, Python version issues, or component failures, try the [Common Issues Quick Reference](./common-issues.md#top-10-quick-fixes) first.
 
 ### Advanced Installation Diagnosis
 
@@ -140,7 +140,7 @@ pip install --user SuperClaude
 
 ## Command Issues
 
-> **🚀 Quick Fix**: For command recognition problems, timeouts, or basic execution issues, try the [Common Issues Quick Reference](common-issues.md#4--commands-not-working-in-claude-code) first.
+> **🚀 Quick Fix**: For command recognition problems, timeouts, or basic execution issues, try the [Common Issues Quick Reference](./common-issues.md#4--commands-not-working-in-claude-code) first.
 
 ### Advanced Command Diagnosis
 
@@ -386,7 +386,7 @@ echo "Requirements: vague project, needs discovery"
 
 ## MCP Server Issues
 
-> **🚀 Quick Fix**: For Node.js missing or MCP connection problems, see [Common Issues Quick Reference](common-issues.md#8--nodejs-missing-for-mcp-servers) for rapid solutions.
+> **🚀 Quick Fix**: For Node.js missing or MCP connection problems, see [Common Issues Quick Reference](./common-issues.md#8--nodejs-missing-for-mcp-servers) for rapid solutions.
 
 ### Advanced MCP Diagnosis
 
@@ -750,7 +750,7 @@ python3 -m SuperClaude install --components core agents modes
 
 ## Performance Issues
 
-> **🚀 Quick Fix**: For memory errors or resource issues, see [Common Issues Quick Reference](common-issues.md#9--memoryresource-errors) for immediate solutions.
+> **🚀 Quick Fix**: For memory errors or resource issues, see [Common Issues Quick Reference](./common-issues.md#9--memoryresource-errors) for immediate solutions.
 
 ### Advanced Performance Optimization
 
@@ -1024,7 +1024,7 @@ cat ~/.claude/CLAUDE.md | head -20
 3. **Documentation** (Self-Service)
    - Installation Guide: [../Getting-Started/installation.md](../Getting-Started/installation.md)
    - Troubleshooting: This guide
-   - Examples: [examples-cookbook.md](examples-cookbook.md)
+   - Examples: [examples-cookbook.md](./examples-cookbook.md)
 
 **Community Support:**
 - Community-maintained FAQ and tips
@@ -1195,8 +1195,8 @@ time /sc:analyze . --scope module        # Module-scoped analysis
 - [Behavioral Modes](../User-Guide/modes.md) - Mode selection and behavioral troubleshooting
 
 **Advanced Topics:**
-- [Examples Cookbook](examples-cookbook.md) - Working examples and practical troubleshooting scenarios
-- [Best Practices](quick-start-practices.md) - Performance optimization and efficiency troubleshooting
+- [Examples Cookbook](./examples-cookbook.md) - Working examples and practical troubleshooting scenarios
+- [Best Practices](./quick-start-practices.md) - Performance optimization and efficiency troubleshooting
 - [Technical Architecture](../Developer-Guide/technical-architecture.md) - Deep system understanding for complex issues
 
 ### Developer Resources
@@ -1215,12 +1215,12 @@ time /sc:analyze . --scope module        # Module-scoped analysis
 **Immediate Help:**
 - Installation Issues → [Installation Guide](../Getting-Started/installation.md)
 - Command Problems → [Commands Reference](../User-Guide/commands.md)
-- Performance Issues → [Best Practices](quick-start-practices.md)
+- Performance Issues → [Best Practices](./quick-start-practices.md)
 - Configuration Issues → [MCP Servers](../User-Guide/mcp-servers.md)
 
 **Learning Resources:**
 - New Users → [Quick Start Guide](../Getting-Started/quick-start.md)
-- Practical Examples → [Examples Cookbook](examples-cookbook.md)
+- Practical Examples → [Examples Cookbook](./examples-cookbook.md)
 - Advanced Usage → [Technical Architecture](../Developer-Guide/technical-architecture.md)
 
 ---
