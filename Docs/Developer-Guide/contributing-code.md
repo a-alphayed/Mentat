@@ -597,18 +597,11 @@ Brief description of changes and motivation
 - **Performance**: No significant performance degradation
 
 **Addressing Feedback:**
-```bash
-# 1. Make requested changes
-# 2. Commit with clear messages
-git add .
-git commit -m "address review: improve error handling in component loader"
-
-# 3. Push updates
-git push origin feature/your-feature-name
-
-# 4. Respond to review comments
-# 5. Request re-review when ready
-```
+1. Make requested changes to your code
+2. Commit with clear messages describing the fixes
+3. Push updates to your feature branch
+4. Respond to review comments explaining your changes
+5. Request re-review when ready
 
 ## 📋 Comprehensive Contributor Onboarding Checklist
 

@@ -1,5 +1,7 @@
 # SuperClaude Quick Start Guide
 
+> **Command Context**: This guide uses both **Terminal Commands** (for installation) and **Claude Code Commands** (`/sc:` for development). See sections below for where to run each type.
+
 ## The Simple Truth
 
 SuperClaude transforms Claude Code into a structured development framework with just one installation command. Behind the simple interface, intelligent routing automatically selects the right tools, activates domain experts, and coordinates complex workflows.
@@ -8,13 +10,13 @@ SuperClaude transforms Claude Code into a structured development framework with 
 
 ## Just Start Here
 
-**Installation (2 minutes):**
+### 🖥️ Installation (2 minutes) - Run in Terminal
 ```bash
 pip install SuperClaude && SuperClaude install
 ```
 
-**First Commands (3 minutes):**
-```bash
+### 💬 First Commands (3 minutes) - Type in Claude Code
+```
 # Interactive project discovery
 /sc:brainstorm "web app for task management"
 
@@ -164,7 +166,7 @@ SuperClaude transforms Claude Code from a general-purpose AI assistant into a **
 
 **🌲 Advanced (Expert Usage)**
 - [MCP Servers](../User-Guide/mcp-servers.md) - Enhanced capabilities
-- [Best Practices](../Reference/best-practices.md) - Optimization strategies
+- [Best Practices](../Reference/quick-start-practices.md) - Optimization strategies
 - [Technical Architecture](../Developer-Guide/technical-architecture.md) - Deep understanding
 
 **🚑 Support**

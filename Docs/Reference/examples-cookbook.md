@@ -154,7 +154,7 @@
 - [Commands Reference](../User-Guide/commands.md) - Complete command documentation
 - [Agents Guide](../User-Guide/agents.md) - Multi-agent coordination
 - [MCP Servers](../User-Guide/mcp-servers.md) - Enhanced capabilities
-- [Best Practices](best-practices.md) - Optimization strategies
+- [Best Practices](quick-start-practices.md) - Optimization strategies
 
 **Community**:
 - [GitHub Discussions](https://github.com/SuperClaude-Org/SuperClaude_Framework/discussions) - Community support

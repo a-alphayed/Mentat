@@ -765,7 +765,7 @@ Add "documented", "explained", or "tutorial" to requests for automatic technical
 
 ### Advanced Usage  
 - **[Behavioral Modes](modes.md)** - Context optimization for enhanced agent coordination
-- **[Best Practices](../Reference/best-practices.md)** - Expert techniques for agent optimization
+- **[Best Practices](../Reference/quick-start-practices.md)** - Expert techniques for agent optimization
 - **[Examples Cookbook](../Reference/examples-cookbook.md)** - Real-world agent coordination patterns
 
 ### Development Resources

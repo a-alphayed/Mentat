@@ -886,7 +886,7 @@ gh release create v4.0.1 \
 **Primary Maintainers:**
 - **GitHub**: @SuperClaude-Org maintainer team
 - **Issues**: https://github.com/SuperClaude-Org/SuperClaude_Framework/issues
-- **Email**: maintainers@superclaude.org (for urgent publishing issues)
+- **Email**: anton.knoery@gmail.com (for urgent publishing issues)
 
 **Specific Support Areas:**
 
@@ -912,13 +912,13 @@ gh release create v4.0.1 \
 
 **Emergency Contacts:**
 For critical security patches or urgent publishing needs:
-- **Security**: security@superclaude.org
+- **Security**: anton.knoery@gmail.com
 - **Direct**: Maintainer contact information provided upon first contact
 - **Priority**: Use `urgent` label on GitHub issues for expedited response
 
 **Self-Service Resources:**
 Before contacting support:
 1. Review this publishing guide thoroughly
-2. Check [Troubleshooting](Reference/troubleshooting.md) documentation
+2. Check [Troubleshooting](Docs/Reference/troubleshooting.md) documentation
 3. Search existing GitHub issues for similar problems
 4. Test with latest versions and clean environments

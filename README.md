@@ -29,26 +29,26 @@ SuperClaude Framework development requires ongoing support to maintain MCP serve
 ## Documentation
 
 ### Getting Started
-- [Quick Start Guide](Getting-Started/quick-start.md)
-- [Installation Guide](Getting-Started/installation.md)
+- [Quick Start Guide](Docs/Getting-Started/quick-start.md)
+- [Installation Guide](Docs/Getting-Started/installation.md)
 
 ### User Guides
-- [Commands Reference](User-Guide/commands.md)
-- [Agents Guide](User-Guide/agents.md)
-- [Behavioral Modes](User-Guide/modes.md)
-- [Flags Guide](User-Guide/flags.md)
-- [MCP Servers](User-Guide/mcp-servers.md)
-- [Session Management](User-Guide/session-management.md)
+- [Commands Reference](Docs/User-Guide/commands.md)
+- [Agents Guide](Docs/User-Guide/agents.md)
+- [Behavioral Modes](Docs/User-Guide/modes.md)
+- [Flags Guide](Docs/User-Guide/flags.md)
+- [MCP Servers](Docs/User-Guide/mcp-servers.md)
+- [Session Management](Docs/User-Guide/session-management.md)
 
 ### Developer Resources
-- [Technical Architecture](Developer-Guide/technical-architecture.md)
-- [Contributing Code](Developer-Guide/contributing-code.md)
-- [Testing & Debugging](Developer-Guide/testing-debugging.md)
+- [Technical Architecture](Docs/Developer-Guide/technical-architecture.md)
+- [Contributing Code](Docs/Developer-Guide/contributing-code.md)
+- [Testing & Debugging](Docs/Developer-Guide/testing-debugging.md)
 
 ### Reference
-- [Best Practices](Reference/best-practices.md)
-- [Examples Cookbook](Reference/examples-cookbook.md)
-- [Troubleshooting](Reference/troubleshooting.md)
+- [Quick Start Practices](Docs/Reference/quick-start-practices.md)
+- [Examples Cookbook](Docs/Reference/examples-cookbook.md)
+- [Troubleshooting](Docs/Reference/troubleshooting.md)
 
 ## Contributing
 

@@ -1212,7 +1212,7 @@ Learning new technology?
 
 **🌲 Advanced (Month 2+)**
 - [Session Management](session-management.md) - Serena MCP workflows
-- [Best Practices](../Reference/best-practices.md) - MCP optimization strategies
+- [Best Practices](../Reference/quick-start-practices.md) - MCP optimization strategies
 - [Flags Guide](flags.md) - Advanced MCP control
 
 **🔧 Expert**

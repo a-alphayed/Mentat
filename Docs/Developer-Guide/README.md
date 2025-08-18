@@ -139,9 +139,7 @@ python -m SuperClaude --version
 - **Feature Requests**: Propose enhancements through GitHub issues
 
 ### Community Resources
-- **GitHub Repository**: Main development and collaboration hub
-- **Documentation**: Comprehensive guides and reference materials
-- **Issue Tracker**: Bug reports and feature requests
+- **[GitHub Repository](https://github.com/SuperClaude-Org/SuperClaude_Framework)**: Main development and collaboration hub
 
 ## Contributing to Documentation
 

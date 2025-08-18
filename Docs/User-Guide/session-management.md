@@ -1262,7 +1262,7 @@ As you work with SuperClaude, it automatically learns:
 - [Flags Guide](flags.md) - Session optimization flags
 
 **Advanced Resources:**
-- [Best Practices](../Reference/best-practices.md) - Session optimization strategies
+- [Best Practices](../Reference/quick-start-practices.md) - Session optimization strategies
 - [Examples Cookbook](../Reference/examples-cookbook.md) - Complex workflow patterns
 - [Technical Architecture](../Developer-Guide/technical-architecture.md) - Implementation details
 

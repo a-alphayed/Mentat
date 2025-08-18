@@ -1,10 +1,12 @@
 # Common Issues Guide
 
+> **Command Context**: This guide covers both **Terminal Commands** (for installation/setup issues) and **Claude Code Commands** (`/sc:` for development issues). Each section is clearly marked.
+
 **Quick Resolution Focus**: Most common SuperClaude issues can be resolved in under 5 minutes with the right diagnostic approach. This guide provides systematic troubleshooting methods for installation, basic commands, and platform-specific problems.
 
 **Problem Classification**: Issues are categorized by type for fast navigation - installation failures, command execution problems, and platform-specific compatibility issues.
 
-## Installation Issues
+## 🖥️ Installation Issues (Terminal Commands)
 
 ### Permission and Access Problems
 

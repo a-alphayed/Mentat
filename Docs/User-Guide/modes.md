@@ -610,7 +610,7 @@ SuperClaude's 6 behavioral modes create an **intelligent adaptation system** tha
 **🌲 Advanced (Month 2+)**
 - [MCP Servers](mcp-servers.md) - Mode integration with enhanced capabilities
 - [Session Management](session-management.md) - Task Management mode workflows  
-- [Best Practices](../Reference/best-practices.md) - Mode optimization strategies
+- [Best Practices](../Reference/quick-start-practices.md) - Mode optimization strategies
 
 **🔧 Expert**
 - [Technical Architecture](../Developer-Guide/technical-architecture.md) - Mode implementation details
@@ -620,4 +620,4 @@ SuperClaude's 6 behavioral modes create an **intelligent adaptation system** tha
 - **Brainstorming**: [Requirements Discovery Patterns](../Reference/examples-cookbook.md#requirements)
 - **Task Management**: [Session Management Guide](session-management.md)
 - **Orchestration**: [MCP Servers Guide](mcp-servers.md)
-- **Token Efficiency**: [Performance Optimization](../Reference/best-practices.md#efficiency)
+- **Token Efficiency**: [Performance Optimization](../Reference/quick-start-practices.md#efficiency)

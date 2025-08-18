@@ -4560,7 +4560,7 @@ if monitor.alerts:
 **Core Documentation:**
 - [Technical Architecture](technical-architecture.md) - Framework design and patterns
 - [Contributing Code](contributing-code.md) - Development setup and guidelines
-- [Best Practices](../Reference/best-practices.md) - Optimization and quality standards
+- [Best Practices](../Reference/quick-start-practices.md) - Optimization and quality standards
 
 **Testing Resources:**
 - [Examples Cookbook](../Reference/examples-cookbook.md) - Practical testing examples

@@ -1,5 +1,7 @@
 # SuperClaude Installation Guide 📦
 
+> **Command Context**: This guide uses **Terminal Commands** for installation and setup. These run in your terminal/command prompt, not inside Claude Code.
+
 ## 🎯 It's Easier Than It Looks!
 
 SuperClaude installs in under 2 minutes with an interactive installer. The process involves installing the Python package and running the component installer to configure your Claude Code environment.
@@ -15,7 +17,7 @@ SuperClaude install
 **Method 2: NPM (Cross-platform)**
 ```bash
 npm install -g superclaude
-superclaude install
+SuperClaude install
 ```
 
 **Method 3: Development**
@@ -25,6 +27,17 @@ cd SuperClaude_Framework
 pip install -e ".[dev]"
 SuperClaude install --dry-run
 ```
+
+### 📋 Command Quick Reference
+
+| Command Type | Where to Run | Format | Example |
+|-------------|--------------|--------|----------|
+| **🖥️ Installation** | Terminal/CMD | `SuperClaude [command]` | `SuperClaude install` |
+| **🔧 Configuration** | Terminal/CMD | `python3 -m SuperClaude` | `python3 -m SuperClaude --version` |
+| **💬 Development** | Claude Code | `/sc:[command]` | `/sc:brainstorm "idea"` |
+| **⚡ Workflow** | Claude Code | `/sc:[command] --flags` | `/sc:test --coverage` |
+
+> **Important**: Installation commands run in your terminal. Once installed, you'll use `/sc:` commands inside Claude Code for development tasks.
 
 ---
 
@@ -73,19 +86,6 @@ df -h ~
 ```
 
 If any checks fail, see [Prerequisites Setup](#prerequisites-setup-🛠️) below.
-
-```bash
-# Check Python version (should be 3.8+)
-python3 --version
-
-# Check if Claude Code is available
-claude --version
-
-# Check Node.js (optional, for MCP servers)
-node --version
-```
-
-If any of these fail, see the [Prerequisites Setup](#prerequisites-setup-🛠️) section below.
 
 ## Installation Options 🎛️
 
@@ -409,7 +409,7 @@ python scripts/validate_pypi_ready.py
 **Essential Guides:**
 - 🚀 [Quick Start Guide](quick-start.md) - 5-minute setup
 - 🔧 [Commands Reference](../User-Guide/commands.md) - All 21 commands
-- 🧐 [Best Practices](../Reference/best-practices.md) - Optimization tips
+- 🧐 [Best Practices](../Reference/quick-start-practices.md) - Optimization tips
 - 🎆 [Troubleshooting](../Reference/troubleshooting.md) - Problem solving
 
 ---
@@ -443,4 +443,4 @@ python scripts/validate_pypi_ready.py
 **Advanced** (🌲 Expert)
 - [Technical Architecture](../Developer-Guide/technical-architecture.md) - System design
 - [Contributing Code](../Developer-Guide/contributing-code.md) - Development
-- [Best Practices](../Reference/best-practices.md) - Optimization strategies
+- [Best Practices](../Reference/quick-start-practices.md) - Optimization strategies

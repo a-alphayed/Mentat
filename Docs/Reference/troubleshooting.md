@@ -1,5 +1,7 @@
 # SuperClaude Troubleshooting Guide
 
+> **Command Context**: This guide covers both **Terminal Commands** (for installation issues) and **Claude Code Commands** (`/sc:` for development issues). Look for section headers to know which type to use.
+
 **Comprehensive Problem Resolution**: Step-by-step solutions for common SuperClaude issues, from installation problems to advanced configuration challenges. Each solution includes diagnosis steps, resolution procedures, and prevention strategies.
 
 **Quick Resolution Focus**: Most issues can be resolved in under 5 minutes with the right diagnostic approach. This guide provides systematic troubleshooting methods to get you back to productive development quickly.
@@ -1212,7 +1214,7 @@ time /sc:analyze . --scope module        # Module-scoped analysis
 
 **Advanced Topics:**
 - [Examples Cookbook](examples-cookbook.md) - Working examples and practical troubleshooting scenarios
-- [Best Practices](best-practices.md) - Performance optimization and efficiency troubleshooting
+- [Best Practices](quick-start-practices.md) - Performance optimization and efficiency troubleshooting
 - [Technical Architecture](../Developer-Guide/technical-architecture.md) - Deep system understanding for complex issues
 
 ### Developer Resources
@@ -1231,7 +1233,7 @@ time /sc:analyze . --scope module        # Module-scoped analysis
 **Immediate Help:**
 - Installation Issues → [Installation Guide](../Getting-Started/installation.md)
 - Command Problems → [Commands Reference](../User-Guide/commands.md)
-- Performance Issues → [Best Practices](best-practices.md)
+- Performance Issues → [Best Practices](quick-start-practices.md)
 - Configuration Issues → [MCP Servers](../User-Guide/mcp-servers.md)
 
 **Learning Resources:**

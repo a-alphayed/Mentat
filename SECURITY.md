@@ -12,10 +12,10 @@ SuperClaude Framework prioritizes security through secure-by-design principles, 
 
 ### Responsible Disclosure
 
-**Primary Contact:** security@superclaude.org (monitored by maintainers)
+**Primary Contact:** anton.knoery@gmail.com (monitored by maintainers)
 
 **Process:**
-1. **Report**: Send detailed vulnerability report to security@superclaude.org
+1. **Report**: Send detailed vulnerability report to anton.knoery@gmail.com
 2. **Acknowledgment**: We'll confirm receipt within 48 hours
 3. **Investigation**: Initial assessment within 72 hours
 4. **Coordination**: Work together on fix development and testing
@@ -599,7 +599,7 @@ As the project grows and secures funding:
 
 ### Security Team
 **Primary Security Contact:**
-- **Email**: security@superclaude.org
+- **Email**: anton.knoery@gmail.com
 - **Monitored By**: Core maintainers and security-focused contributors
 - **Response Time**: 48-72 hours for initial acknowledgment
 - **Escalation**: Direct maintainer contact for critical issues requiring immediate attention
@@ -618,21 +618,20 @@ As the project grows and secures funding:
 
 **Encrypted Communication:**
 For sensitive security discussions requiring encrypted communication:
-- **GPG Key**: Available upon request to security@superclaude.org
+- **GPG Key**: Available upon request to anton.knoery@gmail.com
 - **Signal**: Secure messaging coordination available for complex cases
 - **Private Channels**: Dedicated security discussion channels for verified researchers
 
 **Emergency Contact:**
 For critical vulnerabilities requiring immediate attention:
-- **GitHub**: Direct message to @SuperClaude-Security team
-- **Priority Email**: security-urgent@superclaude.org (monitored continuously)
+- **Priority Email**: anton.knoery@gmail.com (monitored continuously)
 - **Escalation Path**: Direct maintainer contact information provided upon first contact
 
 ### General Security Questions
 **General Security Questions:**
 - **GitHub Discussions**: https://github.com/SuperClaude-Org/SuperClaude_Framework/discussions
 - **Community Forums**: Security-focused discussion threads
-- **Documentation**: [Security Best Practices](Reference/best-practices.md#security-practices)
+- **Documentation**: [Security Best Practices](Docs/Reference/quick-start-practices.md#security-practices)
 - **Issue Tracker**: Non-sensitive security configuration questions
 
 **Technical Security Support:**
@@ -664,25 +663,25 @@ For organizations requiring dedicated security support:
 
 ### Security-Related Documentation
 **Framework Security Documentation:**
-- [Best Practices Guide](Reference/best-practices.md) - Security-focused usage patterns
-- [Technical Architecture](Developer-Guide/technical-architecture.md) - Security design principles
-- [Contributing Code Guide](Developer-Guide/contributing-code.md) - Secure development practices
-- [Testing & Debugging Guide](Developer-Guide/testing-debugging.md) - Security testing procedures
+- [Quick Start Practices Guide](Docs/Reference/quick-start-practices.md) - Security-focused usage patterns
+- [Technical Architecture](Docs/Developer-Guide/technical-architecture.md) - Security design principles
+- [Contributing Code Guide](Docs/Developer-Guide/contributing-code.md) - Secure development practices
+- [Testing & Debugging Guide](Docs/Developer-Guide/testing-debugging.md) - Security testing procedures
 
 **MCP Server Security:**
-- [MCP Servers Guide](User-Guide/mcp-servers.md) - Server security configuration
-- [Troubleshooting Guide](Reference/troubleshooting.md) - Security-related issue resolution
+- [MCP Servers Guide](Docs/User-Guide/mcp-servers.md) - Server security configuration
+- [Troubleshooting Guide](Docs/Reference/troubleshooting.md) - Security-related issue resolution
 - MCP Server Documentation - Individual server security considerations
 - Configuration Security - Secure MCP setup and credential management
 
 **Agent Security:**
-- [Agents Guide](User-Guide/agents.md) - Agent security boundaries and coordination
+- [Agents Guide](Docs/User-Guide/agents.md) - Agent security boundaries and coordination
 - Agent Development - Security considerations for agent implementation
 - Behavioral Modes - Security implications of different operational modes
 - Command Security - Security aspects of command execution and validation
 
 **Session Management Security:**
-- [Session Management Guide](User-Guide/session-management.md) - Secure session handling
+- [Session Management Guide](Docs/User-Guide/session-management.md) - Secure session handling
 - Memory Security - Secure handling of persistent session data
 - Project Isolation - Security boundaries between different projects
 - Context Security - Secure context loading and validation

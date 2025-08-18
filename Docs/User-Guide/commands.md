@@ -1,5 +1,7 @@
 # SuperClaude Commands Guide
 
+> **Command Context**: This guide covers **Claude Code Commands** (`/sc:` commands). These run inside Claude Code chat, not in your terminal. For installation commands, see [Installation Guide](../Getting-Started/installation.md).
+
 ## ✅ Verification Status
 - **SuperClaude Version**: v4.0+ Compatible
 - **Last Tested**: 2025-01-16
@@ -10,23 +12,40 @@
 
 ## 🧪 Testing Your Setup
 
-Before using this guide, verify your SuperClaude installation:
-
+### 🖥️ Terminal Verification (Run in Terminal/CMD)
 ```bash
 # Verify SuperClaude is working
 SuperClaude --version
 # Expected: SuperClaude Framework v4.0+
-
-# Test basic command syntax  
-echo "/sc:brainstorm 'test'" | claude --help
-# Expected: No syntax errors
 
 # Check MCP server connectivity
 SuperClaude status --mcp
 # Expected: At least context7 and sequential-thinking connected
 ```
 
+### 💬 Claude Code Testing (Type in Claude Code Chat)
+```
+# Test basic /sc: command
+/sc:brainstorm "test project"
+# Expected: Interactive requirements discovery starts
+
+# Test command help
+/sc:help
+# Expected: List of available commands
+```
+
 **If tests fail**: Check [Installation Guide](../Getting-Started/installation.md) or [Troubleshooting](#troubleshooting)
+
+### 📋 Command Quick Reference
+
+| Command Type | Where to Run | Format | Purpose |
+|-------------|--------------|--------|---------|
+| **🖥️ Installation** | Terminal/CMD | `SuperClaude [command]` | Setup and maintenance |
+| **🔧 Configuration** | Terminal/CMD | `python3 -m SuperClaude` | Advanced configuration |
+| **💬 Development** | Claude Code | `/sc:[command]` | AI-enhanced development |
+| **⚡ Workflow** | Claude Code | `/sc:[command] --flags` | Enhanced automation |
+
+> **Remember**: All `/sc:` commands work inside Claude Code chat, not your terminal.
 
 ## Table of Contents
 
@@ -660,7 +679,7 @@ SuperClaude install --components mcp --force
 
 **Documentation**
 - [Quick Start Guide](../Getting-Started/quick-start.md) - Essential setup and first steps
-- [Best Practices](../Reference/best-practices.md) - Optimization and workflow patterns
+- [Best Practices](../Reference/quick-start-practices.md) - Optimization and workflow patterns
 - [Examples Cookbook](../Reference/examples-cookbook.md) - Real-world usage patterns
 
 **Community Support**

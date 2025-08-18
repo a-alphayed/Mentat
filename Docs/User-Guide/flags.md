@@ -940,7 +940,7 @@ SuperClaude validate-flags --think-hard --no-mcp --magic
 
 **🌲 Advanced (Month 2+)**
 - [Session Management](session-management.md) - Long-term flag patterns
-- [Best Practices](../Reference/best-practices.md) - Flag optimization strategies
+- [Best Practices](../Reference/quick-start-practices.md) - Flag optimization strategies
 - [Examples Cookbook](../Reference/examples-cookbook.md) - Real-world flag combinations
 
 **🔧 Expert**
