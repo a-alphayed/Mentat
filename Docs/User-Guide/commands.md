@@ -536,19 +536,6 @@ export MORPH_API_KEY="your_key"           # For Morphllm
 killall node                         # Reset MCP servers
 ```
 
-### Error Code Reference
-
-| Code | Meaning | Quick Fix |
-|------|---------|-----------|
-| **E001** | Command syntax error | Check command spelling and `/sc:` prefix |
-| **E002** | Flag not recognized | Verify flag with `/sc:help flags` |
-| **E003** | MCP server connection failed | Check Node.js and run `npm cache clean --force` |
-| **E004** | Permission denied | Check file permissions or run with appropriate access |
-| **E005** | Timeout exceeded | Reduce scope with `--scope file` or increase `--timeout` |
-| **E006** | Memory limit exceeded | Use `--memory-limit` or `--scope module` |
-| **E007** | Invalid project structure | Verify you're in a valid project directory |
-| **E008** | Dependency missing | Check installation with `SuperClaude --version` |
-
 ### Progressive Support Levels
 
 **Level 1: Quick Fix (< 2 min)**
@@ -585,14 +572,14 @@ lsof | grep SuperClaude
 After applying fixes, test with:
 - [ ] `python3 -m SuperClaude --version` (should show version)
 - [ ] `/sc:analyze README.md` (should complete without errors)
-- [ ] Check MCP servers respond: `SuperClaude status --mcp`
+- [ ] Check MCP servers installed: `SuperClaude install --list-components | grep mcp`
 - [ ] Verify flags work: `/sc:help flags`
 - [ ] Test basic workflow: `/sc:brainstorm "test"` → should ask questions
 
 ## Quick Troubleshooting (Legacy)
 - **Command not found** → Check installation: `SuperClaude --version`
 - **Flag error** → Verify against [FLAGS.md](flags.md)  
-- **MCP error** → Check server configuration: `SuperClaude status --mcp`
+- **MCP issue** → Check MCP server installation: `SuperClaude install --components mcp --dry-run`
 - **No output** → Restart Claude Code session
 - **Slow performance** → Use `--scope file` or `--no-mcp`
 
