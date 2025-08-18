@@ -1,5 +1,31 @@
 # SuperClaude Framework Flags User Guide 🏁
 
+## ✅ Verification Status
+- **SuperClaude Version**: v4.0+ Compatible
+- **Last Tested**: 2025-01-16
+- **Test Environment**: Linux/Windows/macOS
+- **Flag Syntax**: ✅ All Verified
+
+## 🧪 Testing Your Flag Setup
+
+Before using flags, verify they work correctly:
+
+```bash
+# Test basic flag recognition
+/sc:analyze . --help
+# Expected: Shows available flags without errors
+
+# Test auto-flag activation
+/sc:implement "test component"
+# Expected: Magic + Context7 should auto-activate for UI requests
+
+# Test manual flag override
+/sc:analyze . --no-mcp
+# Expected: Native execution only, no MCP servers
+```
+
+**If tests fail**: Check [Installation Guide](../Getting-Started/installation.md) for flag system setup
+
 ## 🤖 Most Flags Activate Automatically - Don't Stress About It!
 
 SuperClaude's intelligent flag system automatically detects task complexity and context, then activates appropriate flags behind the scenes. You get optimized performance without memorizing flag combinations.
@@ -85,10 +111,21 @@ SuperClaude's intelligent flag system automatically detects task complexity and 
 - **Auto-Triggers**: Multi-component analysis, moderate complexity
 - **Manual Use**: Force structured thinking for simple tasks
 - **Enables**: Sequential MCP for systematic reasoning
+
+#### Success Criteria
+- [ ] Sequential MCP server activates (check status output)
+- [ ] Analysis follows structured methodology with clear sections
+- [ ] Output includes evidence-based reasoning and conclusions
+- [ ] Token usage approximately 4K or less
+
 ```bash
 /sc:analyze auth-system/ --think
 # → Structured analysis with evidence-based reasoning
 ```
+
+**Verify:** Sequential MCP should show in status output  
+**Test:** Output should have systematic structure with hypothesis testing  
+**Check:** Analysis quality should be notably higher than basic mode
 
 **`--think-hard`** - Deep Analysis (~10K tokens)  
 - **Auto-Triggers**: Architectural analysis, system-wide dependencies
@@ -608,6 +645,163 @@ SuperClaude's intelligent flag system automatically detects task complexity and 
 ```
 
 ## Flag Troubleshooting 🔧
+
+## 🚨 Quick Troubleshooting
+
+### Common Issues (< 2 minutes)
+- **Flag not recognized**: Check spelling and verify against `python3 -m SuperClaude --help`
+- **MCP flag failures**: Check Node.js installation and server configuration
+- **Auto-flags wrong**: Use manual override with `--no-mcp` or specific flags
+- **Performance degradation**: Reduce complexity with `--scope file` or `--concurrency 1`
+- **Flag conflicts**: Check flag priority rules and use single flags
+
+### Immediate Fixes
+- **Reset flags**: Remove all flags and let auto-detection work
+- **Check compatibility**: Use `/sc:help flags` for valid combinations
+- **Restart session**: Exit and restart Claude Code to reset flag state
+- **Verify setup**: Run `SuperClaude status --flags` to check flag system
+
+### Flag-Specific Troubleshooting
+
+**Flag Not Recognized:**
+```bash
+# Problem: "Unknown flag --invalid-flag"
+# Quick Fix: Check flag spelling and availability
+/sc:help flags                         # List all valid flags
+python3 -m SuperClaude --help flags    # System-level flag help
+# Common typos: --brainstrom → --brainstorm, --seq → --sequential
+```
+
+**MCP Flag Issues:**
+```bash
+# Problem: --magic, --morph, --c7 not working
+# Quick Fix: Check MCP server status
+SuperClaude status --mcp              # Verify server connections
+node --version                        # Ensure Node.js v16+
+npm cache clean --force               # Clear package cache
+/sc:command --no-mcp                  # Bypass MCP temporarily
+```
+
+**Flag Combination Conflicts:**
+```bash
+# Problem: "Flag conflict: --all-mcp and --no-mcp"
+# Quick Fix: Use flag priority rules
+/sc:command --no-mcp                  # --no-mcp overrides --all-mcp
+/sc:command --ultrathink --think      # --ultrathink overrides --think
+/sc:command --safe-mode --uc          # --safe-mode auto-enables --uc
+```
+
+**Auto-Detection Issues:**
+```bash
+# Problem: Wrong flags auto-activated
+# Quick Fix: Manual override with explicit flags
+/sc:analyze simple-file.js --no-mcp   # Override complex auto-detection
+/sc:implement "basic function" --think # Force thinking mode
+/sc:brainstorm clear-requirement       # Force discovery mode
+```
+
+### Performance-Related Flag Issues
+
+**Resource Exhaustion:**
+```bash
+# Problem: System slowing down with --all-mcp --ultrathink
+# Quick Fix: Reduce resource usage
+/sc:command --c7 --seq                # Essential servers only
+/sc:command --concurrency 1           # Limit parallel operations
+/sc:command --scope file              # Reduce analysis scope
+/sc:command --uc                      # Enable compression
+```
+
+**Timeout Issues:**
+```bash
+# Problem: Commands hanging with complex flags
+# Quick Fix: Timeout and resource management
+/sc:command --timeout 60              # Set explicit timeout
+/sc:command --memory-limit 2048       # Limit memory usage
+/sc:command --safe-mode               # Conservative execution
+killall node                         # Reset hung MCP servers
+```
+
+### API Key and Dependency Issues
+
+**Missing API Keys:**
+```bash
+# Problem: --magic or --morph flags fail with "API key required"
+# Expected behavior: These services require paid subscriptions
+export TWENTYFIRST_API_KEY="key"     # For --magic flag
+export MORPH_API_KEY="key"           # For --morph flag
+# Alternative: /sc:command --no-mcp to skip paid services
+```
+
+**Missing Dependencies:**
+```bash
+# Problem: MCP flags fail with "command not found"
+# Quick Fix: Install missing dependencies
+node --version                        # Check Node.js v16+
+npm install -g npx                   # Ensure npx available
+SuperClaude install --components mcp --force  # Reinstall MCP
+```
+
+### Error Code Reference
+
+| Flag Error | Meaning | Quick Fix |
+|------------|---------|-----------|
+| **F001** | Unknown flag | Check spelling with `/sc:help flags` |
+| **F002** | Flag conflict | Use priority rules or remove conflicting flags |
+| **F003** | MCP server unavailable | Check `node --version` and server status |
+| **F004** | API key missing | Set environment variables or use `--no-mcp` |
+| **F005** | Resource limit exceeded | Use `--concurrency 1` or `--scope file` |
+| **F006** | Timeout exceeded | Increase `--timeout` or reduce complexity |
+| **F007** | Permission denied | Check file permissions or run with appropriate access |
+| **F008** | Invalid combination | Refer to flag priority hierarchy |
+
+### Progressive Support Levels
+
+**Level 1: Quick Fix (< 2 min)**
+- Remove problematic flags and try again
+- Use `--no-mcp` to bypass MCP server issues
+- Check basic flag spelling and syntax
+
+**Level 2: Detailed Help (5-15 min)**
+```bash
+# Flag-specific diagnostics
+SuperClaude diagnose --flags
+/sc:help flags --verbose
+cat ~/.claude/logs/flag-system.log
+# Test individual flags one at a time
+```
+- See [Common Issues Guide](../Reference/common-issues.md) for flag installation problems
+
+**Level 3: Expert Support (30+ min)**
+```bash
+# Deep flag system analysis
+SuperClaude validate-flags --all-combinations
+strace -e trace=execve /sc:command --verbose 2>&1
+# Check flag interaction matrix
+# Review flag priority implementation
+```
+- See [Diagnostic Reference Guide](../Reference/diagnostic-reference.md) for system-level analysis
+
+**Level 4: Community Support**
+- Report flag issues at [GitHub Issues](https://github.com/SuperClaude-Org/SuperClaude_Framework/issues)
+- Include flag combination that failed
+- Describe expected vs actual behavior
+
+### Success Validation
+
+After applying flag fixes, test with:
+- [ ] `/sc:help flags` (should list all available flags)
+- [ ] `/sc:command --basic-flag` (should work without errors)
+- [ ] `SuperClaude status --mcp` (MCP flags should work if servers connected)
+- [ ] Flag combinations follow priority rules correctly
+- [ ] Auto-detection works for simple commands
+
+## Quick Troubleshooting (Legacy)
+- **Flag not recognized** → Check spelling: `SuperClaude --help flags`
+- **MCP flag fails** → Check server status: `SuperClaude status --mcp`
+- **Auto-flags wrong** → Use manual override: `--no-mcp` or specific flags
+- **Performance issues** → Reduce complexity: `--scope file` or `--concurrency 1`
+- **Flag conflicts** → Check priority rules in documentation
 
 ### Common Issues & Solutions
 

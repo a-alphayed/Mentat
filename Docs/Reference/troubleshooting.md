@@ -1,4 +1,4 @@
-# SuperClaude Troubleshooting Guide 🔧
+# SuperClaude Troubleshooting Guide
 
 **Comprehensive Problem Resolution**: Step-by-step solutions for common SuperClaude issues, from installation problems to advanced configuration challenges. Each solution includes diagnosis steps, resolution procedures, and prevention strategies.
 
@@ -23,7 +23,7 @@ chmod 755 ~/.claude
 
 # Solution 2: Use --user installation
 pip install --user SuperClaude
-SuperClaude install --install-dir ~/superclaude
+python3 -m SuperClaude install --install-dir ~/superclaude
 
 # Prevention
 # Always install SuperClaude in user space, avoid sudo for installation
@@ -61,19 +61,20 @@ pip install SuperClaude
 ERROR: Component 'mcp' installation failed - dependency not met
 
 # Diagnosis
-SuperClaude install --dry-run --components mcp
-SuperClaude debug --components
+python3 -m SuperClaude --version
+ls ~/.claude/
+# Check component installation status
 
 # Solution 1: Install dependencies first
-SuperClaude install --components core  # Install core first
-SuperClaude install --components mcp   # Then install MCP
+python3 -m SuperClaude install --components core  # Install core first
+python3 -m SuperClaude install --components mcp   # Then install MCP
 
 # Solution 2: Force reinstallation
-SuperClaude install --components mcp --force
+python3 -m SuperClaude install --components mcp --force
 
 # Solution 3: Clean installation
 rm -rf ~/.claude/
-SuperClaude install --fresh
+python3 -m SuperClaude install --fresh
 
 # Prevention
 # Always install components in dependency order: core → agents → modes → mcp
@@ -88,7 +89,7 @@ ERROR: Cannot find file 'C:\Users\name\.claude\CLAUDE.md'
 
 # Solution: Use proper Windows paths
 set CLAUDE_CONFIG_DIR=C:\Users\%USERNAME%\.claude
-SuperClaude install --install-dir "%CLAUDE_CONFIG_DIR%"
+python -m SuperClaude install --install-dir "%CLAUDE_CONFIG_DIR%"
 
 # Issue: Node.js not found for MCP servers
 # Solution: Install Node.js from official source
@@ -144,7 +145,7 @@ ERROR: Command '/sc:analyze' not recognized
 
 # Diagnosis
 # Check if SuperClaude is properly installed
-SuperClaude --version
+python3 -m SuperClaude --version
 ls ~/.claude/
 
 # Check Claude Code session
@@ -154,8 +155,8 @@ claude --version
 # Exit and restart Claude Code completely
 
 # Solution 2: Verify installation
-SuperClaude install --list-components
-SuperClaude install --components core --force
+cat ~/.claude/CLAUDE.md
+python3 -m SuperClaude install --components core --force
 
 # Solution 3: Manual verification
 cat ~/.claude/CLAUDE.md
@@ -179,12 +180,13 @@ ps aux | grep claude
 /sc:analyze src/ --scope file    # Instead of entire project
 /sc:implement "simple task"      # Instead of complex features
 
-# Solution 2: Use timeout flags
-/sc:analyze . --timeout 300      # 5-minute timeout
-/sc:implement "feature" --quick  # Faster implementation mode
+# Solution 2: Use scope limiting
+/sc:analyze ./specific-folder/ --scope module  # Limit analysis scope
+/sc:implement "feature" --scope file            # Focus on specific files
 
-# Solution 3: Clear cache and restart
-rm -rf ~/.claude/cache/
+# Solution 3: Clear session data and restart
+# Remove old session files if they exist
+rm -rf ~/.claude/sessions/old-*
 # Restart Claude Code session
 
 # Prevention
@@ -208,11 +210,12 @@ ls -la
 
 # Solution 2: Use explicit scope
 /sc:analyze ./specific-folder/  # Explicit path
-/sc:implement "specific task" --focus area
+/sc:implement "specific task in authentication module"
 
-# Solution 3: Debug mode
-export SUPERCLAUDE_DEBUG=true
-/sc:analyze . --verbose
+# Solution 3: Verification check
+# Verify CLAUDE.md contains SuperClaude framework instructions
+grep "SuperClaude" ~/.claude/CLAUDE.md
+# Check for proper command imports
 
 # Prevention
 # Use explicit paths and clear task descriptions
@@ -237,11 +240,11 @@ export SUPERCLAUDE_DEBUG=true
 /sc:implement "PostgreSQL database performance optimization"
 # More specific keywords trigger correct specialist
 
-# Solution 2: Use focus flags
-/sc:implement "database optimization" --focus backend --database
+# Solution 2: Use specific backend terminology
+/sc:implement "database performance optimization for PostgreSQL queries"
 
-# Solution 3: Manual agent specification
-/sc:implement "database optimization" --agent database-specialist
+# Solution 3: Use domain-specific terminology
+/sc:implement "PostgreSQL performance tuning and query optimization"
 
 # Prevention
 # Use domain-specific terminology
@@ -260,15 +263,15 @@ export SUPERCLAUDE_DEBUG=true
 /sc:implement "entire microservices platform"
 # Should activate task management mode but doesn't
 
-# Solution 1: Explicit mode activation
-/sc:implement "microservices platform" --task-manage
+# Solution 1: Use complex project language
+/sc:implement "multi-service platform with authentication, database, and API gateway"
 
 # Solution 2: Break down complexity
-/sc:workflow "microservices platform"  # Plan first
+/sc:analyze "microservices platform requirements"  # Plan first
 /sc:implement "authentication service"  # Then implement pieces
 
-# Solution 3: Use complexity flags
-/sc:implement "platform" --complex --multi-step
+# Solution 3: Use descriptive complexity language
+/sc:implement "comprehensive microservices platform with authentication, API gateway, and database"
 
 # Prevention
 # Describe task complexity explicitly
@@ -294,8 +297,8 @@ export SUPERCLAUDE_DEBUG=true
 /sc:implement "secure user authentication with JWT and encryption"
 # Keywords: "secure", "authentication", "encryption" trigger security-engineer
 
-# Solution 2: Explicit security focus
-/sc:implement "user login" --focus security
+# Solution 2: Use security terminology
+/sc:implement "secure user authentication with encryption and validation"
 
 # Solution 3: Multi-keyword approach
 /sc:implement "user login with security best practices and vulnerability protection"
@@ -318,10 +321,10 @@ export SUPERCLAUDE_DEBUG=true
 # More specific, simpler task
 
 # Solution 2: Use scope limiting
-/sc:implement "logging" --scope file --simple
+/sc:implement "logging" --scope file
 
-# Solution 3: Agent limitation
-/sc:implement "logging" --max-agents 2
+# Solution 3: Use simple task description
+/sc:implement "add console.log to function start"
 
 # Prevention
 # Use specific, focused task descriptions
@@ -336,17 +339,17 @@ export SUPERCLAUDE_DEBUG=true
 # Review agent recommendations and conflicts
 /sc:reflect "agent coordination issues in last task"
 
-# Solution 1: Establish priority hierarchy
-/sc:implement "payment system" --lead-agent security-engineer
-# Security-engineer leads, others support
+# Solution 1: Use domain-specific language
+/sc:implement "secure payment system with encryption and PCI compliance"
+# Use security keywords to activate security expertise
 
-# Solution 2: Sequential agent consultation
-/sc:design "payment architecture" --agent system-architect
-/sc:implement "payment security" --agent security-engineer
-/sc:implement "payment UI" --agent frontend-architect
+# Solution 2: Sequential task breakdown
+/sc:analyze "payment system architecture requirements"
+/sc:implement "secure payment backend with JWT authentication"
+/sc:implement "responsive payment UI with form validation"
 
 # Solution 3: Single-domain focus
-/sc:implement "payment backend only" --focus backend
+/sc:implement "payment backend API with database integration"
 
 # Prevention
 # Break complex tasks into domain-specific subtasks
@@ -369,8 +372,8 @@ echo "Requirements: vague project, needs discovery"
 /sc:brainstorm "maybe we could build some kind of productivity tool"
 # Keywords: "maybe", "some kind of" trigger exploration
 
-# Solution 2: Explicit mode activation
-/sc:brainstorm "productivity tool" --mode brainstorming
+# Solution 2: Use brainstorming language patterns
+/sc:brainstorm "let's explore what kind of productivity tool might work best"
 
 # Solution 3: Question-based approach
 /sc:brainstorm "not sure what kind of productivity solution we need"
@@ -391,10 +394,10 @@ echo "Requirements: vague project, needs discovery"
 /sc:implement "correct spelling error in README.md"
 
 # Solution 2: Scope limitation
-/sc:implement "typo fix" --scope file --simple
+/sc:implement "typo fix" --scope file
 
 # Solution 3: Single-step indication
-/sc:implement "one-line fix in README" --quick
+/sc:implement "one-line fix in README"
 
 # Prevention
 # Use simple, direct language for simple tasks
@@ -424,7 +427,7 @@ sudo apt-get install -y nodejs
 npm install -g @context7/mcp-server
 
 # Solution 2: Reconfigure MCP servers
-SuperClaude install --components mcp --force
+python3 -m SuperClaude install --components mcp --force
 
 # Solution 3: Manual server testing
 node -e "console.log('Node.js working')"
@@ -449,12 +452,11 @@ curl -I https://context7-api.example.com/health
 top
 free -h
 
-# Solution 1: Increase timeout
-export SUPERCLAUDE_MCP_TIMEOUT=60
-/sc:implement "complex task" --timeout 60
+# Solution 1: Reduce operation complexity
+/sc:implement "simpler task breakdown"  # Break complex task into smaller parts
 
-# Solution 2: Restart MCP servers
-SuperClaude debug --mcp-restart
+# Solution 2: Restart Claude Code session
+# MCP servers restart with Claude Code session restart
 
 # Solution 3: Disable problematic server temporarily
 /sc:implement "task" --no-mcp
@@ -475,15 +477,15 @@ ERROR: Sequential reasoning server encountered internal error
 # Check Sequential server logs
 tail -f ~/.claude/logs/sequential-mcp.log
 
-# Check server version compatibility
-SuperClaude debug --mcp-versions
+# Check server installation
+npm list -g @sequential/mcp-server
 
-# Solution 1: Restart Sequential server
-SuperClaude debug --mcp-restart sequential
+# Solution 1: Restart Claude Code session
+# This restarts all MCP servers including Sequential
 
 # Solution 2: Use alternative reasoning approach
-/sc:analyze complex-problem --native-reasoning
-# Fall back to native analysis
+/sc:analyze complex-problem
+# Use native Claude reasoning without MCP servers
 
 # Solution 3: Reinstall Sequential MCP
 npm uninstall -g @sequential/mcp-server
@@ -501,9 +503,9 @@ npm install -g @sequential/mcp-server@latest
 # Symptoms: UI component requests not producing expected output
 
 # Diagnosis
-# Check Magic server status and configuration
-SuperClaude debug --mcp-servers
-grep "magic" ~/.claude/.claude.json
+# Check Magic server installation
+npm list -g @magic/ui-generator
+cat ~/.claude/config.json | grep -i magic
 
 # Solution 1: Verify Magic server installation
 npm list -g @magic/ui-generator
@@ -526,7 +528,7 @@ npm install -g @magic/ui-generator@latest
 ERROR: Playwright browser automation failed - browser not installed
 
 # Diagnosis
-SuperClaude debug --mcp-servers playwright
+npm list -g playwright
 npx playwright --version
 
 # Solution 1: Install Playwright browsers
@@ -561,9 +563,8 @@ ls ~/.claude/sessions/
 /sc:save "current-work-session"
 # Before closing Claude Code
 
-# Solution 2: Auto-save configuration
-export SUPERCLAUDE_AUTO_SAVE=true
-# Enables automatic session saving
+# Solution 2: Enable regular session saving
+# Use /sc:save periodically during long sessions
 
 # Solution 3: Manual session recovery
 /sc:load "last-session"
@@ -592,8 +593,8 @@ file ~/.claude/sessions/session-*.json
 # Manually rebuild context
 
 # Solution 3: Fresh session with project analysis
-/sc:load project-directory/ --fresh-analysis
-# Start fresh with project re-analysis
+/sc:analyze project-directory/
+# Start fresh with new project analysis
 
 # Prevention
 # Regular session backups with meaningful names
@@ -613,15 +614,15 @@ file ~/.claude/sessions/session-*.json
 /sc:load "session-1"
 /sc:save "consolidated-session"
 /sc:load "session-2"
-/sc:save "consolidated-session" --merge
+/sc:save "consolidated-session"
 
 # Solution 2: Rebuild authoritative context
-/sc:load project/ --comprehensive-analysis
+/sc:analyze project/ --scope project
 /sc:save "authoritative-project-context"
 
 # Solution 3: Use session hierarchy
 /sc:load "main-project-session"  # Primary context
-/sc:load "feature-branch-session" --inherit-context
+/sc:load "feature-branch-session"
 
 # Prevention
 # Maintain single authoritative session per project
@@ -636,18 +637,19 @@ file ~/.claude/sessions/session-*.json
 
 # Diagnosis
 # Check session size and memory usage
-/sc:debug --memory-usage
 du -sh ~/.claude/sessions/
+ls -la ~/.claude/sessions/
 
-# Solution 1: Clean session memory
-/sc:cleanup --session-memory --preserve-important
+# Solution 1: Clean old sessions manually
+# Remove old session files manually
+rm ~/.claude/sessions/old-session-*.json
 
-# Solution 2: Archive old context
+# Solution 2: Archive current context and start fresh
 /sc:save "archived-context-$(date +%Y%m%d)"
-/sc:cleanup --session-reset
+# Start a new Claude Code session for fresh memory
 
-# Solution 3: Selective memory cleanup
-/sc:cleanup --memory-threshold 100MB --keep-recent 30days
+# Solution 3: Regular session maintenance
+# Save important sessions and restart Claude Code periodically
 
 # Prevention
 # Regular session maintenance and archiving
@@ -673,11 +675,12 @@ grep -n "@" ~/.claude/CLAUDE.md
 # Remove any @CLAUDE.md references from imported files
 
 # Solution 2: Reset to default configuration
-SuperClaude install --reset-config --backup
+cp ~/.claude/CLAUDE.md ~/.claude/CLAUDE.md.backup
+python3 -m SuperClaude install --reset-config
 
 # Solution 3: Manual configuration repair
 cp ~/.claude/CLAUDE.md ~/.claude/CLAUDE.md.backup
-SuperClaude install --components core --force
+python3 -m SuperClaude install --components core --force
 
 # Verification
 # Check that imports work correctly
@@ -690,23 +693,23 @@ grep "@" ~/.claude/CLAUDE.md
 # Symptoms: Components interfering with each other
 
 # Diagnosis
-# Check component installation order and dependencies
-SuperClaude install --list-components
-SuperClaude debug --component-conflicts
+# Check component installation status
+cat ~/.claude/CLAUDE.md
+ls ~/.claude/
 
 # Solution 1: Reinstall in correct order
-SuperClaude install --components core agents modes mcp --force
+python3 -m SuperClaude install --components core agents modes mcp --force
 
-# Solution 2: Selective component installation
-SuperClaude uninstall --components mcp
-SuperClaude install --components mcp --clean
+# Solution 2: Fresh installation
+rm -rf ~/.claude/
+python3 -m SuperClaude install --fresh
 
-# Solution 3: Configuration validation
-SuperClaude install --validate-config --fix-conflicts
+# Solution 3: Verify installation integrity
+cat ~/.claude/CLAUDE.md | grep -E "@|SuperClaude"
 
 # Prevention
 # Install components in dependency order
-# Use --dry-run to preview configuration changes
+# Always backup configuration before major changes
 ```
 
 **Issue: Custom Configuration Not Loading**
@@ -718,21 +721,22 @@ SuperClaude install --validate-config --fix-conflicts
 cat ~/.claude/CLAUDE.md
 # Look for syntax errors
 
-# Solution 1: Validate configuration syntax
-SuperClaude debug --validate-config
+# Solution 1: Check configuration syntax
+# Look for syntax errors in CLAUDE.md
+cat ~/.claude/CLAUDE.md | grep -E "error|Error|invalid"
 
 # Solution 2: Backup and reset
 cp ~/.claude/CLAUDE.md ~/.claude/CLAUDE.md.custom
-SuperClaude install --reset-config
+python3 -m SuperClaude install --reset-config
 # Manually merge custom content back
 
 # Solution 3: Step-by-step integration
-SuperClaude install --components core  # Base installation
+python3 -m SuperClaude install --components core  # Base installation
 # Add custom content gradually and test
 
 # Prevention
 # Always backup custom configurations before updates
-# Use --dry-run to test configuration changes
+# Test configuration changes before committing
 ```
 
 ### Reset and Recovery Procedures
@@ -747,14 +751,14 @@ cp -r ~/.claude ~/.claude.corrupted.$(date +%Y%m%d)
 
 # Step 2: Complete reset
 rm -rf ~/.claude/
-SuperClaude install --fresh
+python3 -m SuperClaude install --fresh
 
 # Step 3: Selective recovery
 # Restore specific custom files from backup if needed
 cp ~/.claude.corrupted.*/custom-file.md ~/.claude/
 
 # Step 4: Gradual reconfiguration
-SuperClaude install --components core agents modes
+python3 -m SuperClaude install --components core agents modes
 # Test after each component
 
 # Prevention
@@ -776,21 +780,21 @@ top
 df -h
 iostat 1 5
 
-# Check SuperClaude resource usage
-ps aux | grep -i superclaude
-/sc:debug --performance-metrics
+# Check process resource usage
+ps aux | grep -i claude
+top | grep -i claude
 
 # Solution 1: Reduce operation scope
 /sc:analyze src/ --scope file          # Instead of entire project
-/sc:implement "simple task" --quick    # Use quick mode
+/sc:implement "simple task"            # Focus on simple tasks
 
-# Solution 2: Optimize resource allocation
-export SUPERCLAUDE_MAX_MEMORY=2GB
-export SUPERCLAUDE_CONCURRENCY=2
-/sc:analyze . --parallel 2
+# Solution 2: Use efficient command patterns
+# Focus on specific files instead of entire project
+/sc:analyze specific-file.py --scope file
 
-# Solution 3: Clear caches and restart
-rm -rf ~/.claude/cache/
+# Solution 3: Clear session data and restart
+# Remove old session files if they exist
+rm -rf ~/.claude/sessions/old-*
 # Restart Claude Code session
 
 # Prevention
@@ -806,18 +810,16 @@ rm -rf ~/.claude/cache/
 # Check memory usage
 free -h
 ps aux --sort=-%mem | head -10
-/sc:debug --memory-analysis
 
-# Solution 1: Enable memory optimization
-export SUPERCLAUDE_MEMORY_OPTIMIZE=true
-/sc:analyze . --memory-efficient
+# Solution 1: Limit operation scope
+/sc:analyze . --scope module  # Instead of entire project
 
-# Solution 2: Use streaming mode for large operations
-/sc:analyze large-project/ --stream --chunk-size 10MB
+# Solution 2: Clear session cache
+rm -rf ~/.claude/sessions/old-*
+# Remove old session files
 
-# Solution 3: Cleanup and optimization
-/sc:cleanup --memory --cache --sessions
-# Remove unnecessary cached data
+# Solution 3: Restart Claude Code session
+# This clears memory and resets context
 
 # Prevention
 # Regular cache cleanup
@@ -830,20 +832,18 @@ export SUPERCLAUDE_MEMORY_OPTIMIZE=true
 # Symptoms: MCP server operations causing delays
 
 # Diagnosis
-# Check MCP server performance
-/sc:debug --mcp-performance
-tail -f ~/.claude/logs/mcp-*.log
+# Check MCP server installation
+npm list -g | grep -E "context7|sequential|magic|playwright"
 
 # Solution 1: Selective MCP server usage
 /sc:implement "task" --c7 --seq  # Use only needed servers
 # Instead of --all-mcp
 
-# Solution 2: MCP server optimization
-SuperClaude debug --mcp-optimize
-# Optimize server configurations
+# Solution 2: Restart Claude Code session
+# This restarts all MCP servers
 
 # Solution 3: Local fallback mode
-/sc:implement "task" --no-mcp --native-mode
+/sc:implement "task" --no-mcp
 # Use native capabilities when MCP servers slow
 
 # Prevention
@@ -863,21 +863,15 @@ htop
 iotop
 netstat -i
 
-# SuperClaude-specific monitoring
-/sc:debug --comprehensive-performance
-export SUPERCLAUDE_PROFILE=true
-/sc:analyze . --profile
+# Monitor Claude Code performance
+time /sc:analyze small-file.py  # Time simple operations
 
 # Analysis and optimization
 # Based on monitoring results:
-# - High CPU: Use --concurrency flags to limit parallel operations
-# - High Memory: Use --memory-efficient modes and cleanup
-# - High I/O: Use --cache and reduce file operations
-# - High Network: Minimize MCP server usage or use local alternatives
-
-# Automated monitoring setup
-crontab -e
-# Add: */5 * * * * /usr/local/bin/superclaude debug --quick-health >> ~/.claude/health.log
+# - High CPU: Reduce operation scope with --scope flags
+# - High Memory: Clear old sessions and restart Claude Code
+# - High I/O: Focus on specific files instead of entire projects
+# - High Network: Use --no-mcp for local operations
 ```
 
 ## Common Error Messages
@@ -891,10 +885,10 @@ ERROR: Command '/sc:analyze' not recognized by Claude Code
 
 # Meaning: SuperClaude instructions not loaded into Claude Code session
 # Resolution:
-1. Verify SuperClaude installation: SuperClaude --version
+1. Verify SuperClaude installation: python3 -m SuperClaude --version
 2. Check ~/.claude/CLAUDE.md exists and contains SuperClaude instructions
 3. Restart Claude Code completely
-4. If persistent: SuperClaude install --components core --force
+4. If persistent: python3 -m SuperClaude install --components core --force
 ```
 
 **Error: "Component dependency not met"**
@@ -904,9 +898,9 @@ ERROR: Component 'mcp' installation failed - dependency 'core' not met
 
 # Meaning: Attempting to install component without required dependencies
 # Resolution:
-1. Install dependencies first: SuperClaude install --components core
-2. Then install desired component: SuperClaude install --components mcp
-3. Or use automatic dependency resolution: SuperClaude install --components mcp --resolve-dependencies
+1. Install dependencies first: python3 -m SuperClaude install --components core
+2. Then install desired component: python3 -m SuperClaude install --components mcp
+3. Or reinstall completely: python3 -m SuperClaude install --fresh
 ```
 
 **Error: "MCP server connection failed"**
@@ -917,8 +911,8 @@ ERROR: MCP server 'context7' connection failed - server not responding
 # Meaning: MCP server unavailable or misconfigured
 # Resolution:
 1. Check Node.js installation: node --version (should be 16+)
-2. Reinstall MCP servers: SuperClaude install --components mcp --force
-3. Verify server status: SuperClaude debug --mcp-servers
+2. Reinstall MCP servers: python3 -m SuperClaude install --components mcp --force
+3. Check server installation: npm list -g | grep -E "context7|sequential|magic"
 4. Test without MCP: /sc:command --no-mcp
 ```
 
@@ -931,8 +925,8 @@ ERROR: Cannot load session - data corruption detected
 # Resolution:
 1. Try backup session: /sc:load "backup-session-name"
 2. List available sessions: /sc:load (shows all sessions)
-3. Start fresh: /sc:load project-directory/ --fresh-analysis
-4. Rebuild context: /sc:analyze . --comprehensive && /sc:save "new-session"
+3. Start fresh: /sc:analyze project-directory/
+4. Rebuild context: /sc:analyze . && /sc:save "new-session"
 ```
 
 **Error: "Agent activation failed"**
@@ -943,8 +937,8 @@ ERROR: No suitable agent found for task complexity
 # Meaning: Task description insufficient for agent selection
 # Resolution:
 1. Add specific keywords: /sc:implement "React TypeScript component with security validation"
-2. Use explicit focus: /sc:implement "task" --focus frontend --agent frontend-architect
-3. Break down complex tasks: /sc:workflow "complex task" first, then implement pieces
+2. Use explicit focus: /sc:implement "React component with TypeScript and accessibility"
+3. Break down complex tasks: /sc:analyze "complex task requirements" first, then implement pieces
 ```
 
 ### Error Interpretation Strategies
@@ -975,13 +969,14 @@ ERROR: MCP context7 connection failed - timeout after 30s [E001]
 **Required Information for Bug Reports:**
 ```bash
 # Essential diagnostic information
-SuperClaude --version                    # Version information
+python3 -m SuperClaude --version        # Version information
 uname -a                                 # System information  
-python --version                         # Python version
+python3 --version                        # Python version
 node --version                           # Node.js version (if using MCP)
 
 # SuperClaude-specific diagnostics
-SuperClaude debug --comprehensive > debug-report.txt
+ls -la ~/.claude/
+cat ~/.claude/CLAUDE.md | head -20
 
 # Error reproduction
 # 1. Exact command that caused the issue
@@ -994,7 +989,7 @@ SuperClaude debug --comprehensive > debug-report.txt
 ```markdown
 ## Bug Report
 
-**SuperClaude Version:** [Output of `SuperClaude --version`]
+**SuperClaude Version:** [Output of `python3 -m SuperClaude --version`]
 
 **Environment:**
 - OS: [Linux/macOS/Windows + version]
@@ -1022,7 +1017,7 @@ SuperClaude debug --comprehensive > debug-report.txt
 ```
 
 **Debug Information:**
-[Attach output of `SuperClaude debug --comprehensive`]
+[Attach output of `ls -la ~/.claude/` and first 20 lines of CLAUDE.md]
 
 **Additional Context:**
 [Any other relevant information]
@@ -1089,10 +1084,10 @@ A: Modes control behavior style (brainstorming, task management, etc.). Agents p
 ### Troubleshooting
 
 **Q: Commands are slow or hanging - what should I do?**
-A: 1) Check system resources with `top`, 2) Reduce scope with `--scope file`, 3) Use `--quick` flag, 4) Clear cache with `/sc:cleanup`.
+A: 1) Check system resources with `top`, 2) Reduce scope with `--scope file`, 3) Focus on specific tasks, 4) Restart Claude Code session to clear cache.
 
 **Q: How do I reset SuperClaude to default configuration?**
-A: `SuperClaude install --reset-config --backup` creates backup and resets to defaults.
+A: `cp ~/.claude/CLAUDE.md ~/.claude/CLAUDE.md.backup && python3 -m SuperClaude install --reset-config` creates backup and resets to defaults.
 
 **Q: Can I contribute to SuperClaude development?**
 A: Yes! See [Contributing Guide](../Developer-Guide/contributing-code.md) for development setup and contribution process.
@@ -1104,36 +1099,41 @@ A: Yes! See [Contributing Guide](../Developer-Guide/contributing-code.md) for de
 **Comprehensive System Health Check:**
 ```bash
 # Complete SuperClaude diagnostics
-SuperClaude debug --comprehensive
+python3 -m SuperClaude --version
+ls -la ~/.claude/
+cat ~/.claude/CLAUDE.md | head -10
 
-# Expected output includes:
-# - Installation status and component health
-# - System compatibility and requirements
-# - MCP server status and connectivity  
-# - Session management functionality
-# - Performance metrics and resource usage
-# - Configuration validation and integrity
+# Verify core functionality
+grep "SuperClaude" ~/.claude/CLAUDE.md
+# Should show SuperClaude framework instructions
+
+# Check MCP server installations (if using)
+node --version
+npm list -g | grep -E "context7|sequential|magic|playwright"
 ```
 
 **Quick Health Verification:**
 ```bash
 # Basic functionality test
-SuperClaude --version                    # Version verification
-SuperClaude install --list-components    # Component status
-SuperClaude debug --quick               # Quick health check
+python3 -m SuperClaude --version        # Version verification
+ls ~/.claude/                           # Check installation
+cat ~/.claude/CLAUDE.md | grep "@"      # Check imports
 
-# Test core functionality
-echo "Test SuperClaude functionality" | claude
-# Then try: /sc:analyze README.md
+# Test core functionality in Claude Code
+# Try: /sc:analyze README.md
 ```
 
 **Component-Specific Diagnostics:**
 ```bash
 # Test specific components
-SuperClaude debug --components core agents modes mcp
-SuperClaude debug --mcp-servers         # MCP server health
-SuperClaude debug --sessions           # Session management
-SuperClaude debug --performance        # Performance metrics
+cat ~/.claude/CLAUDE.md | grep -E "FLAGS|RULES|PRINCIPLES"  # Core components
+cat ~/.claude/CLAUDE.md | grep -E "MODE_|MCP_"              # Modes and MCP
+
+# Check MCP server installations
+npm list -g | grep -E "context7|sequential|magic|playwright"
+
+# Test session functionality
+ls ~/.claude/sessions/ 2>/dev/null || echo "No sessions directory found"
 ```
 
 ### System Requirement Validation
@@ -1141,7 +1141,10 @@ SuperClaude debug --performance        # Performance metrics
 **Automated Compatibility Check:**
 ```bash
 # System requirements validation
-SuperClaude install --check-requirements
+python3 --version  # Should be 3.8+
+which claude       # Should return path to Claude Code
+df -h ~            # Check disk space (50MB+ available)
+touch ~/.claude/test && rm ~/.claude/test  # Test write permissions
 
 # Expected validations:
 # ✅ Python 3.8+ detected
@@ -1149,7 +1152,6 @@ SuperClaude install --check-requirements
 # ✅ Sufficient disk space (50MB minimum)
 # ✅ Write permissions to ~/.claude directory
 # ⚠️  Node.js 16+ recommended for MCP servers
-# ✅ System compatibility verified
 ```
 
 **Manual Verification Steps:**
@@ -1179,13 +1181,12 @@ free -h                    # Check available memory (1GB+ recommended)
 **Performance Baseline Testing:**
 ```bash
 # Establish performance baselines
-time SuperClaude install --dry-run       # Installation speed test
-time /sc:analyze small-file.py           # Analysis speed test  
-/sc:debug --benchmark                     # Performance benchmarks
+time python3 -m SuperClaude --version    # Basic command speed
+time /sc:analyze README.md               # Simple analysis speed test  
 
-# Create performance profile for troubleshooting
-export SUPERCLAUDE_PROFILE=true
-/sc:analyze . --profile > performance-profile.txt
+# Test with different scopes
+time /sc:analyze . --scope file          # File-scoped analysis
+time /sc:analyze . --scope module        # Module-scoped analysis
 ```
 
 ---
@@ -1243,6 +1244,12 @@ export SUPERCLAUDE_PROFILE=true
 **Emergency Recovery:**
 If SuperClaude is completely non-functional:
 1. Backup current configuration: `cp -r ~/.claude ~/.claude.backup`
-2. Complete reset: `rm -rf ~/.claude && SuperClaude install --fresh`
+2. Complete reset: `rm -rf ~/.claude && python3 -m SuperClaude install --fresh`
 3. Restore custom configurations gradually from backup
 4. If issues persist, report to [GitHub Issues](https://github.com/SuperClaude-Org/SuperClaude_Framework/issues) with diagnostic information
+
+**Verification Steps:**
+After every solution, verify with these commands:
+- ✅ `python3 -m SuperClaude --version` - Should return version number
+- ✅ `cat ~/.claude/CLAUDE.md | grep SuperClaude` - Should show framework content
+- ✅ Try `/sc:analyze README.md` in Claude Code - Should work without errors

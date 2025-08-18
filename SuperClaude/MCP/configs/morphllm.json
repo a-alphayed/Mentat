@@ -3,7 +3,7 @@
     "command": "npx",
     "args": [
       "@morph-llm/morph-fast-apply",
-      "/app/"
+      "/home/"
     ],
     "env": {
       "MORPH_API_KEY": "",
