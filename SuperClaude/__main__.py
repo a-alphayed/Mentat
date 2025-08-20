@@ -18,34 +18,17 @@ import difflib
 from pathlib import Path
 from typing import Dict, Callable
 
-# Add the 'setup' directory to the Python import path (modern approach)
+# Add the local 'setup' directory to the Python import path
+current_dir = Path(__file__).parent
+project_root = current_dir.parent
+setup_dir = project_root / "setup"
 
-try:
-    # Python 3.9+ preferred way
-    from importlib.resources import files, as_file
-    with as_file(files("setup")) as resource:
-        setup_dir = str(resource)
-        sys.path.insert(0, setup_dir)
-except (ImportError, ModuleNotFoundError, AttributeError):
-    # Fallback: try to locate setup relative to this file
-    try:
-        current_dir = Path(__file__).parent
-        project_root = current_dir.parent
-        setup_dir = project_root / "setup"
-        if setup_dir.exists():
-            sys.path.insert(0, str(setup_dir))
-        else:
-            # Last resort: try pkg_resources if available
-            try:
-                from pkg_resources import resource_filename
-                setup_dir = resource_filename('setup', '')
-                sys.path.insert(0, str(setup_dir))
-            except ImportError:
-                # If all else fails, setup directory should be relative to this file
-                sys.path.insert(0, str(project_root / "setup"))
-    except Exception as e:
-        print(f"Warning: Could not locate setup directory: {e}")
-        # Continue anyway, imports might still work
+# Insert the setup directory at the beginning of sys.path
+if setup_dir.exists():
+    sys.path.insert(0, str(setup_dir.parent))
+else:
+    print(f"Warning: Setup directory not found at {setup_dir}")
+    sys.exit(1)
 
 
 # Try to import utilities from the setup package
