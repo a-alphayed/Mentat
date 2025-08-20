@@ -43,15 +43,6 @@
   "engines": {
     "node": ">=16"
   },
-  "os": [
-    "darwin",
-    "linux",
-    "win32"
-  ],
-  "cpu": [
-    "x64",
-    "arm64"
-  ],
   "funding": {
     "type": "github",
     "url": "https://github.com/sponsors/NomenAK"
