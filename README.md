@@ -17,7 +17,7 @@ SuperClaude is a meta-programming configuration framework that transforms Claude
 pip install SuperClaude && SuperClaude install
 
 # Via NPM (cross-platform)
-npm install -g superclaude && superclaude install
+npm install -g @superclaude-org/superclaude && superclaude install
 ```
 
 ## Support SuperClaude Development 💎
