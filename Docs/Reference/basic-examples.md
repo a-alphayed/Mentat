@@ -1,8 +1,10 @@
 # SuperClaude Basic Examples Collection
 
-**Status**: ✅ **VERIFIED SuperClaude v4.0** - Essential commands, single-agent workflows, and common development tasks.
+**Status**: ✅ **Status: Current** - Essential commands, single-agent workflows, and common development tasks.
 
 **Quick Reference Guide**: Copy-paste ready examples for beginners, focused on essential SuperClaude usage patterns and fundamental development workflows.
+
+> **📝 Context Note**: These examples show `/sc:` commands and `@agents-` invocations that trigger Claude Code to read specific context files and adopt the behaviors defined there. The sophistication comes from the behavioral instructions, not from executable software.
 
 ## Overview and Usage Guide
 
@@ -81,7 +83,7 @@
 ```bash
 /sc:analyze . --focus quality
 ```
-**Verification**: ✅ Verified SuperClaude v4.0
+**Verification**: 
 
 #### Command: /sc:analyze (Security Focus)
 **Purpose**: Security-focused code review
@@ -90,7 +92,7 @@
 ```bash
 /sc:analyze src/ --focus security --think
 ```
-**Verification**: ✅ Verified SuperClaude v4.0
+**Verification**: 
 
 #### Command: /sc:analyze (Performance Focus)
 **Purpose**: Performance bottleneck identification
@@ -99,7 +101,7 @@
 ```bash
 /sc:analyze api/ --focus performance
 ```
-**Verification**: ✅ Verified SuperClaude v4.0
+**Verification**: 
 
 #### Command: /sc:analyze (Architecture Focus)
 **Purpose**: Architecture assessment for refactoring
@@ -108,7 +110,71 @@
 ```bash
 /sc:analyze . --focus architecture --serena
 ```
-**Verification**: ✅ Verified SuperClaude v4.0
+**Verification**: 
+
+## Manual Agent Invocation Examples
+
+### Direct Specialist Activation
+
+#### Pattern: @agents-[specialist]
+**Purpose**: Manually invoke specific domain experts instead of auto-activation
+**Syntax**: `@agents-[specialist] "task or question"`
+
+#### Python Expert
+```bash
+@agents-python-expert "optimize this data processing pipeline for performance"
+# Expected: Python-specific optimizations, async patterns, memory management
+```
+
+#### Security Engineer
+```bash
+@agents-security "review this authentication system for vulnerabilities"
+# Expected: OWASP compliance check, vulnerability assessment, secure coding recommendations
+```
+
+#### Frontend Architect
+```bash
+@agents-frontend-architect "design a responsive component architecture"
+# Expected: Component patterns, state management, accessibility considerations
+```
+
+#### Quality Engineer
+```bash
+@agents-quality-engineer "create comprehensive test coverage for payment module"
+# Expected: Test strategy, unit/integration/e2e tests, edge cases
+```
+
+### Combining Auto and Manual Patterns
+
+#### Pattern: Command + Manual Override
+```bash
+# Step 1: Use command with auto-activation
+/sc:implement "user profile management system"
+# Auto-activates: backend-architect, possibly frontend
+
+# Step 2: Add specific expert review
+@agents-security "review the profile system for data privacy compliance"
+# Manual activation for targeted review
+
+# Step 3: Performance optimization
+@agents-performance-engineer "optimize database queries for profile fetching"
+# Manual activation for specific optimization
+```
+
+#### Pattern: Sequential Specialist Chain
+```bash
+# Design phase
+@agents-system-architect "design microservices architecture for e-commerce"
+
+# Security review
+@agents-security "review architecture for security boundaries"
+
+# Implementation guidance
+@agents-backend-architect "implement service communication patterns"
+
+# DevOps setup
+@agents-devops-architect "configure CI/CD for microservices"
+```
 
 ## Basic Usage Patterns
 
@@ -172,7 +238,7 @@
 
 # Activates: Serena (project loading) + analyzer + security-engineer + performance-engineer
 # Output: Comprehensive project report with actionable insights
-# ✅ Verified: SuperClaude v4.0
+
 
 # Variations for different focuses:
 /sc:analyze src/ --focus quality          # Code quality only
@@ -212,7 +278,7 @@
 
 # Activates: security-engineer + backend-architect + Context7
 # Output: Production-ready authentication system
-# ✅ Verified: SuperClaude v4.0
+
 
 # Variations for different auth needs:
 /sc:implement "OAuth integration with Google and GitHub"
@@ -227,17 +293,17 @@
 # REST API with CRUD operations
 /sc:implement "Express.js REST API for blog posts with validation"
 # Expected: Complete REST API with proper HTTP methods, validation, error handling
-# ✅ Verified: SuperClaude v4.0
+
 
 # API documentation generation
 /sc:analyze api/ --focus architecture --c7
 # Expected: Comprehensive API documentation with usage examples
-# ✅ Verified: SuperClaude v4.0
+
 
 # API testing setup
 /sc:test --focus api --type integration
 # Expected: Integration test suite for API endpoints
-# ✅ Verified: SuperClaude v4.0
+
 ```
 
 ### Frontend Component Development
@@ -246,17 +312,17 @@
 /sc:implement "React user profile component with form validation and image upload"
 # Activates: frontend-architect + Magic MCP + accessibility patterns
 # Expected: Modern React component with hooks, validation, accessibility
-# ✅ Verified: SuperClaude v4.0
+
 
 # Component testing
 /sc:test src/components/ --focus quality
 # Expected: Component tests with React Testing Library
-# ✅ Verified: SuperClaude v4.0
+
 
 # Responsive design implementation
 /sc:implement "responsive navigation component with mobile menu"
 # Expected: Mobile-first responsive navigation with accessibility
-# ✅ Verified: SuperClaude v4.0
+
 ```
 
 ### Database Integration
@@ -264,17 +330,17 @@
 # Database setup with ORM
 /sc:implement "PostgreSQL integration with Prisma ORM and migrations"
 # Expected: Database schema, ORM setup, migration system
-# ✅ Verified: SuperClaude v4.0
+
 
 # Database query optimization
 /sc:analyze db/ --focus performance
 # Expected: Query performance analysis and optimization suggestions
-# ✅ Verified: SuperClaude v4.0
+
 
 # Data validation and security
 /sc:implement "input validation and SQL injection prevention"
 # Expected: Comprehensive input validation and security measures
-# ✅ Verified: SuperClaude v4.0
+
 ```
 
 ## Basic Troubleshooting Examples
@@ -331,30 +397,38 @@
 ```bash
 # New React project with TypeScript
 /sc:implement "React TypeScript project with routing, state management, and testing setup"
+@agents-frontend-architect "review and optimize the project structure"
 
 # New Node.js API server
 /sc:implement "Express.js REST API with JWT authentication and PostgreSQL integration"
+@agents-backend-architect "ensure scalability and best practices"
 
 # Python web API
 /sc:implement "FastAPI application with async PostgreSQL and authentication middleware"
+@agents-python-expert "optimize async patterns and dependency injection"
 
 # Next.js full-stack app
 /sc:implement "Next.js 14 application with App Router, TypeScript, and Tailwind CSS"
+@agents-system-architect "design optimal data fetching strategy"
 ```
 
 ### Quick Quality Improvements
 ```bash
 # Code quality enhancement
 /sc:analyze . --focus quality && /sc:implement "code quality improvements"
+@agents-quality-engineer "create quality metrics dashboard"
 
 # Security hardening
 /sc:analyze . --focus security && /sc:implement "security improvements"
+@agents-security "perform OWASP Top 10 compliance check"
 
 # Performance optimization
 /sc:analyze . --focus performance && /sc:implement "performance optimizations"
+@agents-performance-engineer "profile and optimize critical paths"
 
 # Test coverage improvement
 /sc:test --focus quality && /sc:implement "additional test coverage"
+@agents-quality-engineer "identify untested edge cases"
 ```
 
 ### Common Feature Implementations
@@ -381,45 +455,45 @@
 ```bash
 # Quick analysis
 /sc:analyze src/ --scope file
-# ✅ Verified: SuperClaude v4.0
+
 
 # Standard analysis
 /sc:analyze . --think
-# ✅ Verified: SuperClaude v4.0
+
 
 # Deep analysis
 /sc:analyze . --think-hard --focus architecture
-# ✅ Verified: SuperClaude v4.0
+
 ```
 
 ### Focus Area Selection
 ```bash
 # Security-focused analysis
 /sc:analyze . --focus security
-# ✅ Verified: SuperClaude v4.0
+
 
 # Performance-focused implementation
 /sc:implement "API optimization" --focus performance
-# ✅ Verified: SuperClaude v4.0
+
 
 # Quality-focused testing
 /sc:test --focus quality
-# ✅ Verified: SuperClaude v4.0
+
 ```
 
 ### Tool Integration
 ```bash
 # Use Context7 for official patterns
 /sc:implement "React hooks implementation" --c7
-# ✅ Verified: SuperClaude v4.0
+
 
 # Use Serena for project memory
 /sc:analyze . --serena --focus architecture
-# ✅ Verified: SuperClaude v4.0
+
 
 # Efficient token usage
 /sc:analyze large-project/ --uc
-# ✅ Verified: SuperClaude v4.0
+
 ```
 
 ## Learning Progression Workflow

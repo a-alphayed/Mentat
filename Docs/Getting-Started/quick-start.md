@@ -1,12 +1,12 @@
 # SuperClaude Quick Start Guide
 
-> **Command Context**: This guide uses both **Terminal Commands** (for installation) and **Claude Code Commands** (`/sc:` for development). See sections below for where to run each type.
+> **Context Framework Guide**: SuperClaude enhances Claude Code through behavioral context injection, NOT CLI commands. `/sc:` patterns are conversation triggers that activate installed behavioral instructions.
 
-## The Simple Truth
+## How SuperClaude Really Works
 
-SuperClaude transforms Claude Code into a structured development framework with just one installation command. Behind the simple interface, intelligent routing automatically selects the right tools, activates domain experts, and coordinates complex workflows.
+SuperClaude is a **Context Engineering Framework** that enhances Claude Code by installing behavioral `.md` files that Claude reads during conversations. When you type `/sc:brainstorm`, you're not running a command - you're triggering context patterns that guide Claude's responses.
 
-**5-Minute Start**: Install → Try `/sc:brainstorm` → Watch the magic happen.
+**5-Minute Start**: Install context framework → Try `/sc:brainstorm` in Claude conversation → Experience enhanced behaviors.
 
 ## Just Start Here
 
@@ -15,56 +15,73 @@ SuperClaude transforms Claude Code into a structured development framework with 
 pip install SuperClaude && SuperClaude install
 ```
 
-### 💬 First Commands (3 minutes) - Type in Claude Code
+### 💬 First Context Triggers (3 minutes) - Type in Claude Code Conversation
 ```
 # Interactive project discovery
 /sc:brainstorm "web app for task management"
 
-# Analyze existing code
+# Analyze existing code  
 /sc:analyze src/
 
 # Generate implementation plan
 /sc:workflow "add user authentication"
+
+# Invoke specialist persona
+@agents-security "review authentication implementation"
 ```
 
-**What Happens Automatically:**
-- Domain experts activate based on context (frontend, backend, security)
-- MCP servers connect for enhanced capabilities
-- Behavioral modes adapt to task complexity
-- Progress tracking and session management
+**What Happens with Context Framework:**
+- Claude reads behavioral instructions from installed .md files
+- Specialist personas activate based on trigger patterns (security, frontend, backend)
+- MCP servers provide enhanced tool capabilities when configured
+- Behavioral modes guide conversation structure and depth
+- Session memory maintains context across interactions
+
+**Key Understanding**: These are conversation patterns with Claude Code, not executable commands. The framework provides Claude with behavioral context to respond more expertly.
 
 ---
 
 ## What is SuperClaude Really?
 
-SuperClaude is a meta-programming framework that enhances Claude Code with:
+### Framework Philosophy
+
+**SuperClaude is NOT standalone software** - it's a **Context Oriented Configuration Framework** for Claude Code. Think of it as a sophisticated prompt engineering system that configures Claude Code's behavior through structured context files. Everything runs through Claude Code - SuperClaude provides the behavioral context, commands, and coordination.
+
+### Core Components
+
+SuperClaude enhances Claude Code with:
 
 **21 Slash Commands** for workflow automation (/sc:brainstorm, /sc:implement, /sc:analyze)
-**13 AI Specialists** with domain expertise (architect, security, frontend, backend)
+**13 AI Specialists** with domain expertise (@agents-architect, @agents-security, @agents-frontend)
 **6 Behavioral Modes** for different contexts (brainstorming, introspection, orchestration)
 **6 MCP Servers** for enhanced capabilities (Context7, Sequential, Magic, Playwright)
+
+**Important**: The `.md` files in `SuperClaude/` directory are NOT documentation - they are the actual context framework instructions that Claude Code reads to enhance its capabilities.
 
 **Version 4.0** delivers production-ready workflow orchestration with intelligent agent coordination and session persistence.
 
 ## How It Works
 
-**User Experience:**
-You type `/sc:implement "user login"` → SuperClaude analyzes requirements → activates security specialist → connects to Context7 for authentication patterns → generates complete implementation with tests.
+**Context Framework Architecture:**
+SuperClaude installs behavioral context files that Claude Code reads during conversations. When you type trigger patterns like `/sc:implement`, Claude accesses the corresponding behavioral instructions and responds accordingly.
 
-**Technical Workflow:**
-1. **Command Parser** analyzes intent and complexity
-2. **Agent Router** selects appropriate domain specialists
-3. **MCP Coordinator** activates relevant servers (Context7, Sequential, etc.)
-4. **Session Manager** tracks progress and maintains context
-5. **Quality Gates** ensure completeness and validation
+**User Experience Flow:**
+You type `/sc:implement "user login"` → Claude reads context from `implement.md` → activates security specialist behavioral patterns → uses configured MCP servers → generates implementation following framework guidelines.
+
+**Technical Architecture:**
+1. **Context Loading** (Claude Code imports behavioral .md files via CLAUDE.md)
+2. **Pattern Recognition** (Recognizes /sc: and @agents- trigger patterns)
+3. **Behavioral Activation** (Applies corresponding behavioral instructions from context files)
+4. **MCP Integration** (Uses configured external tools when available)
+5. **Response Enhancement** (Follows framework patterns for comprehensive responses)
 
 ---
 
 ## First Steps Workflow
 
-**First Session Pattern:**
-```bash
-# 1. Project Discovery
+**First Context Session Pattern:**
+```
+# 1. Project Discovery (context trigger)
 /sc:brainstorm "e-commerce mobile app"
 
 # 2. Load Context (existing projects)
@@ -138,13 +155,15 @@ SuperClaude transforms Claude Code from a general-purpose AI assistant into a **
 - Need systematic workflows and quality gates
 - Working on complex, multi-component systems
 - Require session persistence across development cycles
-- Want specialized domain expertise (security, performance, etc.)
+- Want specialized domain expertise (invoke with @agents-[specialist] or auto-activation)
 
 **Use Standard Claude Code When:**
 - Simple questions or explanations
 - One-off coding tasks
 - Learning programming concepts
 - Quick prototypes or experiments
+
+**Key Distinction**: SuperClaude doesn't replace Claude Code - it configures and enhances it through context. All execution happens within Claude Code itself.
 
 **SuperClaude Excellence**: Multi-step development workflows with quality requirements
 
@@ -166,7 +185,7 @@ SuperClaude transforms Claude Code from a general-purpose AI assistant into a **
 
 **🌲 Advanced (Expert Usage)**
 - [MCP Servers](../User-Guide/mcp-servers.md) - Enhanced capabilities
-- [Best Practices](../Reference/quick-start-practices.md) - Optimization strategies
+- [Commands Reference](../User-Guide/commands.md) - All commands and workflows
 - [Technical Architecture](../Developer-Guide/technical-architecture.md) - Deep understanding
 
 **🚑 Support**

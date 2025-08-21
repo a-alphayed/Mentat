@@ -9,16 +9,19 @@ personas: [architect, analyzer, frontend, backend, security, devops, project-man
 
 # /sc:brainstorm - Interactive Requirements Discovery
 
+> **Context Framework Note**: This file provides behavioral instructions for Claude Code when users type `/sc:brainstorm` patterns. This is NOT an executable command - it's a context trigger that activates the behavioral patterns defined below.
+
 ## Triggers
 - Ambiguous project ideas requiring structured exploration
 - Requirements discovery and specification development needs
 - Concept validation and feasibility assessment requests
 - Cross-session brainstorming and iterative refinement scenarios
 
-## Usage
+## Context Trigger Pattern
 ```
 /sc:brainstorm [topic/idea] [--strategy systematic|agile|enterprise] [--depth shallow|normal|deep] [--parallel]
 ```
+**Usage**: Type this pattern in your Claude Code conversation to activate brainstorming behavioral mode with systematic exploration and multi-persona coordination.
 
 ## Behavioral Flow
 1. **Explore**: Transform ambiguous ideas through Socratic dialogue and systematic questioning

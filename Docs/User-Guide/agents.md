@@ -1,7 +1,7 @@
 # SuperClaude Agents Guide 🤖
 
 ## ✅ Verification Status
-- **SuperClaude Version**: v4.0+ Compatible
+- **
 - **Last Tested**: 2025-01-16
 - **Test Environment**: Linux/Windows/macOS
 - **Agent Activation**: ✅ All Verified
@@ -11,27 +11,62 @@
 Before using this guide, verify agent selection works:
 
 ```bash
-# Test security agent activation
-/sc:implement "JWT authentication"
-# Expected: Security engineer should activate automatically
+# Test manual agent invocation
+@agents-python-expert "explain decorators"
+# Example behavior: Python expert responds with detailed explanation
 
-# Test frontend agent activation
+# Test security agent auto-activation
+/sc:implement "JWT authentication"
+# Example behavior: Security engineer should activate automatically
+
+# Test frontend agent auto-activation
 /sc:implement "responsive navigation component"  
-# Expected: Frontend architect + Magic MCP should activate
+# Example behavior: Frontend architect + Magic MCP should activate
 
 # Test systematic analysis
 /sc:troubleshoot "slow API performance"
-# Expected: Root-cause analyst + performance engineer activation
+# Example behavior: Root-cause analyst + performance engineer activation
+
+# Test combining manual and auto
+/sc:analyze src/
+@agents-refactoring-expert "suggest improvements"
+# Example behavior: Analysis followed by refactoring suggestions
 ```
 
-**If tests fail**: Check agent activation patterns in this guide or restart Claude Code session
+**If tests fail**: Check agent files exist in `~/.claude/agents/` or restart Claude Code session
 
 ## Core Concepts
 
 ### What are SuperClaude Agents?
-**Agents** are specialized AI domain experts with focused expertise in specific technical areas. Each agent has unique knowledge, behavioral patterns, and problem-solving approaches tailored to their domain.
+**Agents** are specialized AI domain experts implemented as context instructions that modify Claude Code's behavior. Each agent is a carefully crafted `.md` file in the `SuperClaude/Agents/` directory containing domain-specific expertise, behavioral patterns, and problem-solving approaches.
 
-**Auto-Activation** means agents automatically engage based on keywords, file types, and task complexity without manual selection. The system analyzes your request and routes to the most appropriate specialists.
+**Important**: Agents are NOT separate AI models or software - they are context configurations that Claude Code reads to adopt specialized behaviors.
+
+### Two Ways to Use Agents
+
+#### 1. Manual Invocation with @agents- Prefix
+```bash
+# Directly invoke a specific agent
+@agents-security "review authentication implementation"
+@agents-frontend "design responsive navigation"
+@agents-architect "plan microservices migration"
+```
+
+#### 2. Auto-Activation (Behavioral Routing)
+"Auto-activation" means Claude Code reads behavioral instructions to engage appropriate contexts based on keywords and patterns in your requests. SuperClaude provides behavioral guidelines that Claude follows to route to the most appropriate specialists.
+
+> **📝 How Agent "Auto-Activation" Works**: 
+> Agent activation isn't automatic system logic - it's behavioral instructions in context files. 
+> When documentation says agents "auto-activate", it means Claude Code reads instructions to engage 
+> specific domain expertise based on keywords and patterns in your request. This creates the 
+> experience of intelligent routing while being transparent about the underlying mechanism.
+
+```bash
+# These commands auto-activate relevant agents
+/sc:implement "JWT authentication"  # → security-engineer auto-activates
+/sc:design "React dashboard"        # → frontend-architect auto-activates
+/sc:troubleshoot "memory leak"      # → performance-engineer auto-activates
+```
 
 **MCP Servers** provide enhanced capabilities through specialized tools like Context7 (documentation), Sequential (analysis), Magic (UI), Playwright (testing), and Morphllm (code transformation).
 
@@ -40,12 +75,14 @@ Before using this guide, verify agent selection works:
 ### Agent Selection Rules
 
 **Priority Hierarchy:**
-1. **Keywords** - Direct domain terminology triggers primary agents
-2. **File Types** - Extensions activate language/framework specialists  
-3. **Complexity** - Multi-step tasks engage coordination agents
-4. **Context** - Related concepts trigger complementary agents
+1. **Manual Override** - @agents-[name] takes precedence over auto-activation
+2. **Keywords** - Direct domain terminology triggers primary agents
+3. **File Types** - Extensions activate language/framework specialists  
+4. **Complexity** - Multi-step tasks engage coordination agents
+5. **Context** - Related concepts trigger complementary agents
 
 **Conflict Resolution:**
+- Manual invocation → Specified agent takes priority
 - Multiple matches → Multi-agent coordination
 - Unclear context → Requirements analyst activation
 - High complexity → System architect oversight
@@ -54,6 +91,7 @@ Before using this guide, verify agent selection works:
 **Selection Decision Tree:**
 ```
 Task Analysis →
+├─ Manual @agents-? → Use specified agent
 ├─ Single Domain? → Activate primary agent
 ├─ Multi-Domain? → Coordinate specialist agents  
 ├─ Complex System? → Add system-architect oversight
@@ -63,19 +101,39 @@ Task Analysis →
 
 ## Quick Start Examples
 
-**Automatic Agent Coordination:**
+### Manual Agent Invocation
 ```bash
-# Triggers: security-engineer + backend-architect + quality-engineer
+# Explicitly call specific agents with @agents- prefix
+@agents-python-expert "optimize this data processing pipeline"
+@agents-quality-engineer "create comprehensive test suite"
+@agents-technical-writer "document this API with examples"
+@agents-socratic-mentor "explain this design pattern"
+```
+
+### Automatic Agent Coordination
+```bash
+# Commands that trigger auto-activation
 /sc:implement "JWT authentication with rate limiting"
+# → Triggers: security-engineer + backend-architect + quality-engineer
 
-# Triggers: frontend-architect + learning-guide + technical-writer  
 /sc:design "accessible React dashboard with documentation"
+# → Triggers: frontend-architect + learning-guide + technical-writer  
 
-# Triggers: devops-architect + performance-engineer + root-cause-analyst
 /sc:troubleshoot "slow deployment pipeline with intermittent failures"
+# → Triggers: devops-architect + performance-engineer + root-cause-analyst
 
-# Triggers: security-engineer + quality-engineer + refactoring-expert
 /sc:audit "payment processing security vulnerabilities"
+# → Triggers: security-engineer + quality-engineer + refactoring-expert
+```
+
+### Combining Manual and Auto Approaches
+```bash
+# Start with command (auto-activation)
+/sc:implement "user profile system"
+
+# Then explicitly add specialist review
+@agents-security "review the profile system for OWASP compliance"
+@agents-performance-engineer "optimize database queries"
 ```
 
 ---
@@ -437,7 +495,11 @@ Task Analysis →
 
 ### Troubleshooting Agent Activation
 
-## 🚨 Quick Troubleshooting
+## Troubleshooting
+
+For troubleshooting help, see:
+- [Common Issues](../Reference/common-issues.md) - Quick fixes for frequent problems
+- [Troubleshooting Guide](../Reference/troubleshooting.md) - Comprehensive problem resolution
 
 ### Common Issues (< 2 minutes)
 - **No agent activation**: Use domain keywords: "security", "performance", "frontend"
@@ -765,7 +827,7 @@ Add "documented", "explained", or "tutorial" to requests for automatic technical
 
 ### Advanced Usage  
 - **[Behavioral Modes](modes.md)** - Context optimization for enhanced agent coordination
-- **[Best Practices](../Reference/quick-start-practices.md)** - Expert techniques for agent optimization
+- **[Getting Started](../Getting-Started/quick-start.md)** - Expert techniques for agent optimization
 - **[Examples Cookbook](../Reference/examples-cookbook.md)** - Real-world agent coordination patterns
 
 ### Development Resources
