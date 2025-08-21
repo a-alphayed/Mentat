@@ -164,7 +164,7 @@ PYTHONPATH=/path/to/SuperClaude_Framework python3 -m setup install --components 
 
 ### Issue: Agents Not Activating
 
-**Symptom**: `@agents-` invocations don't work in Claude Code
+**Symptom**: `@agent-` invocations don't work in Claude Code
 
 **Verification**:
 ```bash

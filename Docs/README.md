@@ -33,7 +33,7 @@ pip install SuperClaude && SuperClaude install
 | Guide | Purpose | Use For |
 |-------|---------|---------|
 | **[Commands Guide](User-Guide/commands.md)** | Master all `/sc:` commands | Daily development |
-| **[Agents Guide](User-Guide/agents.md)** | 15 domain specialists (`@agents-*`) | Expert assistance |
+| **[Agents Guide](User-Guide/agents.md)** | 15 domain specialists (`@agent-*`) | Expert assistance |
 | **[Flags Guide](User-Guide/flags.md)** | Command behavior modification | Optimization |
 | **[Modes Guide](User-Guide/modes.md)** | 6 behavioral modes | Workflow optimization |
 
@@ -59,7 +59,7 @@ pip install SuperClaude && SuperClaude install
 
 ### Framework Components
 - **21 Commands** (`/sc:*`) - Workflow automation patterns
-- **15 Agents** (`@agents-*`) - Domain specialists
+- **15 Agents** (`@agent-*`) - Domain specialists
 - **6 Modes** - Behavioral modification patterns
 - **6 MCP Servers** - Optional external tools
 
@@ -78,8 +78,8 @@ python3 -m SuperClaude --version  # Check installation
 /sc:brainstorm "project idea"              # Start new project
 /sc:implement "feature"                    # Build features
 /sc:analyze src/                           # Analyze code
-@agents-python-expert "optimize this"      # Manual specialist
-@agents-security "review authentication"   # Security review
+@agent-python-expert "optimize this"      # Manual specialist
+@agent-security "review authentication"   # Security review
 ```
 
 ## 📊 Framework vs Software Comparison

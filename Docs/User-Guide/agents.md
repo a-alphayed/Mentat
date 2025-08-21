@@ -12,7 +12,7 @@ Before using this guide, verify agent selection works:
 
 ```bash
 # Test manual agent invocation
-@agents-python-expert "explain decorators"
+@agent-python-expert "explain decorators"
 # Example behavior: Python expert responds with detailed explanation
 
 # Test security agent auto-activation
@@ -29,7 +29,7 @@ Before using this guide, verify agent selection works:
 
 # Test combining manual and auto
 /sc:analyze src/
-@agents-refactoring-expert "suggest improvements"
+@agent-refactoring-expert "suggest improvements"
 # Example behavior: Analysis followed by refactoring suggestions
 ```
 
@@ -44,12 +44,12 @@ Before using this guide, verify agent selection works:
 
 ### Two Ways to Use Agents
 
-#### 1. Manual Invocation with @agents- Prefix
+#### 1. Manual Invocation with @agent- Prefix
 ```bash
 # Directly invoke a specific agent
-@agents-security "review authentication implementation"
-@agents-frontend "design responsive navigation"
-@agents-architect "plan microservices migration"
+@agent-security "review authentication implementation"
+@agent-frontend "design responsive navigation"
+@agent-architect "plan microservices migration"
 ```
 
 #### 2. Auto-Activation (Behavioral Routing)
@@ -75,7 +75,7 @@ Before using this guide, verify agent selection works:
 ### Agent Selection Rules
 
 **Priority Hierarchy:**
-1. **Manual Override** - @agents-[name] takes precedence over auto-activation
+1. **Manual Override** - @agent-[name] takes precedence over auto-activation
 2. **Keywords** - Direct domain terminology triggers primary agents
 3. **File Types** - Extensions activate language/framework specialists  
 4. **Complexity** - Multi-step tasks engage coordination agents
@@ -91,7 +91,7 @@ Before using this guide, verify agent selection works:
 **Selection Decision Tree:**
 ```
 Task Analysis →
-├─ Manual @agents-? → Use specified agent
+├─ Manual @agent-? → Use specified agent
 ├─ Single Domain? → Activate primary agent
 ├─ Multi-Domain? → Coordinate specialist agents  
 ├─ Complex System? → Add system-architect oversight
@@ -103,11 +103,11 @@ Task Analysis →
 
 ### Manual Agent Invocation
 ```bash
-# Explicitly call specific agents with @agents- prefix
-@agents-python-expert "optimize this data processing pipeline"
-@agents-quality-engineer "create comprehensive test suite"
-@agents-technical-writer "document this API with examples"
-@agents-socratic-mentor "explain this design pattern"
+# Explicitly call specific agents with @agent- prefix
+@agent-python-expert "optimize this data processing pipeline"
+@agent-quality-engineer "create comprehensive test suite"
+@agent-technical-writer "document this API with examples"
+@agent-socratic-mentor "explain this design pattern"
 ```
 
 ### Automatic Agent Coordination
@@ -132,8 +132,8 @@ Task Analysis →
 /sc:implement "user profile system"
 
 # Then explicitly add specialist review
-@agents-security "review the profile system for OWASP compliance"
-@agents-performance-engineer "optimize database queries"
+@agent-security "review the profile system for OWASP compliance"
+@agent-performance-engineer "optimize database queries"
 ```
 
 ---

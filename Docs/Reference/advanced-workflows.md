@@ -23,17 +23,17 @@
 ```bash
 # E-commerce platform using multiple contexts
 # Step 1: Architecture context
-@agents-system-architect "design e-commerce architecture"
+@agent-system-architect "design e-commerce architecture"
 
 # Step 2: Security requirements
-@agents-security "define security requirements for payments"
+@agent-security "define security requirements for payments"
 
 # Step 3: Backend implementation
 /sc:implement "API with authentication and payment processing"
 # Claude uses accumulated context from previous steps
 
 # Step 4: Frontend implementation
-@agents-frontend-architect "design responsive UI"
+@agent-frontend-architect "design responsive UI"
 /sc:implement "React frontend with TypeScript"
 
 # Step 5: Review
@@ -51,8 +51,8 @@
 /sc:troubleshoot "application performance issues"
 
 # Step 2: Expert analysis
-@agents-performance-engineer "analyze potential bottlenecks"
-@agents-backend-architect "review architecture for issues"
+@agent-performance-engineer "analyze potential bottlenecks"
+@agent-backend-architect "review architecture for issues"
 
 # Step 3: Solution design
 /sc:design "performance improvement plan"
@@ -75,7 +75,7 @@
 
 # Planning phase
 /sc:design "system architecture"
-@agents-system-architect "review and refine"
+@agent-system-architect "review and refine"
 
 # Documentation
 /sc:document --type architecture
@@ -98,7 +98,7 @@
 
 # Feature 3: Admin Dashboard (uses previous context)
 /sc:implement "admin dashboard"
-@agents-frontend-architect "ensure consistency"
+@agent-frontend-architect "ensure consistency"
 
 # Each feature builds on conversation context
 ```
@@ -113,7 +113,7 @@
 # Claude builds understanding
 
 # Phase 2: Planning
-@agents-system-architect "design migration strategy"
+@agent-system-architect "design migration strategy"
 /sc:workflow "create migration plan"
 
 # Phase 3: Implementation
@@ -143,7 +143,7 @@
 /sc:analyze frontend/ --focus performance
 
 # Synthesis
-@agents-system-architect "synthesize findings"
+@agent-system-architect "synthesize findings"
 /sc:workflow "improvement recommendations"
 
 # Note: Sequential analysis, not parallel
@@ -154,18 +154,18 @@
 ```bash
 # Projects with diverse tech stacks
 # Backend (Python)
-@agents-python-expert "implement FastAPI backend"
+@agent-python-expert "implement FastAPI backend"
 /sc:implement "Python API with async support"
 
 # Frontend (React)
-@agents-frontend-architect "implement React frontend"
+@agent-frontend-architect "implement React frontend"
 /sc:implement "TypeScript React application"
 
 # Mobile (React Native)
 /sc:implement "React Native mobile app"
 
 # Infrastructure
-@agents-devops-architect "design deployment"
+@agent-devops-architect "design deployment"
 /sc:implement "Docker configuration"
 
 # Each technology addressed sequentially
@@ -179,17 +179,17 @@
 # Multi-aspect code review
 # Quality review
 /sc:analyze . --focus quality
-@agents-quality-engineer "identify improvements"
+@agent-quality-engineer "identify improvements"
 
 # Security review
 /sc:analyze . --focus security
-@agents-security "check for vulnerabilities"
+@agent-security "check for vulnerabilities"
 
 # Architecture review
-@agents-system-architect "evaluate design"
+@agent-system-architect "evaluate design"
 
 # Performance review
-@agents-performance-engineer "suggest optimizations"
+@agent-performance-engineer "suggest optimizations"
 
 # Consolidated improvements
 /sc:improve . --fix
@@ -301,7 +301,7 @@
 
 1. **Strategic Activation**: Use agents for specific expertise
 2. **Avoid Overload**: Too many agents can dilute focus
-3. **Manual Control**: Use `@agents-` for precise control
+3. **Manual Control**: Use `@agent-` for precise control
 4. **Context Layering**: Add agents in logical order
 
 ## Summary

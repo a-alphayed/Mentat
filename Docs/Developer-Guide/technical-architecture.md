@@ -50,7 +50,7 @@ This guide documents how SuperClaude's Context-Oriented Configuration Framework 
 | File Type | Purpose | Activation | Example |
 |-----------|---------|------------|---------|
 | **Commands** | Define workflow patterns | `/sc:[command]` (context trigger) | User types `/sc:implement` → reads `implement.md` |
-| **Agents** | Provide domain expertise | `@agents-[name]` or auto | `@agents-security` → reads `security-engineer.md` |
+| **Agents** | Provide domain expertise | `@agent-[name]` or auto | `@agent-security` → reads `security-engineer.md` |
 | **Modes** | Modify interaction style | Flags or triggers | `--brainstorm` → activates brainstorming mode |
 | **Core** | Set fundamental rules | Always active | `RULES.md` always loaded |
 
@@ -113,7 +113,7 @@ Core philosophy and approach
 
 ### Agent Activation Logic
 
-- **Manual**: User types `@agents-python-expert "task"`
+- **Manual**: User types `@agent-python-expert "task"`
 - **Automatic**: Keywords in request trigger agent loading
 - **Contextual**: File types or patterns activate relevant agents
 
@@ -231,7 +231,7 @@ User Input (in Claude Code): "/sc:analyze src/ --focus security"
 ### Context Priority
 
 1. **Explicit Commands**: `/sc:` commands take precedence
-2. **Manual Agents**: `@agents-` override auto-activation
+2. **Manual Agents**: `@agent-` override auto-activation
 3. **Flags**: Modify behavior of commands/agents
 4. **Auto-Activation**: Based on keywords/context
 5. **Default Behavior**: Standard Claude Code

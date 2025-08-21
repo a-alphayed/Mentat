@@ -29,7 +29,7 @@
 # 3. Claude generates React code based on these contexts
 
 # Component development pattern
-@agents-frontend-architect "design component architecture"
+@agent-frontend-architect "design component architecture"
 /sc:implement "reusable component library"
 
 # Testing pattern for React
@@ -51,7 +51,7 @@
 
 # Database integration pattern
 /sc:implement "database models with Prisma"
-@agents-backend-architect "review database schema"
+@agent-backend-architect "review database schema"
 
 # API testing pattern
 /sc:test --focus api
@@ -63,7 +63,7 @@
 ```bash
 # Python web development
 /sc:implement "FastAPI application" --c7
-@agents-python-expert "review implementation"
+@agent-python-expert "review implementation"
 
 # What Happens:
 # - Claude uses Python-specific context
@@ -72,7 +72,7 @@
 
 # Data science context
 /sc:implement "data analysis pipeline"
-@agents-python-expert "optimize pandas operations"
+@agent-python-expert "optimize pandas operations"
 # Claude provides optimization suggestions (not actual optimization)
 
 # Testing patterns
@@ -85,15 +85,15 @@
 ```bash
 # Full-stack application pattern
 /sc:brainstorm "full-stack application architecture"
-@agents-system-architect "design system components"
+@agent-system-architect "design system components"
 
 # Frontend implementation
 /sc:implement "React frontend with TypeScript"
-@agents-frontend-architect "review component structure"
+@agent-frontend-architect "review component structure"
 
 # Backend implementation
 /sc:implement "Node.js API with authentication"
-@agents-backend-architect "review API design"
+@agent-backend-architect "review API design"
 
 # Integration
 /sc:implement "connect frontend to backend API"
@@ -125,17 +125,17 @@
 
 ```bash
 # Security-focused development
-@agents-security "review authentication requirements"
+@agent-security "review authentication requirements"
 /sc:implement "secure authentication system"
 /sc:analyze --focus security
 
 # Quality-focused workflow
 /sc:implement "new feature"
-@agents-quality-engineer "review code quality"
+@agent-quality-engineer "review code quality"
 /sc:test --focus quality
 
 # Architecture-focused approach
-@agents-system-architect "design microservices"
+@agent-system-architect "design microservices"
 /sc:design "service boundaries"
 /sc:implement "service communication"
 ```
@@ -162,7 +162,7 @@
 
 ```bash
 # Schema design
-@agents-backend-architect "design database schema"
+@agent-backend-architect "design database schema"
 
 # Model implementation
 /sc:implement "database models"
@@ -171,7 +171,7 @@
 /sc:implement "database migrations"
 
 # Query optimization suggestions
-@agents-backend-architect "suggest query optimizations"
+@agent-backend-architect "suggest query optimizations"
 # Note: Claude suggests optimizations, doesn't actually optimize
 ```
 
@@ -204,7 +204,7 @@
 /sc:implement "TypeScript React components with props validation"
 
 # State management
-@agents-frontend-architect "recommend state management approach"
+@agent-frontend-architect "recommend state management approach"
 /sc:implement "state management with Zustand/Redux"
 
 # Testing
@@ -218,7 +218,7 @@
 /sc:implement "FastAPI project structure"
 
 # Endpoint development
-@agents-python-expert "implement async endpoints"
+@agent-python-expert "implement async endpoints"
 
 # Database integration
 /sc:implement "SQLAlchemy models with Alembic"
@@ -231,7 +231,7 @@
 
 ```bash
 # Architecture design
-@agents-system-architect "design microservices architecture"
+@agent-system-architect "design microservices architecture"
 
 # Service implementation
 /sc:implement "user service with Express"
@@ -253,7 +253,7 @@
 /sc:troubleshoot "describe the issue"
 
 # Root cause investigation
-@agents-root-cause-analyst "analyze symptoms"
+@agent-root-cause-analyst "analyze symptoms"
 
 # Solution implementation
 /sc:implement "fix based on analysis"
@@ -269,10 +269,10 @@
 /sc:analyze code/ --focus quality
 
 # Security review
-@agents-security "review for vulnerabilities"
+@agent-security "review for vulnerabilities"
 
 # Performance review
-@agents-performance-engineer "suggest improvements"
+@agent-performance-engineer "suggest improvements"
 # Note: Suggestions only, no actual performance measurement
 
 # Implementation of improvements
@@ -310,7 +310,7 @@
 
 - **Simple tasks**: Use basic commands without MCP
 - **Complex tasks**: Add appropriate agents and MCP servers
-- **Security-critical**: Always include `@agents-security`
+- **Security-critical**: Always include `@agent-security`
 - **UI development**: Consider `--magic` flag if configured
 - **Documentation needs**: Use `--c7` for framework docs
 

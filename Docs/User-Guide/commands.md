@@ -1,13 +1,13 @@
 # SuperClaude Commands Guide
 
-SuperClaude provides 21 commands for Claude Code: `/sc:*` commands for workflows and `@agents-*` for specialists.
+SuperClaude provides 21 commands for Claude Code: `/sc:*` commands for workflows and `@agent-*` for specialists.
 
 ## Command Types
 
 | Type | Where Used | Format | Example |
 |------|------------|--------|---------|
 | **Slash Commands** | Claude Code | `/sc:[command]` | `/sc:implement "feature"` |
-| **Agents** | Claude Code | `@agents-[name]` | `@agents-security "review"` |
+| **Agents** | Claude Code | `@agent-[name]` | `@agent-security "review"` |
 | **Installation** | Terminal | `SuperClaude [command]` | `SuperClaude install` |
 
 ## Quick Test
@@ -33,7 +33,7 @@ SuperClaude provides behavioral context files that Claude Code reads to adopt sp
 
 ### Command Types:
 - **Slash Commands** (`/sc:*`): Trigger workflow patterns and behavioral modes
-- **Agent Invocations** (`@agents-*`): Manually activate specific domain specialists
+- **Agent Invocations** (`@agent-*`): Manually activate specific domain specialists
 - **Flags** (`--think`, `--safe-mode`): Modify command behavior and depth
 
 ### The Context Mechanism:
@@ -55,7 +55,7 @@ SuperClaude provides behavioral context files that Claude Code reads to adopt sp
 **💬 Claude Code Commands** (Context triggers):
 - `/sc:brainstorm` - Activates requirements discovery context
 - `/sc:implement` - Activates feature development context
-- `@agents-security` - Activates security specialist context
+- `@agent-security` - Activates security specialist context
 - All commands work inside Claude Code chat interface only
 
 ## ✅ Verification Status
@@ -103,10 +103,10 @@ SuperClaude install --list-components | grep mcp
 | **🖥️ Installation** | Terminal/CMD | `SuperClaude [command]` | Setup and maintenance | `SuperClaude install` |
 | **🔧 Configuration** | Terminal/CMD | `python3 -m SuperClaude [command]` | Advanced configuration | `python3 -m SuperClaude --version` |
 | **💬 Slash Commands** | Claude Code | `/sc:[command]` | Workflow automation | `/sc:implement "feature"` |
-| **🤖 Agent Invocation** | Claude Code | `@agents-[name]` | Manual specialist activation | `@agents-security "review"` |
+| **🤖 Agent Invocation** | Claude Code | `@agent-[name]` | Manual specialist activation | `@agent-security "review"` |
 | **⚡ Enhanced Flags** | Claude Code | `/sc:[command] --flags` | Behavior modification | `/sc:analyze --think-hard` |
 
-> **Remember**: All `/sc:` commands and `@agents-` invocations work inside Claude Code chat, not your terminal. They trigger Claude Code to read specific context files from the SuperClaude framework.
+> **Remember**: All `/sc:` commands and `@agent-` invocations work inside Claude Code chat, not your terminal. They trigger Claude Code to read specific context files from the SuperClaude framework.
 
 ## Table of Contents
 

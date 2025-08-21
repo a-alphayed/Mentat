@@ -4,7 +4,7 @@
 
 **Quick Reference Guide**: Copy-paste ready examples for beginners, focused on essential SuperClaude usage patterns and fundamental development workflows.
 
-> **📝 Context Note**: These examples show `/sc:` commands and `@agents-` invocations that trigger Claude Code to read specific context files and adopt the behaviors defined there. The sophistication comes from the behavioral instructions, not from executable software.
+> **📝 Context Note**: These examples show `/sc:` commands and `@agent-` invocations that trigger Claude Code to read specific context files and adopt the behaviors defined there. The sophistication comes from the behavioral instructions, not from executable software.
 
 ## Overview and Usage Guide
 
@@ -116,31 +116,31 @@
 
 ### Direct Specialist Activation
 
-#### Pattern: @agents-[specialist]
+#### Pattern: @agent-[specialist]
 **Purpose**: Manually invoke specific domain experts instead of auto-activation
-**Syntax**: `@agents-[specialist] "task or question"`
+**Syntax**: `@agent-[specialist] "task or question"`
 
 #### Python Expert
 ```bash
-@agents-python-expert "optimize this data processing pipeline for performance"
+@agent-python-expert "optimize this data processing pipeline for performance"
 # Expected: Python-specific optimizations, async patterns, memory management
 ```
 
 #### Security Engineer
 ```bash
-@agents-security "review this authentication system for vulnerabilities"
+@agent-security "review this authentication system for vulnerabilities"
 # Expected: OWASP compliance check, vulnerability assessment, secure coding recommendations
 ```
 
 #### Frontend Architect
 ```bash
-@agents-frontend-architect "design a responsive component architecture"
+@agent-frontend-architect "design a responsive component architecture"
 # Expected: Component patterns, state management, accessibility considerations
 ```
 
 #### Quality Engineer
 ```bash
-@agents-quality-engineer "create comprehensive test coverage for payment module"
+@agent-quality-engineer "create comprehensive test coverage for payment module"
 # Expected: Test strategy, unit/integration/e2e tests, edge cases
 ```
 
@@ -153,27 +153,27 @@
 # Auto-activates: backend-architect, possibly frontend
 
 # Step 2: Add specific expert review
-@agents-security "review the profile system for data privacy compliance"
+@agent-security "review the profile system for data privacy compliance"
 # Manual activation for targeted review
 
 # Step 3: Performance optimization
-@agents-performance-engineer "optimize database queries for profile fetching"
+@agent-performance-engineer "optimize database queries for profile fetching"
 # Manual activation for specific optimization
 ```
 
 #### Pattern: Sequential Specialist Chain
 ```bash
 # Design phase
-@agents-system-architect "design microservices architecture for e-commerce"
+@agent-system-architect "design microservices architecture for e-commerce"
 
 # Security review
-@agents-security "review architecture for security boundaries"
+@agent-security "review architecture for security boundaries"
 
 # Implementation guidance
-@agents-backend-architect "implement service communication patterns"
+@agent-backend-architect "implement service communication patterns"
 
 # DevOps setup
-@agents-devops-architect "configure CI/CD for microservices"
+@agent-devops-architect "configure CI/CD for microservices"
 ```
 
 ## Basic Usage Patterns
@@ -397,38 +397,38 @@
 ```bash
 # New React project with TypeScript
 /sc:implement "React TypeScript project with routing, state management, and testing setup"
-@agents-frontend-architect "review and optimize the project structure"
+@agent-frontend-architect "review and optimize the project structure"
 
 # New Node.js API server
 /sc:implement "Express.js REST API with JWT authentication and PostgreSQL integration"
-@agents-backend-architect "ensure scalability and best practices"
+@agent-backend-architect "ensure scalability and best practices"
 
 # Python web API
 /sc:implement "FastAPI application with async PostgreSQL and authentication middleware"
-@agents-python-expert "optimize async patterns and dependency injection"
+@agent-python-expert "optimize async patterns and dependency injection"
 
 # Next.js full-stack app
 /sc:implement "Next.js 14 application with App Router, TypeScript, and Tailwind CSS"
-@agents-system-architect "design optimal data fetching strategy"
+@agent-system-architect "design optimal data fetching strategy"
 ```
 
 ### Quick Quality Improvements
 ```bash
 # Code quality enhancement
 /sc:analyze . --focus quality && /sc:implement "code quality improvements"
-@agents-quality-engineer "create quality metrics dashboard"
+@agent-quality-engineer "create quality metrics dashboard"
 
 # Security hardening
 /sc:analyze . --focus security && /sc:implement "security improvements"
-@agents-security "perform OWASP Top 10 compliance check"
+@agent-security "perform OWASP Top 10 compliance check"
 
 # Performance optimization
 /sc:analyze . --focus performance && /sc:implement "performance optimizations"
-@agents-performance-engineer "profile and optimize critical paths"
+@agent-performance-engineer "profile and optimize critical paths"
 
 # Test coverage improvement
 /sc:test --focus quality && /sc:implement "additional test coverage"
-@agents-quality-engineer "identify untested edge cases"
+@agent-quality-engineer "identify untested edge cases"
 ```
 
 ### Common Feature Implementations

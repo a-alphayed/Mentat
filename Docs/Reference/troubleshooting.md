@@ -54,7 +54,7 @@ python3 -m SuperClaude install --components core commands agents modes --force
 
 **Agents Not Activating:**
 - Use specific keywords: `/sc:implement "secure JWT authentication"`
-- Manual activation: `@agents-security "review auth code"`
+- Manual activation: `@agent-security "review auth code"`
 
 **Slow Performance:**
 ```bash

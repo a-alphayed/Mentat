@@ -51,7 +51,7 @@ SuperClaude is a collection of `.md` instruction files that Claude Code reads to
 **IMPORTANT**: SuperClaude is NOT a CLI tool or executable software. When you see `/sc:` commands in documentation, these are **context trigger patterns** you type in Claude Code conversations, not terminal commands.
 
 ### Agent Context Files
-Specialized instruction sets that provide domain expertise when activated by `@agents-[name]` or automatically by keywords.
+Specialized instruction sets that provide domain expertise when activated by `@agent-[name]` or automatically by keywords.
 
 ### Command Context Files
 Workflow patterns triggered by `/sc:[command]` **context patterns** (not CLI commands) that guide Claude Code through structured development tasks when you type them in Claude Code conversations.

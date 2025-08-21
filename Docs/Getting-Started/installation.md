@@ -30,7 +30,7 @@ SuperClaude install --dry-run
 |------|------------|--------|----------|
 | **Installation** | Terminal | `SuperClaude [command]` | `SuperClaude install` |
 | **Slash Commands** | Claude Code | `/sc:[command]` | `/sc:brainstorm "idea"` |
-| **Agents** | Claude Code | `@agents-[type]` | `@agents-security "review"` |
+| **Agents** | Claude Code | `@agent-[type]` | `@agent-security "review"` |
 
 ## Requirements
 
@@ -116,7 +116,7 @@ SuperClaude install --list-components
 **What's Installed:**
 - Framework files in `~/.claude/`
 - 21 slash commands (`/sc:*`)
-- 15 agents (`@agents-*`)
+- 15 agents (`@agent-*`)
 - 6 behavioral modes
 - MCP server configurations (if selected)
 

@@ -27,7 +27,7 @@ pip install SuperClaude && SuperClaude install
 /sc:workflow "add user authentication"
 
 # Invoke specialist persona
-@agents-security "review authentication implementation"
+@agent-security "review authentication implementation"
 ```
 
 **What Happens with Context Framework:**
@@ -52,7 +52,7 @@ pip install SuperClaude && SuperClaude install
 SuperClaude enhances Claude Code with:
 
 **21 Slash Commands** for workflow automation (/sc:brainstorm, /sc:implement, /sc:analyze)
-**13 AI Specialists** with domain expertise (@agents-architect, @agents-security, @agents-frontend)
+**13 AI Specialists** with domain expertise (@agent-architect, @agent-security, @agent-frontend)
 **6 Behavioral Modes** for different contexts (brainstorming, introspection, orchestration)
 **6 MCP Servers** for enhanced capabilities (Context7, Sequential, Magic, Playwright)
 
@@ -70,7 +70,7 @@ You type `/sc:implement "user login"` → Claude reads context from `implement.m
 
 **Technical Architecture:**
 1. **Context Loading** (Claude Code imports behavioral .md files via CLAUDE.md)
-2. **Pattern Recognition** (Recognizes /sc: and @agents- trigger patterns)
+2. **Pattern Recognition** (Recognizes /sc: and @agent- trigger patterns)
 3. **Behavioral Activation** (Applies corresponding behavioral instructions from context files)
 4. **MCP Integration** (Uses configured external tools when available)
 5. **Response Enhancement** (Follows framework patterns for comprehensive responses)
@@ -155,7 +155,7 @@ SuperClaude transforms Claude Code from a general-purpose AI assistant into a **
 - Need systematic workflows and quality gates
 - Working on complex, multi-component systems
 - Require session persistence across development cycles
-- Want specialized domain expertise (invoke with @agents-[specialist] or auto-activation)
+- Want specialized domain expertise (invoke with @agent-[specialist] or auto-activation)
 
 **Use Standard Claude Code When:**
 - Simple questions or explanations

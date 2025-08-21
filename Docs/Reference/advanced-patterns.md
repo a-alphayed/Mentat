@@ -23,8 +23,8 @@
 **Security + Backend Pattern:**
 ```bash
 # Security-focused backend development
-@agents-security "define authentication requirements"
-@agents-backend-architect "design API with security requirements"
+@agent-security "define authentication requirements"
+@agent-backend-architect "design API with security requirements"
 /sc:implement "secure API endpoints"
 
 # What happens:
@@ -37,9 +37,9 @@
 **Frontend + UX + Accessibility Pattern:**
 ```bash
 # Comprehensive frontend development
-@agents-frontend-architect "design component architecture"
+@agent-frontend-architect "design component architecture"
 /sc:implement "accessible React components" --magic
-@agents-quality-engineer "review accessibility compliance"
+@agent-quality-engineer "review accessibility compliance"
 
 # Context layering:
 # - Frontend patterns guide structure
@@ -52,7 +52,7 @@
 **Explicit Control Pattern:**
 ```bash
 # Manually control which contexts load
-@agents-python-expert "implement data pipeline"
+@agent-python-expert "implement data pipeline"
 # Only Python context, no auto-activation
 
 # vs Automatic selection
@@ -64,7 +64,7 @@
 ```bash
 # Prevent unwanted agent activation
 /sc:implement "simple utility" --no-mcp
-@agents-backend-architect "keep it simple"
+@agent-backend-architect "keep it simple"
 # Limits context to specified agent only
 ```
 
@@ -96,7 +96,7 @@
 /sc:design "feature architecture"
 # Creates structure
 
-@agents-backend-architect "review design"
+@agent-backend-architect "review design"
 # Expert review
 
 /sc:implement "feature based on design"
@@ -116,7 +116,7 @@
 /sc:improve code/ --fix
 # First improvement pass
 
-@agents-refactoring-expert "suggest further improvements"
+@agent-refactoring-expert "suggest further improvements"
 # Expert suggestions
 
 /sc:improve code/ --fix --focus maintainability
@@ -172,7 +172,7 @@
 /sc:analyze . --quick --focus architecture
 
 # Step 2: Identify problem areas
-@agents-quality-engineer "identify high-risk modules"
+@agent-quality-engineer "identify high-risk modules"
 
 # Step 3: Deep dive into specific areas
 /sc:analyze high-risk-module/ --think-hard --focus quality
@@ -187,11 +187,11 @@
 # Developing interconnected modules
 # Frontend module
 /sc:implement "user interface module"
-@agents-frontend-architect "ensure consistency"
+@agent-frontend-architect "ensure consistency"
 
 # Backend module
 /sc:implement "API module"
-@agents-backend-architect "ensure compatibility"
+@agent-backend-architect "ensure compatibility"
 
 # Integration layer
 /sc:implement "frontend-backend integration"
@@ -203,13 +203,13 @@
 ```bash
 # Projects with multiple technologies
 # Python backend
-@agents-python-expert "implement FastAPI backend"
+@agent-python-expert "implement FastAPI backend"
 
 # React frontend
-@agents-frontend-architect "implement React frontend"
+@agent-frontend-architect "implement React frontend"
 
 # DevOps setup
-@agents-devops-architect "create deployment configuration"
+@agent-devops-architect "create deployment configuration"
 
 # Integration documentation
 /sc:document --type integration
@@ -224,8 +224,8 @@
 /sc:load legacy-system/
 /sc:analyze . --focus architecture --verbose
 
-@agents-refactoring-expert "identify modernization opportunities"
-@agents-system-architect "propose migration strategy"
+@agent-refactoring-expert "identify modernization opportunities"
+@agent-system-architect "propose migration strategy"
 
 /sc:workflow "create migration plan"
 ```
@@ -238,7 +238,7 @@
 /sc:analyze legacy-module/ --comprehensive
 
 # Phase 2: Design new architecture
-@agents-system-architect "design modern replacement"
+@agent-system-architect "design modern replacement"
 
 # Phase 3: Implementation
 /sc:implement "modern module with compatibility layer"
@@ -254,8 +254,8 @@
 ```bash
 # Comprehensive security review
 /sc:analyze . --focus security --think-hard
-@agents-security "review authentication and authorization"
-@agents-security "check for OWASP vulnerabilities"
+@agent-security "review authentication and authorization"
+@agent-security "check for OWASP vulnerabilities"
 /sc:document --type security-audit
 ```
 
@@ -264,8 +264,8 @@
 ```bash
 # Multi-aspect quality review
 /sc:analyze src/ --focus quality
-@agents-quality-engineer "review test coverage"
-@agents-refactoring-expert "identify code smells"
+@agent-quality-engineer "review test coverage"
+@agent-refactoring-expert "identify code smells"
 /sc:improve --fix --preview
 ```
 
@@ -273,9 +273,9 @@
 
 ```bash
 # System architecture assessment
-@agents-system-architect "review current architecture"
+@agent-system-architect "review current architecture"
 /sc:analyze . --focus architecture --think-hard
-@agents-performance-engineer "identify bottlenecks"
+@agent-performance-engineer "identify bottlenecks"
 /sc:design "optimization recommendations"
 ```
 
