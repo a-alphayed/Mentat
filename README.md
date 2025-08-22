@@ -40,7 +40,7 @@
 
 | **Commands** | **Agents** | **Modes** | **MCP Servers** |
 |:------------:|:----------:|:---------:|:---------------:|
-| **21** | **14** | **6** | **6** |
+| **21** | **14** | **5** | **6** |
 | Slash Commands | Specialized AI | Behavioral | Integrations |
 
 </div>
@@ -86,7 +86,11 @@ pip install --break-system-packages SuperClaude
 
 ## 💖 **Support the Project**
 
-> *Maintaining SuperClaude takes time and resources. Your support helps keep development active!*
+> *Hey, let's be real - maintaining SuperClaude takes time and resources.
+> The Claude Max subscription alone runs $100/month for testing, and that's before counting the hours spent on documentation, bug fixes, and feature development.
+> If you're finding value in SuperClaude for your daily work, consider supporting the project.
+> Even a few dollars helps cover the basics and keeps development active.
+> Every contributor matters, whether through code, feedback, or support. Thanks for being part of this community! 🙏*
 
 <table>
 <tr>
@@ -128,7 +132,7 @@ pip install --break-system-packages SuperClaude
 | 🔧 **MCP Integration** | Testing new server connections |
 | 🌐 **Infrastructure** | Hosting & deployment costs |
 
-> **Note:** The framework stays open source regardless. Contributing code, documentation, or spreading the word helps too! 🙏
+> **Note:** No pressure though - the framework stays open source regardless. Just knowing people use and appreciate it is motivating. Contributing code, documentation, or spreading the word helps too! 🙏
 
 </div>
 
