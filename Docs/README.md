@@ -14,7 +14,12 @@
 
 **New Users**: [Quick Start Guide →](Getting-Started/quick-start.md)
 ```bash
+# Recommended for Linux/macOS
+pipx install SuperClaude && SuperClaude install
+
+# Traditional method
 pip install SuperClaude && SuperClaude install
+
 # Then try: /sc:brainstorm "web app idea" in Claude Code
 ```
 
@@ -67,7 +72,12 @@ pip install SuperClaude && SuperClaude install
 
 ### In Your Terminal (Installation)
 ```bash
-pip install SuperClaude        # Install framework
+# Install framework (choose one)
+pipx install SuperClaude       # Recommended for Linux/macOS
+pip install SuperClaude        # Traditional method
+npm install -g @bifrost_inc/superclaude  # Cross-platform
+
+# Configure and maintain
 SuperClaude install            # Configure Claude Code
 SuperClaude update             # Update framework
 python3 -m SuperClaude --version  # Check installation

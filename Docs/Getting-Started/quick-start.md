@@ -12,7 +12,14 @@ SuperClaude is a **Context Engineering Framework** that enhances Claude Code by 
 
 ### 🖥️ Installation - Run in Terminal
 ```bash
+# Recommended for Linux/macOS
+pipx install SuperClaude && SuperClaude install
+
+# Traditional method
 pip install SuperClaude && SuperClaude install
+
+# Cross-platform via NPM
+npm install -g @bifrost_inc/superclaude && superclaude install
 ```
 
 ### 💬 First Context Triggers - Type in Claude Code Conversation

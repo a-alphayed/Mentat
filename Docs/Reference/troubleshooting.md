@@ -29,15 +29,29 @@ SuperClaude install --list-components
 
 **Package Installation Fails:**
 ```bash
+# For pipx users
+pipx uninstall SuperClaude
+pipx install SuperClaude
+
+# For pip users
 pip uninstall SuperClaude
 pip install --upgrade pip
 pip install SuperClaude
 ```
 
-**Permission Denied:**
+**Permission Denied / PEP 668 Error:**
 ```bash
+# Option 1: Use pipx (recommended)
+pipx install SuperClaude
+
+# Option 2: Use pip with --user flag
 pip install --user SuperClaude
-# Or: sudo chown -R $USER ~/.claude
+
+# Option 3: Fix permissions
+sudo chown -R $USER ~/.claude
+
+# Option 4: Force installation (use with caution)
+pip install --break-system-packages SuperClaude
 ```
 
 **Component Missing:**

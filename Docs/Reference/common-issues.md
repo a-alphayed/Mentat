@@ -16,15 +16,27 @@ Test: /sc:brainstorm "test" should ask questions
 python3 -m SuperClaude --version    # Should show 4.0.4
 
 # If not working:
+# For pipx users
+pipx upgrade SuperClaude
+
+# For pip users
 pip install --upgrade SuperClaude
+
+# Then reinstall
 python3 -m SuperClaude install
 ```
 
 ### 3. Permission Issues
 ```bash
-# Permission denied errors:
+# Permission denied / PEP 668 errors:
+# Option 1: Use pipx (recommended)
+pipx install SuperClaude
+
+# Option 2: Use pip with --user
 pip install --user SuperClaude
-# Or: sudo chown -R $USER ~/.claude
+
+# Option 3: Fix permissions
+sudo chown -R $USER ~/.claude
 ```
 
 ### 4. MCP Server Issues

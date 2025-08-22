@@ -4,13 +4,19 @@ SuperClaude installs behavioral context files that Claude Code reads to enhance 
 
 ## Quick Start 🚀
 
-**Python (Recommended):**
+**pipx (Recommended for Linux/macOS):**
+```bash
+pipx install SuperClaude
+SuperClaude install
+```
+
+**pip (Traditional):**
 ```bash
 pip install SuperClaude
 SuperClaude install
 ```
 
-**NPM:**
+**NPM (Cross-platform):**
 ```bash
 npm install -g @bifrost_inc/superclaude
 SuperClaude install
@@ -22,6 +28,18 @@ git clone https://github.com/SuperClaude-Org/SuperClaude_Framework.git
 cd SuperClaude_Framework
 pip install -e ".[dev]"
 SuperClaude install --dry-run
+```
+
+**If you encounter PEP 668 errors:**
+```bash
+# Option 1: Use pipx (recommended)
+pipx install SuperClaude
+
+# Option 2: Use pip with --user flag
+pip install --user SuperClaude
+
+# Option 3: Force installation (use with caution)
+pip install --break-system-packages SuperClaude
 ```
 
 ## Command Types

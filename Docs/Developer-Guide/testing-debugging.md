@@ -240,7 +240,7 @@ if command -v SuperClaude &> /dev/null; then
     echo "   ✅ SuperClaude installation available"
     python3 -m SuperClaude --version
 else
-    echo "   ❌ SuperClaude not found - install with: pip install SuperClaude"
+    echo "   ❌ SuperClaude not found - install with: pipx install SuperClaude (or pip install SuperClaude)"
 fi
 
 # Check context files
