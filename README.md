@@ -9,7 +9,7 @@
 [![Contributors](https://img.shields.io/github/contributors/SuperClaude-Org/SuperClaude_Framework)](https://github.com/SuperClaude-Org/SuperClaude_Framework/graphs/contributors)
 [![Website](https://img.shields.io/website?url=https://superclaude-org.github.io/SuperClaude_Website/)](https://superclaude-org.github.io/SuperClaude_Website/)
 
-SuperClaude is a meta-programming configuration framework that transforms Claude Code into a structured development platform through behavioral instruction injection and component orchestration. It enhances Claude Code with 21 slash commands, 14 specialized agents, 6 behavioral modes, and 6 MCP server integrations for systematic workflow automation.
+SuperClaude is a meta-programming configuration framework that transforms Claude Code into a structured development platform through behavioral instruction injection and component orchestration. It enhances Claude Code with 21 slash commands, 14 specialized agents, 5 behavioral modes, and 6 MCP server integrations for systematic workflow automation.
 
 ## Quick Start
 
