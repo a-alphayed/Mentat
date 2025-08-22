@@ -2,7 +2,7 @@
 
 ## 🚀 Complete Publishing Guide for PyPI and NPM
 
-**Version**: 4.0.0 (PyPI) / 4.0.3 (NPM)  
+**Version**: 4.0.3 (Both PyPI and NPM)  
 **Date**: 2025-08-22  
 **Status**: READY FOR RELEASE
 
@@ -11,7 +11,7 @@
 ## 📋 Pre-Flight Checklist
 
 ### Critical Fixes Applied ✅
-- [x] Version consistency fixed (PyPI: 4.0.0)
+- [x] Version consistency fixed (Both: 4.0.3)
 - [x] License format updated to PEP 639 compliance
 - [x] NPM package name corrected to `@superclaude-org/superclaude`
 - [x] NPM version incremented to 4.0.3 (from existing 4.0.2)
@@ -113,7 +113,7 @@
    # Install from TestPyPI
    pip install --index-url https://test.pypi.org/simple/ \
                --extra-index-url https://pypi.org/simple/ \
-               SuperClaude==4.0.0
+               SuperClaude==4.0.3
    
    # Test the CLI
    SuperClaude --version
@@ -166,8 +166,8 @@ git status
 # Should show: nothing to commit, working tree clean
 
 # Tag the release
-git tag -a v4.0.0 -m "Release v4.0.0 - Production ready"
-git push origin v4.0.0
+git tag -a v4.0.3 -m "Release v4.0.3 - Production ready"
+git push origin v4.0.3
 ```
 
 ### PyPI Production Release
@@ -194,7 +194,7 @@ git push origin v4.0.0
 4. **Verify on PyPI**:
    ```bash
    # Wait 1-2 minutes for CDN propagation
-   pip install SuperClaude==4.0.0 --no-cache-dir
+   pip install SuperClaude==4.0.3 --no-cache-dir
    SuperClaude --version
    ```
 
@@ -232,10 +232,10 @@ git push origin v4.0.0
 1. **PyPI Verification**:
    ```bash
    # Check PyPI page
-   open https://pypi.org/project/SuperClaude/4.0.0/
+   open https://pypi.org/project/SuperClaude/4.0.3/
    
    # Fresh install test
-   pip install SuperClaude==4.0.0 --no-cache-dir
+   pip install SuperClaude==4.0.3 --no-cache-dir
    SuperClaude install --list-components
    ```
 
@@ -266,7 +266,7 @@ git push origin v4.0.0
 1. **Yank the release** (makes it non-installable):
    ```bash
    # Via web interface:
-   # https://pypi.org/manage/project/SuperClaude/release/4.0.0/
+   # https://pypi.org/manage/project/SuperClaude/release/4.0.3/
    # Click "Options" → "Yank"
    
    # Users can still install if they specify exact version
@@ -298,8 +298,8 @@ git push origin v4.0.0
 ### GitHub Release
 
 1. Create release at: https://github.com/SuperClaude-Org/SuperClaude_Framework/releases/new
-2. Tag: v4.0.0
-3. Title: "SuperClaude v4.0.0 - Production Release"
+2. Tag: v4.0.3
+3. Title: "SuperClaude v4.0.3 - Production Release"
 4. Description: Include changelog and installation instructions
 
 ### Update Documentation
@@ -313,7 +313,7 @@ git push origin v4.0.0
 ### Community Announcement Template
 
 ```markdown
-🎉 SuperClaude v4.0.0 Released!
+🎉 SuperClaude v4.0.3 Released!
 
 Install via:
 - PyPI: `pip install SuperClaude`
@@ -381,7 +381,7 @@ npm publish --dry-run              # Test locally
 npm publish --otp=123456           # Release to NPM
 
 # Verification
-pip install SuperClaude==4.0.0
+pip install SuperClaude==4.0.3
 npm install -g @superclaude-org/superclaude@4.0.3
 ```
 

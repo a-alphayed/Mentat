@@ -1,9 +1,9 @@
-# SuperClaude v4.0.0 🚀
+# SuperClaude v4.0.3 🚀
 [![Website Preview](https://img.shields.io/badge/Visit-Website-blue?logo=google-chrome)](https://superclaude-org.github.io/SuperClaude_Website/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PyPI version](https://img.shields.io/pypi/v/SuperClaude.svg)](https://pypi.org/project/SuperClaude/)
 [![npm version](https://img.shields.io/npm/v/@superclaude-org/superclaude.svg)](https://www.npmjs.com/package/@superclaude-org/superclaude)
-[![Version](https://img.shields.io/badge/version-4.0.0-blue.svg)](https://github.com/SuperClaude-Org/SuperClaude_Framework)
+[![Version](https://img.shields.io/badge/version-4.0.3-blue.svg)](https://github.com/SuperClaude-Org/SuperClaude_Framework)
 [![GitHub issues](https://img.shields.io/github/issues/SuperClaude-Org/SuperClaude_Framework)](https://github.com/SuperClaude-Org/SuperClaude_Framework/issues)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/SuperClaude-Org/SuperClaude_Framework/blob/master/CONTRIBUTING.md)
 [![Contributors](https://img.shields.io/github/contributors/SuperClaude-Org/SuperClaude_Framework)](https://github.com/SuperClaude-Org/SuperClaude_Framework/graphs/contributors)

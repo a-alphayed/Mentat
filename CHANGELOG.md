@@ -48,7 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Tab completion support for `/sc:` prefix to discover all SuperClaude commands
 - Guides/ directory replaces Docs/ for improved organization
 
-## [4.0.0-beta.1] - 2025-02-05
+## [4.0.3] - 2025-08-22
 
 ### Added
 - **Agent System**: 13 specialized domain experts replacing personas
