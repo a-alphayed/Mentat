@@ -47,13 +47,16 @@
 
 ---
 
+<div align="center">
+
 ## 🎯 **Overview**
 
 SuperClaude is a **meta-programming configuration framework** that transforms Claude Code into a structured development platform through behavioral instruction injection and component orchestration. It provides systematic workflow automation with powerful tools and intelligent agents.
 
-## ⚡ **Quick Installation**
-
+</div>
 <div align="center">
+
+## ⚡ **Quick Installation**
 
 ### **Choose Your Installation Method**
 
@@ -142,13 +145,11 @@ pip install --break-system-packages SuperClaude
 
 ---
 
-## 🎉 **What's New in V4**
-
 <div align="center">
 
-> *Version 4 brings significant improvements based on community feedback and real-world usage patterns.*
+## 🎉 **What's New in V4**
 
-</div>
+> *Version 4 brings significant improvements based on community feedback and real-world usage patterns.*
 
 <table>
 <tr>
@@ -222,11 +223,13 @@ pip install --break-system-packages SuperClaude
 </tr>
 </table>
 
+</div>
+
 ---
 
-## 📚 **Documentation**
-
 <div align="center">
+
+## 📚 **Documentation**
 
 ### **Complete Guide to SuperClaude**
 
@@ -299,9 +302,9 @@ pip install --break-system-packages SuperClaude
 
 ---
 
-## 🤝 **Contributing**
-
 <div align="center">
+
+## 🤝 **Contributing**
 
 ### **Join the SuperClaude Community**
 
@@ -328,9 +331,9 @@ We welcome contributions of all kinds! Here's how you can help:
 
 ---
 
-## ⚖️ **License**
-
 <div align="center">
+
+## ⚖️ **License**
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
@@ -342,9 +345,9 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ---
 
-## ⭐ **Star History**
-
 <div align="center">
+
+## ⭐ **Star History**
 
 <a href="https://www.star-history.com/#SuperClaude-Org/SuperClaude_Framework&Date">
   <picture>
