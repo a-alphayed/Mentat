@@ -102,7 +102,7 @@ The installer will:
 
 **Verify Installation:**
 ```bash
-python3 -m SuperClaude --version    # Should show 4.0.3
+python3 -m SuperClaude --version    # Should show 4.0.4
 SuperClaude install --list-components
 ```
 

@@ -54,7 +54,7 @@ pip install SuperClaude
 pip install git+https://github.com/SuperClaude-Org/SuperClaude_Framework.git
 
 # Specific version
-pip install SuperClaude==4.0.3
+pip install SuperClaude==4.0.4
 ```
 
 **Automated Release Process:**
@@ -212,7 +212,7 @@ git config tag.gpgsign true
 **Package Information:**
 
 **Package Name**: `SuperClaude`
-**Current Version**: 4.0.3 (Major release with v4 architecture)
+**Current Version**: 4.0.4 (Major release with v4 architecture)
 **PyPI URL**: https://pypi.org/project/SuperClaude/
 **GitHub URL**: https://github.com/SuperClaude-Org/SuperClaude_Framework
 
@@ -363,12 +363,12 @@ git push origin v4.0.1
 
 **Version Scheme (Semantic Versioning):**
 
-**Format**: MAJOR.MINOR.PATCH (e.g., 4.0.3)
+**Format**: MAJOR.MINOR.PATCH (e.g., 4.0.4)
 - **MAJOR**: Breaking changes, architectural updates, incompatible API changes
 - **MINOR**: New features, agent additions, MCP server integrations, backward-compatible changes
 - **PATCH**: Bug fixes, documentation updates, security patches, backward-compatible fixes
 
-**Current Version**: 4.0.3
+**Current Version**: 4.0.4
 - Major architectural update with enhanced agent coordination
 - 6 MCP server integrations and 14 specialized agents
 - Comprehensive command system with 21 slash commands
@@ -472,7 +472,7 @@ git tag -v v4.0.1
 
 **Source Distribution Contents:**
 ```
-SuperClaude-4.0.3.tar.gz
+SuperClaude-4.0.4.tar.gz
 ├── superclaude/
 │   ├── __init__.py                 # Version and package metadata
 │   ├── cli.py                      # Main CLI entry point
@@ -501,9 +501,9 @@ SuperClaude-4.0.3.tar.gz
 
 **Wheel Distribution:**
 ```
-SuperClaude-4.0.3-py3-none-any.whl
+SuperClaude-4.0.4-py3-none-any.whl
 ├── superclaude/                    # Compiled package code
-├── SuperClaude-4.0.3.dist-info/   # Package metadata
+├── SuperClaude-4.0.4.dist-info/   # Package metadata
 │   ├── METADATA                    # Package description and requirements
 │   ├── WHEEL                       # Wheel format metadata
 │   ├── entry_points.txt            # CLI entry points
@@ -637,7 +637,7 @@ which SuperClaude
 
 # Issue: "Tag validation failed"
 # Solution: Ensure tag follows semver pattern
-git tag -d v4.0.3 && git tag v4.0.3
+git tag -d v4.0.4 && git tag v4.0.4
 ```
 **Publishing Support Resources:**
 
