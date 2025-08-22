@@ -87,9 +87,13 @@ pip install --break-system-packages SuperClaude
 ## 💖 **Support the Project**
 
 > *Hey, let's be real - maintaining SuperClaude takes time and resources.
+> 
 > The Claude Max subscription alone runs $100/month for testing, and that's before counting the hours spent on documentation, bug fixes, and feature development.
+> 
 > If you're finding value in SuperClaude for your daily work, consider supporting the project.
+> 
 > Even a few dollars helps cover the basics and keeps development active.
+> 
 > Every contributor matters, whether through code, feedback, or support. Thanks for being part of this community! 🙏*
 
 <table>
