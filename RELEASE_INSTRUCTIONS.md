@@ -13,7 +13,7 @@
 ### Critical Fixes Applied ✅
 - [x] Version consistency fixed (Both: 4.0.3)
 - [x] License format updated to PEP 639 compliance
-- [x] NPM package name corrected to `@superclaude-org/superclaude`
+- [x] NPM package name corrected to `@bifrost_inc/superclaude`
 - [x] NPM version incremented to 4.0.3 (from existing 4.0.2)
 
 ### Required Accounts
@@ -130,7 +130,7 @@
    ```bash
    npm publish --dry-run
    # Check output for:
-   # - Correct package name: @superclaude-org/superclaude
+   # - Correct package name: @bifrost_inc/superclaude
    # - Version: 4.0.3
    # - Files included: bin/, README.md, LICENSE, package.json
    ```
@@ -147,7 +147,7 @@
    superclaude --version
    
    # Uninstall test
-   npm uninstall -g @superclaude-org/superclaude
+   npm uninstall -g @bifrost_inc/superclaude
    ```
 
 ---
@@ -216,10 +216,10 @@ git push origin v4.0.3
 3. **Verify on NPM**:
    ```bash
    # Wait 1-2 minutes
-   npm view @superclaude-org/superclaude@4.0.3
+   npm view @bifrost_inc/superclaude@4.0.3
    
    # Test installation
-   npm install -g @superclaude-org/superclaude@4.0.3
+   npm install -g @bifrost_inc/superclaude@4.0.3
    superclaude --version
    ```
 
@@ -242,17 +242,17 @@ git push origin v4.0.3
 2. **NPM Verification**:
    ```bash
    # Check NPM page
-   open https://www.npmjs.com/package/@superclaude-org/superclaude
+   open https://www.npmjs.com/package/@bifrost_inc/superclaude
    
    # Fresh install test
-   npm install -g @superclaude-org/superclaude@4.0.3
+   npm install -g @bifrost_inc/superclaude@4.0.3
    superclaude install --list-components
    ```
 
 3. **Cross-platform test**:
    ```bash
    # Test NPM → PyPI flow
-   npm install -g @superclaude-org/superclaude
+   npm install -g @bifrost_inc/superclaude
    superclaude install --dry-run
    # Should successfully detect/install Python package
    ```
@@ -283,12 +283,12 @@ git push origin v4.0.3
 
 1. **Unpublish** (within 72 hours):
    ```bash
-   npm unpublish @superclaude-org/superclaude@4.0.3
+   npm unpublish @bifrost_inc/superclaude@4.0.3
    ```
 
 2. **Deprecate** (after 72 hours):
    ```bash
-   npm deprecate @superclaude-org/superclaude@4.0.3 "Critical bug - use 4.0.4"
+   npm deprecate @bifrost_inc/superclaude@4.0.3 "Critical bug - use 4.0.4"
    ```
 
 ---
@@ -317,7 +317,7 @@ git push origin v4.0.3
 
 Install via:
 - PyPI: `pip install SuperClaude`
-- NPM: `npm install -g @superclaude-org/superclaude`
+- NPM: `npm install -g @bifrost_inc/superclaude`
 
 What's New:
 - 14 specialized AI agents
@@ -363,7 +363,7 @@ Docs: https://github.com/SuperClaude-Org/SuperClaude_Framework
 
 After 24 hours, check:
 - PyPI download stats: https://pypistats.org/packages/superclaude
-- NPM download stats: https://www.npmjs.com/package/@superclaude-org/superclaude
+- NPM download stats: https://www.npmjs.com/package/@bifrost_inc/superclaude
 - GitHub stars/issues
 - Community feedback
 
@@ -382,7 +382,7 @@ npm publish --otp=123456           # Release to NPM
 
 # Verification
 pip install SuperClaude==4.0.3
-npm install -g @superclaude-org/superclaude@4.0.3
+npm install -g @bifrost_inc/superclaude@4.0.3
 ```
 
 ---

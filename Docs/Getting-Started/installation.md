@@ -12,7 +12,7 @@ SuperClaude install
 
 **NPM:**
 ```bash
-npm install -g superclaude
+npm install -g @bifrost_inc/superclaude
 SuperClaude install
 ```
 
@@ -75,7 +75,7 @@ pip install SuperClaude
 
 **JavaScript/Node.js Users:**
 ```bash
-npm install -g superclaude  # ⚠️ Verify exact package name
+npm install -g @bifrost_inc/superclaude
 ```
 
 **Development/Contributors:**

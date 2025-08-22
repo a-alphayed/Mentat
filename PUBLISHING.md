@@ -12,7 +12,7 @@ SuperClaude Framework is published to PyPI as a Python package with automated CI
 
 **Package Distribution:**
 - **Primary**: PyPI (pip install SuperClaude)
-- **Alternative**: npm (npm install -g superclaude) for Node.js environments
+- **Alternative**: npm (npm install -g @bifrost_inc/superclaude) for Node.js environments
 - **Development**: Direct GitHub installation for contributors and testers
 
 ## 🚀 Quick Start
