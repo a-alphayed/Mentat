@@ -1,8 +1,10 @@
 # SuperClaude Agents Guide 🤖
 
+SuperClaude provides 14 domain specialist agents that Claude Code can invoke for specialized expertise.
+
 ## ✅ Verification Status
-- **
-- **Last Tested**: 2025-01-16
+- **Agent Count**: 14 specialists available
+- **Last Tested**: 2025-01-16  
 - **Test Environment**: Linux/Windows/macOS
 - **Agent Activation**: ✅ All Verified
 
@@ -501,7 +503,7 @@ For troubleshooting help, see:
 - [Common Issues](../Reference/common-issues.md) - Quick fixes for frequent problems
 - [Troubleshooting Guide](../Reference/troubleshooting.md) - Comprehensive problem resolution
 
-### Common Issues (< 2 minutes)
+### Common Issues
 - **No agent activation**: Use domain keywords: "security", "performance", "frontend"
 - **Wrong agents selected**: Check trigger keywords in agent documentation
 - **Too many agents**: Focus keywords on primary domain or use `/sc:focus [domain]`
@@ -552,35 +554,24 @@ For troubleshooting help, see:
 "implement server-side authentication" # Backend focus - triggers backend-architect
 ```
 
-### Progressive Support Levels
+### Support Levels
 
-**Level 1: Quick Fix (< 2 min)**
+**Quick Fix:**
 - Use explicit domain keywords from agent trigger table
 - Try restarting Claude Code session
 - Focus on single domain to avoid confusion
 
-**Level 2: Detailed Help (5-15 min)**
-```bash
-# Agent-specific diagnostics
-/sc:help agents                        # List available agents
-/sc:explain "agent selection process"  # Understand routing
-# Review trigger keywords for target agents
-```
+**Detailed Help:**
 - See [Common Issues Guide](../Reference/common-issues.md) for agent installation problems
+- Review trigger keywords for target agents
 
-**Level 3: Expert Support (30+ min)**
-```bash
-# Deep agent analysis
-SuperClaude install --diagnose
-# Check agent coordination patterns
-# Review multi-domain keyword strategies
-```
-- See [Diagnostic Reference Guide](../Reference/diagnostic-reference.md) for agent coordination analysis
+**Expert Support:**  
+- Use `SuperClaude install --diagnose`
+- See [Diagnostic Reference Guide](../Reference/diagnostic-reference.md) for coordination analysis
 
-**Level 4: Community Support**
-- Report agent issues at [GitHub Issues](https://github.com/SuperClaude-Org/SuperClaude_Framework/issues)
+**Community Support:**
+- Report issues at [GitHub Issues](https://github.com/SuperClaude-Org/SuperClaude_Framework/issues)
 - Include examples of expected vs actual agent activation
-- Describe the type of task and desired agent combination
 
 ### Success Validation
 
@@ -646,40 +637,21 @@ After applying agent fixes, test with:
 | `/sc:test` | quality-engineer | security-engineer, performance-engineer |
 | `/sc:explain` | learning-guide | technical-writer, domain specialists |
 
-### Most Effective Agent Combinations
+### Effective Agent Combinations
 
 **Development Workflows**:
-```bash
-# Web application (4-5 agents)
-frontend-architect + backend-architect + security-engineer + quality-engineer + devops-architect
-
-# API development (3-4 agents)  
-backend-architect + security-engineer + technical-writer + quality-engineer
-
-# Data platform (3-4 agents)
-python-expert + performance-engineer + security-engineer + system-architect
-```
+- Web application: frontend-architect + backend-architect + security-engineer + quality-engineer + devops-architect
+- API development: backend-architect + security-engineer + technical-writer + quality-engineer  
+- Data platform: python-expert + performance-engineer + security-engineer + system-architect
 
 **Analysis Workflows**:
-```bash
-# Security audit (3-4 agents)
-security-engineer + quality-engineer + root-cause-analyst + technical-writer
-
-# Performance investigation (3-4 agents)
-performance-engineer + root-cause-analyst + system-architect + devops-architect
-
-# Legacy assessment (4-5 agents)
-refactoring-expert + system-architect + quality-engineer + security-engineer + technical-writer
-```
+- Security audit: security-engineer + quality-engineer + root-cause-analyst + technical-writer
+- Performance investigation: performance-engineer + root-cause-analyst + system-architect + devops-architect
+- Legacy assessment: refactoring-expert + system-architect + quality-engineer + security-engineer + technical-writer
 
 **Communication Workflows**:
-```bash
-# Technical documentation (3-4 agents)
-technical-writer + requirements-analyst + domain experts + learning-guide
-
-# Educational content (3-4 agents)
-learning-guide + technical-writer + frontend-architect + quality-engineer
-```
+- Technical documentation: technical-writer + requirements-analyst + domain experts + learning-guide
+- Educational content: learning-guide + technical-writer + frontend-architect + quality-engineer
 
 ## Best Practices 💡
 
@@ -813,7 +785,7 @@ Add "documented", "explained", or "tutorial" to requests for automatic technical
 **What Not to Worry About**:
 - Manual agent selection or configuration
 - Complex routing rules or agent management
-- Agent performance tuning or optimization
+- Agent configuration or coordination
 - Micromanaging agent interactions
 
 ---
@@ -845,9 +817,9 @@ Start with natural language descriptions. Notice which agents activate and why. 
 Observe agent coordination patterns. Understand how complexity and domain keywords influence agent selection. Begin optimizing request phrasing for better coordination.
 
 **Month 2+: Expert Coordination**
-Master multi-domain requests that trigger optimal agent combinations. Leverage troubleshooting techniques for perfect agent selection. Use advanced patterns for complex workflows.
+Master multi-domain requests that trigger optimal agent combinations. Leverage troubleshooting techniques for effective agent selection. Use advanced patterns for complex workflows.
 
 **The SuperClaude Advantage:**
-Experience the power of 13 specialized AI experts working in perfect coordination, all through simple, natural language requests. No configuration, no management, just intelligent collaboration that scales with your needs.
+Experience the power of 13 specialized AI experts working in coordinated response, all through simple, natural language requests. No configuration, no management, just intelligent collaboration that scales with your needs.
 
 🎯 **Ready to experience intelligent agent coordination? Start with `/sc:implement` and discover the magic of specialized AI collaboration.**

@@ -134,7 +134,7 @@
 ```bash
 # Systematic analysis of large projects
 # Overview
-/sc:analyze . --quick
+/sc:analyze . --overview
 # Get high-level understanding
 
 # Focused analysis by module

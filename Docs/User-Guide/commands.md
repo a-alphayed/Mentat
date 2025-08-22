@@ -14,7 +14,7 @@ SuperClaude provides 21 commands for Claude Code: `/sc:*` commands for workflows
 ```bash
 # Terminal: Verify installation
 python3 -m SuperClaude --version
-# Alternative: SuperClaude --version (if installed globally)
+# Claude Code CLI verification: claude --version
 
 # Claude Code: Test commands
 /sc:brainstorm "test project"    # Should ask discovery questions
@@ -74,12 +74,11 @@ SuperClaude provides behavioral context files that Claude Code reads to adopt sp
 python3 -m SuperClaude --version
 # Example output: SuperClaude 4.0.0
 
-# Alternative version check (if installed globally)
-SuperClaude --version
-# Example output: SuperClaude 4.0.0
+# Claude Code CLI version check
+claude --version
 
-# Check MCP server connectivity
-SuperClaude install --list-components | grep mcp
+# Check installed components
+python3 -m SuperClaude install --list-components | grep mcp
 # Example output: Shows installed MCP components
 ```
 
@@ -297,7 +296,7 @@ SuperClaude install --list-components | grep mcp
 **Command Issues:**
 - **Command not found**: Verify installation: `python3 -m SuperClaude --version`
 - **No response**: Restart Claude Code session
-- **Slow performance**: Use `--no-mcp` to test without MCP servers
+- **Processing delays**: Use `--no-mcp` to test without MCP servers
 
 **Quick Fixes:**
 - Reset session: `/sc:load` to reinitialize

@@ -1,6 +1,6 @@
 # SuperClaude Installation Guide 📦
 
-SuperClaude installs behavioral context files that Claude Code reads to enhance its capabilities with 21 commands, 15 agents, and 6 modes. Installation takes 2-5 minutes.
+SuperClaude installs behavioral context files that Claude Code reads to enhance its capabilities with 21 commands, 14 agents, and 5 modes.
 
 ## Quick Start 🚀
 
@@ -12,7 +12,7 @@ SuperClaude install
 
 **NPM:**
 ```bash
-npm install -g superclaude  # ⚠️ Verify package name exists
+npm install -g superclaude
 SuperClaude install
 ```
 
@@ -116,8 +116,8 @@ SuperClaude install --list-components
 **What's Installed:**
 - Framework files in `~/.claude/`
 - 21 slash commands (`/sc:*`)
-- 15 agents (`@agent-*`)
-- 6 behavioral modes
+- 14 agents (`@agent-*`)
+- 5 behavioral modes
 - MCP server configurations (if selected)
 
 ## Managing Your Installation 🛠️
@@ -181,11 +181,11 @@ pip uninstall SuperClaude
 ## Final Notes 📝
 
 **Installation Summary:**
-- **Time**: 2-5 minutes typical installation
+
 - **Space**: 50MB for full installation
 - **Requirements**: Python 3.8+, Claude Code, 1GB RAM recommended
 - **Platform**: Linux, macOS, Windows supported
-- **Usage**: Immediate access to 21 commands and 6 behavioral modes
+- **Usage**: Immediate access to 21 commands and 5 behavioral modes
 
 **What's Next**: Your Claude Code now has enhanced capabilities. Try `/sc:brainstorm` for your first SuperClaude experience!
 
@@ -196,7 +196,7 @@ pip uninstall SuperClaude
 **Documentation Roadmap:**
 
 **Beginner** (🌱 Start Here)
-- [Quick Start Guide](quick-start.md) - 5-minute setup
+- [Quick Start Guide](quick-start.md) - quick setup guide
 - [Commands Reference](../User-Guide/commands.md) - Basic usage
 
 **Intermediate** (🌿 Growing)
@@ -211,4 +211,4 @@ pip uninstall SuperClaude
 
 ---
 
-**Installation Complete!** You now have access to 21 commands, 15 agents, and 6 behavioral modes. Try `/sc:brainstorm` in Claude Code to get started.
+**Installation Complete!** You now have access to 21 commands, 14 agents, and 5 behavioral modes. Try `/sc:brainstorm` in Claude Code to get started.

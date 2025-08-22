@@ -36,19 +36,19 @@
 ## Quick Navigation Guide
 
 ### By Experience Level
-**Beginner (Week 1-2)**
+**Beginner**
 → Start with [Basic Examples](./basic-examples.md)
 - Essential commands and patterns
 - Simple troubleshooting workflows
 - Copy-paste solutions for common tasks
 
-**Intermediate (Week 3-6)**
+**Intermediate**
 → Progress to [Advanced Workflows](./advanced-workflows.md)
 - Multi-agent coordination
 - Complex project orchestration
 - Session management patterns
 
-**Expert (Month 2+)**
+**Expert**
 → Master [Integration Patterns](./integration-patterns.md)
 - Framework integration strategies
 - Performance optimization recipes
@@ -74,7 +74,7 @@
 
 ## Verified Commands Reference
 
-**Core Commands** (all tested and functional):
+**Core Commands**:
 - `/sc:brainstorm` - Interactive requirements discovery
 - `/sc:analyze` - Codebase analysis and assessment
 - `/sc:implement` - Feature implementation with best practices

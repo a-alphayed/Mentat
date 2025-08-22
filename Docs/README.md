@@ -23,19 +23,19 @@ pip install SuperClaude && SuperClaude install
 ## 📚 Documentation Structure
 
 ### 🌱 Start Here (New Users)
-| Guide | Purpose | Time |
+| Guide | Purpose |
 |-------|---------|------|
-| **[Quick Start](Getting-Started/quick-start.md)** | 5-minute setup and first commands | 5 min |
-| **[Installation](Getting-Started/installation.md)** | Detailed setup instructions | 10 min |
-| **[Commands Guide](User-Guide/commands.md)** | All 21 `/sc:` commands | 20 min |
+| **[Quick Start](Getting-Started/quick-start.md)** | Setup and first commands |  |
+| **[Installation](Getting-Started/installation.md)** | Detailed setup instructions |  |
+| **[Commands Guide](User-Guide/commands.md)** | All 21 `/sc:` commands |  |
 
 ### 🌿 Daily Usage (Regular Users)
 | Guide | Purpose | Use For |
 |-------|---------|---------|
 | **[Commands Guide](User-Guide/commands.md)** | Master all `/sc:` commands | Daily development |
-| **[Agents Guide](User-Guide/agents.md)** | 15 domain specialists (`@agent-*`) | Expert assistance |
+| **[Agents Guide](User-Guide/agents.md)** | 14 domain specialists (`@agent-*`) | Expert assistance |
 | **[Flags Guide](User-Guide/flags.md)** | Command behavior modification | Optimization |
-| **[Modes Guide](User-Guide/modes.md)** | 6 behavioral modes | Workflow optimization |
+| **[Modes Guide](User-Guide/modes.md)** | 5 behavioral modes | Workflow optimization |
 
 ### 🌲 Reference & Advanced (Power Users)
 | Guide | Purpose | Use For |

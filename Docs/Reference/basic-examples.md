@@ -10,13 +10,13 @@
 
 **Purpose**: Essential SuperClaude commands and patterns for everyday development tasks. Start here for your first SuperClaude experience.
 
-**Target Audience**: New users, developers learning SuperClaude fundamentals, quick task execution
+**Target Audience**: New users, developers learning SuperClaude fundamentals, immediate task application
 
 **Usage Pattern**: Copy → Adapt → Execute → Learn from results
 
 **Key Features**:
-- All examples verified and production-ready
-- Copy-paste utility with immediate results
+- Examples demonstrate core SuperClaude functionality
+- Clear patterns for immediate application  
 - Single-focus examples for clear learning
 - Progressive complexity within basic scope
 
@@ -32,7 +32,7 @@
 /sc:brainstorm "mobile app for fitness tracking"
 # Expected: Socratic dialogue, requirement elicitation, feasibility analysis
 ```
-**Verification**: Activates brainstorming mode + system-architect + requirements-analyst + Context7
+**Behavior**: Triggers interactive discovery dialogue and requirements analysis
 
 #### Command: /sc:analyze
 **Purpose**: Analyze existing codebase for issues and improvements
@@ -42,7 +42,7 @@
 /sc:analyze src/ --focus security
 # Expected: Comprehensive security audit, vulnerability report, improvement suggestions
 ```
-**Verification**: Activates security-engineer + quality-engineer + performance-engineer
+**Behavior**: Provides comprehensive security analysis and improvement recommendations
 
 #### Command: /sc:implement
 **Purpose**: Implement a complete feature with best practices
@@ -52,7 +52,7 @@
 /sc:implement "user authentication with JWT and rate limiting"
 # Expected: Complete auth implementation, security validation, tests included
 ```
-**Verification**: Activates security-engineer + backend-architect + Context7 + quality gates
+**Behavior**: Delivers complete implementation following security and quality standards
 
 #### Command: /sc:troubleshoot
 **Purpose**: Troubleshoot and fix a problem systematically
@@ -420,15 +420,9 @@
 
 # Security hardening
 /sc:analyze . --focus security && /sc:implement "security improvements"
-@agent-security "perform OWASP Top 10 compliance check"
 
-# Performance optimization
-/sc:analyze . --focus performance && /sc:implement "performance optimizations"
-@agent-performance-engineer "profile and optimize critical paths"
-
-# Test coverage improvement
+# Test coverage improvement  
 /sc:test --focus quality && /sc:implement "additional test coverage"
-@agent-quality-engineer "identify untested edge cases"
 ```
 
 ### Common Feature Implementations
@@ -456,10 +450,8 @@
 # Quick analysis
 /sc:analyze src/ --scope file
 
-
 # Standard analysis
 /sc:analyze . --think
-
 
 # Deep analysis
 /sc:analyze . --think-hard --focus architecture
@@ -472,8 +464,8 @@
 /sc:analyze . --focus security
 
 
-# Performance-focused implementation
-/sc:implement "API optimization" --focus performance
+# Implementation with specific focus
+/sc:implement "API optimization" --focus architecture
 
 
 # Quality-focused testing

@@ -8,7 +8,7 @@ MCP (Model Context Protocol) servers extend Claude Code's capabilities through s
 - **What MCP servers are**: External Node.js processes that provide additional tools
 - **What they aren't**: Built-in SuperClaude functionality
 - **How activation works**: Claude reads instructions to use appropriate servers based on context
-- **Why they're powerful**: Real tools that extend Claude Code's native capabilities
+- **What they provide**: Real tools that extend Claude Code's native capabilities
 
 **Core Servers:**
 - **context7**: Official library documentation and patterns
@@ -66,7 +66,7 @@ MCP (Model Context Protocol) servers extend Claude Code's capabilities through s
 ### magic ✨
 **Purpose**: Modern UI component generation from 21st.dev patterns
 **Triggers**: UI requests, `/ui` commands, component development
-**Requirements**: Node.js 16+, TWENTYFIRST_API_KEY (⚠️ EXPERIMENTAL - verify service exists)
+**Requirements**: Node.js 16+, TWENTYFIRST_API_KEY ()
 
 ```bash
 # Automatic activation
@@ -94,7 +94,7 @@ export TWENTYFIRST_API_KEY="your_key_here"
 ### morphllm-fast-apply 🔄
 **Purpose**: Efficient pattern-based code transformations
 **Triggers**: Multi-file edits, refactoring, framework migrations
-**Requirements**: Node.js 16+, MORPH_API_KEY (⚠️ EXPERIMENTAL - verify service exists)
+**Requirements**: Node.js 16+, MORPH_API_KEY
 
 ```bash
 # Automatic activation
@@ -261,7 +261,7 @@ echo 'export MORPH_API_KEY="your_key"' >> ~/.bashrc
 
 **Essential Reading:**
 - [Commands Guide](commands.md) - Commands that activate MCP servers
-- [Quick Start Guide](../Getting-Started/quick-start.md) - First MCP experience
+- [Quick Start Guide](../Getting-Started/quick-start.md) - MCP setup guide
 
 **Advanced Usage:**
 - [Behavioral Modes](modes.md) - Mode-MCP coordination

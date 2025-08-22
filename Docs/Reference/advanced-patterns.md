@@ -129,7 +129,7 @@
 
 ```bash
 # Quick overview
-/sc:analyze . --quick --uc
+/sc:analyze . --overview --uc
 # Fast, compressed output
 
 # Standard analysis
@@ -169,7 +169,7 @@
 # Systematic exploration of large projects
 # Step 1: Structure understanding
 /sc:load project/
-/sc:analyze . --quick --focus architecture
+/sc:analyze . --overview --focus architecture
 
 # Step 2: Identify problem areas
 @agent-quality-engineer "identify high-risk modules"

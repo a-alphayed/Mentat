@@ -1,6 +1,6 @@
 # SuperClaude Common Issues - Quick Reference 🚀
 
-**2-Minute Problem Solving**: Most frequent issues with instant solutions.
+**Problem Solving Guide**: Most frequent issues with practical solutions.
 
 ## Top 5 Quick Fixes (90% of Issues)
 

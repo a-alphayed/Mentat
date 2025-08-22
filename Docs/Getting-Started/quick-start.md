@@ -10,12 +10,12 @@ SuperClaude is a **Context Engineering Framework** that enhances Claude Code by 
 
 ## Just Start Here
 
-### 🖥️ Installation (2 minutes) - Run in Terminal
+### 🖥️ Installation - Run in Terminal
 ```bash
 pip install SuperClaude && SuperClaude install
 ```
 
-### 💬 First Context Triggers (3 minutes) - Type in Claude Code Conversation
+### 💬 First Context Triggers - Type in Claude Code Conversation
 ```
 # Interactive project discovery
 /sc:brainstorm "web app for task management"
@@ -58,7 +58,7 @@ SuperClaude enhances Claude Code with:
 
 **Important**: The `.md` files in `SuperClaude/` directory are NOT documentation - they are the actual context framework instructions that Claude Code reads to enhance its capabilities.
 
-**Version 4.0** delivers production-ready workflow orchestration with intelligent agent coordination and session persistence.
+**Version 4.0** delivers workflow orchestration capabilities with intelligent agent coordination and session persistence.
 
 ## How It Works
 

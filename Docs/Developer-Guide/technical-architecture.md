@@ -248,7 +248,7 @@ User Input (in Claude Code): "/sc:analyze src/ --focus security"
 
 1. Create `~/.claude/agents/new-specialist.md`
 2. Define expertise, triggers, and behaviors
-3. Agent available immediately
+3. Agent becomes available
 
 ### Adding New Modes
 

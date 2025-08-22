@@ -12,7 +12,7 @@ Test modes by using `/sc:` commands - they activate automatically based on task 
 | **📋 Task Management** | Complex coordination | >3 steps, >2 directories | Phase breakdown, memory persistence | Multi-step operations, project management |
 | **🎯 Orchestration** | Intelligent tool selection | Multi-tool ops, high resource usage | Optimal tool routing, parallel execution | Complex analysis, performance optimization |
 | **⚡ Token Efficiency** | Compressed communication | High context usage, `--uc` flag | Symbol systems, estimated 30-50% token reduction | Resource constraints, large operations |
-| **🎨 Standard** | Balanced default | Simple tasks, no complexity triggers | Clear professional communication | General development, straightforward tasks |
+
 
 ---
 
@@ -172,7 +172,7 @@ Task Management Approach:
 - **Intelligent Tool Routing**: Selects optimal MCP servers and native tools for each task type
 - **Resource Awareness**: Adapts approach based on system constraints and availability
 - **Parallel Optimization**: Identifies independent operations for concurrent execution
-- **Performance Focus**: Maximizes speed and effectiveness through coordinated tool usage
+- **Coordination Focus**: Optimizes tool selection and usage through coordinated execution
 - **Adaptive Fallback**: Switches tools gracefully when preferred options are unavailable
 
 **Example Experience:**
@@ -184,7 +184,7 @@ Orchestration Approach:
  ⚡ Phase 2: Morphllm (pattern edits) + Magic (UI components) 
  🧪 Phase 3: Playwright (testing) + Context7 (documentation patterns)
  🔄 Parallel execution: 3 tools working simultaneously
- 📈 Efficiency gain: 60% faster than sequential approach"
+\"
 ```
 
 **Works Best With:**
@@ -209,7 +209,7 @@ Orchestration Approach:
 - **Technical Abbreviation**: Context-aware compression for repeated technical terms
 - **Structured Density**: Bullet points, tables, and concise formatting over verbose paragraphs
 - **Information Preservation**: Maintains ≥95% information quality despite compression
-- **Scannable Format**: Optimizes for quick comprehension and task completion
+- **Structured Format**: Organized for clarity and task completion
 
 **Example Experience:**
 ```
@@ -408,11 +408,11 @@ For troubleshooting help, see:
 - [Common Issues](../Reference/common-issues.md) - Quick fixes for frequent problems
 - [Troubleshooting Guide](../Reference/troubleshooting.md) - Comprehensive problem resolution
 
-### Common Issues (< 2 minutes)
+### Common Issues
 - **Mode not activating**: Use manual flags: `--brainstorm`, `--introspect`, `--uc`
 - **Wrong mode active**: Check complexity triggers and keywords in request
 - **Mode switching unexpectedly**: Normal behavior based on task evolution
-- **Performance impact**: Modes optimize performance, shouldn't slow execution
+- **Execution impact**: Modes optimize tool usage, shouldn't affect execution
 - **Mode conflicts**: Check flag priority rules in [Flags Guide](flags.md)
 
 ### Immediate Fixes
@@ -523,7 +523,7 @@ After applying mode fixes, test with:
 - **Mode not activating** → Use manual flags: `--brainstorm`, `--introspect`, `--uc`
 - **Wrong mode active** → Check complexity triggers and keywords in request
 - **Mode switching unexpectedly** → Normal behavior based on task evolution  
-- **Performance impact** → Modes optimize performance, shouldn't slow execution
+- **Execution impact** → Modes optimize tool usage, shouldn't affect execution
 - **Mode conflicts** → Check flag priority rules in [Flags Guide](flags.md)
 
 ## Frequently Asked Questions
@@ -545,8 +545,8 @@ A: Yes, use manual flags to override automatic detection:
 /sc:command --uc            # Compress output
 ```
 
-**Q: Do modes affect performance?**
-A: Modes enhance performance through optimization:
+**Q: Do modes affect execution?**
+A: Modes optimize tool usage through coordination:
 - **Token Efficiency**: 30-50% context reduction
 - **Orchestration**: Parallel processing
 - **Task Management**: Prevents rework through systematic planning
@@ -561,7 +561,7 @@ A: Yes, modes are designed to complement each other:
 
 ## Summary
 
-SuperClaude's 6 behavioral modes create an **intelligent adaptation system** that matches your needs automatically:
+SuperClaude's 5 behavioral modes create an **intelligent adaptation system** that matches your needs automatically:
 
 - **🧠 Brainstorming**: Transforms vague ideas into clear requirements
 - **🔍 Introspection**: Provides transparent reasoning for learning and debugging
@@ -579,7 +579,7 @@ SuperClaude's 6 behavioral modes create an **intelligent adaptation system** tha
 **Learning Progression:**
 
 **🌱 Essential (Week 1)**
-- [Quick Start Guide](../Getting-Started/quick-start.md) - Experience modes naturally
+- [Quick Start Guide](../Getting-Started/quick-start.md) - Mode activation examples
 - [Commands Reference](commands.md) - Commands automatically activate modes
 - [Installation Guide](../Getting-Started/installation.md) - Set up behavioral modes
 
@@ -591,7 +591,7 @@ SuperClaude's 6 behavioral modes create an **intelligent adaptation system** tha
 **🌲 Advanced (Month 2+)**
 - [MCP Servers](mcp-servers.md) - Mode integration with enhanced capabilities
 - [Session Management](session-management.md) - Task Management mode workflows  
-- [Getting Started](../Getting-Started/quick-start.md) - Mode optimization strategies
+- [Getting Started](../Getting-Started/quick-start.md) - Mode usage patterns
 
 **🔧 Expert**
 - [Technical Architecture](../Developer-Guide/technical-architecture.md) - Mode implementation details
