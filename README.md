@@ -11,33 +11,6 @@
 
 SuperClaude is a meta-programming configuration framework that transforms Claude Code into a structured development platform through behavioral instruction injection and component orchestration. It enhances Claude Code with 21 slash commands, 14 specialized agents, 6 behavioral modes, and 6 MCP server integrations for systematic workflow automation.
 
-## What's New in V4
-
-Version 4 brings significant improvements based on community feedback and real-world usage patterns.
-
-### 🤖 Smarter Agent System
-We've expanded to 14 specialized agents that actually know their domains. The security engineer catches real vulnerabilities, the frontend architect understands modern UI patterns, and they coordinate automatically based on what you're working on. No more generic advice - you get domain expertise when you need it.
-
-### 📝 Namespace That Makes Sense
-All commands now use `/sc:` prefix to avoid stepping on your custom commands. Simple change, but it matters when you're managing multiple command sets. The 21 commands cover the full development lifecycle from brainstorming to deployment.
-
-### 🔧 MCP Servers That Actually Help
-Six integrated MCP servers provide real capabilities:
-- **Context7** for up-to-date documentation
-- **Sequential** for complex analysis and problem-solving
-- **Magic** for UI component generation
-- **Playwright** for browser testing
-- **Morphllm** for bulk code transformations
-- **Serena** for session persistence
-
-These aren't just wrappers; they're properly integrated tools that work together.
-
-### 🎯 Behavioral Modes for Different Contexts
-Five modes adjust Claude's approach based on what you're doing. Brainstorming mode asks the right questions, orchestration mode coordinates tools efficiently, token-efficiency mode reduces context usage by 30-50%. It adapts to your workflow, not the other way around.
-
-### ⚡ Smaller Framework, Bigger Projects
-We've cut the framework's footprint significantly. Less framework overhead at Claude Code startup means more context available for your actual work. The entire V4 framework uses fewer tokens to load, leaving you with more room for your codebase, longer conversations, and complex operations. It's simple math - smaller framework = larger available context for what matters.
-
 ## Quick Start
 
 ```bash
@@ -69,6 +42,33 @@ If you're finding value in SuperClaude for your daily work, consider supporting 
 No pressure though - the framework stays open source regardless. Just knowing people use and appreciate it is motivating. If you can't support financially, contributing code, documentation, or just spreading the word helps too. 
 
 Every contributor matters, whether through code, feedback, or support. Thanks for being part of this community! 🙏
+
+## What's New in V4
+
+Version 4 brings significant improvements based on community feedback and real-world usage patterns.
+
+### 🤖 Smarter Agent System
+We've expanded to 14 specialized agents that actually know their domains. The security engineer catches real vulnerabilities, the frontend architect understands modern UI patterns, and they coordinate automatically based on what you're working on. No more generic advice - you get domain expertise when you need it.
+
+### 📝 Namespace That Makes Sense
+All commands now use `/sc:` prefix to avoid stepping on your custom commands. Simple change, but it matters when you're managing multiple command sets. The 21 commands cover the full development lifecycle from brainstorming to deployment.
+
+### 🔧 MCP Servers That Actually Help
+Six integrated MCP servers provide real capabilities:
+- **Context7** for up-to-date documentation
+- **Sequential** for complex analysis and problem-solving
+- **Magic** for UI component generation
+- **Playwright** for browser testing
+- **Morphllm** for bulk code transformations
+- **Serena** for session persistence
+
+These aren't just wrappers; they're properly integrated tools that work together.
+
+### 🎯 Behavioral Modes for Different Contexts
+Five modes adjust Claude's approach based on what you're doing. Brainstorming mode asks the right questions, orchestration mode coordinates tools efficiently, token-efficiency mode reduces context usage by 30-50%. It adapts to your workflow, not the other way around.
+
+### ⚡ Smaller Framework, Bigger Projects
+We've cut the framework's footprint significantly. Less framework overhead at Claude Code startup means more context available for your actual work. The entire V4 framework uses fewer tokens to load, leaving you with more room for your codebase, longer conversations, and complex operations. It's simple math - smaller framework = larger available context for what matters.
 
 ## Documentation
 
@@ -110,3 +110,14 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed contribution guidelines.
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 **Contributors:** [View all contributors](https://github.com/SuperClaude-Org/SuperClaude_Framework/graphs/contributors)
+
+## Star History
+
+<a href="https://www.star-history.com/#SuperClaude-Org/SuperClaude_Framework&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=SuperClaude-Org/SuperClaude_Framework&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=SuperClaude-Org/SuperClaude_Framework&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=SuperClaude-Org/SuperClaude_Framework&type=Date" />
+ </picture>
+</a>
+---

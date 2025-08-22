@@ -102,7 +102,7 @@ class MCPComponent(Component):
         """Get component metadata"""
         return {
             "name": "mcp",
-            "version": "4.0.0",
+            "version": "4.0.3",
             "description": "MCP server configuration management via .claude.json",
             "category": "integration"
         }
@@ -348,7 +348,7 @@ class MCPComponent(Component):
             metadata_mods = {
                 "components": {
                     "mcp": {
-                        "version": "4.0.0",
+                        "version": "4.0.3",
                         "installed": True,
                         "servers_configured": len(self.selected_servers),
                         "configured_servers": self.selected_servers
