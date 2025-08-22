@@ -9,7 +9,34 @@
 [![Contributors](https://img.shields.io/github/contributors/SuperClaude-Org/SuperClaude_Framework)](https://github.com/SuperClaude-Org/SuperClaude_Framework/graphs/contributors)
 [![Website](https://img.shields.io/website?url=https://superclaude-org.github.io/SuperClaude_Website/)](https://superclaude-org.github.io/SuperClaude_Website/)
 
-SuperClaude is a meta-programming configuration framework that transforms Claude Code into a structured development platform through behavioral instruction injection and component orchestration. It enhances Claude Code with 21 slash commands, 13 specialized agents, 6 behavioral modes, and 6 MCP server integrations for systematic workflow automation.
+SuperClaude is a meta-programming configuration framework that transforms Claude Code into a structured development platform through behavioral instruction injection and component orchestration. It enhances Claude Code with 21 slash commands, 14 specialized agents, 6 behavioral modes, and 6 MCP server integrations for systematic workflow automation.
+
+## What's New in V4
+
+Version 4 brings significant improvements based on community feedback and real-world usage patterns.
+
+### 🤖 Smarter Agent System
+We've expanded to 14 specialized agents that actually know their domains. The security engineer catches real vulnerabilities, the frontend architect understands modern UI patterns, and they coordinate automatically based on what you're working on. No more generic advice - you get domain expertise when you need it.
+
+### 📝 Namespace That Makes Sense
+All commands now use `/sc:` prefix to avoid stepping on your custom commands. Simple change, but it matters when you're managing multiple command sets. The 21 commands cover the full development lifecycle from brainstorming to deployment.
+
+### 🔧 MCP Servers That Actually Help
+Six integrated MCP servers provide real capabilities:
+- **Context7** for up-to-date documentation
+- **Sequential** for complex analysis and problem-solving
+- **Magic** for UI component generation
+- **Playwright** for browser testing
+- **Morphllm** for bulk code transformations
+- **Serena** for session persistence
+
+These aren't just wrappers; they're properly integrated tools that work together.
+
+### 🎯 Behavioral Modes for Different Contexts
+Five modes adjust Claude's approach based on what you're doing. Brainstorming mode asks the right questions, orchestration mode coordinates tools efficiently, token-efficiency mode reduces context usage by 30-50%. It adapts to your workflow, not the other way around.
+
+### ⚡ Smaller Framework, Bigger Projects
+We've cut the framework's footprint significantly. Less framework overhead at Claude Code startup means more context available for your actual work. The entire V4 framework uses fewer tokens to load, leaving you with more room for your codebase, longer conversations, and complex operations. It's simple math - smaller framework = larger available context for what matters.
 
 ## Quick Start
 
@@ -21,11 +48,27 @@ pip install SuperClaude && SuperClaude install
 npm install -g @superclaude-org/superclaude && superclaude install
 ```
 
-## Support SuperClaude Development 💎
+## Support the Project 💖
 
-SuperClaude Framework development requires ongoing support to maintain MCP server integrations, expand the command system, and provide comprehensive documentation. Your support enables continuous improvement and new capabilities.
+Hey, let's be real - maintaining SuperClaude takes time and resources. The Claude Max subscription alone runs $100/month for testing, and that's before counting the hours spent on documentation, bug fixes, and feature development.
 
-[![GitHub Sponsors](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#white)](https://github.com/sponsors/SuperClaude-Org)
+If you're finding value in SuperClaude for your daily work, consider supporting the project. Even a few dollars helps cover the basics and keeps development active.
+
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20Me-ff5e5b?style=for-the-badge&logo=ko-fi)](https://ko-fi.com/superclaude)
+[![Patreon](https://img.shields.io/badge/Patreon-Become%20a%20Patron-f96854?style=for-the-badge&logo=patreon)](https://patreon.com/superclaude)
+[![GitHub Sponsors](https://img.shields.io/badge/GitHub-Sponsor-30363D?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/SuperClaude-Org)
+
+**What your support covers:**
+- Claude Max subscription for testing and validation ($100/month)
+- Development time for new features and bug fixes
+- Documentation and example creation
+- Community support and issue responses
+- MCP server integration testing
+- Infrastructure and hosting costs
+
+No pressure though - the framework stays open source regardless. Just knowing people use and appreciate it is motivating. If you can't support financially, contributing code, documentation, or just spreading the word helps too. 
+
+Every contributor matters, whether through code, feedback, or support. Thanks for being part of this community! 🙏
 
 ## Documentation
 

@@ -40,7 +40,7 @@ This guide documents how SuperClaude's Context-Oriented Configuration Framework 
 ├── MODE_Orchestration.md           # Tool coordination mode
 ├── MODE_Task_Management.md         # Task orchestration mode
 ├── MODE_Token_Efficiency.md        # Compressed communication mode
-├── agents/                         # Domain specialist contexts (13 total)
+├── agents/                         # Domain specialist contexts (14 total)
 │   ├── backend-architect.md        # Backend expertise
 │   ├── devops-architect.md         # DevOps expertise
 │   ├── frontend-architect.md       # Frontend expertise
@@ -52,6 +52,7 @@ This guide documents how SuperClaude's Context-Oriented Configuration Framework 
 │   ├── requirements-analyst.md     # Requirements expertise
 │   ├── root-cause-analyst.md       # Problem diagnosis expertise
 │   ├── security-engineer.md        # Security expertise
+│   ├── socratic-mentor.md          # Educational expertise
 │   ├── system-architect.md         # System design expertise
 │   └── technical-writer.md         # Documentation expertise
 └── commands/                       # Workflow pattern contexts

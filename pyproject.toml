@@ -11,7 +11,7 @@ authors = [
 ]
 description = "SuperClaude Framework Management Hub - AI-enhanced development framework for Claude Code"
 readme = "README.md"
-license = {text = "MIT"}
+license = "MIT"
 requires-python = ">=3.8"
 classifiers = [
     "Development Status :: 4 - Beta",

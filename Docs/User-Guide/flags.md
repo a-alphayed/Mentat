@@ -166,7 +166,7 @@
 | `--all-mcp` | Enable all MCP servers | Boolean |
 | `--no-mcp` | Native tools only | Boolean |
 
-### System Flags (SuperClaude CLI)
+### System Flags (SuperClaude Installation)
 | Flag | Purpose | Values |
 |------|---------|--------|
 | `--verbose` / `-v` | Verbose logging | Boolean |

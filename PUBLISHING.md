@@ -370,7 +370,7 @@ git push origin v4.0.1
 
 **Current Version**: 4.0.0
 - Major architectural update with enhanced agent coordination
-- 6 MCP server integrations and 13 specialized agents
+- 6 MCP server integrations and 14 specialized agents
 - Comprehensive command system with 21 slash commands
 
 **Version Update Process:**

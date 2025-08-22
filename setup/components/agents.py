@@ -20,7 +20,7 @@ class AgentsComponent(Component):
         return {
             "name": "agents",
             "version": "4.0.0",
-            "description": "13 specialized AI agents with domain expertise and intelligent routing",
+            "description": "14 specialized AI agents with domain expertise and intelligent routing",
             "category": "agents"
         }
     

@@ -46,7 +46,7 @@ ls -la ~/.claude/
 echo "=== SuperClaude Context File Diagnostic ==="
 
 # Define expected counts
-EXPECTED_AGENTS=13
+EXPECTED_AGENTS=14
 EXPECTED_COMMANDS=21
 EXPECTED_MODES=6
 

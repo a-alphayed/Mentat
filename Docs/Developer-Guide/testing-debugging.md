@@ -237,10 +237,10 @@ echo ""
 # Check installation system
 echo "1. Installation System:"
 if command -v SuperClaude &> /dev/null; then
-    echo "   ✅ SuperClaude CLI available"
+    echo "   ✅ SuperClaude installation available"
     python3 -m SuperClaude --version
 else
-    echo "   ❌ SuperClaude CLI not found - install with: pip install SuperClaude"
+    echo "   ❌ SuperClaude not found - install with: pip install SuperClaude"
 fi
 
 # Check context files

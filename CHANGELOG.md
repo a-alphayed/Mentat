@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
-- **BREAKING**: Agent system restructured to 13 specialized agents
+- **BREAKING**: Agent system restructured to 14 specialized agents
 - **BREAKING**: Commands now use `/sc:` namespace to avoid conflicts with user custom commands
 - Commands are now installed in `~/.claude/commands/sc/` subdirectory
 - All 21 commands updated: `/analyze` → `/sc:analyze`, `/build` → `/sc:build`, etc.
@@ -16,11 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING**: Documentation reorganization - Docs/ directory renamed to Guides/
 
 ### Added
-- **NEW AGENTS**: 13 specialized domain agents with enhanced capabilities
+- **NEW AGENTS**: 14 specialized domain agents with enhanced capabilities
   - backend-architect.md, devops-architect.md, frontend-architect.md
   - learning-guide.md, performance-engineer.md, python-expert.md
   - quality-engineer.md, refactoring-expert.md, requirements-analyst.md
-  - root-cause-analyst.md, security-engineer.md
+  - root-cause-analyst.md, security-engineer.md, socratic-mentor.md
 - **NEW MODE**: MODE_Orchestration.md for intelligent tool selection mindset (5 total behavioral modes)
 - **NEW COMMAND**: `/sc:implement` for feature and code implementation (addresses v2 user feedback)
 - **NEW FILE**: CLAUDE.md for project-specific Claude Code instructions
@@ -33,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 - **BREAKING**: Removed Templates/ directory (legacy templates no longer needed)
-- **BREAKING**: Removed legacy agents and replaced with enhanced 13-agent system
+- **BREAKING**: Removed legacy agents and replaced with enhanced 14-agent system
 
 ### Improved
 - Refactored Modes and MCP documentation for concise behavioral guidance

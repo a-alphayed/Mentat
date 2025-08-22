@@ -815,6 +815,6 @@ Observe agent coordination patterns. Understand how complexity and domain keywor
 Master multi-domain requests that trigger optimal agent combinations. Leverage troubleshooting techniques for effective agent selection. Use advanced patterns for complex workflows.
 
 **The SuperClaude Advantage:**
-Experience the power of 13 specialized AI experts working in coordinated response, all through simple, natural language requests. No configuration, no management, just intelligent collaboration that scales with your needs.
+Experience the power of 14 specialized AI experts working in coordinated response, all through simple, natural language requests. No configuration, no management, just intelligent collaboration that scales with your needs.
 
 🎯 **Ready to experience intelligent agent coordination? Start with `/sc:implement` and discover the magic of specialized AI collaboration.**
