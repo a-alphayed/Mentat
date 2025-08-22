@@ -78,6 +78,9 @@ Five modes adjust Claude's approach based on what you're doing. Brainstorming mo
 ### ⚡ Smaller Framework, Bigger Projects
 We've cut the framework's footprint significantly. Less framework overhead at Claude Code startup means more context available for your actual work. The entire V4 framework uses fewer tokens to load, leaving you with more room for your codebase, longer conversations, and complex operations. It's simple math - smaller framework = larger available context for what matters.
 
+### 📚 Complete Documentation Overhaul
+We've rebuilt the docs from scratch based on what developers actually need. Every guide now includes real examples, common pitfalls, and practical workflows. The whole documentation set got restructured for better navigation - you'll find what you need faster. If something's unclear or missing, let us know. Seriously, we want the docs to be genuinely helpful, not just technically complete.
+
 ## Documentation
 
 ### Getting Started
