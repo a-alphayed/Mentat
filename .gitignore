@@ -195,3 +195,9 @@ $RECYCLE.BIN/
 # Personal files
 CRUSH.md
 TODO.txt
+
+# Development artifacts (should not be in repo)
+package.json
+package-lock.json
+uv.lock
+bin/
