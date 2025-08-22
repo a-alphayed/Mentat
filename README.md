@@ -1,9 +1,9 @@
-# SuperClaude v4.0.3 🚀
+# SuperClaude v4.0.4 🚀
 [![Website Preview](https://img.shields.io/badge/Visit-Website-blue?logo=google-chrome)](https://superclaude-org.github.io/SuperClaude_Website/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PyPI version](https://img.shields.io/pypi/v/SuperClaude.svg)](https://pypi.org/project/SuperClaude/)
 [![npm version](https://img.shields.io/npm/v/@bifrost_inc/superclaude.svg)](https://www.npmjs.com/package/@bifrost_inc/superclaude)
-[![Version](https://img.shields.io/badge/version-4.0.3-blue.svg)](https://github.com/SuperClaude-Org/SuperClaude_Framework)
+[![Version](https://img.shields.io/badge/version-4.0.4-blue.svg)](https://github.com/SuperClaude-Org/SuperClaude_Framework)
 [![GitHub issues](https://img.shields.io/github/issues/SuperClaude-Org/SuperClaude_Framework)](https://github.com/SuperClaude-Org/SuperClaude_Framework/issues)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/SuperClaude-Org/SuperClaude_Framework/blob/master/CONTRIBUTING.md)
 [![Contributors](https://img.shields.io/github/contributors/SuperClaude-Org/SuperClaude_Framework)](https://github.com/SuperClaude-Org/SuperClaude_Framework/graphs/contributors)
@@ -14,11 +14,19 @@ SuperClaude is a meta-programming configuration framework that transforms Claude
 ## Quick Start
 
 ```bash
-# Via Python (recommended)
+# Via pipx (recommended for Linux/macOS)
+pipx install SuperClaude && SuperClaude install
+
+# Via pip (traditional)
 pip install SuperClaude && SuperClaude install
 
 # Via NPM (cross-platform)
 npm install -g @bifrost_inc/superclaude && superclaude install
+
+# If you get PEP 668 errors, use one of these:
+pipx install SuperClaude  # Recommended
+pip install --user SuperClaude  # User install
+pip install --break-system-packages SuperClaude  # Force (use with caution)
 ```
 
 ## Support the Project 💖

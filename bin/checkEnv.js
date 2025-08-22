@@ -28,9 +28,33 @@ function detectPip() {
   return null;
 }
 
+function detectPipx() {
+  if (checkCommand("pipx")) return "pipx";
+  return null;
+}
+
 function isSuperClaudeInstalled(pipCmd) {
   const result = run(pipCmd, ["show", "SuperClaude"]);
   return result.status === 0;
 }
 
-module.exports = { run, detectPython, detectPip, isSuperClaudeInstalled };
+function isSuperClaudeInstalledPipx() {
+  const result = run("pipx", ["list"]);
+  if (result.status === 0 && result.stdout) {
+    return result.stdout.toString().includes("SuperClaude");
+  }
+  return false;
+}
+
+function checkPythonEnvironment() {
+  // Check if we're in an externally managed environment (PEP 668)
+  const result = run("python3", ["-c", "import sysconfig; print(sysconfig.get_path('stdlib'))"]);
+  if (result.status === 0 && result.stdout) {
+    const stdlibPath = result.stdout.toString().trim();
+    const checkPep668 = run("test", ["-f", `${stdlibPath}/EXTERNALLY-MANAGED`]);
+    return checkPep668.status === 0;
+  }
+  return false;
+}
+
+module.exports = { run, detectPython, detectPip, detectPipx, isSuperClaudeInstalled, isSuperClaudeInstalledPipx, checkPythonEnvironment };
