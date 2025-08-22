@@ -53,13 +53,13 @@ done
 ### Count Installed Components
 
 ```bash
-# Should have 13 agents
+# Should have 14 agents
 ls ~/.claude/agents/*.md | wc -l
 
 # Should have 21 commands  
 ls ~/.claude/commands/*.md | wc -l
 
-# Should have 6+ modes
+# Should have 5 modes
 ls ~/.claude/modes/*.md | wc -l
 ```
 

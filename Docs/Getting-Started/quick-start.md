@@ -52,8 +52,8 @@ pip install SuperClaude && SuperClaude install
 SuperClaude enhances Claude Code with:
 
 **21 Slash Commands** for workflow automation (/sc:brainstorm, /sc:implement, /sc:analyze)
-**13 AI Specialists** with domain expertise (@agent-architect, @agent-security, @agent-frontend)
-**6 Behavioral Modes** for different contexts (brainstorming, introspection, orchestration)
+**14 AI Specialists** with domain expertise (@agent-architect, @agent-security, @agent-frontend)
+**5 Behavioral Modes** for different contexts (brainstorming, introspection, orchestration)
 **6 MCP Servers** for enhanced capabilities (Context7, Sequential, Magic, Playwright)
 
 **Important**: The `.md` files in `SuperClaude/` directory are NOT documentation - they are the actual context framework instructions that Claude Code reads to enhance its capabilities.

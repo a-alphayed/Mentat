@@ -24,10 +24,10 @@ pip install SuperClaude && SuperClaude install
 
 ### 🌱 Start Here (New Users)
 | Guide | Purpose |
-|-------|---------|------|
-| **[Quick Start](Getting-Started/quick-start.md)** | Setup and first commands |  |
-| **[Installation](Getting-Started/installation.md)** | Detailed setup instructions |  |
-| **[Commands Guide](User-Guide/commands.md)** | All 21 `/sc:` commands |  |
+|-------|---------|
+| **[Quick Start](Getting-Started/quick-start.md)** | Setup and first commands |
+| **[Installation](Getting-Started/installation.md)** | Detailed setup instructions |
+| **[Commands Guide](User-Guide/commands.md)** | All 21 `/sc:` commands |
 
 ### 🌿 Daily Usage (Regular Users)
 | Guide | Purpose | Use For |
@@ -59,8 +59,8 @@ pip install SuperClaude && SuperClaude install
 
 ### Framework Components
 - **21 Commands** (`/sc:*`) - Workflow automation patterns
-- **15 Agents** (`@agent-*`) - Domain specialists
-- **6 Modes** - Behavioral modification patterns
+- **14 Agents** (`@agent-*`) - Domain specialists
+- **5 Modes** - Behavioral modification patterns
 - **6 MCP Servers** - Optional external tools
 
 ## 🚀 Quick Command Reference

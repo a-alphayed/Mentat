@@ -22,27 +22,64 @@ This guide documents how SuperClaude's Context-Oriented Configuration Framework 
 ### Directory Structure
 
 ```
-~/.claude/                          # Claude Code's configuration directory
+~/.claude/ (SuperClaude Framework Files Only)
 ├── CLAUDE.md                       # Main context file with imports
-├── FLAGS.md                        # Flag definitions and triggers
+├── FLAGS.md                        # Flag definitions and triggers  
 ├── RULES.md                        # Core behavioral rules
 ├── PRINCIPLES.md                   # Guiding principles
-├── agents/                         # Domain specialist contexts
-│   ├── backend-architect.md       # Backend expertise
-│   ├── frontend-architect.md      # Frontend expertise
-│   ├── security-engineer.md       # Security expertise
-│   ├── python-expert.md           # Python expertise
-│   └── ... (13 total agents)
-├── commands/                       # Workflow pattern contexts
-│   ├── implement.md                # Implementation patterns
-│   ├── analyze.md                  # Analysis patterns
-│   ├── brainstorm.md              # Discovery patterns
-│   └── ... (21 total commands)
-└── modes/                          # Behavioral modification contexts
-    ├── MODE_Brainstorming.md      # Collaborative discovery
-    ├── MODE_Introspection.md      # Transparent reasoning
-    ├── MODE_Task_Management.md    # Task orchestration
-    └── ... (6 total modes)
+├── ZIG.md                          # Zig language integration
+├── MCP_Context7.md                 # Context7 MCP integration
+├── MCP_Magic.md                    # Magic MCP integration
+├── MCP_Morphllm.md                 # Morphllm MCP integration
+├── MCP_Playwright.md               # Playwright MCP integration
+├── MCP_Sequential.md               # Sequential MCP integration
+├── MCP_Serena.md                   # Serena MCP integration
+├── MCP_Zig.md                      # Zig MCP integration
+├── MODE_Brainstorming.md           # Collaborative discovery mode
+├── MODE_Introspection.md           # Transparent reasoning mode
+├── MODE_Orchestration.md           # Tool coordination mode
+├── MODE_Task_Management.md         # Task orchestration mode
+├── MODE_Token_Efficiency.md        # Compressed communication mode
+├── agents/                         # Domain specialist contexts (13 total)
+│   ├── backend-architect.md        # Backend expertise
+│   ├── devops-architect.md         # DevOps expertise
+│   ├── frontend-architect.md       # Frontend expertise
+│   ├── learning-guide.md           # Educational expertise
+│   ├── performance-engineer.md     # Performance expertise
+│   ├── python-expert.md            # Python expertise
+│   ├── quality-engineer.md         # Quality assurance expertise
+│   ├── refactoring-expert.md       # Code quality expertise
+│   ├── requirements-analyst.md     # Requirements expertise
+│   ├── root-cause-analyst.md       # Problem diagnosis expertise
+│   ├── security-engineer.md        # Security expertise
+│   ├── system-architect.md         # System design expertise
+│   └── technical-writer.md         # Documentation expertise
+└── commands/                       # Workflow pattern contexts
+    └── sc/                         # SuperClaude command namespace (21 total)
+        ├── analyze.md              # Analysis patterns
+        ├── brainstorm.md           # Discovery patterns
+        ├── build.md                # Build patterns
+        ├── cleanup.md              # Cleanup patterns
+        ├── design.md               # Design patterns
+        ├── document.md             # Documentation patterns
+        ├── estimate.md             # Estimation patterns
+        ├── explain.md              # Explanation patterns
+        ├── git.md                  # Git workflow patterns
+        ├── implement.md            # Implementation patterns
+        ├── improve.md              # Improvement patterns
+        ├── index.md                # Index patterns
+        ├── load.md                 # Context loading patterns
+        ├── reflect.md              # Reflection patterns
+        ├── save.md                 # Session persistence patterns
+        ├── select-tool.md          # Tool selection patterns
+        ├── spawn.md                # Multi-agent patterns
+        ├── task.md                 # Task management patterns
+        ├── test.md                 # Testing patterns
+        ├── troubleshoot.md         # Troubleshooting patterns
+        └── workflow.md             # Workflow planning patterns
+
+Note: Other directories (backups/, logs/, projects/, serena/, etc.) are Claude Code 
+operational directories, not part of SuperClaude framework content.
 ```
 
 ### Context File Types
@@ -61,13 +98,28 @@ This guide documents how SuperClaude's Context-Oriented Configuration Framework 
 The main `CLAUDE.md` file uses an import system to load multiple context files:
 
 ```markdown
-# CLAUDE.md structure
-@import commands/*.md      # Loads all command patterns
-@import agents/*.md        # Loads all agent contexts
-@import modes/*.md         # Loads all behavioral modes
-@import FLAGS.md           # Loads flag definitions
-@import RULES.md           # Loads core rules
-@import PRINCIPLES.md      # Loads guiding principles
+# CLAUDE
+
+*MANDATORY*
+@FLAGS.md                  # Flag definitions and triggers
+@RULES.md                  # Core behavioral rules
+@PRINCIPLES.md             # Guiding principles
+*SECONDARY*
+@MCP_Context7.md           # Context7 MCP integration
+@MCP_Magic.md              # Magic MCP integration
+@MCP_Morphllm.md           # Morphllm MCP integration
+@MCP_Playwright.md         # Playwright MCP integration
+@MCP_Sequential.md         # Sequential MCP integration
+@MCP_Serena.md             # Serena MCP integration
+@MCP_Zig.md                # Zig MCP integration
+*CRITICAL*
+@MODE_Brainstorming.md     # Collaborative discovery mode
+@MODE_Introspection.md     # Transparent reasoning mode
+@MODE_Task_Management.md   # Task orchestration mode
+@MODE_Orchestration.md     # Tool coordination mode
+@MODE_Token_Efficiency.md  # Compressed communication mode
+*LANGUAGE SPECIFIC*
+@ZIG.md                    # Zig language integration
 ```
 
 ### Import Processing
@@ -152,7 +204,7 @@ Practical usage examples
 ### Command Processing
 
 When user types `/sc:implement "feature"` in Claude Code conversation:
-1. Claude reads `commands/implement.md`
+1. Claude reads `commands/sc/implement.md`
 2. Adopts implementation workflow pattern
 3. May auto-activate related agents
 4. Follows defined workflow steps
@@ -217,7 +269,7 @@ User Input (in Claude Code): "/sc:analyze src/ --focus security"
                     ↓
 1. Parse Command: identify 'analyze' command
                     ↓
-2. Load Context: read commands/analyze.md
+2. Load Context: read commands/sc/analyze.md
                     ↓
 3. Check Flags: --focus security
                     ↓
@@ -240,7 +292,7 @@ User Input (in Claude Code): "/sc:analyze src/ --focus security"
 
 ### Adding New Commands
 
-1. Create `~/.claude/commands/new-command.md`
+1. Create `~/.claude/commands/sc/new-command.md`
 2. Define metadata, triggers, and workflow
 3. No code changes needed - just context
 
@@ -252,7 +304,7 @@ User Input (in Claude Code): "/sc:analyze src/ --focus security"
 
 ### Adding New Modes
 
-1. Create `~/.claude/modes/MODE_NewMode.md`
+1. Create `~/.claude/MODE_NewMode.md`
 2. Define activation triggers and modifications
 3. Mode activates based on triggers
 

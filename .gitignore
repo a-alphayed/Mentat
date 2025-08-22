@@ -191,3 +191,7 @@ ehthumbs.db
 Thumbs.db
 Desktop.ini
 $RECYCLE.BIN/
+
+# Personal files
+CRUSH.md
+TODO.txt
