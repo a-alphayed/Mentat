@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="https://superclaude.netlify.app/)">
+  <a href="https://superclaude.netlify.app/">
     <img src="https://img.shields.io/badge/🌐_Visit_Website-blue?style=for-the-badge" alt="Website">
   </a>
   <a href="https://pypi.org/project/SuperClaude/">
