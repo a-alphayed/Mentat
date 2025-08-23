@@ -40,7 +40,7 @@
 
 | **Commands** | **Agents** | **Modes** | **MCP Servers** |
 |:------------:|:----------:|:---------:|:---------------:|
-| **21** | **14** | **6** | **6** |
+| **21** | **14** | **5** | **6** |
 | Slash Commands | Specialized AI | Behavioral | Integrations |
 
 </div>
@@ -278,7 +278,7 @@ pip install --break-system-packages SuperClaude
   *14 specialized agents*
 
 - 🎨 [**Behavioral Modes**](Docs/User-Guide/modes.md)  
-  *6 adaptive modes*
+  *5 adaptive modes*
 
 - 🚩 [**Flags Guide**](Docs/User-Guide/flags.md)  
   *Control behaviors*
