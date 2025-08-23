@@ -5,7 +5,7 @@
 ### **Transform Claude Code into a Structured Development Platform**
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-4.0.4-blue?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/version-4.0.6-blue?style=for-the-badge" alt="Version">
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge" alt="PRs Welcome">
 </p>
@@ -40,23 +40,20 @@
 
 | **Commands** | **Agents** | **Modes** | **MCP Servers** |
 |:------------:|:----------:|:---------:|:---------------:|
-| **21** | **14** | **5** | **6** |
+| **21** | **14** | **6** | **6** |
 | Slash Commands | Specialized AI | Behavioral | Integrations |
 
 </div>
 
 ---
 
-<div align="center">
-
 ## 🎯 **Overview**
 
 SuperClaude is a **meta-programming configuration framework** that transforms Claude Code into a structured development platform through behavioral instruction injection and component orchestration. It provides systematic workflow automation with powerful tools and intelligent agents.
 
-</div>
-<div align="center">
-
 ## ⚡ **Quick Installation**
+
+<div align="center">
 
 ### **Choose Your Installation Method**
 
@@ -67,6 +64,30 @@ SuperClaude is a **meta-programming configuration framework** that transforms Cl
 | **🌐 npm** | `npm install -g @bifrost_inc/superclaude && superclaude install` | Cross-platform, Node.js users |
 
 </div>
+
+<details open>
+<summary><b>⚠️ IMPORTANT: Upgrading from SuperClaude V3</b></summary>
+
+**If you have SuperClaude V3 installed, you SHOULD uninstall it before installing V4:**
+
+```bash
+# Uninstall V3 first
+Remove all related files and directories :
+*.md *.json and commands/
+
+# Then install V4
+pipx install SuperClaude && SuperClaude install
+```
+
+**✅ What gets preserved during upgrade:**
+- ✓ Your custom slash commands (outside `commands/sc/`)
+- ✓ Your custom content in `CLAUDE.md` 
+- ✓ Claude Code's `.claude.json`, `settings.json` and `settings.local.json`
+- ✓ Any custom agents and files you've added
+
+**⚠️ Note:** Other SuperClaude-related `.json` files from V3 may cause conflicts and should be removed.
+
+</details>
 
 <details>
 <summary><b>💡 Troubleshooting PEP 668 Errors</b></summary>

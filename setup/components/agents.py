@@ -19,7 +19,7 @@ class AgentsComponent(Component):
         """Get component metadata"""
         return {
             "name": "agents",
-            "version": "4.0.4",
+            "version": "4.0.6",
             "description": "14 specialized AI agents with domain expertise and intelligent routing",
             "category": "agents"
         }
@@ -29,7 +29,7 @@ class AgentsComponent(Component):
         return {
             "components": {
                 "agents": {
-                    "version": "4.0.4",
+                    "version": "4.0.6",
                     "installed": True,
                     "agents_count": len(self.component_files),
                     "install_directory": str(self.install_component_subdir)
@@ -63,7 +63,7 @@ class AgentsComponent(Component):
             
             # Add component registration
             self.settings_manager.add_component_registration("agents", {
-                "version": "4.0.4",
+                "version": "4.0.6",
                 "category": "agents",
                 "agents_count": len(self.component_files),
                 "agents_list": self.component_files
@@ -216,16 +216,16 @@ class AgentsComponent(Component):
         if missing_agents:
             errors.append(f"Missing agent files: {missing_agents}")
         
-        # Check version in settings
+        # Check version in metadata
         if not self.get_installed_version():
             errors.append("Agents component not registered in metadata")
         
         # Check if at least some standard agents are present
         expected_agents = [
             "system-architect.md",
-            "frontend-specialist.md", 
-            "backend-engineer.md",
-            "security-auditor.md"
+            "frontend-architect.md", 
+            "backend-architect.md",
+            "security-engineer.md"
         ]
         
         missing_core_agents = []
