@@ -6,6 +6,7 @@ from typing import Dict, List, Tuple, Optional, Any
 from pathlib import Path
 
 from ..core.base import Component
+from setup import __version__
 from ..services.claude_md import CLAUDEMdService
 
 
@@ -34,7 +35,7 @@ class MCPDocsComponent(Component):
         """Get component metadata"""
         return {
             "name": "mcp_docs",
-            "version": "4.0.7",
+            "version": __version__,
             "description": "MCP server documentation and usage guides",
             "category": "documentation"
         }
@@ -135,7 +136,7 @@ class MCPDocsComponent(Component):
             metadata_mods = {
                 "components": {
                     "mcp_docs": {
-                        "version": "4.0.7",
+                        "version": __version__,
                         "installed": True,
                         "files_count": len(self.component_files),
                         "servers_documented": self.selected_servers

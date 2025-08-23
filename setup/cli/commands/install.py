@@ -559,8 +559,9 @@ def run(args: argparse.Namespace) -> int:
         
         # Display header
         if not args.quiet:
+            from setup.cli.base import __version__
             display_header(
-                "SuperClaude Installation v3.0",
+                f"SuperClaude Installation v{__version__}",
                 "Installing SuperClaude framework components"
             )
         

@@ -11,7 +11,13 @@ Usage:
     SuperClaude --help
 """
 
-__version__ = "4.0.7"
+from pathlib import Path
+
+# Read version from VERSION file
+try:
+    __version__ = (Path(__file__).parent.parent / "VERSION").read_text().strip()
+except Exception:
+    __version__ = "4.0.7"  # Fallback
 __author__ = "NomenAK, Mithun Gowda B"
 __email__ = "anton.knoery@gmail.com"
 __license__ = "MIT"

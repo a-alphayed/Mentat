@@ -6,6 +6,7 @@ from typing import Dict, List, Tuple, Optional, Any
 from pathlib import Path
 
 from ..core.base import Component
+from setup import __version__
 from ..services.claude_md import CLAUDEMdService
 
 
@@ -20,7 +21,7 @@ class ModesComponent(Component):
         """Get component metadata"""
         return {
             "name": "modes",
-            "version": "4.0.7",
+            "version": __version__,
             "description": "SuperClaude behavioral modes (Brainstorming, Introspection, Task Management, Token Efficiency)",
             "category": "modes"
         }
@@ -69,7 +70,7 @@ class ModesComponent(Component):
             metadata_mods = {
                 "components": {
                     "modes": {
-                        "version": "4.0.7",
+                        "version": __version__,
                         "installed": True,
                         "files_count": len(self.component_files)
                     }

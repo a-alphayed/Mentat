@@ -21,6 +21,7 @@ except ImportError:
     LOCKING_AVAILABLE = None
 
 from ..core.base import Component
+from setup import __version__
 from ..utils.ui import display_info, display_warning
 
 
@@ -102,7 +103,7 @@ class MCPComponent(Component):
         """Get component metadata"""
         return {
             "name": "mcp",
-            "version": "4.0.7",
+            "version": __version__,
             "description": "MCP server configuration management via .claude.json",
             "category": "integration"
         }
@@ -348,7 +349,7 @@ class MCPComponent(Component):
             metadata_mods = {
                 "components": {
                     "mcp": {
-                        "version": "4.0.7",
+                        "version": __version__,
                         "installed": True,
                         "servers_configured": len(self.selected_servers),
                         "configured_servers": self.selected_servers

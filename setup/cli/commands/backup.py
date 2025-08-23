@@ -234,7 +234,7 @@ def display_backup_list(backups: List[Dict[str, Any]]) -> None:
 def create_backup_metadata(install_dir: Path) -> Dict[str, Any]:
     """Create metadata for the backup"""
     metadata = {
-        "backup_version": "4.0.7",
+        "backup_version": __version__,
         "created": datetime.now().isoformat(),
         "install_dir": str(install_dir),
         "components": {},
@@ -513,8 +513,9 @@ def run(args: argparse.Namespace) -> int:
         
         # Display header
         if not args.quiet:
+            from setup.cli.base import __version__
             display_header(
-                "SuperClaude Backup v3.0",
+                f"SuperClaude Backup v{__version__}",
                 "Backup and restore SuperClaude installations"
             )
         

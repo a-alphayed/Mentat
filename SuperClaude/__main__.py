@@ -98,7 +98,8 @@ Examples:
         parents=[global_parser]
     )
 
-    parser.add_argument("--version", action="version", version="SuperClaude 4.0.7")
+    from SuperClaude import __version__
+    parser.add_argument("--version", action="version", version=f"SuperClaude {__version__}")
 
     subparsers = parser.add_subparsers(
         dest="operation",
@@ -208,8 +209,9 @@ def main() -> int:
             try:
                 from setup.utils.updater import check_for_updates
                 # Check for updates in the background
+                from SuperClaude import __version__
                 updated = check_for_updates(
-                    current_version="4.0.7",
+                    current_version=__version__,
                     auto_update=getattr(args, 'auto_update', False)
                 )
                 # If updated, suggest restart
@@ -226,7 +228,8 @@ def main() -> int:
         # No operation provided? Show help manually unless in quiet mode
         if not args.operation:
             if not args.quiet:
-                display_header("SuperClaude Framework v4.0.7", "Unified CLI for all operations")
+                from SuperClaude import __version__
+                display_header(f"SuperClaude Framework v{__version__}", "Unified CLI for all operations")
                 print(f"{Colors.CYAN}Available operations:{Colors.RESET}")
                 for op, desc in get_operation_modules().items():
                     print(f"  {op:<12} {desc}")

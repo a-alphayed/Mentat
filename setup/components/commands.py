@@ -6,6 +6,7 @@ from typing import Dict, List, Tuple, Optional, Any
 from pathlib import Path
 
 from ..core.base import Component
+from setup import __version__
 
 class CommandsComponent(Component):
     """SuperClaude slash commands component"""
@@ -18,7 +19,7 @@ class CommandsComponent(Component):
         """Get component metadata"""
         return {
             "name": "commands",
-            "version": "4.0.7",
+            "version": __version__,
             "description": "SuperClaude slash command definitions",
             "category": "commands"
         }
@@ -28,14 +29,14 @@ class CommandsComponent(Component):
         return {
             "components": {
                 "commands": {
-                    "version": "4.0.7",
+                    "version": __version__,
                     "installed": True,
                     "files_count": len(self.component_files)
                 }
             },
             "commands": {
                 "enabled": True,
-                "version": "4.0.7",
+                "version": __version__,
                 "auto_update": False
             }
         }
@@ -58,7 +59,7 @@ class CommandsComponent(Component):
 
             # Add component registration to metadata
             self.settings_manager.add_component_registration("commands", {
-                "version": "4.0.7",
+                "version": __version__,
                 "category": "commands",
                 "files_count": len(self.component_files)
             })

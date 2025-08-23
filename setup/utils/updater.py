@@ -295,16 +295,19 @@ class UpdateChecker:
         return False
 
 
-def check_for_updates(current_version: str = "4.0.7", **kwargs) -> bool:
+def check_for_updates(current_version: str = None, **kwargs) -> bool:
     """
     Convenience function to check for updates
     
     Args:
-        current_version: Current installed version
+        current_version: Current installed version (defaults to reading from setup)
         **kwargs: Additional arguments passed to check_and_notify
         
     Returns:
         True if update was performed
     """
+    if current_version is None:
+        from setup import __version__
+        current_version = __version__
     checker = UpdateChecker(current_version)
     return checker.check_and_notify(**kwargs)

@@ -4,7 +4,13 @@ SuperClaude CLI Base Module
 Base class for all CLI operations providing common functionality
 """
 
-__version__ = "4.0.7"
+from pathlib import Path
+
+# Read version from VERSION file
+try:
+    __version__ = (Path(__file__).parent.parent.parent / "VERSION").read_text().strip()
+except Exception:
+    __version__ = "4.0.7"  # Fallback
 
 
 def get_command_info():

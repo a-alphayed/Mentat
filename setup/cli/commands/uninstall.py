@@ -785,8 +785,9 @@ def run(args: argparse.Namespace) -> int:
         
         # Display header
         if not args.quiet:
+            from setup.cli.base import __version__
             display_header(
-                "SuperClaude Uninstall v3.0",
+                f"SuperClaude Uninstall v{__version__}",
                 "Removing SuperClaude framework components"
             )
         
