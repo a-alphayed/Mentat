@@ -82,7 +82,7 @@ pipx install SuperClaude && SuperClaude install
 **✅ What gets preserved during upgrade:**
 - ✓ Your custom slash commands (outside `commands/sc/`)
 - ✓ Your custom content in `CLAUDE.md` 
-- ✓ Claude Code's `.claude.json`, `settings.json` and `settings.local.json`
+- ✓ Claude Code's `.claude.json`, `.credentials.json`, `settings.json` and `settings.local.json`
 - ✓ Any custom agents and files you've added
 
 **⚠️ Note:** Other SuperClaude-related `.json` files from V3 may cause conflicts and should be removed.
