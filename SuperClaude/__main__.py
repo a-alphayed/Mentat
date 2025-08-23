@@ -73,6 +73,10 @@ def create_global_parser() -> argparse.ArgumentParser:
                                help="Force execution, skipping checks")
     global_parser.add_argument("--yes", "-y", action="store_true",
                                help="Automatically answer yes to all prompts")
+    global_parser.add_argument("--no-update-check", action="store_true",
+                               help="Skip checking for updates")
+    global_parser.add_argument("--auto-update", action="store_true",
+                               help="Automatically install updates without prompting")
 
     return global_parser
 
@@ -198,6 +202,26 @@ def main() -> int:
         parser, subparsers, global_parser = create_parser()
         operations = register_operation_parsers(subparsers, global_parser)
         args = parser.parse_args()
+        
+        # Check for updates unless disabled
+        if not args.quiet and not getattr(args, 'no_update_check', False):
+            try:
+                from setup.utils.updater import check_for_updates
+                # Check for updates in the background
+                updated = check_for_updates(
+                    current_version="4.0.6",
+                    auto_update=getattr(args, 'auto_update', False)
+                )
+                # If updated, suggest restart
+                if updated:
+                    print("\n🔄 SuperClaude was updated. Please restart to use the new version.")
+                    return 0
+            except ImportError:
+                # Updater module not available, skip silently
+                pass
+            except Exception:
+                # Any other error, skip silently
+                pass
 
         # No operation provided? Show help manually unless in quiet mode
         if not args.operation:
