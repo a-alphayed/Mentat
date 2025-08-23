@@ -47,13 +47,13 @@
 
 ---
 
+<div align="center">
+
 ## 🎯 **Overview**
 
 SuperClaude is a **meta-programming configuration framework** that transforms Claude Code into a structured development platform through behavioral instruction injection and component orchestration. It provides systematic workflow automation with powerful tools and intelligent agents.
 
 ## ⚡ **Quick Installation**
-
-<div align="center">
 
 ### **Choose Your Installation Method**
 
