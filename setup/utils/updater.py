@@ -295,7 +295,7 @@ class UpdateChecker:
         return False
 
 
-def check_for_updates(current_version: str = "4.0.6", **kwargs) -> bool:
+def check_for_updates(current_version: str = "4.0.7", **kwargs) -> bool:
     """
     Convenience function to check for updates
     

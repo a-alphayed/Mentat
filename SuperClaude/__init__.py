@@ -11,7 +11,7 @@ Usage:
     SuperClaude --help
 """
 
-__version__ = "4.0.6"
+__version__ = "4.0.7"
 __author__ = "NomenAK, Mithun Gowda B"
 __email__ = "anton.knoery@gmail.com"
 __license__ = "MIT"

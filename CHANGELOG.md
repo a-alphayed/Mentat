@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.7] - 2025-01-23
+
+### Added
+- Automatic update checking for PyPI and NPM packages
+- `--no-update-check` flag to skip update checks
+- `--auto-update` flag for automatic updates without prompting
+- Environment variable `SUPERCLAUDE_AUTO_UPDATE` support
+- Update notifications with colored banners showing available version
+- Rate limiting to check updates once per 24 hours
+- Smart installation method detection (pip/pipx/npm/yarn)
+- Cache files for update check timestamps (~/.claude/.update_check and .npm_update_check)
+
+### Fixed
+- Component validation now correctly uses pipx-installed version instead of source code
+
+### Technical
+- Added `setup/utils/updater.py` for PyPI update checking logic
+- Added `bin/checkUpdate.js` for NPM update checking logic
+- Integrated update checks into main entry points (SuperClaude/__main__.py and bin/cli.js)
+- Non-blocking update checks with 2-second timeout to avoid delays
+
 ### Changed
 - **BREAKING**: Agent system restructured to 14 specialized agents
 - **BREAKING**: Commands now use `/sc:` namespace to avoid conflicts with user custom commands
