@@ -65,7 +65,7 @@ SuperClaude is a **meta-programming configuration framework** that transforms Cl
 
 </div>
 
-<details open>
+<details>
 <summary><b>⚠️ IMPORTANT: Upgrading from SuperClaude V3</b></summary>
 
 **If you have SuperClaude V3 installed, you SHOULD uninstall it before installing V4:**
