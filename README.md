@@ -5,20 +5,20 @@
 ### **Transform Claude Code into a Structured Development Platform**
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-4.0.8-blue?style=for-the-badge" alt="Version">
-  <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge" alt="PRs Welcome">
+  <img src="https://img.shields.io/badge/version-4.0.8-blue" alt="Version">
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome">
 </p>
 
 <p align="center">
   <a href="https://superclaude.netlify.app/">
-    <img src="https://img.shields.io/badge/🌐_Visit_Website-blue?style=for-the-badge" alt="Website">
+    <img src="https://img.shields.io/badge/🌐_Visit_Website-blue" alt="Website">
   </a>
   <a href="https://pypi.org/project/SuperClaude/">
-    <img src="https://img.shields.io/pypi/v/SuperClaude.svg?style=for-the-badge&label=PyPI" alt="PyPI">
+    <img src="https://img.shields.io/pypi/v/SuperClaude.svg?" alt="PyPI">
   </a>
   <a href="https://www.npmjs.com/package/@bifrost_inc/superclaude">
-    <img src="https://img.shields.io/npm/v/@bifrost_inc/superclaude.svg?style=for-the-badge&label=npm" alt="npm">
+    <img src="https://img.shields.io/npm/v/@bifrost_inc/superclaude.svg" alt="npm">
   </a>
 </p>
 
@@ -123,7 +123,7 @@ pip install --break-system-packages SuperClaude
 <td align="center" width="33%">
   
 ### ☕ **Ko-fi**
-[![Ko-fi](https://img.shields.io/badge/Support_on-Ko--fi-ff5e5b?style=for-the-badge&logo=ko-fi)](https://ko-fi.com/superclaude)
+[![Ko-fi](https://img.shields.io/badge/Support_on-Ko--fi-ff5e5b?logo=ko-fi)](https://ko-fi.com/superclaude)
 
 *One-time contributions*
 
@@ -131,7 +131,7 @@ pip install --break-system-packages SuperClaude
 <td align="center" width="33%">
 
 ### 🎯 **Patreon**
-[![Patreon](https://img.shields.io/badge/Become_a-Patron-f96854?style=for-the-badge&logo=patreon)](https://patreon.com/superclaude)
+[![Patreon](https://img.shields.io/badge/Become_a-Patron-f96854?logo=patreon)](https://patreon.com/superclaude)
 
 *Monthly support*
 
@@ -139,7 +139,7 @@ pip install --break-system-packages SuperClaude
 <td align="center" width="33%">
 
 ### 💜 **GitHub**
-[![GitHub Sponsors](https://img.shields.io/badge/GitHub-Sponsor-30363D?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/SuperClaude-Org)
+[![GitHub Sponsors](https://img.shields.io/badge/GitHub-Sponsor-30363D?logo=github-sponsors)](https://github.com/sponsors/SuperClaude-Org)
 
 *Flexible tiers*
 
@@ -339,10 +339,10 @@ We welcome contributions of all kinds! Here's how you can help:
 
 <p align="center">
   <a href="CONTRIBUTING.md">
-    <img src="https://img.shields.io/badge/📖_Read-Contributing_Guide-blue?style=for-the-badge" alt="Contributing Guide">
+    <img src="https://img.shields.io/badge/📖_Read-Contributing_Guide-blue" alt="Contributing Guide">
   </a>
   <a href="https://github.com/SuperClaude-Org/SuperClaude_Framework/graphs/contributors">
-    <img src="https://img.shields.io/badge/👥_View-All_Contributors-green?style=for-the-badge" alt="Contributors">
+    <img src="https://img.shields.io/badge/👥_View-All_Contributors-green" alt="Contributors">
   </a>
 </p>
 
@@ -357,7 +357,7 @@ We welcome contributions of all kinds! Here's how you can help:
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 <p align="center">
-  <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="MIT License">
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg?" alt="MIT License">
 </p>
 
 </div>
