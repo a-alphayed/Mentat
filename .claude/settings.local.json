@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:superclaude.netlify.app)",
+      "Read(/Users/afayed/Projects/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
