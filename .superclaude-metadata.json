@@ -1,0 +1,45 @@
+{
+    "version": "4.0.8",
+    "components": {
+        "core": {
+            "name": "core",
+            "type": "core",
+            "description": "SuperClaude framework documentation and core files",
+            "required": true
+        },
+        "commands": {
+            "name": "commands",
+            "type": "commands",
+            "description": "SuperClaude slash command definitions",
+            "required": true
+        },
+        "agents": {
+            "name": "agents",
+            "type": "agents",
+            "description": "14 specialized AI agents with domain expertise and intelligent routing",
+            "required": true
+        },
+        "modes": {
+            "name": "modes",
+            "type": "modes",
+            "description": "SuperClaude behavioral modes (Brainstorming, Introspection, Task Management, Token Efficiency)",
+            "required": false
+        },
+        "mcp": {
+            "name": "mcp",
+            "type": "integration",
+            "description": "MCP server configuration management via .claude.json",
+            "required": false
+        },
+        "mcp_docs": {
+            "name": "mcp_docs",
+            "type": "documentation",
+            "description": "MCP server documentation and usage guides",
+            "required": false
+        }
+    },
+    "installation": {
+        "method": "pipx",
+        "source": "git+https://github.com/a-alphayed/Mentat.git@mentat"
+    }
+}
