@@ -38,13 +38,34 @@ Keeps your Mentat framework synchronized with upstream SuperClaude updates while
 - **Tests** compatibility after updates
 - **Rollback** capability if updates cause issues
 
+## Installation
+
+### Step 1: Install the Package
+```bash
+# Install Mentat framework via pipx (recommended)
+pipx install git+https://github.com/a-alphayed/Mentat.git
+
+# Or via pip
+pip install git+https://github.com/a-alphayed/Mentat.git
+```
+
+### Step 2: Run the Installer (Required!)
+```bash
+# Run the interactive installer to complete setup
+mentat install
+```
+
+**Important**: The `mentat install` command is required after package installation. It will:
+- Configure MCP servers for Claude Code
+- Install Mentat agents and commands
+- Set up dotfiles synchronization
+- Configure API keys for services
+
 ## Quick Start
 
-```bash
-# Install Mentat
-pipx install git+https://github.com/YOUR-USERNAME/Mentat.git
-mentat install
+After installation is complete:
 
+```bash
 # Setup your environment on a new machine
 /mentat:setup
 
