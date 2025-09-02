@@ -3,13 +3,12 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "SuperClaude"
-version = "4.0.8"
+name = "Mentat"
+version = "1.0.0"
 authors = [
-    {name = "NomenAK", email = "anton.knoery@gmail.com"},
-    {name = "Mithun Gowda B", email = "mithungowda.b7411@gmail.com"}
+    {name = "a-alphayed", email = "your-email@example.com"}
 ]
-description = "SuperClaude Framework Management Hub - AI-enhanced development framework for Claude Code"
+description = "Mentat Framework - Advanced meta-programming framework with dotfiles synchronization for Claude Code"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.8"
@@ -35,15 +34,14 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/SuperClaude-Org/SuperClaude_Framework"
-GitHub = "https://github.com/SuperClaude-Org/SuperClaude_Framework"
-"Bug Tracker" = "https://github.com/SuperClaude-Org/SuperClaude_Framework/issues"
-"Mithun Gowda B" = "https://github.com/mithun50"
-"NomenAK" = "https://github.com/NomenAK"
+Homepage = "https://github.com/a-alphayed/Mentat"
+GitHub = "https://github.com/a-alphayed/Mentat"
+"Bug Tracker" = "https://github.com/a-alphayed/Mentat/issues"
+"Upstream" = "https://github.com/SuperClaude-Org/SuperClaude_Framework"
 
 [project.scripts]
-SuperClaude = "SuperClaude.__main__:main"
-superclaude = "SuperClaude.__main__:main"
+mentat = "SuperClaude.__main__:main"
+Mentat = "SuperClaude.__main__:main"
 
 [project.optional-dependencies]
 dev = [

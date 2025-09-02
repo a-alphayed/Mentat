@@ -6,7 +6,7 @@ set -euo pipefail
 
 # Configuration
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
-SYNC_LOCK="/tmp/mentat-sync.lock"
+SYNC_LOCK="$HOME/.mentat/sync.lock"
 LOG_FILE="$HOME/.mentat/sync.log"
 MAX_RETRIES=3
 BATCH_DELAY=5

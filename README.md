@@ -1,5 +1,9 @@
 # Mentat Framework
 
+[![Version](https://img.shields.io/badge/version-1.0.0--mentat-blue)](https://github.com/a-alphayed/Mentat/releases)
+[![Based on SuperClaude](https://img.shields.io/badge/based%20on-SuperClaude%20v4.0.8-purple)](https://github.com/SuperClaude-Org/SuperClaude_Framework)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 > "It is by will alone I set my mind in motion"
 
 Mentat is an advanced meta-programming framework that transforms Claude Code into a hyper-intelligent development environment with perfect synchronization across all machines.
@@ -122,10 +126,31 @@ mentat install --dev
 
 Mentat stores its configuration in `~/.claude/` alongside SuperClaude settings. Your dotfiles are managed in a separate repository (default: `~/dotfiles/`).
 
+## Versioning
+
+Mentat follows [Semantic Versioning](https://semver.org/):
+
+- **MAJOR.MINOR.PATCH-mentat** format
+- **MAJOR**: Breaking changes to core functionality
+- **MINOR**: New features, backward compatible
+- **PATCH**: Bug fixes and minor improvements
+
+### Version Management
+
+```bash
+# Check current version
+cat VERSION
+
+# Bump version (patch/minor/major)
+./scripts/version-bump.sh patch    # 1.0.0 → 1.0.1
+./scripts/version-bump.sh minor    # 1.0.1 → 1.1.0
+./scripts/version-bump.sh major    # 1.1.0 → 2.0.0
+```
+
 ## License
 
 MIT License - See [LICENSE](LICENSE) for details.
 
 ## Acknowledgments
 
-- Built on top of [SuperClaude Framework](https://github.com/SuperClaude-Org/SuperClaude_Framework)
+- Built on top of [SuperClaude Framework](https://github.com/SuperClaude-Org/SuperClaude_Framework) v4.0.8

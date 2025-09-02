@@ -100,7 +100,6 @@ poetry.lock
 
 # Claude Code
 .claude/
-CLAUDE.md
 
 # SuperClaude specific
 .serena/
