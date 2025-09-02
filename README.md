@@ -6,14 +6,13 @@
 
 > "It is by will alone I set my mind in motion"
 
-Mentat is an advanced meta-programming framework that transforms Claude Code into a hyper-intelligent development environment with perfect synchronization across all machines.
-
+Mentat is my personal compute/programming framework that transforms Claude Code into a hyper-intelligent agentic development environment.
 ## What is Mentat?
 
-Mentat extends the SuperClaude Framework with powerful dotfiles synchronization and automated environment management capabilities. Like the Mentats of Dune, it provides:
+Mentat extends the SuperClaude Framework with customized capabilities, so far it provides:
 
 - **Perfect Recall**: Your dotfiles are always synchronized across all machines
-- **Computational Precision**: Automated workflows and intelligent conflict resolution
+- **Automation**: Automated workflows and intelligent conflict resolution
 - **Predictive Analysis**: Prevents conflicts before they occur
 - **Total Awareness**: Multi-machine consciousness and health monitoring
 
