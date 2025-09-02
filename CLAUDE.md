@@ -1,187 +1,132 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Mentat = Personal Claude Code customization framework built on SuperClaude v4.0.8
+Package: `Mentat` | Version: `1.0.0-mentat` | Base: `SuperClaude Framework`
 
-## Project Overview
+## Identity
+- **Purpose**: Extensible personal customization layer for Claude Code
+- **Architecture**: SuperClaude base + Mentat extensions (dotfiles sync is first feature)
+- **Philosophy**: Add features as needed, following SuperClaude patterns
 
-Mentat (v1.0.0-mentat) is a custom fork of the SuperClaude Framework that extends it with intelligent dotfiles synchronization and automated environment management capabilities. The framework transforms Claude Code into a hyper-intelligent development environment with perfect synchronization across all machines.
+## Structure
+```
+/Users/ahmed/projects/Mentat/
+├── mentat-extensions/       # Custom features
+│   ├── agents/             # @syncer, @mentat-updater
+│   └── commands/           # /mentat:* commands
+├── setup/
+│   ├── components/         # MentatExtensions, MentatDev
+│   └── utils/              # ssh_auth, mentat_config
+└── scripts/                # sync-orchestrator, test-ssh, etc.
+```
 
-**Note**: Package name changed from "SuperClaude" to "Mentat" to avoid conflicts with upstream.
+## Quick Reference
 
-## Key Architecture
+### Commands
+| Command | Purpose | Location |
+|---------|---------|----------|
+| `/mentat:setup` | Init new machine | `mentat-extensions/commands/setup.md` |
+| `/mentat:sync` | Force dotfiles sync | `mentat-extensions/commands/sync.md` |
+| `/mentat:config` | Configure repo (SSH/HTTPS) | `mentat-extensions/commands/config.md` |
+| `/mentat:status` | Show sync status | `mentat-extensions/commands/status.md` |
+| `/mentat:force-pull` | Safe destructive pull | `mentat-extensions/commands/force-pull.md` |
+| `/mentat:update-claude-md` | Update ~/.claude/CLAUDE.md | `mentat-extensions/commands/update-claude-md.md` |
 
-### Framework Structure
-- **Base Framework**: SuperClaude Framework v4.0.8 providing meta-programming capabilities
-- **Mentat Extensions**: Custom agents and commands in `mentat-extensions/`
-- **Dotfiles Management**: GitHub-based synchronization with `~/dotfiles/` as canonical source
-- **Installation**: Python package installable via pipx
+### Agents
+| Agent | Purpose | Category |
+|-------|---------|----------|
+| `@syncer` | Auto dotfiles sync | mentat |
+| `@mentat-updater` | Framework updates (dev) | mentat |
 
-### Core Components
+### Key Scripts
+| Script | Purpose | Path |
+|--------|---------|------|
+| `sync-orchestrator.sh` | Core sync engine | `scripts/` |
+| `test-ssh.sh` | SSH diagnostics | `scripts/` |
+| `health-monitor.sh` | Repo health check | `scripts/` |
+| `version-bump.sh` | Semver mgmt | `scripts/` |
 
-#### Custom Agents
-- **@syncer** (`mentat-extensions/agents/agent-syncer.md`): Maintains perfect dotfiles synchronization across machines
-- **@mentat-updater** (`mentat-extensions/agents/agent-mentat-updater.md`): Keeps framework updated with upstream SuperClaude while preserving customizations
+### Components
+| Component | Type | Features Added |
+|-----------|------|----------------|
+| `ssh_auth.py` | Security | SSH key mgmt, GitHub auth, passphrase |
+| `mentat_config.py` | Config | Interactive setup, validation |
+| `MentatExtensionsComponent` | Install | User features (cmds, agents) |
+| `MentatDevComponent` | Install | Dev tools (@mentat-updater) |
 
-#### Custom Commands
-- `/mentat:setup` - Initialize new machine with complete environment
-- `/mentat:sync` - Force dotfiles synchronization
-- `/mentat:status` - Display comprehensive system status
+## Paths & Permissions
+```
+~/.mentat/config.json    # 0600 - repo URL, no creds
+~/.mentat/sync.lock/     # 0700 - prevent concurrent
+~/.mentat/sync.log       # logs, auto-rotate
+~/dotfiles/              # canonical source, symlinked
+~/.claude/               # SuperClaude + Mentat install
+```
 
-#### Supporting Scripts
-- `scripts/sync-orchestrator.sh` - Main synchronization engine with secure lock management
-- `scripts/health-monitor.sh` - Repository health and integrity checks
-- `scripts/conflict-resolver.sh` - Intelligent conflict resolution
-- `scripts/version-bump.sh` - Semantic versioning management
+## Security Rules
+- **Never auto-commit** - user handles git
+- **Validate all inputs** - email, username, URLs
+- **No credential storage** - use system SSH
+- **Atomic permissions** - 0600 keys, 0700 dirs
+- **Sanitize logs/commits** - no sensitive data
+- **Force-pull = interactive only** - no automation
 
-## Development Commands
+## Dev Workflow
 
-### Installation
+### Install Dev Mode
 ```bash
-# Install Mentat framework (package name: Mentat)
-pipx install git+https://github.com/a-alphayed/Mentat.git
-mentat install
-
-# Development installation (editable mode)
-cd /Users/afayed/Projects/mentat
+cd /Users/ahmed/projects/Mentat
 pipx install -e .
 mentat install
-
-# Update from source
-cd /Users/afayed/Projects/mentat
-# Changes apply immediately in editable mode
 ```
 
-### Testing
+### Add New Feature
+1. Create in `mentat-extensions/` following patterns
+2. Add component to `setup/components/` if needed
+3. Update this CLAUDE.md & run `/mentat:update-claude-md`
+4. Test: `bash scripts/test-*.sh`
+5. Version: `./scripts/version-bump.sh [patch|minor|major]`
+
+### Test Commands
 ```bash
-# Test sync functionality
-bash ~/.claude/scripts/sync-orchestrator.sh sync
-
-# Check health
-bash ~/.claude/scripts/sync-orchestrator.sh health
-
-# Run status check
-/mentat:status
+/mentat:status                              # Check system
+bash ~/.claude/scripts/sync-orchestrator.sh # Manual sync
+bash scripts/test-ssh.sh                   # SSH diag
 ```
 
-### Building and Publishing
-```bash
-# Clean build artifacts
-bash scripts/cleanup.sh
+## Current Features
 
-# Build package
-python -m build
+### 1. Dotfiles Sync (First Feature)
+- **What**: Bidirectional GitHub sync every 30min
+- **Repo**: Private GitHub, SSH auth recommended
+- **Conflicts**: Auto-resolve simple, branch complex
+- **Security**: Input validation, passphrase protect, sanitized commits
 
-# Publish to PyPI (when ready)
-bash scripts/publish.sh
-```
+## Expansion Framework
 
-## Dotfiles Synchronization Workflow
+### Planned Features
+- [ ] will be added here
 
-The system maintains bidirectional sync between local machine and GitHub repository:
 
-1. **GitHub as Source of Truth**: Repository at `https://github.com/a-alphayed/dotfiles.git`
-2. **Local Directory**: `~/dotfiles/` with symlinks to actual locations
-3. **Automatic Sync**: Every 30 minutes or on-demand via `/mentat:sync`
-4. **Conflict Prevention**: Smart merge strategies and machine attribution
+### Extension Hooks
+- Pre/post sync hooks
+- Custom conflict strategies
+- Machine-specific configs
+- Third-party integrations
 
-### Directory Structure
-```
-~/dotfiles/
-├── home/           # Files symlinked from home directory
-├── packages/       # Package lists (Brewfile, npm, Cursor extensions)
-├── scripts/        # Utility scripts
-└── special/        # App-specific configs (Cursor settings)
-```
+### Adding Components
+- **Commands**: Add `.md` to `mentat-extensions/commands/`
+- **Agents**: Add `.md` with YAML to `mentat-extensions/agents/`
+- **Utils**: Add `.py` to `setup/utils/`
+- **Scripts**: Add `.sh` to `scripts/`
 
-## Working with Mentat
+## Integration
+- **With SuperClaude**: All base features available, Mentat adds on top
+- **With Claude Code**: Config in `~/.claude/`, follows SC patterns
+- **With Git**: Never auto-commit, user controls all commits
 
-### Adding New Dotfiles
-1. Copy file to appropriate `~/dotfiles/` subdirectory
-2. Create symlink from original location
-3. Run sync: `bash ~/.claude/scripts/sync-orchestrator.sh sync`
+## Component Count
+Commands: 6 | Agents: 2 | Scripts: 8 | Utils: 5 | Components: 2
 
-### Updating Packages
-```bash
-# Update Brewfile
-brew bundle dump --file=~/dotfiles/packages/Brewfile --force
-
-# Update Cursor extensions
-cursor --list-extensions > ~/dotfiles/packages/cursor-extensions.txt
-
-# Sync changes
-/mentat:sync
-```
-
-### Framework Updates
-The Mentat Updater agent checks daily for upstream SuperClaude updates and can safely rebase while preserving customizations.
-
-## Important Context
-
-- **Never auto-commit**: User handles all git commits manually
-- **Symlinks are critical**: Always verify symlinks when making changes
-- **Machine Registry**: Tracks all machines in `.machine-registry`
-- **Conflict Resolution**: Automatic for simple conflicts, creates branch for complex ones
-- **Security**: Never sync sensitive files (.ssh/*, *.key, *.pem)
-
-## Integration Points
-
-### With SuperClaude Components
-- All SuperClaude agents and commands remain available
-- Mentat extensions are in separate `mentat-extensions/` directory
-- Custom agents appear in "mentat" category
-
-### With Claude Code
-- Configuration stored in `~/.claude/`
-- Agents require YAML frontmatter to be recognized
-- Commands follow SuperClaude markdown format
-
-## Common Tasks
-
-### Check sync status
-```bash
-/mentat:status
-```
-
-### Force sync now
-```bash
-/mentat:sync
-# or
-bash ~/.claude/scripts/sync-orchestrator.sh sync
-```
-
-### Install on new machine
-```bash
-/mentat:setup
-```
-
-### Update framework from upstream
-```bash
-@mentat-updater
-```
-
-### Version management
-```bash
-# Check current version
-cat VERSION
-
-# Bump version
-./scripts/version-bump.sh patch  # 1.0.0 → 1.0.1
-./scripts/version-bump.sh minor  # 1.0.1 → 1.1.0
-./scripts/version-bump.sh major  # 1.1.0 → 2.0.0
-```
-
-## Recent Changes (v1.0.0-mentat)
-
-### Security Improvements
-- **Lock file**: Moved from `/tmp/mentat-sync.lock` to `~/.mentat/sync.lock` with 700 permissions
-- **Machine registry**: Uses generic IDs instead of hostnames for privacy
-- **Configuration sanitization**: P10k and other configs sanitized before syncing
-
-### Package Changes
-- **Name**: Changed from "SuperClaude" to "Mentat" to avoid pipx conflicts
-- **Version**: Now using semantic versioning with "-mentat" suffix
-- **Branch**: Main development branch renamed from `mentat` to `main`
-
-### New Features
-- **Version management**: Added VERSION file and version-bump.sh script
-- **Enhanced dotfiles support**: Added terminal configs (WezTerm, FZF, P10k, ccstatusline)
+---
+*Token-optimized for Claude context. Update when adding features.*

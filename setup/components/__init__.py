@@ -6,6 +6,8 @@ from .mcp import MCPComponent
 from .agents import AgentsComponent
 from .modes import ModesComponent
 from .mcp_docs import MCPDocsComponent
+from .mentat_extensions import MentatExtensionsComponent
+from .mentat_dev import MentatDevComponent
 
 __all__ = [
     'CoreComponent',
@@ -13,5 +15,7 @@ __all__ = [
     'MCPComponent',
     'AgentsComponent',
     'ModesComponent',
-    'MCPDocsComponent'
+    'MCPDocsComponent',
+    'MentatExtensionsComponent',
+    'MentatDevComponent'
 ]

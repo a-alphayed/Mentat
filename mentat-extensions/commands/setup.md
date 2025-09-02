@@ -72,17 +72,126 @@ fi
 ### Phase 3: Dotfiles Repository Setup
 
 ```bash
-# Clone dotfiles repository
-DOTFILES_REPO="https://github.com/a-alphayed/dotfiles.git"
+# Read configuration
+CONFIG_FILE="$HOME/.mentat/config.json"
+if [ ! -f "$CONFIG_FILE" ]; then
+    echo "❌ Mentat configuration not found!"
+    echo "Please run /mentat:config to set up your dotfiles repository"
+    exit 1
+fi
+
+# Extract repository URL from config
+DOTFILES_REPO=$(python3 -c "import json; print(json.load(open('$CONFIG_FILE'))['dotfiles_repo'])" 2>/dev/null)
+SYNC_BRANCH=$(python3 -c "import json; print(json.load(open('$CONFIG_FILE')).get('sync_branch', 'main'))" 2>/dev/null)
+
+if [ -z "$DOTFILES_REPO" ]; then
+    echo "❌ No dotfiles repository configured!"
+    echo "Please run /mentat:config to set up your repository"
+    exit 1
+fi
+
 DOTFILES_DIR="$HOME/dotfiles"
+
+# Check if repository is accessible
+echo "🔍 Checking repository access..."
+if ! git ls-remote "$DOTFILES_REPO" HEAD >/dev/null 2>&1; then
+    echo "⚠️  Cannot access repository: $DOTFILES_REPO"
+    
+    # Provide SSH-specific troubleshooting
+    if [[ "$DOTFILES_REPO" == git@* ]]; then
+        echo ""
+        echo "🔐 SSH Authentication Issue Detected"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        
+        # Run automated SSH test if available
+        if [ -f "$HOME/.claude/scripts/test-ssh.sh" ]; then
+            echo "Running SSH diagnostics..."
+            echo ""
+            bash "$HOME/.claude/scripts/test-ssh.sh"
+            echo ""
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        else
+            # Manual troubleshooting steps
+            echo "Quick SSH checks:"
+            
+            # Check for SSH keys
+            if ls ~/.ssh/id_* 2>/dev/null | grep -q .; then
+                echo "  ✅ SSH keys found"
+            else
+                echo "  ❌ No SSH keys found"
+                echo "     → Generate one: ssh-keygen -t ed25519 -C 'your_email@example.com'"
+            fi
+            
+            # Check SSH agent
+            if ssh-add -l &>/dev/null; then
+                echo "  ✅ SSH agent has keys loaded"
+            else
+                echo "  ❌ No keys in SSH agent"
+                echo "     → Add your key: ssh-add ~/.ssh/id_ed25519"
+            fi
+            
+            # Check GitHub connectivity
+            if ssh -T git@github.com 2>&1 | grep -q "successfully authenticated"; then
+                echo "  ✅ GitHub SSH authentication works"
+                echo ""
+                echo "  Repository issue - possible causes:"
+                echo "    • Repository doesn't exist yet"
+                echo "    • Repository name is incorrect"
+                echo "    • You don't have access to this repository"
+            else
+                echo "  ❌ GitHub SSH authentication failed"
+                echo "     → Add your public key to GitHub: https://github.com/settings/keys"
+                echo "     → Copy key: cat ~/.ssh/id_ed25519.pub"
+            fi
+        fi
+        
+        echo ""
+        echo "To reconfigure: /mentat:config"
+        echo "This will guide you through complete SSH setup"
+        
+    elif [[ "$DOTFILES_REPO" == https://* ]]; then
+        echo ""
+        echo "🔑 HTTPS Authentication Issue"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "For HTTPS authentication, you need:"
+        echo "  1. Personal Access Token from: https://github.com/settings/tokens"
+        echo "  2. Token scope: 'repo' (Full control of private repositories)"
+        echo "  3. Configure git: git config --global credential.helper store"
+        echo ""
+        echo "Alternative: Switch to SSH (recommended)"
+        echo "Run: /mentat:config and choose SSH option"
+    fi
+    
+    exit 1
+fi
 
 if [ ! -d "$DOTFILES_DIR" ]; then
     echo "📥 Cloning dotfiles repository..."
     git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
+    
+    # Check if clone was successful
+    if [ $? -ne 0 ]; then
+        echo "❌ Failed to clone repository"
+        exit 1
+    fi
+    
+    echo "✅ Repository cloned successfully"
 else
     echo "✅ Dotfiles repository already exists"
     cd "$DOTFILES_DIR"
-    git pull origin main
+    
+    # Fetch and pull latest changes
+    echo "📥 Updating from remote..."
+    git fetch origin "$SYNC_BRANCH"
+    
+    # Check for uncommitted changes
+    if [ -n "$(git status --porcelain)" ]; then
+        echo "⚠️  Uncommitted changes detected"
+        echo "Stashing changes..."
+        git stash push -m "Mentat setup: auto-stash $(date +%Y%m%d-%H%M%S)"
+    fi
+    
+    git pull origin "$SYNC_BRANCH"
 fi
 
 # Run existing setup script

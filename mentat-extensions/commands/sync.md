@@ -280,11 +280,39 @@ fi
 ### Authentication Problems
 
 ```bash
-# Check SSH key
-if ! ssh -T git@github.com 2>&1 | grep -q "successfully authenticated"; then
-    echo "🔑 Authentication issue detected"
-    echo "Run: ssh-keygen -t ed25519 -C 'your_email@example.com'"
-    echo "Then add the key to GitHub"
+# Check authentication based on repository URL
+CONFIG_FILE="$HOME/.mentat/config.json"
+if [ -f "$CONFIG_FILE" ]; then
+    REPO_URL=$(python3 -c "import json; print(json.load(open('$CONFIG_FILE')).get('dotfiles_repo', ''))" 2>/dev/null)
+    
+    if [[ "$REPO_URL" == git@* ]]; then
+        # SSH authentication check
+        echo "🔐 Checking SSH authentication..."
+        
+        # Run comprehensive SSH test
+        if [ -f "$HOME/.claude/scripts/test-ssh.sh" ]; then
+            bash "$HOME/.claude/scripts/test-ssh.sh"
+        else
+            # Basic SSH checks
+            if ! ssh -T git@github.com 2>&1 | grep -q "successfully authenticated"; then
+                echo "❌ SSH authentication failed"
+                echo ""
+                echo "Quick fixes:"
+                echo "1. Generate SSH key: ssh-keygen -t ed25519 -C 'your_email@example.com'"
+                echo "2. Add to GitHub: https://github.com/settings/keys"
+                echo "3. Add to agent: ssh-add ~/.ssh/id_ed25519"
+                echo ""
+                echo "Or reconfigure: /mentat:config"
+            else
+                echo "✅ SSH authentication working"
+                echo "Repository may not exist or you may lack access"
+            fi
+        fi
+    elif [[ "$REPO_URL" == https://* ]]; then
+        echo "🔑 Using HTTPS authentication"
+        echo "If authentication fails, you may need a Personal Access Token"
+        echo "Create one at: https://github.com/settings/tokens"
+    fi
 fi
 ```
 

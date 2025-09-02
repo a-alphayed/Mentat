@@ -241,6 +241,18 @@ def select_framework_components(registry: ComponentRegistry, config_manager: Con
         # Framework components (excluding MCP-related ones)
         framework_components = ["core", "modes", "commands", "agents"]
         
+        # Check if this is a Mentat installation
+        mentat_extensions_dir = Path(__file__).parent.parent.parent.parent / "mentat-extensions"
+        is_mentat_installation = mentat_extensions_dir.exists()
+        
+        # Add Mentat components if they exist
+        if is_mentat_installation:
+            # Check if components are available in registry
+            if registry.get_component_metadata("mentat"):
+                framework_components.append("mentat")
+                logger.debug("Mentat extensions detected and added to available components")
+            # mentat_dev is optional and not added by default
+        
         # Create component menu
         component_options = []
         component_info = {}
@@ -261,21 +273,37 @@ def select_framework_components(registry: ComponentRegistry, config_manager: Con
             component_options.append("mcp_docs - MCP server documentation (none selected)")
             auto_selected_mcp_docs = False
         
+        # Add mentat_dev option if Mentat is installed
+        if is_mentat_installation and registry.get_component_metadata("mentat_dev"):
+            component_options.append("mentat_dev - Developer tools for maintaining the Mentat fork (optional)")
+        
         print(f"\n{Colors.CYAN}{Colors.BRIGHT}═══════════════════════════════════════════════════{Colors.RESET}")
         print(f"{Colors.CYAN}{Colors.BRIGHT}Stage 2: Framework Component Selection{Colors.RESET}")
         print(f"{Colors.CYAN}{Colors.BRIGHT}═══════════════════════════════════════════════════{Colors.RESET}")
-        print(f"\n{Colors.BLUE}Select SuperClaude framework components to install:{Colors.RESET}")
+        
+        # Adjust the prompt based on whether this is Mentat or SuperClaude
+        if is_mentat_installation:
+            print(f"\n{Colors.BLUE}Select Mentat framework components to install:{Colors.RESET}")
+            print(f"{Colors.YELLOW}Note: Mentat extensions will be installed automatically{Colors.RESET}")
+        else:
+            print(f"\n{Colors.BLUE}Select SuperClaude framework components to install:{Colors.RESET}")
         
         menu = Menu("Select components (Core is recommended):", component_options, multi_select=True)
         selections = menu.display()
         
         if not selections:
-            # Default to core if nothing selected
+            # Default to core (and mentat if this is a Mentat installation)
             logger.info("No components selected, defaulting to core")
             selected_components = ["core"]
+            if is_mentat_installation and "mentat" in framework_components:
+                selected_components.append("mentat")
+                logger.info("Auto-including Mentat extensions")
         else:
             selected_components = []
+            # Build the full list of available components
             all_components = framework_components + ["mcp_docs"]
+            if is_mentat_installation and registry.get_component_metadata("mentat_dev"):
+                all_components.append("mentat_dev")
             
             for i in selections:
                 if i < len(all_components):
@@ -293,6 +321,19 @@ def select_framework_components(registry: ComponentRegistry, config_manager: Con
         # Always include MCP component if servers were selected
         if selected_mcp_servers and "mcp" not in selected_components:
             selected_components.append("mcp")
+        
+        # Always include Mentat component if this is a Mentat installation (unless explicitly excluded)
+        if is_mentat_installation and "mentat" in framework_components and "mentat" not in selected_components:
+            # Check if user had the option to select it but didn't
+            mentat_index = framework_components.index("mentat") if "mentat" in framework_components else -1
+            if mentat_index >= 0:
+                # If it was in the menu and user made selections but didn't select mentat, respect that
+                if selections and mentat_index not in selections:
+                    logger.info("Mentat extensions available but not selected by user")
+                else:
+                    # Auto-include mentat extensions
+                    selected_components.append("mentat")
+                    logger.info("Auto-included Mentat extensions")
         
         logger.info(f"Selected framework components: {', '.join(selected_components)}")
         return selected_components

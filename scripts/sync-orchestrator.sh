@@ -6,10 +6,21 @@ set -euo pipefail
 
 # Configuration
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
+CONFIG_FILE="$HOME/.mentat/config.json"
 SYNC_LOCK="$HOME/.mentat/sync.lock"
 LOG_FILE="$HOME/.mentat/sync.log"
 MAX_RETRIES=3
 BATCH_DELAY=5
+
+# Load configuration if available
+if [ -f "$CONFIG_FILE" ]; then
+    SYNC_BRANCH=$(python3 -c "import json; print(json.load(open('$CONFIG_FILE')).get('sync_branch', 'main'))" 2>/dev/null || echo "main")
+    AUTO_SYNC=$(python3 -c "import json; print(json.load(open('$CONFIG_FILE')).get('auto_sync', True))" 2>/dev/null || echo "true")
+else
+    SYNC_BRANCH="main"
+    AUTO_SYNC="true"
+    log WARNING "Configuration file not found, using defaults"
+fi
 
 # Colors for output
 RED='\033[0;31m'
@@ -102,9 +113,29 @@ health_check() {
         git gc --aggressive
     fi
     
-    # Check network
+    # Check network and authentication
     if ! git ls-remote origin > /dev/null 2>&1; then
         log WARNING "Cannot reach remote repository"
+        
+        # Check if it's an SSH URL
+        REMOTE_URL=$(git config --get remote.origin.url || echo "")
+        if [[ "$REMOTE_URL" == git@* ]]; then
+            log INFO "Testing SSH authentication..."
+            
+            # Test SSH to GitHub
+            if ! ssh -T git@github.com 2>&1 | grep -q "successfully authenticated"; then
+                log ERROR "SSH authentication to GitHub failed"
+                log INFO "Run this command to troubleshoot: bash $HOME/.claude/scripts/test-ssh.sh"
+                return 2
+            fi
+            
+            log INFO "SSH authentication works, but cannot reach repository"
+            log INFO "Possible causes:"
+            log INFO "  • Repository doesn't exist yet"
+            log INFO "  • Repository name is incorrect"
+            log INFO "  • You don't have access to this repository"
+        fi
+        
         return 2
     fi
     
@@ -127,9 +158,10 @@ push_changes() {
     # Stage all changes
     git add -A
     
-    # Generate commit message
+    # Generate commit message with sanitized hostname
     local changed_count=$(git diff --cached --numstat | wc -l)
-    local machine=$(hostname)
+    # Sanitize hostname to prevent injection
+    local machine=$(hostname | sed 's/[^a-zA-Z0-9._-]//g' | cut -c1-30)
     local timestamp=$(date '+%Y%m%d-%H%M%S')
     local commit_msg="Sync from $machine at $timestamp ($changed_count files)"
     
@@ -266,7 +298,8 @@ verify_symlinks() {
 
 # Update machine registry
 update_registry() {
-    local machine=$(hostname)
+    # Sanitize hostname to prevent injection
+    local machine=$(hostname | sed 's/[^a-zA-Z0-9._-]//g' | cut -c1-30)
     local timestamp=$(date +%s)
     local registry="$DOTFILES_DIR/.machine-registry"
     
