@@ -318,6 +318,28 @@ sync() {
         pull)
             pull_changes
             ;;
+        force-pull)
+            # SECURITY: Force-pull must only be run interactively by user
+            if ! [[ -t 0 && -t 1 ]]; then
+                log ERROR "SECURITY: Force-pull can only be run interactively"
+                log ERROR "Use the dedicated force-pull.sh script or /mentat:force-pull command"
+                return 1
+            fi
+            
+            # Check if being called by automation
+            local parent_cmd=$(ps -o comm= $PPID 2>/dev/null | tr -d ' ')
+            if echo "$parent_cmd" | grep -qE "(cron|systemd|launchd|agent)"; then
+                log ERROR "SECURITY: Force-pull cannot be run by automation"
+                return 1
+            fi
+            
+            log WARNING "Force-pull should use the dedicated script for safety"
+            log INFO "Running: bash $HOME/.claude/scripts/force-pull.sh"
+            
+            # Delegate to the dedicated force-pull script with all safety checks
+            bash "$HOME/.claude/scripts/force-pull.sh" "$@"
+            return $?
+            ;;
         check)
             # Just health check (already done)
             ;;
@@ -368,11 +390,20 @@ main() {
         pull)
             pull_changes
             ;;
+        force-pull)
+            # Force-pull requires interactive terminal
+            if ! [[ -t 0 && -t 1 ]]; then
+                echo "ERROR: Force-pull requires an interactive terminal session"
+                echo "This command cannot be run by scripts or automation"
+                exit 1
+            fi
+            sync "force-pull" "$@"
+            ;;
         verify)
             verify_symlinks
             ;;
         *)
-            echo "Usage: $0 {sync|daemon|health|push|pull|verify} [options]"
+            echo "Usage: $0 {sync|daemon|health|push|pull|force-pull|verify} [options]"
             exit 1
             ;;
     esac

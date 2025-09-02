@@ -155,6 +155,11 @@ Each machine is automatically registered with:
 - Use SSH keys for GitHub authentication
 - Encrypt sensitive config values
 - Maintain audit log of all sync operations
+- **CRITICAL**: The Syncer agent must NEVER invoke force-pull commands
+  - `/mentat:force-pull` is strictly user-only for safety
+  - Force-pull can cause data loss and requires human judgment
+  - If unresolvable conflicts occur, notify user to manually run force-pull
+  - Never attempt to automate or script force-pull operations
 
 ## User Interaction
 
@@ -168,11 +173,13 @@ The Syncer should be mostly invisible but can communicate when necessary:
 ## Testing
 
 The Syncer includes self-test capabilities:
+
 ```bash
 @agent-syncer --test
 ```
 
 This will:
+
 1. Create test file
 2. Sync to remote
 3. Pull from remote
@@ -183,6 +190,7 @@ This will:
 ## Metrics
 
 Track and report:
+
 - Sync frequency
 - Conflict rate
 - Resolution success rate

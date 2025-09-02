@@ -15,13 +15,25 @@ Mentat extends the SuperClaude Framework with powerful dotfiles synchronization 
 
 ## Core Components
 
-### The Syncer Agent (`@agent-syncer`)
+### Agents
 
-The Syncer maintains perfect synchronization of your development environment across all machines. It monitors, predicts, and resolves configuration changes automatically.
+#### The Syncer Agent (`@agent-syncer`)
 
-### The Mentat Updater (`@agent-mentat-updater`)
+The Syncer maintains perfect synchronization of your development environment across all machines. It:
+- **Auto-syncs** every 30 minutes and on startup/shutdown
+- **Monitors** file changes in your dotfiles directory
+- **Resolves** conflicts intelligently using merge strategies
+- **Repairs** broken symlinks automatically
+- **Tracks** all machines in your network
 
-Keeps your Mentat framework synchronized with upstream SuperClaude updates while preserving your customizations.
+#### The Mentat Updater (`@agent-mentat-updater`)
+
+Keeps your Mentat framework synchronized with upstream SuperClaude updates while preserving your customizations. It:
+- **Checks** daily for SuperClaude Framework updates
+- **Preserves** your custom agents, commands, and scripts
+- **Rebases** your changes on top of new framework versions
+- **Tests** compatibility after updates
+- **Rollback** capability if updates cause issues
 
 ## Quick Start
 
@@ -38,6 +50,9 @@ mentat install
 
 # Force synchronization
 /mentat:sync
+
+# Force pull from remote (destructive - requires user confirmation)
+/mentat:force-pull
 ```
 
 ## Key Features
@@ -54,12 +69,13 @@ mentat install
 - `/mentat:setup` - Initialize a new machine with your complete environment
 - `/mentat:sync` - Force synchronization across all machines
 - `/mentat:status` - Display comprehensive system status
-- `/mentat:compute` - Analyze and optimize your environment
-- `/mentat:recall` - Restore any previous configuration state
+- `/mentat:force-pull` - Override local dotfiles with remote state (user-only, destructive)
+- `/mentat:compute` - Analyze and optimize your environment (planned)
+- `/mentat:recall` - Restore any previous configuration state (planned)
 
 ## Architecture
 
-```
+```text
 Mentat/
 ├── mentat-core/           # Core SuperClaude components
 ├── mentat-extensions/     # Custom Mentat additions
@@ -106,10 +122,6 @@ mentat install --dev
 
 Mentat stores its configuration in `~/.claude/` alongside SuperClaude settings. Your dotfiles are managed in a separate repository (default: `~/dotfiles/`).
 
-## Contributing
-
-Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
-
 ## License
 
 MIT License - See [LICENSE](LICENSE) for details.
@@ -117,8 +129,3 @@ MIT License - See [LICENSE](LICENSE) for details.
 ## Acknowledgments
 
 - Built on top of [SuperClaude Framework](https://github.com/SuperClaude-Org/SuperClaude_Framework)
-- Inspired by Frank Herbert's Dune universe
-
----
-
-*"The highest function of ecology is understanding consequences" - Frank Herbert*
