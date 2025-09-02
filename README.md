@@ -108,14 +108,14 @@ Mentat/
 ### From GitHub (Recommended)
 
 ```bash
-pipx install git+https://github.com/YOUR-USERNAME/Mentat.git
+pipx install git+https://github.com/a-alphayed/Mentat.git
 mentat install
 ```
 
 ### Development Installation
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/Mentat.git
+git clone https://github.com/a-alphayed/Mentat.git
 cd Mentat
 pip install -e .
 mentat install --dev
