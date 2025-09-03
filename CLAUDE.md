@@ -31,6 +31,7 @@ Package: `Mentat` | Version: `1.0.0-mentat` | Base: `SuperClaude Framework`
 | `/mentat:status` | Show sync status | `mentat-extensions/commands/status.md` |
 | `/mentat:force-pull` | Safe destructive pull | `mentat-extensions/commands/force-pull.md` |
 | `/mentat:update-claude-md` | Update ~/.claude/CLAUDE.md | `mentat-extensions/commands/update-claude-md.md` |
+| `/mentat:packages` | Manage tracked packages | `mentat-extensions/commands/packages.md` |
 
 ### Agents
 | Agent | Purpose | Category |
@@ -96,11 +97,17 @@ bash scripts/test-ssh.sh                   # SSH diag
 
 ## Current Features
 
-### 1. Dotfiles Sync (First Feature)
+### 1. Dotfiles Sync
 - **What**: Bidirectional GitHub sync every 30min
 - **Repo**: Private GitHub, SSH auth recommended
 - **Conflicts**: Auto-resolve simple, branch complex
 - **Security**: Input validation, passphrase protect, sanitized commits
+
+### 2. Package Management
+- **What**: Track and sync all installed packages across machines
+- **Tracks**: Homebrew (formulae/casks), npm global, pipx, Cursor extensions
+- **Commands**: `/mentat:packages update|install|status|sync`
+- **Scripts**: Auto-update package lists, batch installation
 
 ## Expansion Framework
 
@@ -126,7 +133,7 @@ bash scripts/test-ssh.sh                   # SSH diag
 - **With Git**: Never auto-commit, user controls all commits
 
 ## Component Count
-Commands: 6 | Agents: 2 | Scripts: 8 | Utils: 5 | Components: 2
+Commands: 7 | Agents: 2 | Scripts: 10 | Utils: 5 | Components: 2
 
 ---
 *Token-optimized for Claude context. Update when adding features.*

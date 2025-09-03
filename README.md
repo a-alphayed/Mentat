@@ -13,6 +13,7 @@
 ### Core Capabilities
 
 - **Dotfiles Synchronization**: Automatic bidirectional sync across all machines via GitHub
+- **Package Management**: Track and sync Homebrew, npm, pipx, and editor extensions
 - **Environment Management**: Complete development environment setup and maintenance
 - **Extensible Framework**: Custom agents and commands for Claude Code automation
 - **Security First**: Protected SSH key generation, input validation, and atomic operations
@@ -46,6 +47,10 @@ mentat install
 # Force synchronization
 /mentat:sync
 
+# Package management
+/mentat:packages update  # Update package tracking
+/mentat:packages install # Install all tracked packages
+
 # Update documentation
 /mentat:update-claude-md
 ```
@@ -57,10 +62,18 @@ mentat install
 | `/mentat:setup` | Initialize new machine with complete environment |
 | `/mentat:sync` | Force dotfiles synchronization |
 | `/mentat:status` | Display comprehensive system status |
+| `/mentat:packages` | Manage tracked packages (update/install/status/sync) |
 | `/mentat:force-pull` | Override local dotfiles with remote (destructive) |
 | `/mentat:update-claude-md` | Refresh CLAUDE.md documentation |
 
 ## Recent Updates (v1.0.0-mentat)
+
+### Package Management System
+- **Automatic Tracking**: Captures all installed packages across package managers
+- **Homebrew Integration**: Tracks formulae, casks, and taps via Brewfile
+- **Development Tools**: Tracks npm globals, pipx packages, and editor extensions
+- **One-Command Setup**: Install all packages on new machines with `/mentat:packages install`
+- **Shell Enhancements**: Modern shell with Powerlevel10k, zoxide, eza, and syntax highlighting
 
 ### Security Enhancements
 
