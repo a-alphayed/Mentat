@@ -89,6 +89,19 @@ cleanup() {
 trap cleanup EXIT
 
 # Health check
+verify_symlinks() {
+    log INFO "Verifying dotfile symlinks..."
+    
+    # Use Mentat's symlink manager
+    local symlink_script="$HOME/.claude/scripts/symlink-manager.sh"
+    
+    if [ -f "$symlink_script" ]; then
+        bash "$symlink_script" verify
+    else
+        log WARNING "Symlink manager not found, skipping verification"
+    fi
+}
+
 health_check() {
     log INFO "Running health check..."
     
@@ -350,6 +363,7 @@ sync() {
             ;;
         pull)
             pull_changes
+            verify_symlinks
             ;;
         force-pull)
             # SECURITY: Force-pull must only be run interactively by user
@@ -422,6 +436,7 @@ main() {
             ;;
         pull)
             pull_changes
+            verify_symlinks
             ;;
         force-pull)
             # Force-pull requires interactive terminal

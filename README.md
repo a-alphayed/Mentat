@@ -1,6 +1,6 @@
 # Mentat Framework
 
-[![Version](https://img.shields.io/badge/version-1.0.0--mentat-blue)](https://github.com/a-alphayed/Mentat/releases)
+[![Version](https://img.shields.io/badge/version-1.1.0--mentat-blue)](https://github.com/a-alphayed/Mentat/releases)
 [![Based on SuperClaude](https://img.shields.io/badge/based%20on-SuperClaude%20v4.0.8-purple)](https://github.com/SuperClaude-Org/SuperClaude_Framework)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -35,6 +35,16 @@ pipx install git+https://github.com/a-alphayed/Mentat.git
 mentat install
 ```
 
+### Updating
+
+```bash
+# Update to latest version (after v1.1.0)
+/mentat:update
+
+# Or manually via pipx
+pipx reinstall Mentat
+```
+
 ### Basic Usage
 
 ```bash
@@ -63,6 +73,7 @@ mentat install
 | `/mentat:sync` | Force dotfiles synchronization |
 | `/mentat:status` | Display comprehensive system status |
 | `/mentat:packages` | Manage tracked packages (update/install/status/sync) |
+| `/mentat:update` | Update Mentat framework to latest version |
 | `/mentat:force-pull` | Override local dotfiles with remote (destructive) |
 | `/mentat:update-claude-md` | Refresh CLAUDE.md documentation |
 
@@ -75,13 +86,10 @@ mentat install
 - **One-Command Setup**: Install all packages on new machines with `/mentat:packages install`
 - **Shell Enhancements**: Modern shell with Powerlevel10k, zoxide, eza, and syntax highlighting
 
-### Security Enhancements
 
-- **SSH Key Security**: Fixed command injection vulnerabilities in SSH key generation
-- **Input Validation**: Added email and GitHub username validation
-- **Protected Operations**: Atomic file permissions with proper umask handling
-- **Passphrase Protection**: Secure SSH key generation with user-provided passphrases
-- **Sanitized Commits**: Cleaned hostname data in commit messages
+## Security
+
+For detailed security guidelines on protecting your dotfiles and credentials, see [SECURITY.md](SECURITY.md).
 
 ## Architecture
 

@@ -194,13 +194,22 @@ else
     git pull origin "$SYNC_BRANCH"
 fi
 
-# Run existing setup script
-if [ -f "$DOTFILES_DIR/scripts/dotfiles-setup.sh" ]; then
-    echo "🔧 Running dotfiles setup..."
-    bash "$DOTFILES_DIR/scripts/dotfiles-setup.sh"
+# Setup symlinks using Mentat's symlink manager
+echo "🔧 Setting up dotfile symlinks..."
+SYMLINK_SCRIPT="$HOME/.claude/scripts/symlink-manager.sh"
+
+if [ -f "$SYMLINK_SCRIPT" ]; then
+    bash "$SYMLINK_SCRIPT" setup
 else
-    echo "⚠️ Setup script not found, creating symlinks manually..."
-    # Manual symlink creation fallback
+    echo "⚠️ Symlink manager not found, attempting fallback..."
+    # Fallback: Try to use the script from Mentat installation
+    MENTAT_SYMLINK="/usr/local/bin/mentat-symlink-manager"
+    if [ -f "$MENTAT_SYMLINK" ]; then
+        bash "$MENTAT_SYMLINK" setup
+    else
+        echo "❌ Cannot setup symlinks - symlink manager not found"
+        echo "Please reinstall Mentat or run: mentat install"
+    fi
 fi
 ```
 

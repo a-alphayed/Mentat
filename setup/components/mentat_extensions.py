@@ -90,7 +90,9 @@ class MentatExtensionsComponent(Component):
                 important_scripts = [
                     "sync-orchestrator.sh",
                     "health-monitor.sh",
-                    "conflict-resolver.sh"
+                    "conflict-resolver.sh",
+                    "framework-updater.sh",
+                    "symlink-manager.sh"
                 ]
                 
                 for script_name in important_scripts:
@@ -107,6 +109,14 @@ class MentatExtensionsComponent(Component):
             mentat_dir = Path.home() / ".mentat"
             mentat_dir.mkdir(mode=0o700, exist_ok=True)
             self.logger.debug(f"Created .mentat directory at {mentat_dir}")
+            
+            # Store version information
+            version_file_source = Path(__file__).parent.parent.parent / "VERSION"
+            if version_file_source.exists():
+                version_content = version_file_source.read_text().strip()
+                version_file_target = self.install_dir / ".mentat-version"
+                version_file_target.write_text(version_content)
+                self.logger.debug(f"Stored version: {version_content}")
             
             if installed_items:
                 self.logger.info(f"Installed {len(installed_items)} Mentat components")
