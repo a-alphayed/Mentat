@@ -124,7 +124,7 @@ pipx reinstall Mentat
 ### Method 2: Manual Update (Advanced)
 ```bash
 # For development installations
-cd /Users/ahmed/projects/Mentat
+cd ~/projects/Mentat  # Or your Mentat directory
 git pull origin main
 mentat install
 ```

@@ -10,7 +10,7 @@ Package: `Mentat` | Version: `1.0.0-mentat` | Base: `SuperClaude Framework`
 
 ## Structure
 ```
-/Users/ahmed/projects/Mentat/
+Mentat/                      # Project root
 ├── mentat-extensions/       # Custom features
 │   ├── agents/             # @syncer, @mentat-updater
 │   └── commands/           # /mentat:* commands
@@ -76,7 +76,7 @@ Package: `Mentat` | Version: `1.0.0-mentat` | Base: `SuperClaude Framework`
 
 ### Install Dev Mode
 ```bash
-cd /Users/ahmed/projects/Mentat
+cd ~/projects/Mentat  # Or your project directory
 pipx install -e .
 mentat install
 ```
