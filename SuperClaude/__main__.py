@@ -86,8 +86,8 @@ def create_parser():
     global_parser = create_global_parser()
 
     parser = argparse.ArgumentParser(
-        prog="SuperClaude",
-        description="SuperClaude Framework Management Hub - Unified CLI",
+        prog="Mentat",
+        description="Mentat Framework Management Hub - Unified CLI",
         epilog="""
 Examples:
   SuperClaude install --dry-run
@@ -99,7 +99,7 @@ Examples:
     )
 
     from SuperClaude import __version__
-    parser.add_argument("--version", action="version", version=f"SuperClaude {__version__}")
+    parser.add_argument("--version", action="version", version=f"Mentat {__version__}")
 
     subparsers = parser.add_subparsers(
         dest="operation",
@@ -216,7 +216,7 @@ def main() -> int:
                 )
                 # If updated, suggest restart
                 if updated:
-                    print("\n🔄 SuperClaude was updated. Please restart to use the new version.")
+                    print("\n🔄 Mentat was updated. Please restart to use the new version.")
                     return 0
             except ImportError:
                 # Updater module not available, skip silently
@@ -229,7 +229,7 @@ def main() -> int:
         if not args.operation:
             if not args.quiet:
                 from SuperClaude import __version__
-                display_header(f"SuperClaude Framework v{__version__}", "Unified CLI for all operations")
+                display_header(f"Mentat Framework v{__version__}", "Unified CLI for all operations")
                 print(f"{Colors.CYAN}Available operations:{Colors.RESET}")
                 for op, desc in get_operation_modules().items():
                     print(f"  {op:<12} {desc}")

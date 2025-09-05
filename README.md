@@ -1,6 +1,6 @@
 # Mentat Framework
 
-[![Version](https://img.shields.io/badge/version-1.1.0--mentat-blue)](https://github.com/a-alphayed/Mentat/releases)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue)](https://github.com/a-alphayed/Mentat/releases)
 [![Based on SuperClaude](https://img.shields.io/badge/based%20on-SuperClaude%20v4.0.8-purple)](https://github.com/SuperClaude-Org/SuperClaude_Framework)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -77,7 +77,7 @@ pipx reinstall Mentat
 | `/mentat:force-pull` | Override local dotfiles with remote (destructive) |
 | `/mentat:update-claude-md` | Refresh CLAUDE.md documentation |
 
-## Recent Updates (v1.0.0-mentat)
+## Recent Updates (v1.1.0)
 
 ### Package Management System
 - **Automatic Tracking**: Captures all installed packages across package managers
@@ -121,8 +121,13 @@ Mentat/
 ```bash
 git clone https://github.com/a-alphayed/Mentat.git
 cd Mentat
-pip install -e .
-mentat install --dev
+pipx install -e .
+mentat install
+# During interactive installation, select 'mentat_dev' component ONLY if you:
+# - Are maintaining the Mentat fork (need @mentat-updater agent)
+# - Need to merge upstream SuperClaude changes
+# - Are developing Mentat framework features
+# Regular users: Skip this component - use /mentat:update for updates
 ```
 
 ### Version Management
